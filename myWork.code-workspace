@@ -4,10 +4,10 @@
 			"path": "."
 		},
 		{
-			"path": "../../../Library/CloudStorage/GoogleDrive-mmorando@ucsc.edu/My Drive/data/amplicon_review"
+			"path": "../../../Library/CloudStorage/GoogleDrive-mmorando@ucsc.edu/My Drive/data/amplicon_review/all_studies"
 		},
 		{
-			"path": "../../../Library/CloudStorage/GoogleDrive-mmorando@ucsc.edu/My Drive/scripts/amp_review_Specific"
+			"path": "../../../Library/CloudStorage/GoogleDrive-mmorando@ucsc.edu/My Drive/bioinfo/databases"
 		}
 	],
 	"settings": {}
