@@ -45,7 +45,10 @@ def filter_csv(input_csv_path, output_csv_path, min_qcovs, min_pident):
     print("Filtered data has been written to", output_csv_path)
 
 
-# Example usage:
-# filter_csv('input.csv', 'filtered_output.csv', 70, 97)
-
-filter_csv("auid.filtered.nifHDB_file.csv", "filtered_output.csv", 70, 97)
+# Usage:
+filter_csv(
+    input_csv_path="auid.filtered.nifHDB_UCYNAoligos.csv",
+    output_csv_path="filtered_output.csv",
+    min_qcovs=70,
+    min_pident=97,
+)

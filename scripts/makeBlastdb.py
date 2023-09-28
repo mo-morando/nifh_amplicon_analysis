@@ -29,9 +29,6 @@ def create_blast_database(input_fasta_file, database_type, blast_database):
 
 # Example usage to create a BLAST database from a FASTA file
 input_fasta_file = "/Users/mo/Projects/nifH_amp_project/myWork/UCYN-A_oligoreps.fasta"
-# input_fasta_file = "UCYN_A_oligos/UCYN-A_oligoreps.fasta"
-# input_fasta_file = "/Users/mo/Library/CloudStorage/GoogleDrive-mmorando@ucsc.edu/My Drive/bioinfo/databases/UCYN_A_oligos/UCYN-A_oligoreps.fasta"
-# input_fasta_file = "../../../Library/CloudStorage/GoogleDrive-mmorando@ucsc.edu/My Drive/bioinfo/databases/UCYN_A_oligos/UCYN-A_oligoreps.fasta"
 database_type = "nucl"  # Change to "prot" if it's a protein database
 blast_database = (
     "/Users/mo/Projects/nifH_amp_project/myWork/data/databases/UCYN-A_oligoreps_db"

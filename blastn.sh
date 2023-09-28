@@ -8,7 +8,7 @@ blast_database="/Users/mo/Projects/nifH_amp_project/myWork/data/databases/UCYN-A
 # identity_threshold=97
 # blast_type="blastn"
 num_threads=4
-output_csv=auid.filtered.nifHDB_file.csv
+output_csv=auid.filtered.nifHDB_UCYNAoligos.csv
 
 # Define column headers
 # column_headers="qseqid,sseqid,alignment_length,qcovs,PID,mismatches,gap_openings,q_start,q_end,s_start,s_end,evalue,bit_score"
@@ -17,6 +17,7 @@ output_csv=auid.filtered.nifHDB_file.csv
 column_headers_blast="sseqid length qcovs pident mismatch gapopen qstart qend sstart send evalue bitscore qseqid"
 column_headers_tsv=$(echo "$column_headers_blast" | tr ' ' '\t')
 column_headers_csv=$(echo "$column_headers_blast" | tr ' ' ',')
+# column_headers_txt=column_headers_blast
 
 # column_headers_tsv="sseqid\tlength\tqcovs\tpident\tmismatch\tgapopen\tqstart\tqend\tsstart\tsend\tevalue\tbitscore\tqseqid"
 # column_headers_csv="qseqid,sseqid,alignment_length,qcovs,PID,mismatches,gap_openings,q_start,q_end,s_start,s_end,evalue,bit_score"
