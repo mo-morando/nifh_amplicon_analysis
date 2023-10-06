@@ -1,5 +1,9 @@
 I am trying to put together a full annotation file for the nifH DB. Currently, I am using different AUIDs than Jonathan so they need to be matched up properply. 
 
+### Everything I have done so far with in
+<!-- python3 --version
+Python 3.10.12 -->
+
 My files are:
 Fasta : input_fasta_file="/Users/mo/Projects/nifH_amp_project/myWork/analysis/Jmags/mappingOLD2NEWauids/auid.filtered.nifHDB.fasta"
 Annotations: **Must add** UCYN-A oligo reps

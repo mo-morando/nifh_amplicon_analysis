@@ -1,4 +1,3 @@
-import string
 import pandas as pd
 
 
@@ -9,38 +8,31 @@ def assign_consensus_id(df, output_path, min_pid=97):
     # Create a new column with the specified name and data type
     df.loc[df["Genomes879.pctId"] >= min_pid, "Genoes879.pid_flag"] = 1
 
-    # Convert cluster column to string
-    # print(df["cluster"])
-    # print(df["cluster"].dtype)
-    df["cluster"] = (
-        df["cluster"]
-        .fillna("unresolved")
-        .astype(dtype=str)
-        .str.replace(pat=r"\.0*", repl="")
-    )
-    # print(df["cluster"])
-    # print(df["cluster"].dtype)
+    # Convert cluster and subcluster columns to string
+    df["subcluster"] = df["subcluster"].astype(str)
+    df["cluster"] = df["cluster"].apply(lambda x: str(int(x)) if not pd.isna(x) else x)
 
-    # print(df["cluster"].drop_duplicates())
+    # Fix subcluster
+    # combine 1J and 1K
+
+    ### Clean up oligo names
+    # df["UCYNA_oligos"] = df["UCYNA_oligos"].replace(replacement_dict)
+    df["UCYNA_oligos"] = "UCYN-" + df["UCYNA_oligos"].str.split("_").str[1]
 
     # Create new column "MarineDiazo.ID". append subject to description separated by ";" and place value here
     df["MarineDiazo.ID"] = ""
     df["MarineDiazo.ID"] = (
         df["MarineDiazo.description"] + ";" + df["MarineDiazo.subject"]
     )
+
     # Initialize new column with default value "unknown"
     df["consensus_id"] = "unknown"
 
     # Define the condition for updating "consensus_id"
     condition_pid_flag = df["Genoes879.pid_flag"] == 1
+    # condition_cluster3_4_flag = df["cluster"] == "3" or df["cluster"] == "4"
 
-    # Conditionally fill "consensus_id" based on my criteria
-    print(df.dtypes)
-
-    # condition_cluster3_4_flag = (df["cluster"] == "3.0") | (df["cluster"] == "4.0")
-    # condition_cluster3_4_flag = row["cluster"] == "3.0" or row["cluster"] == "4.0"
-    # print(condition_cluster3_4_flag)
-
+    # Create column
     df["consensus_id"] = (
         df["UCYNA_oligos"]
         .fillna(df["MarineDiazo.ID"])
@@ -50,25 +42,23 @@ def assign_consensus_id(df, output_path, min_pid=97):
         .fillna(
             df.apply(
                 lambda row: "unknown" + row["cluster"]
-                if (row["cluster"] == "3.0" or row["cluster"] == "4.0")
-                else "unknown" + str(row["subcluster"]),
+                if (row["cluster"] == "3" or row["cluster"] == "4")
+                else "unknown" + row["subcluster"],
                 axis=1,
             )
+            # df.apply(
+            #     lambda row: "unknown" + str(int(row["cluster"]))
+            #     if (row["cluster"] == 3.0 or row["cluster"] == 4.0)
+            #     else "unknown" + str(row["subcluster"]),
+            #     axis=1,
+            # )
         )
         # .fillna("unknown" + df["subcluster"])
     )
 
-    print(df["consensus_id"].head())
-
-    # Fix subcluster
-    # combine 1J and 1K
-    # remove letters after 3 and 4
-
-    # p = df["consensus_id"].str.contains("unknown").drop_duplicates()
-    # print(p)
-
     # Write out file as CSV
-    df.to_csv(output_path)
+    df.to_csv(output_path, index=False)
+    print(f"File written out as '{output_path}'")
 
 
 ### Usage

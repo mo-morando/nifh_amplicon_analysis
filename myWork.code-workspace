@@ -11,6 +11,12 @@
 		},
 		{
 			"path": "../../../Library/CloudStorage/GoogleDrive-mmorando@ucsc.edu/My Drive/scripts/amp_review_Specific"
+		},
+		{
+			"path": "../DADA2_nifH_pipeline_devel/nifH_amplicons_DADA2"
+		},
+		{
+			"path": "../nifH-ASV-workflow"
 		}
 	],
 	"settings": {}

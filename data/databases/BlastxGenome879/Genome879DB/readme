@@ -1,0 +1,6 @@
+
+## Grabbed the fasta from the lab page on 17 July 2021.
+
+## Built the DB with the following.
+cat genome879_March2019.fasta \
+  | makeblastdb -dbtype prot -title genome897_March2019 -out genome879DB

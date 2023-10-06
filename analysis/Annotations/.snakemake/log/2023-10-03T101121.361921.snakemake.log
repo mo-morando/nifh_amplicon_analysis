@@ -1,0 +1,3 @@
+NameError in file /Users/mo/Projects/nifH_amp_project/myWork/analysis/Annotations/Snakefile, line 28:
+name 'GENOME879_DIR' is not defined
+  File "/Users/mo/Projects/nifH_amp_project/myWork/analysis/Annotations/Snakefile", line 28, in <module>

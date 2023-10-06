@@ -1,0 +1,7 @@
+
+## Grabbed the fasta from the lab page, then manually removed one messed up
+##  entry that was 1's and 0's.
+
+## Built the DB with the following.
+cat nifH_ARBUpdate_June2017_nt_dropWeirdBinaryAtLine82114.fasta \
+  | makeblastdb -dbtype nucl -title ARB_nifH_2017_update -out NifHDB

@@ -1,0 +1,3 @@
+NameError in file /Users/mo/Projects/nifH_amp_project/myWork/analysis/Annotations/Snakefile, line 16:
+name 'BlastnARB2017' is not defined
+  File "/Users/mo/Projects/nifH_amp_project/myWork/analysis/Annotations/Snakefile", line 16, in <module>
