@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../../scripts"
+		}
+	],
+	"settings": {
+		"yaml.schemas": {
+			"file:///Users/mo/.vscode/extensions/ms-python.python-2023.20.0/schemas/conda-environment.json": "file:///Users/mo/Projects/nifH_amp_project/myWork/data/databases/CMAP/environments/CMAP_enviroments.yaml"
+		}
+	}
+}
