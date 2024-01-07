@@ -1,4 +1,10 @@
 ### all functions
+
+### _ Loading in library
+cat("Load in the tidyverse")
+
+library(tidyverse)
+
 ### _ Loading in functions
 cat("Load in the functions")
 
