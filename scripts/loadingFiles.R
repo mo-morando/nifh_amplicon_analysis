@@ -289,6 +289,13 @@ CMAP_coloc <- CMAP_coloc %>%
     logFe = log(Fe_tblPisces_NRT)
   )
 
+### add Ocean regions for each study ID
+studyid_regions <- read_csv("~/mmorando@ucsc.edu - Google Drive/My Drive/data/amplicon_review/all_studies/tables/Table1/studyid_regions.csv")
+
+CMAP_coloc <- CMAP_coloc %>%
+  left_join(studyid_regions) %>%
+  select(photic, SAMPLEID, studyID, Ocean, everything())
+
 
 # ### Size fractions
 # CMAP_coloc <- CMAP_coloc %>%
