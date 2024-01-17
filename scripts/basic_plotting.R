@@ -52,6 +52,19 @@ get_viridis_colors <- function(
   return(custom_palette)
 }
 
+## colours specific to nifh clusters
+nifh_cluster_colours <- c(
+  "1A" = "steelblue",
+  "1J/1K" = "chocolate4",
+  "1O/1P" = "magenta",
+  # "3" = "goldenrod2",
+  "3" = "red",
+  "1G" = "chocolate1",
+  "1B" = "green2",
+  "other" = "lightgrey",
+  "unknown" = "darkgrey"
+)
+
 
 # Function to create a custom dot plot
 create_custom_plot_point <- function(
@@ -102,6 +115,7 @@ create_custom_plot_point <- function(
 bar_plot <- function(
     df, x, y,
     fill = NULL,
+    fill_pallete = NULL,
     width = NULL,
     fill_lab = NULL,
     colour_lab = NULL,
@@ -122,7 +136,8 @@ bar_plot <- function(
     ) +
     # theme_bw() +
     # theme_minimal() +
-    scale_fill_manual(values = viridis_color_pallete) +
+    scale_fill_manual(values = fill_pallete) +
+    # scale_fill_manual(values = viridis_color_pallete) +
     theme_custom() +
     theme(
       legend.position = legend_position,

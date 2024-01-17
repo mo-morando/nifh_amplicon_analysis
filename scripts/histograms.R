@@ -93,6 +93,8 @@ print(samples_per_photic, n = 1000)
 count_and_arrange(CMAP_coloc, c("photic", "nucleicAcidType"))
 
 
+# count_and_arrange(sample_types_all, c("sample_type", "SAMPLEID"), sample_type)  %>% add_total_row
+
 ## - sample type
 (sample_type <- count_and_arrange(sample_types_all, c("sample_type", "nucleicAcidType"), sample_type) %>%
   # add_total_row(n, "sample_type", all_columns = FALSE) %>%
@@ -118,6 +120,7 @@ bar_plot(
   y = "sample type",
   # y = percentage_total_rel_abund_total_nifH_cluster_study_id_clean,
   fill = new_group,
+  fill_pallete = viridis_color_pallete,
   # fill = nifH_cluster_modified,
   # fill_lab = expression(italic("nifH") "cluster"),
   # fill_lab = bquote(bold(bold(italic(nifH)) ~ cluster)),
@@ -165,6 +168,7 @@ viridis_color_pallete <- get_viridis_colors(to_plot, new_group, "H", -1, 0)
   x = percentage,
   # y = percentage_total_rel_abund_total_nifH_cluster_study_id_clean,
   fill = new_group,
+  fill_pallete = viridis_color_pallete,
   # fill = nifH_cluster_modified,
   # fill_lab = expression(italic("nifH") "cluster"),
   # fill_lab = bquote(bold(bold(italic(nifH)) ~ cluster)),
@@ -217,28 +221,30 @@ ggsave("/Users/mo/Projects/nifH_amp_project/myWork/analysis/plots/bar_chart_nifh
 #     arrange(desc(n))
 
 (samples_per_studyid <- count_and_arrange(
-  query_df, c("studyID")
+  query_df, c("studyID", "nucleicAcidType")
 ))
 
 # print(samples_per_studyid, n = 50)
 
 to_plot <- samples_per_studyid
 
-viridis_color_pallete <- get_viridis_colors(to_plot, studyID, "H", -1, 0)
+viridis_color_pallete <- get_viridis_colors(to_plot, nucleicAcidType, "H", -1, 0)
 
 (samples_per_studyid_plot <- bar_plot(
   df = to_plot,
   y = studyID,
   x = n,
-  fill = NULL,
+  fill = nucleicAcidType,
+  fill_pallete = viridis_color_pallete,
   y_lab = "Study ID",
   x_lab = "Number of samples",
-  legend_position = "none"
+  legend_position = "right",
+  legend_direction = "vertical"
 ) #+
 # theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 15))
 )
 
-ggsave("/Users/mo/Projects/nifH_amp_project/myWork/analysis/plots/Samples_per_studyID_bar.jpeg", height = 8.5, width = 14, units = "in", dpi = 300)
+ggsave("/Users/mo/Projects/nifH_amp_project/myWork/analysis/plots/Samples_per_studyID_nucacid_fill_bar.jpeg", height = 8.5, width = 14, units = "in", dpi = 300)
 
 ### month
 (samples_per_month <- count_and_arrange(query_df, c("month")))

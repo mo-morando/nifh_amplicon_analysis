@@ -8,6 +8,10 @@ all_studies <- read_csv("~/mmorando@ucsc.edu - Google Drive/My Drive/data/amplic
 
 all_together <- read_csv("~/mmorando@ucsc.edu - Google Drive/My Drive/data/amplicon_review/all_studies/tables/Table1/AllTogether.csv")
 
+studyid_regions <- read_csv("~/mmorando@ucsc.edu - Google Drive/My Drive/data/amplicon_review/all_studies/tables/Table1/studyid_regions.csv")
+
+
+
 # all_together_way <- read_csv("~/mmorando@ucsc.edu - Google Drive/My Drive/data/amplicon_review/all_studies/tables/Table1/AllTogetherWay.csv")
 
 # all_studiesStages <- read_csv("~/mmorando@ucsc.edu - Google Drive/My Drive/data/amplicon_review/all_studies/tables/Table1/all_studiesAssessed_Stages.csv")
@@ -58,7 +62,10 @@ table_1_names_key <- c(
 )
 
 table_1 <- supp_table_1 %>%
-  select(all_of(table_1_names_key))
+  filter(used == "y") %>%
+  select(all_of(table_1_names_key)) %>%
+  left_join(studyid_regions) %>%
+  select(studyID, Ocean, everything())
 
 ## * write out Table 1
 write_csv(table_1, "~/mmorando@ucsc.edu - Google Drive/My Drive/data/amplicon_review/all_studies/tables/Table1/Table_1.csv")

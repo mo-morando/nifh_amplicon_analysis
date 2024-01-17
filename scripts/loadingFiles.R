@@ -70,6 +70,9 @@ annoNifHDB_updt <- annoNifHDB_updt %>%
     nifH_cluster = if_else(nifH_cluster == "1J" | nifH_cluster == "1K",
       "1J/1K", nifH_cluster
     ),
+    nifH_cluster = if_else(nifH_cluster == "1P" | nifH_cluster == "1O",
+      "1O/1P", nifH_cluster
+    ),
     nifH_cluster = if_else(is.na(nifH_cluster), "unknown", nifH_cluster)
   )
 
@@ -292,10 +295,13 @@ CMAP_coloc <- CMAP_coloc %>%
 ### add Ocean regions for each study ID
 studyid_regions <- read_csv("~/mmorando@ucsc.edu - Google Drive/My Drive/data/amplicon_review/all_studies/tables/Table1/studyid_regions.csv")
 
+### identy studies from Southern Ocean
 CMAP_coloc <- CMAP_coloc %>%
   left_join(studyid_regions) %>%
-  select(photic, SAMPLEID, studyID, Ocean, everything())
-
+  select(photic, SAMPLEID, studyID, ocean, everything()) %>%
+  mutate(
+    ocean = if_else(lat_abs >= 60 & hemi == "southernHemi", "Southern Ocean", ocean)
+  )
 
 # ### Size fractions
 # CMAP_coloc <- CMAP_coloc %>%

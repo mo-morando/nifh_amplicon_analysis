@@ -363,7 +363,7 @@ print(pie_chart_AUID_depud_DNA_counts)
 ggsave("/Users/mo/Projects/nifH_amp_project/myWork/analysis/plots/pie_chart_nifhDF_DNA_dedup_perc_tot_cnts_nifH_cluster.jpeg", height = 8.5, width = 14, units = "in", dpi = 300)
 
 annoNifHDB_updt %>%
-  filter(nifH_cluster == "1P") %>%
+  filter(nifH_cluster == "1O/1P") %>%
   distinct(CON)
 
 #### by relative abundance
