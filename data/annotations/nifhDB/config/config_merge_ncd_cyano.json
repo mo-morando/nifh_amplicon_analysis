@@ -1,0 +1,8 @@
+{
+    "left_csv_ncd_cyano": "ncd_cyano/auids_headers_filt_colsfilt_blst.csv",
+    "merged_csv_ncd_cyano": "cart_arb_genome879_ncd_cyano_merge.csv",
+    "left_on_ncd_cyano": "AUID_updt",
+    "right_on_ncd_cyano": "AUID_updt",
+    "how_ncd_cyano": "outer",
+    "merged_dir_ncd_cyano": "merged_database/"
+}

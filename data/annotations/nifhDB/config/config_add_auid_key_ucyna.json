@@ -1,0 +1,6 @@
+{
+    "keyed_csv_ucyna": "auids_headers_filt_colsfilt_blst.csv",
+    "left_on_key_ucyna": "ucyna_oligos_qseqid",
+    "right_on_key_ucyna": "AUID_OLD",
+    "how_key_ucyna": "left"
+}

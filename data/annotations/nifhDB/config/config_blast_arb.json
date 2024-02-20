@@ -1,0 +1,15 @@
+{
+    "input_fasta_blast_arb": "fasta/auid.filtered.nifHDB.fasta",
+    "blast_type_arb": "blastn",
+    "num_threads_arb": 4,
+    "output_csv_arb": "output_blast.csv",
+    "final_blst_csv_arb": "final_blst.csv",
+    "blast_output_dir_arb": "arb_nifh_2017/",
+    "database_suffix": "arb",
+    "blast_processing_key": [
+        "arb",
+        "ucyna",
+        "genome879",
+        "ncd_cyano"
+    ]
+}

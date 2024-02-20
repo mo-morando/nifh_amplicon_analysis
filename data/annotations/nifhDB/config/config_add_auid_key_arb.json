@@ -1,0 +1,6 @@
+{
+    "keyed_csv_arb": "auids_headers_filt_colsfilt_blst.csv",
+    "left_on_key_arb": "arb_nifh_qseqid",
+    "right_on_key_arb": "AUID_OLD",
+    "how_key_arb": "left"
+}

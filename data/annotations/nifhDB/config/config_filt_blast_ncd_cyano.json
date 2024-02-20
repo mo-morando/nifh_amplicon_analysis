@@ -1,0 +1,5 @@
+{
+    "filtered_blast_output_ncd_cyano": "filt_colsfilt_blst.csv",
+    "min_qcov_ncd_cyano": 70,
+    "min_pident_ncd_cyano": 97
+}

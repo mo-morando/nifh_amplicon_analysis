@@ -1,0 +1,7 @@
+{
+    "input_fasta_db_ncd_cyano": "Marine_NCD_cyano_refsequences_sans_oliogos.fasta",
+    "database_type_ncd_cyano": "nucl",
+    "blast_database_dir_ncd_cyano": "ncd_cyano_db/",
+    "blast_database_ncd_cyano": "ncd_cyano_db",
+    "input_fasta_dir_ncd_cyano": "../../databases/Marine_NCD_cyano_refsequences/"
+}

@@ -1,0 +1,5 @@
+{
+    "filtered_blast_output_genome879": "filt_colsfilt_blst.csv",
+    "min_qcov_genome879": 50,
+    "min_pident_genome879": 90
+}

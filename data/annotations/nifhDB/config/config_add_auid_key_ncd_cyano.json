@@ -1,0 +1,6 @@
+{
+    "keyed_csv_ncd_cyano": "auids_headers_filt_colsfilt_blst.csv",
+    "left_on_key_ncd_cyano": "ncd_cyano_qseqid",
+    "right_on_key_ncd_cyano": "AUID_OLD",
+    "how_key_ncd_cyano": "left"
+}

@@ -1,0 +1,8 @@
+{
+    "left_csv_ucyna": "UCYNA_oligos/auids_headers_filt_colsfilt_blst.csv",
+    "merged_csv_ucyna": "cart_arb_genome879_ncd_cyano_ucyna_merge.csv",
+    "left_on_ucyna": "AUID_updt",
+    "right_on_ucyna": "AUID_updt",
+    "how_ucyna": "outer",
+    "merged_dir_ucyna": "merged_database/"
+}
