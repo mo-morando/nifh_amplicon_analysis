@@ -170,8 +170,7 @@ viridis_color_pallete <- get_viridis_colors(to_plot, new_group, "H", -1, 0)
   fill = new_group,
   fill_pallete = viridis_color_pallete,
   # fill = nifH_cluster_modified,
-  # fill_lab = expression(italic("nifH") "cluster"),
-  # fill_lab = bquote(bold(bold(italic(nifH)) ~ cluster)),
+  # fill_lab = bquote((bold(italic(nifH)) ~ cluster)),
   y_lab = NULL,
   x_lab = "% of total",
   legend_position = "right"
@@ -189,19 +188,6 @@ viridis_color_pallete <- get_viridis_colors(to_plot, new_group, "H", -1, 0)
 
 
 ggsave("/Users/mo/Projects/nifH_amp_project/myWork/analysis/plots/samp_nucleic_acid_type_light_bar_cmb_plot.jpeg", height = 10.5, width = 14, units = "in", dpi = 300)
-
-### * combine plot
-
-samples_per_studyid_plot
-
-combined_nuca_phtc_smptp_tibble_plot
-
-(combine_test <- samples_per_studyid_plot | combined_nuca_phtc_smptp_tibble_plot +
-  plot_layout(widths = c(1.5, 0))
-#  plot_layout(widths = c(2, 1), heights = unit(c(5, 1), c('cm', 'null')))
-)
-
-ggsave("/Users/mo/Projects/nifH_amp_project/myWork/analysis/plots/bar_chart_nifhDB_DNA_dedup_perc_tot_nifH_cluster_studyID_samples_per_cmb_plot.jpeg", height = 8.5, width = 14, units = "in", dpi = 300)
 
 
 
@@ -221,20 +207,20 @@ ggsave("/Users/mo/Projects/nifH_amp_project/myWork/analysis/plots/bar_chart_nifh
 #     arrange(desc(n))
 
 (samples_per_studyid <- count_and_arrange(
-  query_df, c("studyID", "nucleicAcidType")
+  query_df, c("studyID", "nucleicAcidType", "ocean")
 ))
 
 # print(samples_per_studyid, n = 50)
 
 to_plot <- samples_per_studyid
 
-viridis_color_pallete <- get_viridis_colors(to_plot, nucleicAcidType, "H", -1, 0)
+viridis_color_pallete <- get_viridis_colors(to_plot, ocean, "magma", -1, 0)
 
 (samples_per_studyid_plot <- bar_plot(
   df = to_plot,
   y = studyID,
   x = n,
-  fill = nucleicAcidType,
+  fill = ocean,
   fill_pallete = viridis_color_pallete,
   y_lab = "Study ID",
   x_lab = "Number of samples",
@@ -244,7 +230,67 @@ viridis_color_pallete <- get_viridis_colors(to_plot, nucleicAcidType, "H", -1, 0
 # theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 15))
 )
 
-ggsave("/Users/mo/Projects/nifH_amp_project/myWork/analysis/plots/Samples_per_studyID_nucacid_fill_bar.jpeg", height = 8.5, width = 14, units = "in", dpi = 300)
+samples_per_studyid_plot +
+  facet_wrap(~nucleicAcidType)
+# facet_wrap(~hemi)
+
+# ggsave("/Users/mo/Projects/nifH_amp_project/myWork/analysis/plots/Samples_per_studyID_nucacid_fill_bar.jpeg", height = 8.5, width = 14, units = "in", dpi = 300)
+
+ggsave("/Users/mo/Projects/nifH_amp_project/myWork/analysis/plots/Samples_per_studyID_ocean_fill_bar_facet_nucelic.jpeg", height = 8.5, width = 14, units = "in", dpi = 300)
+
+
+# ### * combine plot
+
+# samples_per_studyid_plot
+
+# combined_nuca_phtc_smptp_tibble_plot
+
+# (combine_test <- samples_per_studyid_plot | combined_nuca_phtc_smptp_tibble_plot +
+#   plot_layout(widths = c(1.5, 0))
+# #  plot_layout(widths = c(2, 1), heights = unit(c(5, 1), c('cm', 'null')))
+# )
+
+# ggsave("/Users/mo/Projects/nifH_amp_project/myWork/analysis/plots/bar_chart_nifhDB_DNA_dedup_perc_tot_nifH_cluster_studyID_samples_per_cmb_plot.jpeg", height = 8.5, width = 14, units = "in", dpi = 300)
+
+
+
+### -  Ocean and hemisphere
+(samples_per_ocean <- count_and_arrange(
+  #   query_df, c("studyID", "nucleicAcidType")
+  #   query_df, c("ocean")
+  query_df, c("ocean", "hemi")
+))
+samples_per_ocean %>%
+  left_join(
+    count_and_arrange(query_df, c("ocean"), "n_ocean", "n_ocean")
+  ) %>%
+  arrange(desc(ocean))
+# print(samples_per_studyid, n = 50)
+
+to_plot <- samples_per_ocean
+
+viridis_color_pallete <- get_viridis_colors(to_plot, hemi, "magma", -1, 0)
+
+(samples_per_ocean_plot <- bar_plot(
+  df = to_plot,
+  y = ocean,
+  x = n,
+  fill = hemi,
+  fill_pallete = viridis_color_pallete,
+  y_lab = "Oceans",
+  x_lab = "Number of samples",
+  fill_lab = "Hemisphere",
+  legend_position = "right",
+  legend_direction = "vertical"
+) +
+  scale_fill_manual(
+    values = c("northernHemi" = "darkorange", "southernHemi" = "green"),
+    label = c("northern", "southern")
+  )
+# theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 15))
+)
+
+ggsave("/Users/mo/Projects/nifH_amp_project/myWork/analysis/plots/Samples_per_ocean_hemi_fill_bar.jpeg", height = 8.5, width = 14, units = "in", dpi = 300)
 
 ### month
 (samples_per_month <- count_and_arrange(query_df, c("month")))
@@ -256,11 +302,12 @@ to_plot <- samples_per_month
 
 viridis_color_pallete <- get_viridis_colors(to_plot, month, "H", -1, 0)
 
-bar_plot(
+(samples_per_month_plot <- bar_plot(
   df = to_plot,
   y = month,
   x = n,
-  fill = month,
+  fill = NULL,
+  # fill_pallete = viridis_color_pallete,
   y_lab = "Month",
   x_lab = "Number of samples",
   legend_position = "none",
@@ -273,7 +320,7 @@ bar_plot(
     labels =
     # c("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")
       rev(c("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")),
-  )
+  ))
 
 
 ggsave("/Users/mo/Projects/nifH_amp_project/myWork/analysis/plots/Samples_per_month_bar.jpeg", height = 8.5, width = 14, units = "in", dpi = 300)
@@ -293,6 +340,7 @@ bar_plot(
   y = month,
   x = n,
   fill = studyID,
+  fill_pallete = viridis_color_pallete,
   y_lab = "Month",
   x_lab = "Number of samples",
   legend_position = "bottom"
@@ -324,8 +372,8 @@ print(samples_per_lat_abs, n = 1000)
 #     y_lab = "absolute latitude"
 # )
 
-histogram_plot_x_or_y(samples_per_lat_abs, "x", lat_abs,
-  fill = hemi, binwidth = 1,
+(samples_per_lat_abs_plot <- histogram_plot_x_or_y(samples_per_lat_abs, "x", lat_abs,
+  fill = hemi, binwidth = 2,
   x_lab = "absolute latitude"
 ) +
   theme(
@@ -337,7 +385,7 @@ histogram_plot_x_or_y(samples_per_lat_abs, "x", lat_abs,
   scale_fill_manual(
     values = c("northernHemi" = "darkorange", "southernHemi" = "green"),
     label = c("northern", "southern")
-  )
+  ))
 
 ggsave("/Users/mo/Projects/nifH_amp_project/myWork/analysis/plots/Samples_per_abslat_hemi_hist.jpeg", height = 8.5, width = 14, units = "in", dpi = 300)
 
@@ -353,7 +401,7 @@ samples_per_season <- count_and_arrange(
 
 # print(samples_per_season, n = 1000)
 
-bar_plot(
+(bar_plot(
   df = samples_per_season,
   x = n,
   y = season,
@@ -370,7 +418,7 @@ bar_plot(
   scale_fill_manual(
     values = c("northernHemi" = "darkorange", "southernHemi" = "green"),
     label = c("northern", "southern")
-  )
+  ))
 
 ## !x value has to be continous so "season" doesn't work
 ## !could change to number c(1,2,3,4) and then label them by their actual season
@@ -552,23 +600,25 @@ print(samples_per_sst_tblSST_AVHRR_OI_NRT, n = 1000)
 #     y_lab = "SST ˚C"
 # )
 
-# histogram_plot_x_or_y(
-#   df = samples_per_sst_tblSST_AVHRR_OI_NRT, aes_var = "x",
-#   x = sst_tblSST_AVHRR_OI_NRT,
-#   fill = hemi,
-#   binwidth = 1,
-#   x_lab = "SST ˚C"
-# ) +
-#   theme(
-#     legend.position = "bottom"
-#   ) +
-#   labs(
-#     fill = "Hemisphere"
-#   ) +
-#   scale_fill_manual(
-#     values = c("northernHemi" = "darkorange", "southernHemi" = "green"),
-#     label = c("northern", "southern")
-#   )
+sst_hist <- histogram_plot_x_or_y(
+  df = samples_per_sst_tblSST_AVHRR_OI_NRT, aes_var = "x",
+  x = sst_tblSST_AVHRR_OI_NRT,
+  fill = hemi,
+  binwidth = 1,
+  x_lab = "SST ˚C"
+) +
+  theme(
+    legend.position = "bottom"
+  ) +
+  labs(
+    fill = "Hemisphere"
+  ) +
+  scale_fill_manual(
+    values = c("northernHemi" = "darkorange", "southernHemi" = "green"),
+    label = c("northern", "southern")
+  )
+
+print(sst_hist)
 
 ggsave("/Users/mo/Projects/nifH_amp_project/myWork/analysis/plots/Samples_per_SST_hemi_hist.jpeg", height = 8.5, width = 14, units = "in", dpi = 300)
 
@@ -588,11 +638,11 @@ print(samples_per_PO4_tblPisces_NRT, n = 1000)
 #     y_lab = "SST ˚C"
 # )
 
-histogram_plot_x_or_y(
+po4_hist <- histogram_plot_x_or_y(
   df = samples_per_PO4_tblPisces_NRT, aes_var = "x",
   x = PO4_tblPisces_NRT,
   fill = hemi,
-  binwidth = 0.01,
+  binwidth = 0.02,
   x_lab = expression(bold(paste(
     "PO"[4]^"3-" * " (µmol L"^"-1", ")"
   )))
@@ -608,7 +658,59 @@ histogram_plot_x_or_y(
     label = c("northern", "southern")
   )
 
+print(po4_hist)
+
 ggsave("/Users/mo/Projects/nifH_amp_project/myWork/analysis/plots/Samples_per_PO4_hemi_hist.jpeg", height = 8.5, width = 14, units = "in", dpi = 300)
+
+
+
+## - Make combined plot
+#* # absolute lat ---> samples_per_lat_abs_plot
+#* # ocean  ---> samples_per_ocean_plot
+#* # SST ---> sst_hist
+#* # PO4 ---> po4_hist
+
+#* # alter plots for combining
+
+sst_hist_sub <- sst_hist + theme(legend.position = "none")
+po4_hist_sub <- po4_hist + theme(legend.position = "none")
+samples_per_lat_abs_plot_sub <- samples_per_lat_abs_plot + theme(legend.position = "none")
+samples_per_ocean_plot_sub <- samples_per_ocean_plot + theme(
+  legend.position = "none",
+  axis.text.y = element_text(
+    angle = 45,
+    hjust = 1,
+    size = 19,
+    face = "bold"
+  )
+)
+
+#* # combine with patchwork
+(combined_plot_fig_5 <- (samples_per_lat_abs_plot_sub / sst_hist_sub) | (samples_per_ocean_plot_sub / po4_hist_sub))
+
+# (combined_plot_fig_5 <- (samples_per_lat_abs_plot_sub | samples_per_ocean_plot_sub) / (sst_hist_sub | po4_hist_sub))
+
+# (combined_plot_fig_5 <- samples_per_lat_abs_plot_sub / samples_per_ocean_plot_sub + sst_hist_sub / po4_hist_sub)
+
+# combined_plot_fig_5 + plot_layout(
+#   ncol = 2,
+#   heights = c(1, 2), # This adjusts the height ratio between the top and bottom plots
+#   # widths = c(1, 5)  # This adjusts the height ratio between the top and bottom plots
+# )
+
+ggsave("/Users/mo/Projects/nifH_amp_project/myWork/analysis/plots/Samples_per_abslat_ocean_sst_po4_hemi_cmb_hist.jpeg", height = 8.5, width = 14, units = "in", dpi = 300)
+
+# ## combine plots   OLD PLOT HERE
+
+# sst_hist <- sst_hist + theme(legend.position = "none")
+
+# combine_sst_po4_hist <- (sst_hist / po4_hist)
+
+# print(combine_sst_po4_hist)
+
+# ggsave("/Users/mo/Projects/nifH_amp_project/myWork/analysis/plots/Samples_per_PO4_N_SST_hemi_cmb_hist.jpeg", height = 8.5, width = 14, units = "in", dpi = 300)
+
+
 
 
 ### * logFe

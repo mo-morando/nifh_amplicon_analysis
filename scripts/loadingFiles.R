@@ -1,63 +1,62 @@
+### set working directory
+setwd("/Users/mo/Projects/nifH_amp_project/myWork")
+
+## load libraries
 library("tidyverse")
 
 ### _ Loading in the data
 cat("Load in the data")
 
-### ! FIXME: Temporarily moved this to here while figuring out what is wrong with the annotation file
-## ! It is missing ~1500 ASVs from the count table (nifhDB_cnts)
-## ! Below the nifhDB_cnts is needed to add these ASVs as unknown, but I don't know if they are actually unknown so stats may be off
-## ! Once I figure this out remove this part and that part just described below
-nifhDB_cnts <- read.table("~/mmorando@ucsc.edu - Google Drive/My Drive/data/amplicon_review/all_studies/master_fasta/nifHDB/auid.abundances.filtered.nifHDB.tsv", header = TRUE, sep = "\t", row.names = 1) %>%
-  rownames_to_column("AUID") %>%
-  rename_all(~ str_remove(., pattern = ".*___")) %>%
-  as_tibble()
-
 ### annotation files
 #### read in annotations table
-## - new annotation file
-# annoNifHDB_updt <- read_tsv("~/mmorando@ucsc.edu_gDrive/My Drive/data/amplicon_review/all_studies/master_annotation/filtered_annotations/nifHDB/auids.annot_nifhDB.tsv")
-annoNifHDB_updt <- read_csv("/Users/mo/Projects/nifH_amp_project/myWork/data/annotations/nifhDB/test_consensus_tax_annotation.csv", col_types = cols(
-  cluster = col_character()
-)) %>%
-  select(-"Unnamed: 0") %>%
-  mutate(across(everything(), ~ ifelse(. == "nan", NA, .)))
-# c(AUID.162578, AUID.176395, AUID.177000)
+# ## - new annotation file
+# # annoNifHDB_updt <- read_tsv("~/mmorando@ucsc.edu_gDrive/My Drive/data/amplicon_review/all_studies/master_annotation/filtered_annotations/nifHDB/auids.annot_nifhDB.tsv")
+# annoNifHDB_updt <- read_csv("/Users/mo/Projects/nifH_amp_project/myWork/data/annotations/nifhDB/test_consensus_tax_annotation.csv", col_types = cols(
+#   cluster = col_character()
+# )) %>%
+#   select(-"Unnamed: 0") %>%
+#   mutate(across(everything(), ~ ifelse(. == "nan", NA, .)))
+# # c(AUID.162578, AUID.176395, AUID.177000)
 
-## ! FIXME: Something is going on with the annotations and I don't have time to figure it out
-## ! Once I figure this out remove this part and that part just described below
-## - Add AUIDs removed during annotations and call the unknown
-annoNifHDB_updt <- annoNifHDB_updt %>%
-  full_join(nifhDB_cnts %>%
-    select(AUID)) %>%
-  # ! I will proably need to combine 'unknownnan' (which already exisits)
-  # ! With this newly added "unknown"
-  mutate(
-    subcluster = if_else(is.na(ARB2017.id) | is.na(Genomes879.id) |
-      is.na(consensus_id), "unknown", subcluster),
-    cluster = if_else(is.na(ARB2017.id) | is.na(Genomes879.id) |
-      is.na(consensus_id), "unknown", cluster),
-    consensus_id = if_else(is.na(ARB2017.id) | is.na(Genomes879.id) |
-      is.na(consensus_id), "unknown", consensus_id)
-  )
+# _# updated by me 20240219
+# _# updated by me 20240219
+
+annotations_new_auids <- read_csv("data/annotations/nifhDB/merged_database/annotation_tab.csv")
+
+annoNifHDB_updt <- annotations_new_auids %>%
+  # select(-AUID) %>%
+  rename(AUID = AUID_OLD)
+
+# _# updated by me 20240219
+# _# updated by me 20240219
 
 
+#### ! Now I am temporarily using Jonathans annotations to speed this up
+## ! but they are not what I will use, and do not have the UCYN-A oligos
+## ! Once i remake my new annotatino file remove this
+# annotations_new_auids <- read_tsv("data/annotations/nifhDB/jonathan/FOR_MO_ESSD/auids.annot.tsv")
+# annotations_new_auids <- read_csv("annotationsall_updatedauids_nifhdb.csv")
+# annotations_new_auids <- read_csv("annotationsall_updatedauids_nifhdb_consensus_tax_annotation.csv")
 
-## - /FIXME: currently these is some issue with the CART and the assigned clusters and subclusters
-## ! so I am replacing a few here
-## ! Once this is fixed, remove this
-# Create a tibble with the infromation I would like to replace/add
-df2 <- tibble(
-  AUID_NEW = c("AUID.162578", "AUID.176395", "AUID.177000"),
-  subcluster = c("1G", "1B", "1B"),
-  cluster = c("1", "1", "1")
-)
+# annoNifHDB_updt <- annotations_new_auids %>%
+#   select(-AUID) %>%
+#   rename(AUID = AUID_OLD)
+# ## !! Remove down to here
 
-annoNifHDB_updt <- annoNifHDB_updt %>%
-  left_join(df2, by = c("AUID_NEW" = "AUID_NEW")) %>%
-  mutate(subcluster = ifelse(!is.na(subcluster.y), subcluster.y, subcluster.x)) %>%
-  select(-subcluster.x, -subcluster.y) %>%
-  mutate(cluster = ifelse(!is.na(cluster.y), cluster.y, cluster.x)) %>%
-  select(-cluster.x, -cluster.y)
+annoNifHDB_updt %>%
+  distinct(subcluster) %>%
+  view()
+
+annoNifHDB_updt %>%
+  # filter(AUID_NEW=="AUID.12250")
+  filter(AUID == "AUID.12250") %>%
+  view()
+
+annoNifHDB_updt %>%
+  # filter(AUID_NEW=="AUID.12250")
+  filter(subcluster == "nan") %>%
+  # filter(subcluster %in% "nan") %>%
+  view()
 
 ## - make CON column as the consesus id column since this is what the rest of the script uses
 ## then make the nifH_cluster column used by the rest of script
@@ -66,15 +65,17 @@ annoNifHDB_updt <- annoNifHDB_updt %>%
   mutate(
     CON = consensus_id,
     nifH_cluster = if_else(cluster == 3 | cluster == 4 | cluster == 2, as.character(cluster), subcluster),
-    nifH_cluster = if_else(grepl("UCYN-B|croco", MarineDiazo.ID, ignore.case = T), "1B", nifH_cluster),
+    nifH_cluster = if_else(grepl("UCYN-B|croco", ncd_cyano_id, ignore.case = T), "1B", nifH_cluster),
     nifH_cluster = if_else(nifH_cluster == "1J" | nifH_cluster == "1K",
       "1J/1K", nifH_cluster
     ),
     nifH_cluster = if_else(nifH_cluster == "1P" | nifH_cluster == "1O",
       "1O/1P", nifH_cluster
     ),
-    nifH_cluster = if_else(is.na(nifH_cluster), "unknown", nifH_cluster)
+    nifH_cluster = if_else(is.na(nifH_cluster) | subcluster == "nan", "unknown", nifH_cluster)
   )
+
+annoNifHDB_updt
 
 # ! TODO: The CON id need to be cleaned up
 ## _ MAGs need to be identified
@@ -85,6 +86,26 @@ annoNifHDB_updt %>%
   distinct(CON, .keep_all = T) %>%
   view()
 
+## add a column for parsing nifH clusters of interest
+clusters_of_interest <- c(
+  "1A",
+  "1J/1K",
+  "1O/1P",
+  "3",
+  "1G",
+  "1B",
+  "4",
+  "2"
+)
+
+annoNifHDB_updt <- annoNifHDB_updt %>%
+  mutate(
+    cluster_stats = ifelse(test = nifH_cluster %in% clusters_of_interest,
+      yes = nifH_cluster,
+      no = "other"
+    )
+  )
+
 
 ### *  remove ASVs that cannot be resolved and Syne-like
 
@@ -92,14 +113,16 @@ annoNifHDB_updt %>%
 grep_text <- "synechococcus"
 
 syne_auid_key <- annoNifHDB_updt %>%
-  filter(grepl(grep_text, Genomes879.id, ignore.case = TRUE)) %>%
+  filter(grepl(grep_text, genome879_nifh_sseqid, ignore.case = TRUE)) %>%
   pull(AUID)
 ## - make unknown auid key
-unknown_text <- "unknownnan"
+unknown_con <- "unknownnan"
+unknown_cluster <- "unknown"
 
 unknownnan_auid_key <- annoNifHDB_updt %>%
-  filter(CON == unknown_text) %>%
+  filter(CON %in% unknown_con | nifH_cluster %in% unknown_cluster) %>%
   pull(AUID)
+
 ## - remove these from the annotation table
 annoNifHDB_updt <- annoNifHDB_updt %>%
   filter(!AUID %in% syne_auid_key) %>%
@@ -114,9 +137,9 @@ dim(annoNifHDB_updt)
 
 # annoNifHDB_updt %>%
 #     # filter(subcluster == "1J")  %>%
-#     filter(grepl("Cyano", Genomes879.tax, ignore.case = T)) %>%
-#     # filter(grepl("UCYN-B|croco", MarineDiazo.ID, ignore.case = T)) %>%
-#     distinct(MarineDiazo.ID, subcluster, .keep_all = T) %>%
+#     filter(grepl("Cyano", genome879_nifh_tax, ignore.case = T)) %>%
+#     # filter(grepl("UCYN-B|croco", ncd_cyano_id, ignore.case = T)) %>%
+#     distinct(ncd_cyano_id, subcluster, .keep_all = T) %>%
 #     view()
 
 # cat("Load in annotation file", annoNifHDB_updt, "the data")
@@ -242,6 +265,11 @@ CMAP_coloc <- CMAP_coloc %>%
     Size_fraction = if_else(Size_fraction %in% c("whole", "Sterivex", "0.22") | is.na(Size_fraction), "0.2", Size_fraction),
     date = str_remove(time, " .+$"),
     month = str_remove_all(str_extract(date, "-.+-"), "-"),
+    # geoRegion = cut(.$lat_abs,
+    #   breaks = c(-1, 23, 35, 66, 100),
+    #   labels = c("Tropics", "Subtropic", "Temperate", "Polar")
+    # ),
+    # geoRegion = factor(geoRegion, c("Tropics", "Subtropic", "Temperate", "Polar")),
     # season = str_remove_all(str_extract(date, "-.+-"), "-"),
     season = if_else(month %in% c("03", "04", "05") & hemi == "northernHemi", "spring",
       if_else(month %in% c("09", "10", "11") & hemi == "northernHemi", "fall",
@@ -298,9 +326,9 @@ studyid_regions <- read_csv("~/mmorando@ucsc.edu - Google Drive/My Drive/data/am
 ### identy studies from Southern Ocean
 CMAP_coloc <- CMAP_coloc %>%
   left_join(studyid_regions) %>%
-  select(photic, SAMPLEID, studyID, ocean, everything()) %>%
+  select(photic, SAMPLEID, studyID, study_ocean, everything()) %>%
   mutate(
-    ocean = if_else(lat_abs >= 60 & hemi == "southernHemi", "Southern Ocean", ocean)
+    ocean = if_else(lat_abs >= 60 & hemi == "southernHemi", "Southern", study_ocean)
   )
 
 # ### Size fractions
@@ -385,10 +413,9 @@ nifhDB_cnts <- nifhDB_cnts %>%
 
 ### remove samples from NEMO that I have no idea what they are
 
-nifhDB_cnts <- nifhDB_cnts %>%
+(nifhDB_cnts <- nifhDB_cnts %>%
   select(-matches("Turk\\d+\\.e")) %>%
-  select(-matches("Harding229\\.66705_S229|Harding230\\.66706_S230|Harding231\\.66709_S231")) %>%
-  view()
+  select(-matches("Harding229\\.66705_S229|Harding230\\.66706_S230|Harding231\\.66709_S231")))
 
 
 ##### calculate relative abundance
@@ -424,6 +451,7 @@ nifhDB_RA_T <- nifhDB_RA %>%
 nifhDB_cnts
 nifhDB_cnts_T
 # nifhDB_cnts_T_lng
+
 
 
 ### _ Finished loading in the data ### _ Finished loading in the data

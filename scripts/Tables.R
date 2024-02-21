@@ -1,3 +1,5 @@
+library(tidyverse)
+
 ### tables
 
 ### make Table 1
@@ -23,7 +25,7 @@ studyid_regions <- read_csv("~/mmorando@ucsc.edu - Google Drive/My Drive/data/am
   ) %>%
   select(
     studyID,
-    Location,
+    # Location,
     SRAinformation,
     samples,
     bytes_gb,
@@ -65,12 +67,18 @@ table_1 <- supp_table_1 %>%
   filter(used == "y") %>%
   select(all_of(table_1_names_key)) %>%
   left_join(studyid_regions) %>%
-  select(studyID, ocean, everything())
+  select(studyID, study_ocean, everything()) %>%
+  rename(
+    "Study ID" = studyID,
+    "Ocean" = study_ocean,
+    "SRA Information" = SRAinformation,
+    "References" = references
+  )
 
 ## * write out Table 1
 write_csv(table_1, "~/mmorando@ucsc.edu - Google Drive/My Drive/data/amplicon_review/all_studies/tables/Table1/Table_1.csv")
 
-### - Table 2
+### - Supplemental Table 2
 
 ##* functino to extract columns from our CMAP file to use to merge with the CMAP cataloge (which I will download from CMAP) that has all the information all the CMAP data we pulled so I can make a supp table
 
@@ -116,7 +124,7 @@ cmap_catalog <- read_csv("~/mmorando@ucsc.edu - Google Drive/My Drive/data/ampli
 
 cmap_catalog %>%
   filter(
-    Table_Name == "tblWOA_Climatology" #| Table_Name == "tblWOA_2018_1deg_Climatology"
+    Table_Name == "tblArgoMerge_REP" #| Table_Name == "tblWOA_2018_1deg_Climatology"
     # filter(grepl("argo",Table_Name, ignore.case = TRUE) #| Table_Name == "tblWOA_2018_1deg_Climatology"
   ) %>%
   view()

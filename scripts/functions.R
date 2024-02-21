@@ -184,9 +184,13 @@ remove_samples_nucleic_acid <- function(df, nucleic_acid_type, nucleic_acid_samp
   return(nucleic_acid)
 }
 
-count_and_arrange <- function(data, group_vars, arrange_var = n) {
+count_and_arrange <- function(
+    data,
+    group_vars,
+    arrange_var = n,
+    count_col_name = "n") {
   df_count_and_arrange <- data %>%
-    count(across(all_of(group_vars))) %>%
+    count(across(all_of(group_vars)), name = count_col_name) %>%
     arrange(desc({{ arrange_var }}))
 
   return(df_count_and_arrange)

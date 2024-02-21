@@ -32,8 +32,20 @@ DNA_samples_key <- CMAP_coloc %>%
   filter(nucleicAcidType == "DNA") %>%
   pull(SAMPLEID)
 
+# make key to remove all unknown AUIDs and those without a nifh clusters identfied through annotations
+(auids_w_annotations <- annoNifHDB_updt %>%
+filter(!is.na(AUID)) %>% 
+  pull(AUID)) 
 
-### - load in data
+### make a function to remove these from a dataframe
+remove_unknown_auids <- function(
+    df,
+    annotation_key = auids_w_annotations) {
+  df_filt <- df %>%
+    filter(AUID %in% {{ annotation_key }})
+
+  return(df_filt)
+}
 
 
 

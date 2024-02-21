@@ -53,6 +53,18 @@ get_viridis_colors <- function(
 }
 
 ## colours specific to nifh clusters
+# nifh_cluster_colours <- c(
+#   "1A" = "steelblue",
+#   "1J/1K" = "chocolate4",
+#   "1O/1P" = "magenta",
+#   # "3" = "goldenrod2",
+#   "3" = "red",
+#   "1G" = "chocolate1",
+#   "1B" = "green2",
+#   "other" = "lightgrey",
+#   "unknown" = "darkgrey"
+# )
+
 nifh_cluster_colours <- c(
   "1A" = "steelblue",
   "1J/1K" = "chocolate4",
@@ -62,9 +74,10 @@ nifh_cluster_colours <- c(
   "1G" = "chocolate1",
   "1B" = "green2",
   "other" = "lightgrey",
-  "unknown" = "darkgrey"
+  "unknown" = "darkgrey",
+  "4" = "black",
+  "2" = "blue"
 )
-
 
 # Function to create a custom dot plot
 create_custom_plot_point <- function(
