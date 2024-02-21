@@ -1,17 +1,24 @@
 ## Copyright (C) 2023 Michael (Mo) Morando and Jonathan D. Magasin
 ##
 ## Annotate ASVs from stage FilterAuids using three tools that are included in the
-## DADA2 nifH pipeline's "scripts.ancillary/Annotation" directory:
-##  1. BlastnARB2017          - Blastn ASVs against the 2017 ARB nifH database 
+## DADA2 nifH pipeline's "data/annotations/scripts" directory:
+##  1. BlastnARB2017          - Blastn ASVs against the 2017 ARB nifH database
 ##  2. BlastxGenome879        - Blastx ASVs against the Zehr Lab's database with
 ##                              879 diazotroph genomes.
-##  3. NifHClustersFrank2016  - Determine nifH clusters for each ASV using the
+## #! FIXME: This is not currently working
+## #! Instead, I am using an the original CART annotation prior to the
+## #! generation of the new AUIDs and nothing is generated here. See more below
+## #! in snakefile.
+##  !3. NifHClustersFrank2016  - Determine nifH clusters for each ASV using the
 ##                              classification and regression tree (CART) approach
 ##                              of Frank et al. 2016.
+##  4. Marine_NCD_cyano_refsequences
+##                             -  223 nifH sequences from selected
+##                                cyanobacteria and NCDs to provide increased
+##                                resolution.
+##  5. UCYNA_oligoreps         -  Forty-four UNCY-A oligotypes, thirty-eight
+##                                from metagenome assembly, to provide increase ##                                resolution of UCYN-A ASVs.
 ##
-## Also search for the ASVs in a DB with 267 nifH sequences from cyanobacteria
-## and NCDs. Forty-four of these nifH are from oligotyping, 38 from metagenome
-## assembly.
 ##
 ## This Makefile runs each of the annotation tools, then searches the cyano /
 ## NCD DB, and then stitches together all the results into auids.annot.tsv,
@@ -29,6 +36,7 @@
 ##
 
 
+# logfiles will have timestamps
 # Import the datetime module
 import datetime
 
@@ -38,37 +46,25 @@ def get_timestamp():
     return datetime.datetime.now().strftime("%Y%m%d")
 
 
-#################################
-#################################
-#################################
-#################################
-
-
 ## Making blast databases
 
 
 ## ARB database generation
 # Load parameters from JSON config
 configfile: "config/config_blast_db_arb.json"
+configfile: "config/config_blast_db_genome879.json"
+configfile: "./config/config_blast_db_ncd_cyano.json"
+configfile: "./config/config_blast_db_ucyna.json"
 
-# make_database_key=config["make_database_key"]
-
-# # directories
-# for database in make_database_key
-#     input_fasta_dir_{database} = config[f"input_fasta_dir_{database}"]
-#     blast_database_dir_{database} =expand(
-#         "{input_fasta_dir}{blast_database_dir}",
-#         input_fasta_dir=input_fasta_dir_{database},
-#         blast_database_dir=config[f"blast_database_dir_{database}"],
-#     )
 
 # directories
 input_fasta_dir_arb = config[f"input_fasta_dir_arb"]
-blast_database_dir_arb =expand(
+blast_database_dir_arb = expand(
     "{input_fasta_dir}{blast_database_dir}",
     input_fasta_dir=input_fasta_dir_arb,
     blast_database_dir=config[f"blast_database_dir_arb"],
 )
+
 
 rule make_database_arb:
     input:
@@ -78,12 +74,7 @@ rule make_database_arb:
             input_fasta_db=config["input_fasta_db_arb"],
         ),
     output:
-        expand(
-            "{blast_database_dir}{blast_database}.{ext}",
-            blast_database_dir=blast_database_dir_arb,
-            blast_database=config["blast_database_arb"],
-            ext=["ndb", "nhr", "nin", "njs", "not", "nsq", "ntf", "nto"],
-        ),
+        blast_database_dir=directory(blast_database_dir_arb),
     params:
         blast_database=expand(
             "{blast_database_dir}{blast_database}",
@@ -91,9 +82,7 @@ rule make_database_arb:
             blast_database=config["blast_database_arb"],
         ),
         database_type=config["database_type_arb"],
-        # blast_database=config["blast_database"],
     log:
-        # "logs/filter_blast{timestamp}.log",
         expand(
             "{blast_database_dir}logs/{blast_database}_{timestamp}.log",
             timestamp=get_timestamp(),
@@ -110,13 +99,15 @@ rule make_database_arb:
 # Load parameters from JSON config
 configfile: "config/config_blast_db_genome879.json"
 
+
 # directories
 input_fasta_dir_genome879 = config["input_fasta_dir_genome879"]
-blast_database_dir_genome879 =expand(
+blast_database_dir_genome879 = expand(
     "{input_fasta_dir}{blast_database_dir}",
     input_fasta_dir=input_fasta_dir_genome879,
     blast_database_dir=config["blast_database_dir_genome879"],
 )
+
 
 rule make_database_genome879:
     input:
@@ -126,12 +117,7 @@ rule make_database_genome879:
             input_fasta_db=config["input_fasta_db_genome879"],
         ),
     output:
-        expand(
-            "{blast_database_dir}{blast_database}.{ext}",
-            blast_database_dir=blast_database_dir_genome879,
-            blast_database=config["blast_database_genome879"],
-            ext=["pdb", "phr", "pin", "pjs", "pot", "psq", "ptf", "pto"],
-        ),
+        blast_database_dir=directory(blast_database_dir_genome879),
     params:
         blast_database=expand(
             "{blast_database_dir}{blast_database}",
@@ -139,9 +125,7 @@ rule make_database_genome879:
             blast_database=config["blast_database_genome879"],
         ),
         database_type=config["database_type_genome879"],
-        # blast_database=config["blast_database"],
     log:
-        # "logs/filter_blast{timestamp}.log",
         expand(
             "{blast_database_dir}logs/{blast_database}_{timestamp}.log",
             timestamp=get_timestamp(),
@@ -156,6 +140,7 @@ rule make_database_genome879:
 
 # Load parameters from JSON config
 configfile: "config/config_blast_db_ncd_cyano.json"
+
 
 input_fasta_dir_ncd_cyano = config["input_fasta_dir_ncd_cyano"]
 blast_database_dir_ncd_cyano = expand(
@@ -173,12 +158,7 @@ rule make_database_ncd_cyano:
             input_fasta_db=config["input_fasta_db_ncd_cyano"],
         ),
     output:
-        expand(
-            "{blast_database_dir}{blast_database}.{ext}",
-            blast_database_dir=blast_database_dir_ncd_cyano,
-            blast_database=config["blast_database_ncd_cyano"],
-            ext=["ndb", "nhr", "nin", "njs", "not", "nsq", "ntf", "nto"],
-        ),
+        blast_database_dir=directory(blast_database_dir_ncd_cyano),
     params:
         blast_database=expand(
             "{blast_database_dir}{blast_database}",
@@ -186,9 +166,7 @@ rule make_database_ncd_cyano:
             blast_database=config["blast_database_ncd_cyano"],
         ),
         database_type=config["database_type_ncd_cyano"],
-        # blast_database=config["blast_database"],
     log:
-        # "logs/filter_blast{timestamp}.log",
         expand(
             "{blast_database_dir}logs/{blast_database}_{timestamp}.log",
             timestamp=get_timestamp(),
@@ -203,8 +181,10 @@ rule make_database_ncd_cyano:
 
 ## UCYN-A oligos database generation
 
+
 # Load parameters from JSON config
 configfile: "config/config_blast_db_ucyna.json"
+
 
 input_fasta_dir_ucyna = config["input_fasta_dir_ucyna"]
 blast_database_dir_ucyna = expand(
@@ -222,12 +202,13 @@ rule make_database_ucyna:
             input_fasta_db=config["input_fasta_db_ucyna"],
         ),
     output:
-        expand(
-            "{blast_database_dir}{blast_database}.{ext}",
-            blast_database_dir=blast_database_dir_ucyna,
-            blast_database=config["blast_database_ucyna"],
-            ext=["ndb", "nhr", "nin", "njs", "not", "nsq", "ntf", "nto"],
-        ),
+        # expand(
+        #     "{blast_database_dir}{blast_database}.{ext}",
+        #     blast_database_dir=blast_database_dir_ucyna,
+        #     blast_database=config["blast_database_ucyna"],
+        #     ext=["ndb", "nhr", "nin", "njs", "not", "nsq", "ntf", "nto"],
+        # ),
+        blast_database_dir=directory(blast_database_dir_ucyna),
     params:
         blast_database=expand(
             "{blast_database_dir}{blast_database}",
@@ -250,44 +231,32 @@ rule make_database_ucyna:
         """
 
 
-## Rule to make all databases:
-## This run seperately from the rest of the snakefile below
-## Rule to make them all
-rule all_make_databases:
-    input:
-        expand(
-            "{blast_database_dir}{blast_database}.{ext}",
-            blast_database_dir=blast_database_dir_arb,
-            blast_database=config["blast_database_arb"],
-            ext=["ndb", "nhr", "nin", "njs", "not", "nsq", "ntf", "nto"],
-        ),
-        expand(
-            "{blast_database_dir}{blast_database}.{ext}",
-            blast_database_dir=blast_database_dir_genome879,
-            blast_database=config["blast_database_genome879"],
-            ext=["pdb", "phr", "pin", "pjs", "pot", "psq", "ptf", "pto"],
-        ),
-        expand(
-            "{blast_database_dir}{blast_database}.{ext}",
-            blast_database_dir=blast_database_dir_ncd_cyano,
-            blast_database=config["blast_database_ncd_cyano"],
-            ext=["ndb", "nhr", "nin", "njs", "not", "nsq", "ntf", "nto"],
-        ),
-        expand(
-            "{blast_database_dir}{blast_database}.{ext}",
-            blast_database_dir=blast_database_dir_ucyna,
-            blast_database=config["blast_database_ucyna"],
-            ext=["ndb", "nhr", "nin", "njs", "not", "nsq", "ntf", "nto"],
-        ),
+# ## Rule to make all databases:
+# ## This run seperately from the rest of the snakefile below
+# ## Rule to make them all
+# rule all_make_databases:
+#     input:
+#         blast_database_dir_arb,
+#         blast_database_dir_genome879,
+#         blast_database_dir_ncd_cyano,
+#         blast_database_dir_ucyna,
 
 
-#_##############################################################################
-#_##############################################################################
-#_##############################################################################
+# ## Clean rule for database generation
+# rule clean_all_make_databases:
+#     shell:
+#         """
+#         rm -r ../../databases/*/*_db
+#         """
 
 
+# _#############################################################################
+# _#############################################################################
+# _#############################################################################
 
-#-# Now we need to blast our fasta file against these newly generated blast datbases
+
+# -# Now we need to blast our fasta file against these newly generated blast datbases.
+
 
 # Load config files
 #################################
@@ -297,189 +266,193 @@ configfile: "config/config_blast_genome879.json"
 configfile: "config/config_cart.json"
 configfile: "config/config_blast_ncd_cyano.json"
 
-# List of databases
-# databases = ["arb", "ucyna", "genome879", "ncd_cyano"]
+
+# List of databases to iterate over the blast and subsequent processing of these results prior to merging into one unified annotation table
 blast_dbs = config["blast_processing_key"]
 
-# Dictionary to store blast database directories
+# Dictionary to store blast database directories which is used in other stages
 full_blast_database_dir_ = {}
 
 ## Define the full path for the blast database with for loop:
 for database in blast_dbs:
+    # * define blast db directory withing loop
     full_blast_database_dir = expand(
         "{input_fasta_dir}{blast_database_dir}",
         input_fasta_dir=config[f"input_fasta_dir_{database}"],
         blast_database_dir=config[f"blast_database_dir_{database}"],
     )
     full_blast_database_dir_[database] = full_blast_database_dir
-    # print(full_blast_database_dir_[database])
-    print(blast_dbs)
 
-## Blasting
-## Blasting
-## Blasting
-## Blasting
 
-# Define a rule to collect all outputs
+# -# Define a rule to collect all outputs
 rule all_blast:
     input:
         expand(
             "{blast_output_dir}{output}",
             blast_output_dir=[config[f"blast_output_dir_{db}"] for db in blast_dbs],
-            output=[config[f"final_blst_csv_{db}"] for db in blast_dbs]
-        )
+            output=[config[f"final_blst_csv_{db}"] for db in blast_dbs],
+        ),
 
 
-# Dynamically create rules for each database
+# -# Dynamically create rules for each database
 for database in blast_dbs:
     # configfile: f"config/config_blast_{database}.json"
+    # * define blast output directory withing loop
     blast_output_dir = config[f"blast_output_dir_{database}"]
-    # print(full_blast_database_dir_[database])
 
     rule:
-        name: f"blast_{database}"
+        name:
+            f"blast_{database}"
         input:
-            fasta=config[f"input_fasta_blast_{database}"]
+            fasta=config[f"input_fasta_blast_{database}"],
         output:
-            # csv="{blast_output_dir}final_blst.csv"
             expand(
-            "{blast_output_dir}{output}",
-            blast_output_dir=blast_output_dir,
-            # blast_type=config[f"blast_type_{database}"],
-            output=config[f"final_blst_csv_{database}"],
-        )
+                "{blast_output_dir}{output}",
+                blast_output_dir=blast_output_dir,
+                output=config[f"final_blst_csv_{database}"],
+            ),
         params:
-            # blast_database="{blast_database_dir}{database}"
             blast_database_blast=expand(
-            "{full_blast_database_dir}{blast_database}",
-            full_blast_database_dir=full_blast_database_dir_[database],
-            # blast_database_dir=blast_database_dir,
-            blast_database=config[f"blast_database_{database}"],
-            
-        ),
+                "{full_blast_database_dir}{blast_database}",
+                full_blast_database_dir=full_blast_database_dir_[database],
+                blast_database=config[f"blast_database_{database}"],
+            ),
             output_csv=expand(
                 "{full_blast_database_dir}{output_csv}",
                 full_blast_database_dir=full_blast_database_dir_[database],
-                # blast_database_dir=blast_database_dir,
                 output_csv=config[f"output_csv_{database}"],
-        ),
+            ),
             blast_type=config[f"blast_type_{database}"],
             num_threads=config[f"num_threads_{database}"],
         log:
-            # "{blast_output_dir}logs/{database}_blast.log"
             expand(
-            # "{UCYNA_oligoreps_dir}logs/blast_{timestamp}.log",
                 "{blast_output_dir}logs/{blast_database}_blast_{timestamp}.log",
                 timestamp=get_timestamp(),
                 blast_database=config[f"blast_database_{database}"],
                 blast_output_dir=blast_output_dir,
-        ),
+            ),
         shell:
             """
-            bash ../scripts/blast_function.sh {input} {params.blast_database_blast} {params.blast_type} {params.num_threads} {params.output_csv} {output} > {log} 2>&1
+            bash ../scripts/blast_function.sh {input.fasta} {params.blast_database_blast} {params.blast_type} {params.num_threads} {params.output_csv} {output} > {log} 2>&1
             """
-
 
 
 ########################
 
 
-# filtering blast out to keep only columns we want
+# _### Filtering blast out to keep only columns we want ####
 
-configfile:"./config/config_filt_blastcols_arb.json"
-configfile:"./config/config_filt_blastcols_ucyna.json"
-configfile:"./config/config_filt_blastcols_genome879.json"
-configfile:"./config/config_filt_blastcols_ncd_cyano.json"
-# configfile:"./config"
+
+# Load config files
+#################################
+configfile: "./config/config_filt_blastcols_arb.json"
+
+
+configfile: "./config/config_filt_blastcols_ucyna.json"
+
+
+configfile: "./config/config_filt_blastcols_genome879.json"
+
+
+configfile: "./config/config_filt_blastcols_ncd_cyano.json"
+
 
 # Define rule to column-based filter them all
-rule all_filter_blast_cols:
+# Criteria passed via config file
+# Will filter annotations headers to only keep columns of interest
+rule all_filter_annotation_headers:
     input:
         expand(
             "{blast_output_dir}{output}",
             blast_output_dir=[config[f"blast_output_dir_{db}"] for db in blast_dbs],
-            output=[config[f"cols_filt_blast_output_{db}"] for db in blast_dbs]
-            # output=config[f"col_filt_blast_output"],
-        )
+            output=[config[f"cols_filt_blast_output_{db}"] for db in blast_dbs],
+        ),
 
 
 # Dynamically create rule for each database
 for database in blast_dbs:
-    # configfile: f"config/config_filt_blast_{database}.json"
+    # * define blast output directory withing loop
     blast_output_dir = config[f"blast_output_dir_{database}"]
-    
-    rule: 
-        name: f"filter_blast_cols_{database}"
+
+    rule:
+        name:
+            f"filter_annotation_headers_{database}"
         input:
-            # config["input_blast_arb"]
             expand(
-            "{blast_output_dir}{output}",
-            blast_output_dir=blast_output_dir,
-            # blast_type=config[f"blast_type_{database}"],
-            output=config[f"final_blst_csv_{database}"],
-        )          
+                "{blast_output_dir}{output}",
+                blast_output_dir=blast_output_dir,
+                output=config[f"final_blst_csv_{database}"],
+            ),
         params:
-            headers_to_keep=config[f"headers_to_keep_{database}"]
+            headers_to_keep=config[f"headers_to_keep_{database}"],
         output:
-            # config["col_filt_blast_output"],
             expand(
                 "{blast_output_dir}{output}",
                 blast_output_dir=blast_output_dir,
                 output=config[f"cols_filt_blast_output_{database}"],
-                # output=config[f"col_filt_blast_output"],
+            ),
+        log:
+            expand(
+                "{blast_output_dir}logs/filter_annotation_headers_{timestamp}.log",
+                timestamp=get_timestamp(),
+                blast_output_dir=blast_output_dir,
             ),
         shell:
             """
-            python3 ../scripts/filter_csv_cols_by_header.py --input_csv {input} --filtered_csv {output} --headers_to_keep {params.headers_to_keep}
+            python3 ../scripts/filter_csv_cols_by_header.py --input_csv {input} --filtered_csv {output} --headers_to_keep {params.headers_to_keep} >> {log} 2>&1
             """
 
 
-
-########################
-
-
+# Load config files
+#################################
 configfile: "config/config_filt_blast_ucyna.json"
+
+
 configfile: "config/config_filt_blast_arb.json"
+
+
 configfile: "config/config_filt_blast_genome879.json"
-configfile: "./config/config_filt_blast_ncd_cyano.json"
 
 
-# Define a rule to collect all outputs
-rule all_filter_blast:
+configfile: "config/config_filt_blast_ncd_cyano.json"
+
+
+# Define a rule to filter all annotations
+# Criteria passed via config file
+# Will filter annotations that do not reach a given threshold
+rule all_filter_annotation:
     input:
         expand(
             "{blast_output_dir}{output}",
             blast_output_dir=[config[f"blast_output_dir_{db}"] for db in blast_dbs],
-            output=[config[f"filtered_blast_output_{db}"] for db in blast_dbs]
-        )
+            output=[config[f"filtered_blast_output_{db}"] for db in blast_dbs],
+        ),
 
 
 # Dynamically create rules for each database
 for database in blast_dbs:
-    # configfile: f"config/config_filt_blast_{database}.json"
+    # * define blast output directory withing loop
     blast_output_dir = config[f"blast_output_dir_{database}"]
 
-    rule: 
-        name: f"filter_blast_{database}"
+    rule:
+        name:
+            f"filter_annotation_{database}"
         input:
-            # config["input_blast_csv"],
             expand(
                 "{blast_output_dir}{output}",
                 blast_output_dir=blast_output_dir,
                 output=config[f"cols_filt_blast_output_{database}"],
-            )
+            ),
         params:
             min_qcov=config[f"min_qcov_{database}"],
             min_pident=config[f"min_pident_{database}"],
         output:
-            # config["filtered_blast_output"],
             expand(
                 "{blast_output_dir}{output}",
                 blast_output_dir=blast_output_dir,
                 output=config[f"filtered_blast_output_{database}"],
             ),
         log:
-            # "logs/filter_blast{timestamp}.log",
             expand(
                 "{blast_output_dir}logs/filter_blast_{timestamp}.log",
                 timestamp=get_timestamp(),
@@ -491,37 +464,44 @@ for database in blast_dbs:
             """
 
 
-
-########################
-
-
+# Load config files
+#################################
 configfile: "./config/config_change_csv_header_ucyna.json"
+
+
 configfile: "./config/config_change_csv_header_arb.json"
+
+
 configfile: "./config/config_change_csv_header_genome879.json"
+
+
 configfile: "./config/config_change_csv_header_ncd_cyano.json"
+
+
 configfile: "./config/config_change_csv_header_cart.json"
 
 
-# Define a rule to collect all outputs
-rule all_database_headers:
+# Define a rule to change all headers of each annotation file
+# Prefix specific to each database is added to each header
+rule all_prefix_headers:
     input:
         expand(
             "{blast_output_dir}{output}",
             blast_output_dir=[config[f"blast_output_dir_{db}"] for db in blast_dbs],
-            output=[config[f"output_header_csv_{db}"] for db in blast_dbs]
-        )
+            output=[config[f"output_header_csv_{db}"] for db in blast_dbs],
+        ),
 
 
 # Dynamically create rules for each database
 for database in blast_dbs:
-    # configfile: f"config/config_change_csv_{database}.json"
+    # * define blast output directory withing loop
     blast_output_dir = config[f"blast_output_dir_{database}"]
     # print(blast_output_dir)
 
     rule:
-        name: f"database_headers_{database}"
+        name:
+            f"database_prefix_{database}"
         input:
-            # config["input_csv"],
             expand(
                 "{blast_output_dir}{output}",
                 blast_output_dir=blast_output_dir,
@@ -548,39 +528,44 @@ for database in blast_dbs:
 
 
 # ## Rule to add AUID key
-# ## At some point, new AUIDs were generated but all my files and analysis need these old AUID IDs, so this key needs to be added
+# !# At some point, new AUIDs were generated but all my files and analysis need these old AUID IDs, so this key needs to be added
 
+
+# Load config files
+#################################
 configfile: "./config/config_add_auid_key_ucyna.json"
-configfile: "./config/config_add_auid_key_arb.json"
-configfile: "./config/config_add_auid_key_genome879.json"
-configfile: "./config/config_add_auid_key_ncd_cyano.json"
-# configfile: "./config_add_auid_key_cart.json"
 
-# List of blast_dbs or config files
-# blast_dbs = ["arb", "ucyna", "genome879", "cart"]
-# Define a rule to collect all outputs
+
+configfile: "./config/config_add_auid_key_arb.json"
+
+
+configfile: "./config/config_add_auid_key_genome879.json"
+
+
+configfile: "./config/config_add_auid_key_ncd_cyano.json"
+
+
+configfile: "./config/config_add_auid_key_cart.json"
+
+
+# Define a rule to add AUID key to link old and new AUIDs between annotation files
 rule all_add_auid_key:
-        input:
-            expand(
-                "{blast_output_dir}{output}",
-                blast_output_dir=[config[f"blast_output_dir_{db}"] for db in blast_dbs],
-                output=[config[f"keyed_csv_{db}"] for db in blast_dbs]
-            )
-            # expand(
-            #     "{blast_output_dir}{output}",
-            #     blast_output_dir=config[f"blast_output_dir{database}"],
-            #     output=config[f"keyed_csv_{database}"],
-            #     database=blast_dbs
-            # )
+    input:
+        expand(
+            "{blast_output_dir}{output}",
+            blast_output_dir=[config[f"blast_output_dir_{db}"] for db in blast_dbs],
+            output=[config[f"keyed_csv_{db}"] for db in blast_dbs],
+        ),
+
 
 # Dynamically create rules for each database
 for database in blast_dbs:
-    # configfile: f"config/config_change_csv_{database}.json"
+    # * define blast output directory withing loop
     blast_output_dir = config[f"blast_output_dir_{database}"]
-    # print(blast_output_dir)
-    
+
     rule:
-        name:f"add_auid_key{database}"
+        name:
+            f"add_auid_key{database}"
         input:
             expand(
                 "{blast_output_dir}{output}",
@@ -612,59 +597,61 @@ for database in blast_dbs:
 
 ########################
 
+# _# Merging files
+## A series of merging that concatenates all the annotation files into a
+## single, unified annotation table
+## Finally it adds some description files to add more information to the
+## annotation file
 
 
-####
-# Addtional confige file for blast
-configfile: "./config/config_cart.json"
-
-## Rule to merge csv files
-configfile: "./config/config_add_auid_key_ucyna.json"
-configfile: "./config/config_add_auid_key_arb.json"
-configfile: "./config/config_add_auid_key_cart.json"
-configfile: "./config/config_add_auid_key_genome879.json"
-# configfile: "./config_merge_ucyna.json"
+# Load config files
+#################################
 configfile: "./config/config_merge_cart_arb.json"
-configfile: "./config/config_merge_genome879.json"
-configfile: "./config/config_merge_ncd_cyano.json"
-configfile: "./config/config_merge_ucyna.json"
-configfile: "./config/config_merge_descrp_ncd_cyano.json"
-configfile: "./config/config_merge_descrp_genome879.json"
 
-## Merging files 
+
+configfile: "./config/config_merge_genome879.json"
+
+
+configfile: "./config/config_merge_ncd_cyano.json"
+
+
+configfile: "./config/config_merge_ucyna.json"
+
+
+configfile: "./config/config_merge_descrp_ncd_cyano.json"
+
+
+configfile: "./config/config_merge_descrp_genome879.json"
 
 
 ## define a merging key
 merge_key = config["merge_key"]
 
+
 ##- rule to merge them all
-rule all_merge_databases:
+rule all_merge_annotations:
     input:
-        # config["merged_csv"],
-        # expand(
-        #     "{merged_dir}{output}",
-        #     merged_dir=config[f"merged_dir_{merge_key[4]}"],
-        #     output=config[f"merged_csv_{merge_key[4]}"],
-        # ),
         expand(
             "{merged_dir}{output}",
             merged_dir=config[f"merged_dir_{merge_key[6]}"],
             output=config[f"merged_csv_{merge_key[6]}"],
         ),
 
-## merge 1 cart with arb 
-merged_dir = config[f"merged_dir_{merge_key[0]}"]
-# blast_output_dir = config[f"blast_output_dir_{merge_key[0]}"]
 
-rule: 
-    name: f"merge_databases_1"
+## Merge 1 cart with arb
+merged_dir = config[f"merged_dir_{merge_key[0]}"]
+
+
+rule:
+    name:
+        f"merge_annotations_1"
     input:
         right_csv=expand(
             "{blast_output_dir}{output}",
             blast_output_dir=config[f"blast_output_dir_{merge_key[0]}"],
             output=config[f"keyed_csv_{merge_key[0]}"],
         ),
-        left_csv=config[f"left_csv_{merge_key[0]}"]
+        left_csv=config[f"left_csv_{merge_key[0]}"],
         # config["right_csv"],
     params:
         # left_csv=config[f"left_csv_{merge_key[0]}"],
@@ -681,9 +668,11 @@ rule:
         ),
     log:
         expand(
-            "{merged_dir}logs/merge_{timestamp}.log",
+            "{merged_dir}logs/merge_{merge_key1}_{merge_key2}_{timestamp}.log",
             timestamp=get_timestamp(),
-            merged_dir=merged_dir
+            merged_dir=merged_dir,
+            merge_key1=f"{merge_key[0]}",
+            merge_key2=f"{merge_key[1]}",
         ),
     shell:
         """
@@ -691,14 +680,15 @@ rule:
         """
 
 
-
 ### merge 2 merging output with genomes879
 
 merged_dir = config[f"merged_dir_{merge_key[2]}"]
 # blast_output_dir = config[f"blast_output_dir_{merge_key[0]}"]
 
-rule: 
-    name: f"merge_databases_2"
+
+rule:
+    name:
+        f"merge_annotations_2"
     input:
         # config["merged_csv"],
         right_csv=expand(
@@ -721,9 +711,10 @@ rule:
         ),
     log:
         expand(
-            "{merged_dir}logs/merge_{timestamp}.log",
+            "{merged_dir}logs/merge_anno_{merge_key}_{timestamp}.log",
             timestamp=get_timestamp(),
             merged_dir=merged_dir,
+            merge_key=f"{merge_key[2]}",
         ),
     shell:
         """
@@ -731,14 +722,15 @@ rule:
         """
 
 
-
 ### merge 3 merging output with ncd_cyanos
 
 merged_dir = config[f"merged_dir_{merge_key[3]}"]
 # blast_output_dir = config[f"blast_output_dir_{merge_key[0]}"]
 
-rule: 
-    name: f"merge_databases_3"
+
+rule:
+    name:
+        f"merge_annotations_3"
     input:
         # config["merged_csv"],
         right_csv=expand(
@@ -762,9 +754,10 @@ rule:
         ),
     log:
         expand(
-            "{merged_dir}logs/merge_{timestamp}.log",
+            "{merged_dir}logs/merge_anno_{merge_key}_{timestamp}.log",
             timestamp=get_timestamp(),
             merged_dir=merged_dir,
+            merge_key=f"{merge_key[3]}",
         ),
     shell:
         """
@@ -772,14 +765,15 @@ rule:
         """
 
 
-
 ### merge 4 merge output with ucyna_oligos
 
 merged_dir = config[f"merged_dir_{merge_key[4]}"]
 # blast_output_dir = config[f"blast_output_dir_{merge_key[0]}"]
 
-rule: 
-    name: f"merge_databases_4"
+
+rule:
+    name:
+        f"merge_annotations_4"
     input:
         # config["merged_csv"],
         right_csv=expand(
@@ -788,7 +782,6 @@ rule:
             output=config[f"merged_csv_{merge_key[3]}"],
         ),
         left_csv=config[f"left_csv_{merge_key[4]}"],
-        
     params:
         # left_on=config[f"left_on_{merge_key}"],
         left_on=config[f"left_on_{merge_key[4]}"],
@@ -803,9 +796,10 @@ rule:
         ),
     log:
         expand(
-            "{merged_dir}logs/merge_{timestamp}.log",
+            "{merged_dir}logs/merge_anno_{merge_key}_{timestamp}.log",
             timestamp=get_timestamp(),
             merged_dir=merged_dir,
+            merge_key=f"{merge_key[4]}",
         ),
     shell:
         """
@@ -813,19 +807,17 @@ rule:
         """
 
 
-
-
 ####
-
-#-# add description files
-
+# -# add description files
 ## merge ncd cyanos with its description file
 # merged_dir = config[f"merged_dir_ncd_cyano"]
 merged_dir = config[f"merged_dir_{merge_key[5]}"]
-# blast_output_dir = config[f"blast_output_dir_{merge_key[0]}"]
 
-rule: 
-    name: f"merge_databases_5"
+
+# blast_output_dir = config[f"blast_output_dir_{merge_key[0]}"]
+rule:
+    name:
+        f"merge_annotations_5"
     input:
         right_csv=expand(
             "{merged_dir}{output}",
@@ -853,9 +845,10 @@ rule:
         ),
     log:
         expand(
-            "{merged_dir}logs/merge_{timestamp}.log",
+            "{merged_dir}logs/merge_anno_{merge_key}_{timestamp}.log",
             timestamp=get_timestamp(),
-            merged_dir=merged_dir
+            merged_dir=merged_dir,
+            merge_key=f"{merge_key[5]}",
         ),
     shell:
         """
@@ -866,10 +859,12 @@ rule:
 ## merge ncd cyanos with its description file
 # merged_dir = config[f"merged_dir_ncd_cyano"]
 merged_dir = config[f"merged_dir_{merge_key[6]}"]
-# blast_output_dir = config[f"blast_output_dir_{merge_key[0]}"]
 
-rule: 
-    name: f"merge_databases_6"
+
+# blast_output_dir = config[f"blast_output_dir_{merge_key[0]}"]
+rule:
+    name:
+        f"merge_annotations_6"
     input:
         right_csv=expand(
             "{merged_dir}{output}",
@@ -897,9 +892,10 @@ rule:
         ),
     log:
         expand(
-            "{merged_dir}logs/merge_{timestamp}.log",
+            "{merged_dir}logs/merge_anno_{merge_key}_{timestamp}.log",
             timestamp=get_timestamp(),
-            merged_dir=merged_dir
+            merged_dir=merged_dir,
+            merge_key=f"{merge_key[6]}",
         ),
     shell:
         """
@@ -907,7 +903,11 @@ rule:
         """
 
 
-## Rule to make consensus ID for each ASV
+## Rule to make consensus ID for each ASV ##
+
+
+# Load config files
+#################################
 configfile: "./config/config_consensus_id.json"
 
 
@@ -939,73 +939,136 @@ rule consensus_id:
         """
 
 
-
-# rule all:
-#     input:
-#     expand(
-#         "{blast_database_dir}{blast_database}.{ext}",
-#         blast_database_dir=blast_database_dir_arb,
-#         blast_database=config["blast_database_arb"],
-#         ext=["ndb", "nhr", "nin", "njs", "not", "nsq", "ntf", "nto"],
-#     ),
-#     expand(
-#         "{blast_database_dir}{blast_database}.{ext}",
-#         blast_database_dir=blast_database_dir_genome879,
-#         blast_database=config["blast_database_genome879"],
-#         ext=["pdb", "phr", "pin", "pjs", "pot", "psq", "ptf", "pto"],
-#     ),
-#     expand(
-#         "{blast_database_dir}{blast_database}.{ext}",
-#         blast_database_dir=blast_database_dir_ncd_cyano,
-#         blast_database=config["blast_database_ncd_cyano"],
-#         ext=["ndb", "nhr", "nin", "njs", "not", "nsq", "ntf", "nto"],
-#     ),
-#     expand(
-#         "{blast_database_dir}{blast_database}.{ext}",
-#         blast_database_dir=blast_database_dir_ucyna,
-#         blast_database=config["blast_database_ucyna"],
-#         ext=["ndb", "nhr", "nin", "njs", "not", "nsq", "ntf", "nto"],
-#     ),
-#     # expand(
-#     #     "{merged_dir}{output}",
-#     #     merged_dir=merged_dir,
-#     #     output=config["updated_annotation_tab"],
-#     # ),
+rule all_make_databases:
+    input:
+        blast_database_dir_arb,
+        blast_database_dir_genome879,
+        blast_database_dir_ncd_cyano,
+        blast_database_dir_ucyna,
 
 
-# ## Rule to make them all
-# rule all:
-#     input:
-#         expand(
-#             "{blast_database_dir}{blast_database}.{ext}",
-#             blast_database_dir=blast_database_dir_arb,
-#             blast_database=config["blast_database_arb"],
-#             ext=["ndb", "nhr", "nin", "njs", "not", "nsq", "ntf", "nto"],
-#         ),
-#         expand(
-#             "{blast_database_dir}{blast_database}.{ext}",
-#             blast_database_dir=blast_database_dir_genome879,
-#             blast_database=config["blast_database_genome879"],
-#             ext=["pdb", "phr", "pin", "pjs", "pot", "psq", "ptf", "pto"],
-#         ),
-#         expand(
-#             "{blast_database_dir}{blast_database}.{ext}",
-#             blast_database_dir=blast_database_dir_ncd_cyano,
-#             blast_database=config["blast_database_ncd_cyano"],
-#             ext=["ndb", "nhr", "nin", "njs", "not", "nsq", "ntf", "nto"],
-#         ),
-#         expand(
-#             "{blast_database_dir}{blast_database}.{ext}",
-#             blast_database_dir=blast_database_dir_ucyna,
-#             blast_database=config["blast_database_ucyna"],
-#             ext=["ndb", "nhr", "nin", "njs", "not", "nsq", "ntf", "nto"],
-#         ),
+rule all:
+    input:
+        # blast_database_dir_arb,
+        # blast_database_dir_genome879,
+        # blast_database_dir_ncd_cyano,
+        # blast_database_dir_ucyna,
+        expand(
+            "{merged_dir}{output}",
+            merged_dir=merged_dir,
+            output=config["updated_annotation_tab"],
+        ),
 
 
-# # rule all:
-# #     input:
-# #         expand(
-# #             "{merged_dir}{output}",
-# #             merged_dir=merged_dir,
-# #             output=config["updated_annotation_tab"],
-# #         ),
+# _# Cleaning rules
+# _# Cleaning rules
+# _# Cleaning rules
+
+
+## Clean rule for database generation
+rule clean_make_databases:
+    shell:
+        """
+        echo "Cleaning all_make_databases..."
+        echo "Deleting all output files..."
+        snakemake -c1 --delete-all-output all_make_databases
+        """
+
+
+# ## SUPER Clean rule for database generation
+# rule superclean_make_databases:
+#     shell:
+#         """
+#         echo "SUPER cleaning all_make_databases..."
+#         echo "Deleting all files and directories..."
+#         rm -r ../../databases/*/*_db
+#         """
+
+
+rule clean_blast:
+    shell:
+        """
+        echo "Cleaning all_blast outputfiles..."
+        snakemake -c1 --delete-all-output all_blast
+        """
+
+
+rule clean_filter_annotation_headers:
+    shell:
+        """
+        echo "Cleaning all_filter_annotation_headers outputfiles..."
+        echo "Deleting all output files..."
+        snakemake -c1 --delete-all-output all_filter_annotation_headers
+        """
+
+
+rule clean_filter_annotation:
+    shell:
+        """
+        echo "Cleaning all_filter_annotation output files..."
+        echo "Deleting all output files..."
+        snakemake -c1 --delete-all-output all_filter_annotation
+        """
+
+
+rule clean_prefix_headers:
+    shell:
+        """
+        echo "Cleaning all_prefix_headers output files..."
+        echo "Deleting all output files..."
+        snakemake -c1 --delete-all-output all_prefix_headers
+        """
+
+
+rule clean_add_auid_key:
+    shell:
+        """
+        echo "Cleaning all_add_auid_key output files..."
+        echo "Deleting all output files..."
+        snakemake -c1 --delete-all-output all_add_auid_key
+        """
+
+
+rule clean_merge_annotations:
+    shell:
+        """
+        echo "Cleaning all_merge_annotations output files..."
+        echo "Deleting all output files..."
+        snakemake -c1 --delete-all-output all_merge_annotations
+        """
+
+
+rule superclean_merge_directory:
+    shell:
+        """
+        echo "SUPER cleaning 'merge' directory..."
+        echo "Deleting entire 'merge' directory..."
+        rm -r merged_database
+        """
+
+
+rule clean_annotation_directories:
+    shell:
+        """
+        rm -r arb_nifh_2017 genome879 ncd_cyano UCYNA_oligos
+        """
+
+
+rule clean_all:
+    shell:
+        """
+        echo "Cleaning 'all' output files..."
+        echo "Deleting 'all' output files..."
+        snakemake -c1 --delete-all-output all
+        """
+
+
+rule superclean_all:
+    shell:
+        """
+        echo "SUPER cleaning all..."
+        echo "Deleting all files and directories..."
+        snakemake -c1 --delete-all-output all
+        rm -r merged_database
+        rm -r arb_nifh_2017 genome879 ncd_cyano UCYNA_oligos
+        """

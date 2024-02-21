@@ -1,0 +1,494 @@
+## Making annotation files
+
+
+# Import the datetime module
+import datetime
+
+
+# Function to generate a timestamp
+def get_timestamp():
+    return datetime.datetime.now().strftime("%Y%m%d")
+
+
+# Load parameters from JSON config
+configfile: "config_blast_db_ucyna.json"
+
+
+## UCYN-A oligos database generation
+
+
+input_fasta_dir_ucyna = config["input_fasta_dir_ucyna"]
+blast_database_dir_ucyna = expand(
+    "{input_fasta_dir}{blast_database_dir}",
+    input_fasta_dir=input_fasta_dir_ucyna,
+    blast_database_dir=config["blast_database_dir_ucyna"],
+)
+
+
+rule make_database_ucyna:
+    input:
+        expand(
+            "{input_fasta_dir}{input_fasta_db}",
+            input_fasta_dir=input_fasta_dir_ucyna,
+            input_fasta_db=config["input_fasta_db_ucyna"],
+        ),
+    output:
+        expand(
+            "{blast_database_dir}{blast_database}.{ext}",
+            blast_database_dir=blast_database_dir_ucyna,
+            blast_database=config["blast_database_ucyna"],
+            ext=["ndb", "nhr", "nin", "njs", "not", "nsq", "ntf", "nto"],
+        ),
+    params:
+        blast_database=expand(
+            "{blast_database_dir}{blast_database}",
+            blast_database_dir=blast_database_dir_ucyna,
+            blast_database=config["blast_database_ucyna"],
+        ),
+        database_type=config["database_type_ucyna"],
+        # blast_database=config["blast_database"],
+    log:
+        # "logs/filter_blast{timestamp}.log",
+        expand(
+            "{blast_database_dir}logs/{blast_database}_{timestamp}.log",
+            timestamp=get_timestamp(),
+            blast_database_dir=blast_database_dir_ucyna,
+            blast_database=config["blast_database_ucyna"],
+        ),
+    shell:
+        """
+        python3 ../../annotations/scripts/make_blastdb_fun.py --input_fasta_file {input} --database_type {params.database_type} --blast_database {params.blast_database} >> {log} 2>&1
+        """
+
+## genome879 database generation
+# Load parameters from JSON config
+configfile: "config_blast_db_genome879.json"
+
+# directories
+input_fasta_dir_genome879 = config["input_fasta_dir_genome879"]
+blast_database_dir_genome879 =expand(
+    "{input_fasta_dir}{blast_database_dir}",
+    input_fasta_dir=input_fasta_dir_genome879,
+    blast_database_dir=config["blast_database_dir_genome879"],
+)
+
+rule make_database_genome879:
+    input:
+        expand(
+            "{input_fasta_dir}{input_fasta_db}",
+            input_fasta_dir=input_fasta_dir_genome879,
+            input_fasta_db=config["input_fasta_db_genome879"],
+        ),
+    output:
+        expand(
+            "{blast_database_dir}{blast_database}.{ext}",
+            blast_database_dir=blast_database_dir_genome879,
+            blast_database=config["blast_database_genome879"],
+            ext=["ndb", "nhr", "nin", "njs", "not", "nsq", "ntf", "nto"],
+        ),
+    params:
+        blast_database=expand(
+            "{blast_database_dir}{blast_database}",
+            blast_database_dir=blast_database_dir_genome879,
+            blast_database=config["blast_database_genome879"],
+        ),
+        database_type=config["database_type_genome879"],
+        # blast_database=config["blast_database"],
+    log:
+        # "logs/filter_blast{timestamp}.log",
+        expand(
+            "{blast_database_dir}logs/{blast_database}_{timestamp}.log",
+            timestamp=get_timestamp(),
+            blast_database_dir=blast_database_dir_genome879,
+            blast_database=config["blast_database_genome879"],
+        ),
+    shell:
+        """
+        python3 ../../annotations/scripts/make_blastdb_fun.py --input_fasta_file {input} --database_type {params.database_type} --blast_database {params.blast_database} >> {log} 2>&1
+        """
+
+
+## ARB database generation
+# Load parameters from JSON config
+configfile: "config_blast_db_arb.json"
+
+# directories
+input_fasta_dir_arb = config["input_fasta_dir_arb"]
+blast_database_dir_arb =expand(
+    "{input_fasta_dir}{blast_database_dir}",
+    input_fasta_dir=input_fasta_dir_arb,
+    blast_database_dir=config["blast_database_dir_arb"],
+)
+
+rule make_database_arb:
+    input:
+        expand(
+            "{input_fasta_dir}{input_fasta_db}",
+            input_fasta_dir=input_fasta_dir_arb,
+            input_fasta_db=config["input_fasta_db_arb"],
+        ),
+    output:
+        expand(
+            "{blast_database_dir}{blast_database}.{ext}",
+            blast_database_dir=blast_database_dir_arb,
+            blast_database=config["blast_database_arb"],
+            ext=["ndb", "nhr", "nin", "njs", "not", "nsq", "ntf", "nto"],
+        ),
+    params:
+        blast_database=expand(
+            "{blast_database_dir}{blast_database}",
+            blast_database_dir=blast_database_dir_arb,
+            blast_database=config["blast_database_arb"],
+        ),
+        database_type=config["database_type_arb"],
+        # blast_database=config["blast_database"],
+    log:
+        # "logs/filter_blast{timestamp}.log",
+        expand(
+            "{blast_database_dir}logs/{blast_database}_{timestamp}.log",
+            timestamp=get_timestamp(),
+            blast_database_dir=blast_database_dir_arb,
+            blast_database=config["blast_database_arb"],
+        ),
+    shell:
+        """
+        python3 ../../annotations/scripts/make_blastdb_fun.py --input_fasta_file {input} --database_type {params.database_type} --blast_database {params.blast_database} >> {log} 2>&1
+        """
+
+
+
+
+
+#-# Now we need to blast our fasta file against these newly generated blast datbases
+
+# Addtional confige file for blast
+configfile: "config_blast_ucyna.json"
+
+
+## assing global variable
+blast_output_dir_ucyna=config["blast_output_dir_ucyna"]
+
+rule blast_ucyna:
+    input:
+        config["input_fasta_blast_ucyna"],
+    output:
+        # config["final_blst_csv"],
+        expand(
+            "{blast_output_dir}{output}",
+            blast_output_dir=blast_output_dir_ucyna,
+            output=config["final_blst_csv_ucyna"],
+        )
+    params:
+        blast_database_blast=expand(
+            "{blast_database_dir}{blast_database}",
+            blast_database_dir=blast_database_dir_ucyna,
+            blast_database=config["blast_database_ucyna"],
+        ),
+        output_csv=expand(
+            "{blast_database_dir}{output_csv}",
+            blast_database_dir=blast_database_dir_ucyna,
+            output_csv=config["output_csv_ucyna"],
+        ),
+        # blast_database_blast=config["blast_database_blast"],
+        blast_type=config["blast_type_ucyna"],
+        num_threads=config["num_threads_ucyna"],
+        # output_csv=config["output_csv"],
+    log:
+        # "logs/filter_blast{timestamp}.log",
+        expand(
+            # "{UCYNA_oligoreps_dir}logs/blast_{timestamp}.log",
+            "{blast_output_dir}logs/{blast_database}_blast_{timestamp}.log",
+            timestamp=get_timestamp(),
+            blast_database=config["blast_database_ucyna"],
+            blast_output_dir=blast_output_dir_ucyna,
+        ),
+    shell:
+        """
+        bash ../scripts/blast_function.sh {input} {params.blast_database_blast} {params.blast_type} {params.num_threads} {params.output_csv} {output} > {log} 2>&1
+        """
+
+
+
+
+# Addtional confige file for blast
+configfile: "config_blast_arb.json"
+
+
+## assing global variable
+blast_output_dir_arb=config["blast_output_dir_arb"]
+
+rule blast_arb:
+    input:
+        config["input_fasta_blast_arb"],
+        # expand(
+        #     "{input_fasta_dir}{input_fasta_db}",
+        #     input_fasta_dir=input_fasta_dir_arb,
+        #     input_fasta_db=config["input_fasta_db_arb"],
+        # ),
+    output:
+        # config["final_blst_csv"],
+        expand(
+            "{blast_output_dir}{output}",
+            blast_output_dir=blast_output_dir_arb,
+            output=config["final_blst_csv_arb"],
+        )
+    params:
+        blast_database_blast=expand(
+            "{blast_database_dir}{blast_database}",
+            blast_database_dir=blast_database_dir_arb,
+            blast_database=config["blast_database_arb"],
+        ),
+        output_csv=expand(
+            "{blast_database_dir}{output_csv}",
+            blast_database_dir=blast_database_dir_arb,
+            output_csv=config["output_csv_arb"],
+        ),
+        # blast_database_blast=config["blast_database_blast"],
+        blast_type=config["blast_type_arb"],
+        num_threads=config["num_threads_arb"],
+        # output_csv=config["output_csv"],
+    log:
+        # "logs/filter_blast{timestamp}.log",
+        expand(
+            # "{UCYNA_oligoreps_dir}logs/blast_{timestamp}.log",
+            "{blast_output_dir}logs/{blast_database}_blast_{timestamp}.log",
+            timestamp=get_timestamp(),
+            blast_database=config["blast_database_arb"],
+            blast_output_dir=blast_output_dir_arb,
+        ),
+    shell:
+        """
+        bash ../scripts/blast_function.sh {input} {params.blast_database_blast} {params.blast_type} {params.num_threads} {params.output_csv} {output} > {log} 2>&1
+        """
+
+
+
+
+
+########################
+########################
+########################
+########################
+
+
+# configfile: "config_filt_blast.json"
+
+
+# rule filter_blast:
+#     input:
+#         # config["input_blast_csv"],
+#         config["final_blst_csv"],
+#     params:
+#         min_qcov=config["min_qcov"],
+#         min_pident=config["min_pident"],
+#     output:
+#         # config["filtered_blast_output"],
+#         expand(
+#             "{UCYNA_oligoreps_dir}{output}",
+#             UCYNA_oligoreps_dir=UCYNA_oligoreps_dir,
+#             output=config["filtered_blast_output"],
+#         ),
+#     log:
+#         # "logs/filter_blast{timestamp}.log",
+#         expand(
+#             "{UCYNA_oligoreps_dir}logs/filter_blast_{timestamp}.log",
+#             timestamp=get_timestamp(),
+#             UCYNA_oligoreps_dir=UCYNA_oligoreps_dir,
+#         ),
+#     shell:
+#         """
+#         python3 ../../annotations/scripts/filter_blast_output_fun.py --input_blast_csv {input} --filtered_blast_output {output} --min_qcov {params.min_qcov} --min_pident {params.min_pident} >> {log} 2>&1
+#         """
+
+
+# configfile: "config_change_csv_header.json"
+
+
+# rule database_headers:
+#     input:
+#         # config["input_csv"],
+#         expand(
+#             "{UCYNA_oligoreps_dir}{output}",
+#             UCYNA_oligoreps_dir=UCYNA_oligoreps_dir,
+#             output=config["filtered_blast_output"],
+#         ),
+#     params:
+#         header_prefix=config["header_prefix"],
+#     output:
+#         expand(
+#             "{UCYNA_oligoreps_dir}{output}",
+#             UCYNA_oligoreps_dir=UCYNA_oligoreps_dir,
+#             output=config["output_header_csv"],
+#         ),
+#     log:
+#         expand(
+#             "{UCYNA_oligoreps_dir}logs/headers_{timestamp}.log",
+#             timestamp=get_timestamp(),
+#             UCYNA_oligoreps_dir=UCYNA_oligoreps_dir,
+#         ),
+#     shell:
+#         """
+#         bash ../../annotations/scripts/change_csv_headers.sh {input} {output} {params.header_prefix} > {log} 2>&1
+#         """
+
+
+# ## Rule to add AUID key
+# ## At some point, new AUIDs were generated but all my files and analysis need these old AUID IDs, so this key needs to be added
+
+
+# configfile: "./config_add_auid_keyjson"
+
+
+# rule add_auid_key:
+#     input:
+#         # expand(
+#         #     "{UCYNA_oligoreps_dir}{input}",
+#         #     UCYNA_oligoreps_dir=UCYNA_oligoreps_dir,
+#         #     input=config["input_annotation_table"],
+#         # ),
+#         expand(
+#             "{UCYNA_oligoreps_dir}{output}",
+#             UCYNA_oligoreps_dir=UCYNA_oligoreps_dir,
+#             output=config["output_header_csv"],
+#         ),
+#     params:
+#         left_on_key=config["left_on_key"],
+#         right_on_key=config["right_on_key"],
+#         how_key=config["how_key"],
+#     output:
+#         expand(
+#             "{UCYNA_oligoreps_dir}{output}",
+#             UCYNA_oligoreps_dir=UCYNA_oligoreps_dir,
+#             output=config["keyed_csv"],
+#         ),
+#     log:
+#         # "logs/filter_blast{timestamp}.log",
+#         expand(
+#             "{UCYNA_oligoreps_dir}logs/auid_key_{timestamp}.log",
+#             timestamp=get_timestamp(),
+#             UCYNA_oligoreps_dir=UCYNA_oligoreps_dir,
+#         ),
+#     shell:
+#         """
+#         python3 ../../annotations/scripts/add_auid_key.py --left_csv {input} --merged_csv {output} --left_on {params.left_on_key} --right_on {params.right_on_key} --how {params.how_key} >> {log} 2>&1
+#         """
+
+
+# ## Rule to merge csv files
+# configfile: "config_merge.json"
+
+
+# ## Define output directory
+# merged_dir = config["merged_dir"]
+
+
+# rule merge:
+#     input:
+#         expand(
+#             "{UCYNA_oligoreps_dir}{output}",
+#             UCYNA_oligoreps_dir=UCYNA_oligoreps_dir,
+#             output=config["keyed_csv"],
+#         ),
+#         # config["right_csv"],
+#     params:
+#         left_csv=config["left_csv"],
+#         left_on=config["left_on"],
+#         right_on=config["right_on"],
+#         how=config["how"],
+#     output:
+#         # config["merged_csv"],
+#         expand(
+#             "{merged_dir}{output}",
+#             merged_dir=merged_dir,
+#             output=config["merged_csv"],
+#         ),
+#     log:
+#         expand(
+#             "{merged_dir}logs/merge_{timestamp}.log",
+#             timestamp=get_timestamp(),
+#             merged_dir=merged_dir,
+#         ),
+#     shell:
+#         """
+#         python3 ../scripts/merge_csv.py --left_csv {params.left_csv} --right_csv {input} --merged_csv {output} --left_on {params.left_on} --right_on {params.right_on} --how {params.how} >> {log} 2>&1
+#         """
+
+
+# ## Rule to make consensus ID for each ASV
+# configfile: "./config_consensus_id.json"
+
+
+# rule consensus_id:
+#     input:
+#         expand(
+#             "{merged_dir}{output}",
+#             merged_dir=merged_dir,
+#             output=config["merged_csv"],
+#         ),
+#     params:
+#         min_pid_genomes879=config["min_pid_genomes879"],
+#     output:
+#         # config["merged_csv"],
+#         expand(
+#             "{merged_dir}{output}",
+#             merged_dir=merged_dir,
+#             output=config["updated_annotation_tab"],
+#         ),
+#     log:
+#         expand(
+#             "{merged_dir}logs/consensus_id_{timestamp}.log",
+#             timestamp=get_timestamp(),
+#             merged_dir=merged_dir,
+#         ),
+#     shell:
+#         """
+#         python3 ../../annotations/scripts/make_consensus_taxonomy.py --annotation_table {input} --output_table {output}  --min_pid_genomes879 {params.min_pid_genomes879} >> {log} 2>&1
+#         """
+
+
+# rule all:
+#     input:
+#         expand(
+#             "{merged_dir}{output}",
+#             merged_dir=merged_dir,
+#             output=config["updated_annotation_tab"],
+#         ),
+
+
+# ## Cleaning rules
+
+
+# rule clean_make_database:
+#     shell:
+#         """
+#         echo "Cleaning {blast_database_dir}..."
+#         snakemake --delete-all-output --cores 1 make_database
+#         rm -r {blast_database_dir}
+#         """
+
+
+# rule clean_blast:
+#     shell:
+#         """
+#         echo "Cleaning {UCYNA_oligoreps_dir}..."
+#         snakemake -c 1 --delete-all-output blast
+#         rm -r {UCYNA_oligoreps_dir}
+#         """
+
+
+# rule clean_filter_blast:
+#     shell:
+#         """
+#         echo "Cleaning filter blast output: {filtered_blast_output}..."
+#         snakemake -c 1 --delete-all-output filter_blast
+#         rm -r {UCYNA_oligoreps_dir}
+#         """
+
+
+# rule clean_all:
+#     shell:
+#         """
+#         echo "Cleaning all files"
+#         snakemake -c 1 --delete-all-output all
+#         rm -f {log}
+#         """
