@@ -1,5 +1,5 @@
 # Snakefile for annotating ASVs
-# Copyright (C) 2023 Jonathan D. Magasin
+
 
 # Define input
 AUID_FASTA = "/Users/mo/Projects/nifH_amp_project/myWork/test.fasta"
@@ -28,78 +28,90 @@ GENOME879_PCTID = 50
 GENOME879_QRYCVG = 90
 GENOME879_DESC = f"{GENOME879_PCTID}pid.{GENOME879_QRYCVG}cvg"
 GENOME879_TAB = f"{GENOME879_DIR}/blastxGenome879.{GENOME879_DESC}.tab"
-GENOME879_OUTS = [GENOME879_TAB, f"{GENOME879_DIR}/blastxGenome879.{GENOME879_DESC}.aln.gz"]
+GENOME879_OUTS = [
+    GENOME879_TAB,
+    f"{GENOME879_DIR}/blastxGenome879.{GENOME879_DESC}.aln.gz",
+]
 
 # Define NifH clusters parameters
 NIFHCLUST_DIR = "Classify_NifH_Clusters"
 GENOME879_LOG = f"log.{NIFHCLUST_DIR}.txt"
 NIFHCLUST_MAP = f"{NIFHCLUST_DIR}/auid.filtered.clusters.map"
-NIFHCLUST_OUTS = [NIFHCLUST_MAP, f"{NIFHCLUST_DIR}/auid.filtered.withNifH_Clusters.fasta"]
+NIFHCLUST_OUTS = [
+    NIFHCLUST_MAP,
+    f"{NIFHCLUST_DIR}/auid.filtered.withNifH_Clusters.fasta",
+]
 
 
 rule all:
     input:
-        ANNOT_TAB
+        ANNOT_TAB,
+
 
 rule clean:
     shell:
         "rm {ANNOT_TAB}"
 
+
 rule superclean:
     shell:
         "rm -r {ARB2017_DIR} {GENOME879_DIR} {NIFHCLUST_DIR}"
+
 
 rule createDirs:
     output:
         directory(ARB2017_DIR),
         directory(GENOME879_DIR),
-        directory(NIFHCLUST_DIR)
+        directory(NIFHCLUST_DIR),
     run:
         shell("mkdir -p {output}")
 
+
 rule ARB2017:
     input:
-        AUID_FASTA
+        AUID_FASTA,
     output:
-        ARB2017_OUTS
+        ARB2017_OUTS,
     params:
         tool=BLASTNARB2017,
         pctid=ARB2017_PCTID,
-        qrycvg=ARB2017_QRYCVG
+        qrycvg=ARB2017_QRYCVG,
     log:
-        f"{ARB2017_DIR}/log.BlastnARB2017.txt"
+        f"{ARB2017_DIR}/log.BlastnARB2017.txt",
     shell:
         """
         mkdir -p {output[0]}
         {params.tool} {input} {output[0]} {params.pctid} {params.qrycvg} &> {log}
         """
+
 
 rule Genome879:
     input:
-        AUID_FASTA
+        AUID_FASTA,
     output:
-        GENOME879_OUTS
+        GENOME879_OUTS,
     params:
         tool=BLASTXGENOME879,
         pctid=GENOME879_PCTID,
-        qrycvg=GENOME879_QRYCVG
+        qrycvg=GENOME879_QRYCVG,
     log:
-        f"{GENOME879_DIR}/log.BlastxGenome879.txt"
+        f"{GENOME879_DIR}/log.BlastxGenome879.txt",
     shell:
         """
         mkdir -p {output[0]}
         {params.tool} {input} {output[0]} {params.pctid} {params.qrycvg} &> {log}
         """
 
+
 rule Clusters:
     input:
-        AUID_FASTA
+        AUID_FASTA,
     output:
-        NIFHCLUST_OUTS
+        NIFHCLUST_OUTS,
     params:
-        tool=ASSIGNNIFHCLUSTERS
+        tool=ASSIGNNIFHCLUSTERS,
     log:
-        f"{NIFHCLUST_DIR}/log.nifH_clusters.txt"
+        f"{NIFHCLUST_DIR}/log.nifH_clusters.txt",
     shell:
         """
         mkdir -p {NIFHCLUST_DIR}_tmp
@@ -109,12 +121,13 @@ rule Clusters:
         mv {NIFHCLUST_DIR}_tmp {NIFHCLUST_DIR}
         """
 
+
 rule makeAnnotationTable:
     input:
         ARB2017_TAB,
         GENOME879_TAB,
-        NIFHCLUST_MAP
+        NIFHCLUST_MAP,
     output:
-        ANNOT_TAB
+        ANNOT_TAB,
     script:
         "/Users/mo/Projects/nifH_amp_project/nifH-ASV-workflow/AnnotateAuids/scripts/makeAnnotationTable.R {input} {output}"

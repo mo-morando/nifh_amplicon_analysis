@@ -1,0 +1,13 @@
+* metadata.cmap.tsv comes from the GatherMetadata stage and has the
+  CMAP-friendly query fields required by Mo's CMAP script.  It is old (Nov
+  2023).  A newer version will be published in ESSD with expected trivial
+  differences (e.g. some additional metadata that will have been tracked down).
+
+* auids.annot.tsv was created 17 Jan 2024. AnnotateAuids was re-run in order to
+  reflect the removal of a dozen NEMO nutrient-addition samples (the "e15"s).
+  Dropping these samples led to somme ASVs no longer existing. However, AUIDs
+  were recycled (preservin the earlier AUID numbers whenever the exact same
+  nucleotide and length ASV was created in the more recent run of GatherAsvs).
+  The marine NCD/cyano DB (with ~267 sequences) was searched as described in
+  the Dec manuscript: >=97%id and >=70%cvg.  (Used to search with >=90% cvg.
+  Reducing to 70% impact was only to add annotation to a few (4 or 5) AUIDs.)

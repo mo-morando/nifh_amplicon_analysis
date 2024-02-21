@@ -1,0 +1,4059 @@
+BLASTN 2.14.1+
+
+
+Reference: Zheng Zhang, Scott Schwartz, Lukas Wagner, and Webb
+Miller (2000), "A greedy algorithm for aligning DNA sequences", J
+Comput Biol 2000; 7(1-2):203-14.
+
+
+
+Database: Nucleotide collection (nt)
+           99,225,353 sequences; 1,339,658,403,746 total letters
+
+
+
+Query= AUID.99243
+
+Length=291
+
+RID: HBE8HTA7013
+                                                                      Score     E
+Sequences producing significant alignments:                          (Bits)  Value
+
+KF285527.1 Ostreococcus tauri isolate RCC1116 chloroplast, comple...  455     3e-123
+KF285526.1 Ostreococcus tauri isolate RCC1115 chloroplast, comple...  455     3e-123
+KF285522.1 Ostreococcus tauri isolate RCC1108 chloroplast, comple...  455     3e-123
+KF285533.1 Ostreococcus tauri isolate RCC1561 chloroplast, comple...  449     1e-121
+KF285532.1 Ostreococcus tauri isolate RCC1559 chloroplast, comple...  449     1e-121
+KF285531.1 Ostreococcus tauri isolate RCC1558 chloroplast, comple...  449     1e-121
+KF285530.1 Ostreococcus tauri isolate RCC1123 chloroplast, comple...  449     1e-121
+KF285529.1 Ostreococcus tauri isolate RCC1118 chloroplast, comple...  449     1e-121
+KF285528.1 Ostreococcus tauri isolate RCC1117 chloroplast, comple...  449     1e-121
+KF285525.1 Ostreococcus tauri isolate RCC1114 chloroplast, comple...  449     1e-121
+KF285524.1 Ostreococcus tauri isolate RCC1112 chloroplast, comple...  449     1e-121
+KF285523.1 Ostreococcus tauri isolate RCC1110 chloroplast, comple...  449     1e-121
+KC990831.1 Ostreococcus tauri chloroplast, complete genome            449     1e-121
+NC_008289.1 Ostreococcus tauri chloroplast, complete genome           449     1e-121
+NC_024811.1 Bathycoccus prasinos chloroplast, complete genome         425     2e-114
+NC_012575.1 Micromonas sp. RCC299 chloroplast, complete genome        381     5e-101
+ON844105.1 Emiliania huxleyi strain CCMP371 plastid, complete genome  279     2e-70 
+ON844104.1 Emiliania huxleyi strain CS-369 plastid, complete genome   279     2e-70 
+ON844102.1 Emiliania huxleyi strain BOF92 plastid, complete genome    279     2e-70 
+OL703603.2 Emiliania huxleyi strain RCC4028 plastid, complete genome  279     2e-70 
+OL703611.1 Gephyrocapsa parvula strain RCC4034 plastid, complete ...  279     2e-70 
+NC_063785.1 Gephyrocapsa parvula strain RCC4033 plastid, complete...  279     2e-70 
+NC_063784.1 Gephyrocapsa ericsonii strain RCC4032 plastid, comple...  279     2e-70 
+NC_063783.1 Gephyrocapsa muellerae strain RCC3370 plastid, comple...  279     2e-70 
+NC_063782.1 Gephyrocapsa oceanica strain RCC1296 plastid, complet...  279     2e-70 
+OL703605.1 Emiliania huxleyi strain Van556 plastid, complete genome   279     2e-70 
+OL703604.1 Emiliania huxleyi strain RCC4030 plastid, complete genome  279     2e-70 
+OL703602.1 Emiliania huxleyi strain RCC4002 plastid, complete genome  279     2e-70 
+OL703601.1 Emiliania huxleyi strain RCC1253 plastid, complete genome  279     2e-70 
+OL703600.1 Emiliania huxleyi strain RCC174 plastid, complete genome   279     2e-70 
+OL703599.1 Emiliania huxleyi strain NZEH plastid, complete genome     279     2e-70 
+OL703598.1 Emiliania huxleyi strain M217 plastid, complete genome     279     2e-70 
+OL703597.1 Emiliania huxleyi strain L plastid, complete genome        279     2e-70 
+OL703596.1 Emiliania huxleyi strain EH2 plastid, complete genome      279     2e-70 
+OL703595.1 Emiliania huxleyi strain CCMP379 plastid, complete genome  279     2e-70 
+OL703594.1 Emiliania huxleyi strain CCMP371 plastid, complete genome  279     2e-70 
+OL703593.1 Emiliania huxleyi strain AWI1516 plastid, complete genome  279     2e-70 
+OL703592.1 Emiliania huxleyi strain ARC30-1 plastid, complete genome  279     2e-70 
+OL703591.1 Emiliania huxleyi strain 92F plastid, complete genome      279     2e-70 
+OL703590.1 Emiliania huxleyi strain 92E plastid, complete genome      279     2e-70 
+OL691558.1 Emiliania huxleyi strain M219 plastid, partial genome      279     2e-70 
+OL691557.1 Emiliania huxleyi strain B39 plastid, partial genome       279     2e-70 
+OL691556.1 Emiliania huxleyi culture RCC:175 strain RCC175 plasti...  279     2e-70 
+JN022705.1 Emiliania huxleyi culture-collection CCMP:1516 plastid...  279     2e-70 
+NC_007288.1 Emiliania huxleyi chloroplast, complete genome            279     2e-70 
+AB158790.1 Gephyrocapsa oceanica plastid psbC mRNA for photosyste...  279     2e-70 
+AY675523.1 Emiliania huxleyi photosystem II 44 kDa protein (psbC)...  279     2e-70 
+OL703607.1 Gephyrocapsa oceanica strain RCC3711 plastid, complete...  278     6e-70 
+JX292161.1 Emiliania huxleyi photosystem II CP43 chlorophyll apop...  274     8e-69 
+ON844103.1 Emiliania huxleyi strain CCMP3266 plastid, complete ge...  268     4e-67 
+OL322706.1 Emiliania huxleyi strain RCC1216 plastid, complete genome  268     4e-67 
+AY876215.1 Emiliania huxleyi strain SAG 33.90 photosystem II CP43...  268     4e-67 
+NC_066179.1 Eustigmatophyceae sp. WTwin 8/9 T-6m6.8 plastid, comp...  267     1e-66 
+JX297813.1 Uncultured Pelagomonas plastid, complete genome            267     1e-66 
+LC604816.1 Trebouxiophyceae sp. M-hakoo 311 chloroplast DNA, comp...  255     3e-63 
+NC_066976.1 Eutreptiella eupharyngea isolate K-0027 chloroplast, ...  254     1e-62 
+KX839260.1 Monodopsis sp. MarTras21 chloroplast, complete genome      243     2e-59 
+NC_012101.1 Monomastix sp. OKE-1 chloroplast, complete genome         239     3e-58 
+MZ133414.1 Carteria radiosa PsbC (psbC) gene, complete cds; chlor...  233     1e-56 
+EF520307.1 Pseudo-nitzschia turgiduloides strain 7A1 PsbC (psbC) ...  233     1e-56 
+HQ710770.1 Pelagomonas calceolata culture CCMP:1214 photosystem I...  230     2e-55 
+OP297527.1 Coscinodiscophyceae sp. strain AJA027-32 photosystem I...  226     2e-54 
+OP297526.1 Coscinodiscophyceae sp. strain ECT3886 flatcentric pho...  226     2e-54 
+OM827251.1 Guinardia striata chloroplast, complete genome             226     2e-54 
+NC_024817.1 Prasinoderma coloniale culture-collection CCMP:1220 c...  226     2e-54 
+KJ577930.1 Coscinodiscophyceae sp. TN-2014 isolate ECT3886hemidis...  226     2e-54 
+NC_040294.1 Characiopsis acuta strain ACOI 456 plastid, complete ...  224     9e-54 
+HQ710793.1 Tribonema aequale voucher UTEX 50 photosystem II thyla...  220     1e-52 
+MH511707.1 Pandorina morum ribosomal protein L20 (rpl20) and phot...  217     1e-51 
+MK212028.1 Vischeria stellata strain SAG 33.83 chloroplast, compl...  217     1e-51 
+NC_040300.1 Vischeria sp. ACOI 3415 plastid, complete genome          211     7e-50 
+MK895950.1 Pediastrum duplex plastid, complete genome                 209     2e-49 
+MF536515.1 Pediastrum duplex strain UTEX LB1364 chloroplast clone...  209     2e-49 
+JN630572.1 Pediastrum duplex photosystem II 44 kDa protein (psbC)...  209     2e-49 
+GU325311.1 Synura echinulata strain SAG15.92 photosystem II CP43 ...  209     2e-49 
+NC_066180.1 Neustupella aerophytica strain CAUP Q 801 plastid, co...  207     9e-49 
+MH511721.1 Pandorina colemaniae CP43 chlorophyll apoprotein of ph...  204     1e-47 
+NC_045244.1 Fragilariopsis cylindrus chloroplast, complete genome     204     1e-47 
+EF520304.1 Fragilariopsis cylindrus strain E8C2 PsbC (psbC) gene,...  204     1e-47 
+NC_035287.1 Dasyclonium flaccidum isolate PD1087 chloroplast, com...  200     1e-46 
+MK787212.1 Vischeria stellata strain SAG 33.83 photosystem II thy...  198     5e-46 
+NC_029674.1 Bracteacoccus minor strain UTEX 66 chloroplast, compl...  198     5e-46 
+JN630562.1 Bracteacoccus minor photosystem II 44 kDa protein (psb...  198     5e-46 
+MT581990.1 Eustigmatophyceae sp. HSY-2011b strain CCMP 3154 PsbC ...  198     5e-46 
+KT625233.1 Haematococcus lacustris clone contig-25 chloroplast, p...  196     2e-45 
+KT625088.1 Chlorogonium capillatum culture UTEX:11 clone Contig4 ...  196     2e-45 
+MK875392.1 Gloiopeltis sp. JP1 voucher Hiroshi Kawai:KU-d5018 pho...  195     7e-45 
+MF093006.1 Gedaniella paucistriata isolate SZCZCH1281 photosystem...  195     7e-45 
+KT943694.1 Navicula sp. SZCZCH100 photosystem II CP43 protein (ps...  195     7e-45 
+AY876217.1 Pavlova gyrans strain CCMP 607 photosystem II CP43 chl...  195     7e-45 
+MH511750.1 Volvulina compacta subunit VII of photosystem I (Fe-Sp...  193     2e-44 
+MH064030.1 Nitzschia cf. spathulata strain KSA2016-35 thin Nitz-F...  193     2e-44 
+KU179143.1 Nitzschia sp. KSA0035 photosystem II CP43 protein (psb...  193     2e-44 
+NC_025530.1 Pedinomonas tuberculata culture-collection SAG:42.84 ...  193     2e-44 
+MG677935.1 Haematococcus lacustris strain UTEX 2505 chloroplast, ...  191     9e-44 
+NC_037007.1 Haematococcus lacustris voucher UTEX:2505 chloroplast...  191     9e-44 
+MN709220.1 Haematococcus lacustris strain FACHB-712 chloroplast, ...  191     9e-44 
+LC380367.1 Chlamydomonas sp. YgT1301A1 chloroplast psbC gene for ...  187     1e-42 
+KT369349.1 Rotundella rotunda PSII 43 kDa protein (psbC) gene, co...  183     1e-41 
+KC145491.1 Sphaeropleales sp. KF-2013b strain BCP-WJT54VFNP11 pho...  183     1e-41 
+MG762001.2 Marchantia polymorpha subsp. ruderalis chloroplast, co...  182     5e-41 
+MK875388.1 Gloiopeltis furcata voucher Hiroshi Kawai:KU-d22892 ph...  182     5e-41 
+MK202952.1 Marchantia polymorpha subsp. ruderalis strain KBDI0008...  182     5e-41 
+NC_042505.1 Marchantia polymorpha plastid, complete genome            182     5e-41 
+NC_037507.1 Marchantia polymorpha subsp. ruderalis chloroplast DN...  182     5e-41 
+KT364744.3 Cloning vector pCS CL0*b, complete sequence                182     5e-41 
+LC068606.1 Chloroplast transformation vector pCSGFP DNA, complete...  182     5e-41 
+AP025455.1 Marchantia polymorpha subsp. ruderalis Tak-1 chloropla...  182     5e-41 
+MK875387.1 Gloiopeltis furcata voucher Hiroshi Kawai:KU-d3071 pho...  176     2e-39 
+LC380348.1 Chlamydomonas fasciata NIES-437 chloroplast psbC gene ...  176     2e-39 
+NC_042418.1 Reboulia hemisphaerica chloroplast, complete genome       171     1e-37 
+NC_030359.1 Cylindrocystis brebissonii culture-collection SAG:615...  171     1e-37 
+MK875389.1 Gloiopeltis furcata voucher Hiroshi Kawai:KU-d22888 ph...  167     1e-36 
+AB044532.1 Paulschulzia pseudovolvox chloroplast psbC gene for ph...  167     1e-36 
+MF927459.1 Pelagophyceae sp. CCMP3390 photosystem II thylakoid me...  163     2e-35 
+KT625010.1 Chloromonas radiata clone contig2 chloroplast, partial...  159     2e-34 
+MW429510.1 Fossombronia mylioides voucher 90016 chloroplast, comp...  159     2e-34 
+MF927460.1 Pelagophyceae sp. CCMP3361 photosystem II thylakoid me...  158     9e-34 
+KX131180.1 Hariotina sp. MMOGRB0030F chloroplast, complete genome     158     9e-34 
+MK814710.1 Polyneura bonnemaisonii isolate PD2997_1 plastid, part...  154     1e-32 
+MG778350.1 Elakatothrix viridis PSII 43 kDa protein (psbC) gene, ...  152     4e-32 
+KC145504.1 Pseudomuriella engadinensis strain UTEX 58 photosystem...  150     1e-31 
+NC_028586.1 Bracteacoccus giganteus culture-collection UTEX:1251 ...  148     5e-31 
+KX284710.1 Riquetophycus sp. plastid, complete genome                 145     7e-30 
+NC_025525.1 Myrmecia israelensis culture-collection UTEX:1181 chl...  145     7e-30 
+NC_029669.1 Pseudomuriella schumacherensis strain SAG 2137 chloro...  137     1e-27 
+CP003946.1 Leptolyngbya sp. PCC 7376, complete genome                 137     1e-27 
+JN630576.1 Pseudomuriella sp. SAG 2137 photosystem II 44 kDa prot...  137     1e-27 
+LC380372.1 Vitreochlamys nekrassovii SAG 11-10 chloroplast psbC g...  134     1e-26 
+LC380370.1 Lobomonas francei SAG 45-1 chloroplast psbC gene for p...  130     2e-25 
+AB044507.1 Pandorina morum chloroplast psbC gene for photosystem ...  128     7e-25 
+AB044504.1 Volvulina boldii chloroplast psbC gene for photosystem...  128     7e-25 
+AB044498.1 Volvulina compacta chloroplast psbC gene for photosyst...  128     7e-25 
+AF481843.1 Elakatothrix viridis strain SAG 9.94 voucher SAG:9.94 ...  122     3e-23 
+AB044508.1 Pandorina morum chloroplast psbC gene for photosystem ...  122     3e-23 
+AB044499.1 Volvulina pringsheimii chloroplast psbC gene for photo...  122     3e-23 
+AB044512.1 Pandorina colemaniae chloroplast psbC gene for photosy...  117     1e-21 
+KY792694.1 Hariotina reticulata CF0 subunit I of ATP synthase (at...  110     2e-19 
+NC_028582.1 Jenufa minuta culture-collection CAUP:H 8102 chloropl...  93.5    3e-14 
+
+
+>KF285527.1 Ostreococcus tauri isolate RCC1116 chloroplast, complete genome
+Length=75363
+
+ Score = 455 bits (246),  Expect = 3e-123
+ Identities = 276/291 (95%), Gaps = 0/291 (0%)
+ Strand=Plus/Plus
+
+Query  1    ATATCGTTCTTAAGCTTTGATAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCAT  60
+            |||||||| |||||||| |||||||||||||| |||||||||||||||||||| ||||||
+Sbjct  272  ATATCGTTTTTAAGCTTAGATAAATCAAGCCCGTTTGGTCCACGAAGTGGCTCCACCCAT  331
+
+Query  61   GGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGT  120
+            |||||||||||||||||||||||||| || |||||||| |||||||| |||||||| || 
+Sbjct  332  GGAGCACGCATATCCCAGAAACGCATAGTTTCACCACCAAAGATAATCTCTCCAGTTGGC  391
+
+Query  121  GAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCT  180
+            ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+Sbjct  392  GAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCT  451
+
+Query  181  AAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTT  240
+            ||||||||||||||||||||||||||||||||||| ||||| || |||||||||||||| 
+Sbjct  452  AAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGCGCTTGCGAAGCCTCTGGTCCAGTC  511
+
+Query  241  GGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAATACA  291
+            ||||||||||| |||||||||||||||||||||||||||||||||||||||
+Sbjct  512  GGTCCAAAGAATTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAATACA  562
+
+
+>KF285526.1 Ostreococcus tauri isolate RCC1115 chloroplast, complete genome
+Length=75360
+
+ Score = 455 bits (246),  Expect = 3e-123
+ Identities = 276/291 (95%), Gaps = 0/291 (0%)
+ Strand=Plus/Plus
+
+Query  1    ATATCGTTCTTAAGCTTTGATAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCAT  60
+            |||||||| |||||||| |||||||||||||| |||||||||||||||||||| ||||||
+Sbjct  272  ATATCGTTTTTAAGCTTAGATAAATCAAGCCCGTTTGGTCCACGAAGTGGCTCCACCCAT  331
+
+Query  61   GGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGT  120
+            |||||||||||||||||||||||||| || |||||||| |||||||| |||||||| || 
+Sbjct  332  GGAGCACGCATATCCCAGAAACGCATAGTTTCACCACCAAAGATAATCTCTCCAGTTGGC  391
+
+Query  121  GAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCT  180
+            ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+Sbjct  392  GAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCT  451
+
+Query  181  AAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTT  240
+            ||||||||||||||||||||||||||||||||||| ||||| || |||||||||||||| 
+Sbjct  452  AAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGCGCTTGCGAAGCCTCTGGTCCAGTC  511
+
+Query  241  GGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAATACA  291
+            ||||||||||| |||||||||||||||||||||||||||||||||||||||
+Sbjct  512  GGTCCAAAGAATTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAATACA  562
+
+
+>KF285522.1 Ostreococcus tauri isolate RCC1108 chloroplast, complete genome
+Length=68009
+
+ Score = 455 bits (246),  Expect = 3e-123
+ Identities = 276/291 (95%), Gaps = 0/291 (0%)
+ Strand=Plus/Plus
+
+Query  1    ATATCGTTCTTAAGCTTTGATAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCAT  60
+            |||||||| |||||||| |||||||||||||| |||||||||||||||||||| ||||||
+Sbjct  272  ATATCGTTTTTAAGCTTAGATAAATCAAGCCCGTTTGGTCCACGAAGTGGCTCCACCCAT  331
+
+Query  61   GGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGT  120
+            |||||||||||||||||||||||||| || |||||||| |||||||| |||||||| || 
+Sbjct  332  GGAGCACGCATATCCCAGAAACGCATAGTTTCACCACCAAAGATAATCTCTCCAGTTGGC  391
+
+Query  121  GAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCT  180
+            ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+Sbjct  392  GAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCT  451
+
+Query  181  AAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTT  240
+            ||||||||||||||||||||||||||||||||||| ||||| || |||||||||||||| 
+Sbjct  452  AAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGCGCTTGCGAAGCCTCTGGTCCAGTC  511
+
+Query  241  GGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAATACA  291
+            ||||||||||| |||||||||||||||||||||||||||||||||||||||
+Sbjct  512  GGTCCAAAGAATTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAATACA  562
+
+
+>KF285533.1 Ostreococcus tauri isolate RCC1561 chloroplast, complete genome
+Length=67930
+
+ Score = 449 bits (243),  Expect = 1e-121
+ Identities = 275/291 (95%), Gaps = 0/291 (0%)
+ Strand=Plus/Plus
+
+Query  1    ATATCGTTCTTAAGCTTTGATAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCAT  60
+            |||||||| |||||||| |||||||||||||| |||||||||||||||||||| ||||||
+Sbjct  272  ATATCGTTTTTAAGCTTAGATAAATCAAGCCCGTTTGGTCCACGAAGTGGCTCCACCCAT  331
+
+Query  61   GGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGT  120
+            |||||||||||||||||||||||||| || |||||||| |||||||| |||||||| || 
+Sbjct  332  GGAGCACGCATATCCCAGAAACGCATAGTTTCACCACCAAAGATAATCTCTCCAGTTGGC  391
+
+Query  121  GAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCT  180
+            |||||||||||||||||||||||||||||||||||||||||||||||||| |||||||||
+Sbjct  392  GAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATATTTGCTCCT  451
+
+Query  181  AAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTT  240
+            ||||||||||||||||||||||||||||||||||||||||| || || ||||||||||| 
+Sbjct  452  AAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGCGAAGCTTCTGGTCCAGTC  511
+
+Query  241  GGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAATACA  291
+            ||||||||||| |||||||||||||||||||||||||||||||||||||||
+Sbjct  512  GGTCCAAAGAATTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAATACA  562
+
+
+>KF285532.1 Ostreococcus tauri isolate RCC1559 chloroplast, complete genome
+Length=67912
+
+ Score = 449 bits (243),  Expect = 1e-121
+ Identities = 275/291 (95%), Gaps = 0/291 (0%)
+ Strand=Plus/Plus
+
+Query  1    ATATCGTTCTTAAGCTTTGATAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCAT  60
+            |||||||| |||||||| |||||||||||||| |||||||||||||||||||| ||||||
+Sbjct  272  ATATCGTTTTTAAGCTTAGATAAATCAAGCCCGTTTGGTCCACGAAGTGGCTCCACCCAT  331
+
+Query  61   GGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGT  120
+            |||||||||||||||||||||||||| || |||||||| |||||||| |||||||| || 
+Sbjct  332  GGAGCACGCATATCCCAGAAACGCATAGTTTCACCACCAAAGATAATCTCTCCAGTTGGC  391
+
+Query  121  GAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCT  180
+            |||||||||||||||||||||||||||||||||||||||||||||||||| |||||||||
+Sbjct  392  GAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATATTTGCTCCT  451
+
+Query  181  AAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTT  240
+            ||||||||||||||||||||||||||||||||||||||||| || || ||||||||||| 
+Sbjct  452  AAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGCGAAGCTTCTGGTCCAGTC  511
+
+Query  241  GGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAATACA  291
+            ||||||||||| |||||||||||||||||||||||||||||||||||||||
+Sbjct  512  GGTCCAAAGAATTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAATACA  562
+
+
+>KF285531.1 Ostreococcus tauri isolate RCC1558 chloroplast, complete genome
+Length=67681
+
+ Score = 449 bits (243),  Expect = 1e-121
+ Identities = 275/291 (95%), Gaps = 0/291 (0%)
+ Strand=Plus/Plus
+
+Query  1    ATATCGTTCTTAAGCTTTGATAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCAT  60
+            |||||||| |||||||| |||||||||||||| |||||||||||||||||||| ||||||
+Sbjct  272  ATATCGTTTTTAAGCTTAGATAAATCAAGCCCGTTTGGTCCACGAAGTGGCTCCACCCAT  331
+
+Query  61   GGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGT  120
+            |||||||||||||||||||||||||| || |||||||| |||||||| |||||||| || 
+Sbjct  332  GGAGCACGCATATCCCAGAAACGCATAGTTTCACCACCAAAGATAATCTCTCCAGTTGGC  391
+
+Query  121  GAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCT  180
+            |||||||||||||||||||||||||||||||||||||||||||||||||| |||||||||
+Sbjct  392  GAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATATTTGCTCCT  451
+
+Query  181  AAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTT  240
+            ||||||||||||||||||||||||||||||||||||||||| || || ||||||||||| 
+Sbjct  452  AAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGCGAAGCTTCTGGTCCAGTC  511
+
+Query  241  GGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAATACA  291
+            ||||||||||| |||||||||||||||||||||||||||||||||||||||
+Sbjct  512  GGTCCAAAGAATTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAATACA  562
+
+
+>KF285530.1 Ostreococcus tauri isolate RCC1123 chloroplast, complete genome
+Length=67681
+
+ Score = 449 bits (243),  Expect = 1e-121
+ Identities = 275/291 (95%), Gaps = 0/291 (0%)
+ Strand=Plus/Plus
+
+Query  1    ATATCGTTCTTAAGCTTTGATAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCAT  60
+            |||||||| |||||||| |||||||||||||| |||||||||||||||||||| ||||||
+Sbjct  272  ATATCGTTTTTAAGCTTAGATAAATCAAGCCCGTTTGGTCCACGAAGTGGCTCCACCCAT  331
+
+Query  61   GGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGT  120
+            |||||||||||||||||||||||||| || |||||||| |||||||| |||||||| || 
+Sbjct  332  GGAGCACGCATATCCCAGAAACGCATAGTTTCACCACCAAAGATAATCTCTCCAGTTGGC  391
+
+Query  121  GAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCT  180
+            |||||||||||||||||||||||||||||||||||||||||||||||||| |||||||||
+Sbjct  392  GAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATATTTGCTCCT  451
+
+Query  181  AAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTT  240
+            ||||||||||||||||||||||||||||||||||||||||| || || ||||||||||| 
+Sbjct  452  AAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGCGAAGCTTCTGGTCCAGTC  511
+
+Query  241  GGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAATACA  291
+            ||||||||||| |||||||||||||||||||||||||||||||||||||||
+Sbjct  512  GGTCCAAAGAATTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAATACA  562
+
+
+>KF285529.1 Ostreococcus tauri isolate RCC1118 chloroplast, complete genome
+Length=67930
+
+ Score = 449 bits (243),  Expect = 1e-121
+ Identities = 275/291 (95%), Gaps = 0/291 (0%)
+ Strand=Plus/Plus
+
+Query  1    ATATCGTTCTTAAGCTTTGATAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCAT  60
+            |||||||| |||||||| |||||||||||||| |||||||||||||||||||| ||||||
+Sbjct  272  ATATCGTTTTTAAGCTTAGATAAATCAAGCCCGTTTGGTCCACGAAGTGGCTCCACCCAT  331
+
+Query  61   GGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGT  120
+            |||||||||||||||||||||||||| || |||||||| |||||||| |||||||| || 
+Sbjct  332  GGAGCACGCATATCCCAGAAACGCATAGTTTCACCACCAAAGATAATCTCTCCAGTTGGC  391
+
+Query  121  GAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCT  180
+            |||||||||||||||||||||||||||||||||||||||||||||||||| |||||||||
+Sbjct  392  GAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATATTTGCTCCT  451
+
+Query  181  AAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTT  240
+            ||||||||||||||||||||||||||||||||||||||||| || || ||||||||||| 
+Sbjct  452  AAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGCGAAGCTTCTGGTCCAGTC  511
+
+Query  241  GGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAATACA  291
+            ||||||||||| |||||||||||||||||||||||||||||||||||||||
+Sbjct  512  GGTCCAAAGAATTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAATACA  562
+
+
+>KF285528.1 Ostreococcus tauri isolate RCC1117 chloroplast, complete genome
+Length=67911
+
+ Score = 449 bits (243),  Expect = 1e-121
+ Identities = 275/291 (95%), Gaps = 0/291 (0%)
+ Strand=Plus/Plus
+
+Query  1    ATATCGTTCTTAAGCTTTGATAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCAT  60
+            |||||||| |||||||| |||||||||||||| |||||||||||||||||||| ||||||
+Sbjct  272  ATATCGTTTTTAAGCTTAGATAAATCAAGCCCGTTTGGTCCACGAAGTGGCTCCACCCAT  331
+
+Query  61   GGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGT  120
+            |||||||||||||||||||||||||| || |||||||| |||||||| |||||||| || 
+Sbjct  332  GGAGCACGCATATCCCAGAAACGCATAGTTTCACCACCAAAGATAATCTCTCCAGTTGGC  391
+
+Query  121  GAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCT  180
+            |||||||||||||||||||||||||||||||||||||||||||||||||| |||||||||
+Sbjct  392  GAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATATTTGCTCCT  451
+
+Query  181  AAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTT  240
+            ||||||||||||||||||||||||||||||||||||||||| || || ||||||||||| 
+Sbjct  452  AAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGCGAAGCTTCTGGTCCAGTC  511
+
+Query  241  GGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAATACA  291
+            ||||||||||| |||||||||||||||||||||||||||||||||||||||
+Sbjct  512  GGTCCAAAGAATTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAATACA  562
+
+
+>KF285525.1 Ostreococcus tauri isolate RCC1114 chloroplast, complete genome
+Length=70612
+
+ Score = 449 bits (243),  Expect = 1e-121
+ Identities = 275/291 (95%), Gaps = 0/291 (0%)
+ Strand=Plus/Plus
+
+Query  1    ATATCGTTCTTAAGCTTTGATAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCAT  60
+            |||||||| |||||||| |||||||||||||| |||||||||||||||||||| ||||||
+Sbjct  272  ATATCGTTTTTAAGCTTAGATAAATCAAGCCCGTTTGGTCCACGAAGTGGCTCCACCCAT  331
+
+Query  61   GGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGT  120
+            |||||||||||||||||||||||||| || |||||||| |||||||| |||||||| || 
+Sbjct  332  GGAGCACGCATATCCCAGAAACGCATAGTTTCACCACCAAAGATAATCTCTCCAGTTGGC  391
+
+Query  121  GAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCT  180
+            |||||||||||||||||||||||||||||||||||||||||||||||||| |||||||||
+Sbjct  392  GAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATATTTGCTCCT  451
+
+Query  181  AAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTT  240
+            ||||||||||||||||||||||||||||||||||||||||| || || ||||||||||| 
+Sbjct  452  AAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGCGAAGCTTCTGGTCCAGTC  511
+
+Query  241  GGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAATACA  291
+            ||||||||||| |||||||||||||||||||||||||||||||||||||||
+Sbjct  512  GGTCCAAAGAATTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAATACA  562
+
+
+>KF285524.1 Ostreococcus tauri isolate RCC1112 chloroplast, complete genome
+Length=67826
+
+ Score = 449 bits (243),  Expect = 1e-121
+ Identities = 275/291 (95%), Gaps = 0/291 (0%)
+ Strand=Plus/Plus
+
+Query  1    ATATCGTTCTTAAGCTTTGATAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCAT  60
+            |||||||| |||||||| |||||||||||||| |||||||||||||||||||| ||||||
+Sbjct  272  ATATCGTTTTTAAGCTTAGATAAATCAAGCCCGTTTGGTCCACGAAGTGGCTCCACCCAT  331
+
+Query  61   GGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGT  120
+            |||||||||||||||||||||||||| || |||||||| |||||||| |||||||| || 
+Sbjct  332  GGAGCACGCATATCCCAGAAACGCATAGTTTCACCACCAAAGATAATCTCTCCAGTTGGC  391
+
+Query  121  GAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCT  180
+            |||||||||||||||||||||||||||||||||||||||||||||||||| |||||||||
+Sbjct  392  GAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATATTTGCTCCT  451
+
+Query  181  AAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTT  240
+            ||||||||||||||||||||||||||||||||||||||||| || || ||||||||||| 
+Sbjct  452  AAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGCGAAGCTTCTGGTCCAGTC  511
+
+Query  241  GGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAATACA  291
+            ||||||||||| |||||||||||||||||||||||||||||||||||||||
+Sbjct  512  GGTCCAAAGAATTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAATACA  562
+
+
+>KF285523.1 Ostreococcus tauri isolate RCC1110 chloroplast, complete genome
+Length=71674
+
+ Score = 449 bits (243),  Expect = 1e-121
+ Identities = 275/291 (95%), Gaps = 0/291 (0%)
+ Strand=Plus/Plus
+
+Query  1    ATATCGTTCTTAAGCTTTGATAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCAT  60
+            |||||||| |||||||| |||||||||||||| |||||||||||||||||||| ||||||
+Sbjct  272  ATATCGTTTTTAAGCTTAGATAAATCAAGCCCGTTTGGTCCACGAAGTGGCTCCACCCAT  331
+
+Query  61   GGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGT  120
+            |||||||||||||||||||||||||| || |||||||| |||||||| |||||||| || 
+Sbjct  332  GGAGCACGCATATCCCAGAAACGCATAGTTTCACCACCAAAGATAATCTCTCCAGTTGGC  391
+
+Query  121  GAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCT  180
+            |||||||||||||||||||||||||||||||||||||||||||||||||| |||||||||
+Sbjct  392  GAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATATTTGCTCCT  451
+
+Query  181  AAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTT  240
+            ||||||||||||||||||||||||||||||||||||||||| || || ||||||||||| 
+Sbjct  452  AAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGCGAAGCTTCTGGTCCAGTC  511
+
+Query  241  GGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAATACA  291
+            ||||||||||| |||||||||||||||||||||||||||||||||||||||
+Sbjct  512  GGTCCAAAGAATTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAATACA  562
+
+
+>KC990831.1 Ostreococcus tauri chloroplast, complete genome
+Length=71672
+
+ Score = 449 bits (243),  Expect = 1e-121
+ Identities = 275/291 (95%), Gaps = 0/291 (0%)
+ Strand=Plus/Plus
+
+Query  1    ATATCGTTCTTAAGCTTTGATAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCAT  60
+            |||||||| |||||||| |||||||||||||| |||||||||||||||||||| ||||||
+Sbjct  272  ATATCGTTTTTAAGCTTAGATAAATCAAGCCCGTTTGGTCCACGAAGTGGCTCCACCCAT  331
+
+Query  61   GGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGT  120
+            |||||||||||||||||||||||||| || |||||||| |||||||| |||||||| || 
+Sbjct  332  GGAGCACGCATATCCCAGAAACGCATAGTTTCACCACCAAAGATAATCTCTCCAGTTGGC  391
+
+Query  121  GAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCT  180
+            |||||||||||||||||||||||||||||||||||||||||||||||||| |||||||||
+Sbjct  392  GAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATATTTGCTCCT  451
+
+Query  181  AAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTT  240
+            ||||||||||||||||||||||||||||||||||||||||| || || ||||||||||| 
+Sbjct  452  AAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGCGAAGCTTCTGGTCCAGTC  511
+
+Query  241  GGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAATACA  291
+            ||||||||||| |||||||||||||||||||||||||||||||||||||||
+Sbjct  512  GGTCCAAAGAATTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAATACA  562
+
+
+>NC_008289.1 Ostreococcus tauri chloroplast, complete genome
+ CR954199.2 Ostreococcus tauri chloroplast, complete genome
+Length=71666
+
+ Score = 449 bits (243),  Expect = 1e-121
+ Identities = 275/291 (95%), Gaps = 0/291 (0%)
+ Strand=Plus/Plus
+
+Query  1    ATATCGTTCTTAAGCTTTGATAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCAT  60
+            |||||||| |||||||| |||||||||||||| |||||||||||||||||||| ||||||
+Sbjct  272  ATATCGTTTTTAAGCTTAGATAAATCAAGCCCGTTTGGTCCACGAAGTGGCTCCACCCAT  331
+
+Query  61   GGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGT  120
+            |||||||||||||||||||||||||| || |||||||| |||||||| |||||||| || 
+Sbjct  332  GGAGCACGCATATCCCAGAAACGCATAGTTTCACCACCAAAGATAATCTCTCCAGTTGGC  391
+
+Query  121  GAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCT  180
+            |||||||||||||||||||||||||||||||||||||||||||||||||| |||||||||
+Sbjct  392  GAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATATTTGCTCCT  451
+
+Query  181  AAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTT  240
+            ||||||||||||||||||||||||||||||||||||||||| || || ||||||||||| 
+Sbjct  452  AAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGCGAAGCTTCTGGTCCAGTC  511
+
+Query  241  GGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAATACA  291
+            ||||||||||| |||||||||||||||||||||||||||||||||||||||
+Sbjct  512  GGTCCAAAGAATTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAATACA  562
+
+
+>NC_024811.1 Bathycoccus prasinos chloroplast, complete genome
+ FO082259.2 Bathycoccus prasinos genomic : Chloroplast
+Length=72700
+
+ Score = 425 bits (230),  Expect = 2e-114
+ Identities = 266/284 (94%), Gaps = 0/284 (0%)
+ Strand=Plus/Plus
+
+Query  1      ATATCGTTCTTAAGCTTTGATAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCAT  60
+              ||||||||||| || ||||||||||||||||| |||||||||||||||||||| ||||||
+Sbjct  60368  ATATCGTTCTTGAGTTTTGATAAATCAAGCCCGTTTGGTCCACGAAGTGGCTCAACCCAT  60427
+
+Query  61     GGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGT  120
+              |||||||||||||||||||||||||| || || ||||||||||||||||||||||| |||
+Sbjct  60428  GGAGCACGCATATCCCAGAAACGCATAGTTTCTCCACCGAAGATAATTTCTCCAGTTGGT  60487
+
+Query  121    GAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCT  180
+              |||||||| ||||| |||||||||||||||||||||||||| ||||||||||||||||||
+Sbjct  60488  GAACGCATGAGGTATTTACCTAATCCAGTTGGTCCCTGTGCTGAAGCAATGTTTGCTCCT  60547
+
+Query  181    AAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTT  240
+              ||||| ||||||||||| ||||| |||||||| ||||||||||| |||||||||||||||
+Sbjct  60548  AAACGCTGGTCACGAACGAGGAATGTAAATGCCTGTGCTTGTGAAGCCTCTGGTCCAGTT  60607
+
+Query  241    GGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCATAC  284
+              ||||||||||| || |||||||||||||||||||||||||||||
+Sbjct  60608  GGTCCAAAGAATTCTGAAGGGTAAACAGTGTTGTTAAACCATAC  60651
+
+
+>NC_012575.1 Micromonas sp. RCC299 chloroplast, complete genome
+ FJ858267.1 Micromonas sp. RCC299 chloroplast, complete genome
+Length=72585
+
+ Score = 381 bits (206),  Expect = 5e-101
+ Identities = 259/285 (91%), Gaps = 2/285 (1%)
+ Strand=Plus/Minus
+
+Query  7     TTCTTAAGCTTTGATAA-ATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGC  65
+             ||||||||||| | |||  ||||| || ||||||||||||||||||||   |||||||||
+Sbjct  4103  TTCTTAAGCTTAG-TAAGGTCAAGTCCGTTTGGTCCACGAAGTGGCTCAGTCCATGGAGC  4045
+
+Query  66    ACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACG  125
+             ||||||||||||||||||||| || || |||||||||||||||||||| || ||||||||
+Sbjct  4044  ACGCATATCCCAGAAACGCATAGTTTCTCCACCGAAGATAATTTCTCCTGTTGGTGAACG  3985
+
+Query  126   CATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACG  185
+             ||||||||||||||||||||||||||| || |||||||||||||||||||||||||||||
+Sbjct  3984  CATAAGGTACTTACCTAATCCAGTTGGACCTTGTGCAGAAGCAATGTTTGCTCCTAAACG  3925
+
+Query  186   TTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCC  245
+              |||||||| |||||||| ||||||||||| |||||||| || |||||||||||||||||
+Sbjct  3924  CTGGTCACGTACAAGGAATGTAAATGCTTGAGCTTGTGAAGCTTCTGGTCCAGTTGGTCC  3865
+
+Query  246   AAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAATAC  290
+             ||||||||| |||||||| |||||||||||||||||||| | |||
+Sbjct  3864  AAAGAACTCCGAAGGGTATACAGTGTTGTTAAACCATACCATTAC  3820
+
+
+>ON844105.1 Emiliania huxleyi strain CCMP371 plastid, complete genome
+Length=105301
+
+ Score = 279 bits (151),  Expect = 2e-70
+ Identities = 231/271 (85%), Gaps = 0/271 (0%)
+ Strand=Plus/Plus
+
+Query  21     TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+              |||||| |  || ||||| |||||||||||||| ||||| ||||||||||||||||||||
+Sbjct  45129  TAAATCTAATCCGTTTGGACCACGAAGTGGCTCAACCCAAGGAGCACGCATATCCCAGAA  45188
+
+Query  81     ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+              ||||||||||||||||||||||||||| ||||||| ||| |||||||| |||||||||||
+Sbjct  45189  ACGCATTGTCTCACCACCGAAGATAATCTCTCCAGAAGGCGAACGCATTAGGTACTTACC  45248
+
+Query  141    TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+              ||| || ||||| || || || || |||| |||||| ||||||||||||||||| || ||
+Sbjct  45249  TAAACCTGTTGGACCTTGCGCTGATGCAACGTTTGCACCTAAACGTTGGTCACGTACTAG  45308
+
+Query  201    GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+              ||| ||||| ||||||| ||| || || || || || ||||||||| ||||||||   ||
+Sbjct  45309  GAATGTAAAAGCTTGTGATTGCGAAGCTTCAGGACCTGTTGGTCCATAGAACTCACTTGG  45368
+
+Query  261    GTAAACAGTGTTGTTAAACCATACAAATACA  291
+              |||| ||||||||||  |||| ||||| |||
+Sbjct  45369  GTAAGCAGTGTTGTTGTACCAAACAAAAACA  45399
+
+
+>ON844104.1 Emiliania huxleyi strain CS-369 plastid, complete genome
+Length=107529
+
+ Score = 279 bits (151),  Expect = 2e-70
+ Identities = 231/271 (85%), Gaps = 0/271 (0%)
+ Strand=Plus/Plus
+
+Query  21     TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+              |||||| |  || ||||| |||||||||||||| ||||| ||||||||||||||||||||
+Sbjct  46748  TAAATCTAATCCGTTTGGACCACGAAGTGGCTCAACCCAAGGAGCACGCATATCCCAGAA  46807
+
+Query  81     ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+              ||||||||||||||||||||||||||| ||||||| ||| |||||||| |||||||||||
+Sbjct  46808  ACGCATTGTCTCACCACCGAAGATAATCTCTCCAGAAGGCGAACGCATTAGGTACTTACC  46867
+
+Query  141    TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+              ||| || ||||| || || || || |||| |||||| ||||||||||||||||| || ||
+Sbjct  46868  TAAACCTGTTGGACCTTGCGCTGATGCAACGTTTGCACCTAAACGTTGGTCACGTACTAG  46927
+
+Query  201    GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+              ||| ||||| ||||||| ||| || || || || || ||||||||| ||||||||   ||
+Sbjct  46928  GAATGTAAAAGCTTGTGATTGCGAAGCTTCAGGACCTGTTGGTCCATAGAACTCACTTGG  46987
+
+Query  261    GTAAACAGTGTTGTTAAACCATACAAATACA  291
+              |||| ||||||||||  |||| ||||| |||
+Sbjct  46988  GTAAGCAGTGTTGTTGTACCAAACAAAAACA  47018
+
+
+>ON844102.1 Emiliania huxleyi strain BOF92 plastid, complete genome
+Length=107531
+
+ Score = 279 bits (151),  Expect = 2e-70
+ Identities = 231/271 (85%), Gaps = 0/271 (0%)
+ Strand=Plus/Plus
+
+Query  21     TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+              |||||| |  || ||||| |||||||||||||| ||||| ||||||||||||||||||||
+Sbjct  46750  TAAATCTAATCCGTTTGGACCACGAAGTGGCTCAACCCAAGGAGCACGCATATCCCAGAA  46809
+
+Query  81     ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+              ||||||||||||||||||||||||||| ||||||| ||| |||||||| |||||||||||
+Sbjct  46810  ACGCATTGTCTCACCACCGAAGATAATCTCTCCAGAAGGCGAACGCATTAGGTACTTACC  46869
+
+Query  141    TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+              ||| || ||||| || || || || |||| |||||| ||||||||||||||||| || ||
+Sbjct  46870  TAAACCTGTTGGACCTTGCGCTGATGCAACGTTTGCACCTAAACGTTGGTCACGTACTAG  46929
+
+Query  201    GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+              ||| ||||| ||||||| ||| || || || || || ||||||||| ||||||||   ||
+Sbjct  46930  GAATGTAAAAGCTTGTGATTGCGAAGCTTCAGGACCTGTTGGTCCATAGAACTCACTTGG  46989
+
+Query  261    GTAAACAGTGTTGTTAAACCATACAAATACA  291
+              |||| ||||||||||  |||| ||||| |||
+Sbjct  46990  GTAAGCAGTGTTGTTGTACCAAACAAAAACA  47020
+
+
+>OL703603.2 Emiliania huxleyi strain RCC4028 plastid, complete genome
+Length=105259
+
+ Score = 279 bits (151),  Expect = 2e-70
+ Identities = 231/271 (85%), Gaps = 0/271 (0%)
+ Strand=Plus/Plus
+
+Query  21     TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+              |||||| |  || ||||| |||||||||||||| ||||| ||||||||||||||||||||
+Sbjct  65937  TAAATCTAATCCGTTTGGACCACGAAGTGGCTCAACCCAAGGAGCACGCATATCCCAGAA  65996
+
+Query  81     ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+              ||||||||||||||||||||||||||| ||||||| ||| |||||||| |||||||||||
+Sbjct  65997  ACGCATTGTCTCACCACCGAAGATAATCTCTCCAGAAGGCGAACGCATTAGGTACTTACC  66056
+
+Query  141    TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+              ||| || ||||| || || || || |||| |||||| ||||||||||||||||| || ||
+Sbjct  66057  TAAACCTGTTGGACCTTGCGCTGATGCAACGTTTGCACCTAAACGTTGGTCACGTACTAG  66116
+
+Query  201    GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+              ||| ||||| ||||||| ||| || || || || || ||||||||| ||||||||   ||
+Sbjct  66117  GAATGTAAAAGCTTGTGATTGCGAAGCTTCAGGACCTGTTGGTCCATAGAACTCACTTGG  66176
+
+Query  261    GTAAACAGTGTTGTTAAACCATACAAATACA  291
+              |||| ||||||||||  |||| ||||| |||
+Sbjct  66177  GTAAGCAGTGTTGTTGTACCAAACAAAAACA  66207
+
+
+>OL703611.1 Gephyrocapsa parvula strain RCC4034 plastid, complete genome
+Length=105315
+
+ Score = 279 bits (151),  Expect = 2e-70
+ Identities = 231/271 (85%), Gaps = 0/271 (0%)
+ Strand=Plus/Plus
+
+Query  21     TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+              |||||| |  || ||||| |||||||||||||| ||||| ||||||||||||||||||||
+Sbjct  65982  TAAATCTAATCCGTTTGGACCACGAAGTGGCTCAACCCAAGGAGCACGCATATCCCAGAA  66041
+
+Query  81     ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+              ||||||||||||||||||||||||||| ||||||| ||| |||||||| |||||||||||
+Sbjct  66042  ACGCATTGTCTCACCACCGAAGATAATCTCTCCAGAAGGCGAACGCATTAGGTACTTACC  66101
+
+Query  141    TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+              ||| || ||||| || || || || |||| |||||| ||||||||||||||||| || ||
+Sbjct  66102  TAAACCTGTTGGACCTTGCGCTGATGCAACGTTTGCACCTAAACGTTGGTCACGTACTAG  66161
+
+Query  201    GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+              ||| ||||| ||||||| ||| || || || || || ||||||||| ||||||||   ||
+Sbjct  66162  GAATGTAAAAGCTTGTGATTGCGAAGCTTCAGGACCTGTTGGTCCATAGAACTCACTTGG  66221
+
+Query  261    GTAAACAGTGTTGTTAAACCATACAAATACA  291
+              |||| ||||||||||  |||| ||||| |||
+Sbjct  66222  GTAAGCAGTGTTGTTGTACCAAACAAAAACA  66252
+
+
+>NC_063785.1 Gephyrocapsa parvula strain RCC4033 plastid, complete genome
+ OL703610.1 Gephyrocapsa parvula strain RCC4033 plastid, complete genome
+Length=105309
+
+ Score = 279 bits (151),  Expect = 2e-70
+ Identities = 231/271 (85%), Gaps = 0/271 (0%)
+ Strand=Plus/Plus
+
+Query  21     TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+              |||||| |  || ||||| |||||||||||||| ||||| ||||||||||||||||||||
+Sbjct  65988  TAAATCTAATCCGTTTGGACCACGAAGTGGCTCAACCCAAGGAGCACGCATATCCCAGAA  66047
+
+Query  81     ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+              ||||||||||||||||||||||||||| ||||||| ||| |||||||| |||||||||||
+Sbjct  66048  ACGCATTGTCTCACCACCGAAGATAATCTCTCCAGAAGGCGAACGCATTAGGTACTTACC  66107
+
+Query  141    TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+              ||| || ||||| || || || || |||| |||||| ||||||||||||||||| || ||
+Sbjct  66108  TAAACCTGTTGGACCTTGCGCTGATGCAACGTTTGCACCTAAACGTTGGTCACGTACTAG  66167
+
+Query  201    GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+              ||| ||||| ||||||| ||| || || || || || ||||||||| ||||||||   ||
+Sbjct  66168  GAATGTAAAAGCTTGTGATTGCGAAGCTTCAGGACCTGTTGGTCCATAGAACTCACTTGG  66227
+
+Query  261    GTAAACAGTGTTGTTAAACCATACAAATACA  291
+              |||| ||||||||||  |||| ||||| |||
+Sbjct  66228  GTAAGCAGTGTTGTTGTACCAAACAAAAACA  66258
+
+
+>NC_063784.1 Gephyrocapsa ericsonii strain RCC4032 plastid, complete genome
+ OL703609.1 Gephyrocapsa ericsonii strain RCC4032 plastid, complete genome
+Length=105307
+
+ Score = 279 bits (151),  Expect = 2e-70
+ Identities = 231/271 (85%), Gaps = 0/271 (0%)
+ Strand=Plus/Plus
+
+Query  21     TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+              |||||| |  || ||||| |||||||||||||| ||||| ||||||||||||||||||||
+Sbjct  65985  TAAATCTAATCCGTTTGGACCACGAAGTGGCTCAACCCAAGGAGCACGCATATCCCAGAA  66044
+
+Query  81     ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+              ||||||||||||||||||||||||||| ||||||| ||| |||||||| |||||||||||
+Sbjct  66045  ACGCATTGTCTCACCACCGAAGATAATCTCTCCAGAAGGCGAACGCATTAGGTACTTACC  66104
+
+Query  141    TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+              ||| || ||||| || || || || |||| |||||| ||||||||||||||||| || ||
+Sbjct  66105  TAAACCTGTTGGACCTTGCGCTGATGCAACGTTTGCACCTAAACGTTGGTCACGTACTAG  66164
+
+Query  201    GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+              ||| ||||| ||||||| ||| || || || || || ||||||||| ||||||||   ||
+Sbjct  66165  GAATGTAAAAGCTTGTGATTGCGAAGCTTCAGGACCTGTTGGTCCATAGAACTCACTTGG  66224
+
+Query  261    GTAAACAGTGTTGTTAAACCATACAAATACA  291
+              |||| ||||||||||  |||| ||||| |||
+Sbjct  66225  GTAAGCAGTGTTGTTGTACCAAACAAAAACA  66255
+
+
+>NC_063783.1 Gephyrocapsa muellerae strain RCC3370 plastid, complete genome
+ OL703608.1 Gephyrocapsa muellerae strain RCC3370 plastid, complete genome
+Length=107034
+
+ Score = 279 bits (151),  Expect = 2e-70
+ Identities = 231/271 (85%), Gaps = 0/271 (0%)
+ Strand=Plus/Plus
+
+Query  21     TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+              |||||| |  || ||||| |||||||||||||| ||||| ||||||||||||||||||||
+Sbjct  67713  TAAATCTAATCCGTTTGGACCACGAAGTGGCTCAACCCAAGGAGCACGCATATCCCAGAA  67772
+
+Query  81     ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+              ||||||||||||||||||||||||||| ||||||| ||| |||||||| |||||||||||
+Sbjct  67773  ACGCATTGTCTCACCACCGAAGATAATCTCTCCAGAAGGCGAACGCATTAGGTACTTACC  67832
+
+Query  141    TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+              ||| || ||||| || || || || |||| |||||| ||||||||||||||||| || ||
+Sbjct  67833  TAAACCTGTTGGACCTTGCGCTGATGCAACGTTTGCACCTAAACGTTGGTCACGTACTAG  67892
+
+Query  201    GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+              ||| ||||| ||||||| ||| || || || || || ||||||||| ||||||||   ||
+Sbjct  67893  GAATGTAAAAGCTTGTGATTGCGAAGCTTCAGGACCTGTTGGTCCATAGAACTCACTTGG  67952
+
+Query  261    GTAAACAGTGTTGTTAAACCATACAAATACA  291
+              |||| ||||||||||  |||| ||||| |||
+Sbjct  67953  GTAAGCAGTGTTGTTGTACCAAACAAAAACA  67983
+
+
+>NC_063782.1 Gephyrocapsa oceanica strain RCC1296 plastid, complete genome
+ OL703606.1 Gephyrocapsa oceanica strain RCC1296 plastid, complete genome
+Length=107088
+
+ Score = 279 bits (151),  Expect = 2e-70
+ Identities = 231/271 (85%), Gaps = 0/271 (0%)
+ Strand=Plus/Plus
+
+Query  21     TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+              |||||| |  || ||||| |||||||||||||| ||||| ||||||||||||||||||||
+Sbjct  65986  TAAATCTAATCCGTTTGGACCACGAAGTGGCTCAACCCAAGGAGCACGCATATCCCAGAA  66045
+
+Query  81     ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+              ||||||||||||||||||||||||||| ||||||| ||| |||||||| |||||||||||
+Sbjct  66046  ACGCATTGTCTCACCACCGAAGATAATCTCTCCAGAAGGCGAACGCATTAGGTACTTACC  66105
+
+Query  141    TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+              ||| || ||||| || || || || |||| |||||| ||||||||||||||||| || ||
+Sbjct  66106  TAAACCTGTTGGACCTTGCGCTGATGCAACGTTTGCACCTAAACGTTGGTCACGTACTAG  66165
+
+Query  201    GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+              ||| ||||| ||||||| ||| || || || || || ||||||||| ||||||||   ||
+Sbjct  66166  GAATGTAAAAGCTTGTGATTGCGAAGCTTCAGGACCTGTTGGTCCATAGAACTCACTTGG  66225
+
+Query  261    GTAAACAGTGTTGTTAAACCATACAAATACA  291
+              |||| ||||||||||  |||| ||||| |||
+Sbjct  66226  GTAAGCAGTGTTGTTGTACCAAACAAAAACA  66256
+
+
+>OL703605.1 Emiliania huxleyi strain Van556 plastid, complete genome
+Length=107037
+
+ Score = 279 bits (151),  Expect = 2e-70
+ Identities = 231/271 (85%), Gaps = 0/271 (0%)
+ Strand=Plus/Plus
+
+Query  21     TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+              |||||| |  || ||||| |||||||||||||| ||||| ||||||||||||||||||||
+Sbjct  67716  TAAATCTAATCCGTTTGGACCACGAAGTGGCTCAACCCAAGGAGCACGCATATCCCAGAA  67775
+
+Query  81     ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+              ||||||||||||||||||||||||||| ||||||| ||| |||||||| |||||||||||
+Sbjct  67776  ACGCATTGTCTCACCACCGAAGATAATCTCTCCAGAAGGCGAACGCATTAGGTACTTACC  67835
+
+Query  141    TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+              ||| || ||||| || || || || |||| |||||| ||||||||||||||||| || ||
+Sbjct  67836  TAAACCTGTTGGACCTTGCGCTGATGCAACGTTTGCACCTAAACGTTGGTCACGTACTAG  67895
+
+Query  201    GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+              ||| ||||| ||||||| ||| || || || || || ||||||||| ||||||||   ||
+Sbjct  67896  GAATGTAAAAGCTTGTGATTGCGAAGCTTCAGGACCTGTTGGTCCATAGAACTCACTTGG  67955
+
+Query  261    GTAAACAGTGTTGTTAAACCATACAAATACA  291
+              |||| ||||||||||  |||| ||||| |||
+Sbjct  67956  GTAAGCAGTGTTGTTGTACCAAACAAAAACA  67986
+
+
+>OL703604.1 Emiliania huxleyi strain RCC4030 plastid, complete genome
+Length=105302
+
+ Score = 279 bits (151),  Expect = 2e-70
+ Identities = 231/271 (85%), Gaps = 0/271 (0%)
+ Strand=Plus/Plus
+
+Query  21     TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+              |||||| |  || ||||| |||||||||||||| ||||| ||||||||||||||||||||
+Sbjct  65980  TAAATCTAATCCGTTTGGACCACGAAGTGGCTCAACCCAAGGAGCACGCATATCCCAGAA  66039
+
+Query  81     ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+              ||||||||||||||||||||||||||| ||||||| ||| |||||||| |||||||||||
+Sbjct  66040  ACGCATTGTCTCACCACCGAAGATAATCTCTCCAGAAGGCGAACGCATTAGGTACTTACC  66099
+
+Query  141    TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+              ||| || ||||| || || || || |||| |||||| ||||||||||||||||| || ||
+Sbjct  66100  TAAACCTGTTGGACCTTGCGCTGATGCAACGTTTGCACCTAAACGTTGGTCACGTACTAG  66159
+
+Query  201    GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+              ||| ||||| ||||||| ||| || || || || || ||||||||| ||||||||   ||
+Sbjct  66160  GAATGTAAAAGCTTGTGATTGCGAAGCTTCAGGACCTGTTGGTCCATAGAACTCACTTGG  66219
+
+Query  261    GTAAACAGTGTTGTTAAACCATACAAATACA  291
+              |||| ||||||||||  |||| ||||| |||
+Sbjct  66220  GTAAGCAGTGTTGTTGTACCAAACAAAAACA  66250
+
+
+>OL703602.1 Emiliania huxleyi strain RCC4002 plastid, complete genome
+Length=105310
+
+ Score = 279 bits (151),  Expect = 2e-70
+ Identities = 231/271 (85%), Gaps = 0/271 (0%)
+ Strand=Plus/Plus
+
+Query  21     TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+              |||||| |  || ||||| |||||||||||||| ||||| ||||||||||||||||||||
+Sbjct  65989  TAAATCTAATCCGTTTGGACCACGAAGTGGCTCAACCCAAGGAGCACGCATATCCCAGAA  66048
+
+Query  81     ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+              ||||||||||||||||||||||||||| ||||||| ||| |||||||| |||||||||||
+Sbjct  66049  ACGCATTGTCTCACCACCGAAGATAATCTCTCCAGAAGGCGAACGCATTAGGTACTTACC  66108
+
+Query  141    TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+              ||| || ||||| || || || || |||| |||||| ||||||||||||||||| || ||
+Sbjct  66109  TAAACCTGTTGGACCTTGCGCTGATGCAACGTTTGCACCTAAACGTTGGTCACGTACTAG  66168
+
+Query  201    GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+              ||| ||||| ||||||| ||| || || || || || ||||||||| ||||||||   ||
+Sbjct  66169  GAATGTAAAAGCTTGTGATTGCGAAGCTTCAGGACCTGTTGGTCCATAGAACTCACTTGG  66228
+
+Query  261    GTAAACAGTGTTGTTAAACCATACAAATACA  291
+              |||| ||||||||||  |||| ||||| |||
+Sbjct  66229  GTAAGCAGTGTTGTTGTACCAAACAAAAACA  66259
+
+
+>OL703601.1 Emiliania huxleyi strain RCC1253 plastid, complete genome
+Length=109215
+
+ Score = 279 bits (151),  Expect = 2e-70
+ Identities = 231/271 (85%), Gaps = 0/271 (0%)
+ Strand=Plus/Plus
+
+Query  21     TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+              |||||| |  || ||||| |||||||||||||| ||||| ||||||||||||||||||||
+Sbjct  69894  TAAATCTAATCCGTTTGGACCACGAAGTGGCTCAACCCAAGGAGCACGCATATCCCAGAA  69953
+
+Query  81     ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+              ||||||||||||||||||||||||||| ||||||| ||| |||||||| |||||||||||
+Sbjct  69954  ACGCATTGTCTCACCACCGAAGATAATCTCTCCAGAAGGCGAACGCATTAGGTACTTACC  70013
+
+Query  141    TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+              ||| || ||||| || || || || |||| |||||| ||||||||||||||||| || ||
+Sbjct  70014  TAAACCTGTTGGACCTTGCGCTGATGCAACGTTTGCACCTAAACGTTGGTCACGTACTAG  70073
+
+Query  201    GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+              ||| ||||| ||||||| ||| || || || || || ||||||||| ||||||||   ||
+Sbjct  70074  GAATGTAAAAGCTTGTGATTGCGAAGCTTCAGGACCTGTTGGTCCATAGAACTCACTTGG  70133
+
+Query  261    GTAAACAGTGTTGTTAAACCATACAAATACA  291
+              |||| ||||||||||  |||| ||||| |||
+Sbjct  70134  GTAAGCAGTGTTGTTGTACCAAACAAAAACA  70164
+
+
+>OL703600.1 Emiliania huxleyi strain RCC174 plastid, complete genome
+Length=108911
+
+ Score = 279 bits (151),  Expect = 2e-70
+ Identities = 231/271 (85%), Gaps = 0/271 (0%)
+ Strand=Plus/Plus
+
+Query  21     TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+              |||||| |  || ||||| |||||||||||||| ||||| ||||||||||||||||||||
+Sbjct  69590  TAAATCTAATCCGTTTGGACCACGAAGTGGCTCAACCCAAGGAGCACGCATATCCCAGAA  69649
+
+Query  81     ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+              ||||||||||||||||||||||||||| ||||||| ||| |||||||| |||||||||||
+Sbjct  69650  ACGCATTGTCTCACCACCGAAGATAATCTCTCCAGAAGGCGAACGCATTAGGTACTTACC  69709
+
+Query  141    TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+              ||| || ||||| || || || || |||| |||||| ||||||||||||||||| || ||
+Sbjct  69710  TAAACCTGTTGGACCTTGCGCTGATGCAACGTTTGCACCTAAACGTTGGTCACGTACTAG  69769
+
+Query  201    GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+              ||| ||||| ||||||| ||| || || || || || ||||||||| ||||||||   ||
+Sbjct  69770  GAATGTAAAAGCTTGTGATTGCGAAGCTTCAGGACCTGTTGGTCCATAGAACTCACTTGG  69829
+
+Query  261    GTAAACAGTGTTGTTAAACCATACAAATACA  291
+              |||| ||||||||||  |||| ||||| |||
+Sbjct  69830  GTAAGCAGTGTTGTTGTACCAAACAAAAACA  69860
+
+
+>OL703599.1 Emiliania huxleyi strain NZEH plastid, complete genome
+Length=105307
+
+ Score = 279 bits (151),  Expect = 2e-70
+ Identities = 231/271 (85%), Gaps = 0/271 (0%)
+ Strand=Plus/Plus
+
+Query  21     TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+              |||||| |  || ||||| |||||||||||||| ||||| ||||||||||||||||||||
+Sbjct  65986  TAAATCTAATCCGTTTGGACCACGAAGTGGCTCAACCCAAGGAGCACGCATATCCCAGAA  66045
+
+Query  81     ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+              ||||||||||||||||||||||||||| ||||||| ||| |||||||| |||||||||||
+Sbjct  66046  ACGCATTGTCTCACCACCGAAGATAATCTCTCCAGAAGGCGAACGCATTAGGTACTTACC  66105
+
+Query  141    TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+              ||| || ||||| || || || || |||| |||||| ||||||||||||||||| || ||
+Sbjct  66106  TAAACCTGTTGGACCTTGCGCTGATGCAACGTTTGCACCTAAACGTTGGTCACGTACTAG  66165
+
+Query  201    GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+              ||| ||||| ||||||| ||| || || || || || ||||||||| ||||||||   ||
+Sbjct  66166  GAATGTAAAAGCTTGTGATTGCGAAGCTTCAGGACCTGTTGGTCCATAGAACTCACTTGG  66225
+
+Query  261    GTAAACAGTGTTGTTAAACCATACAAATACA  291
+              |||| ||||||||||  |||| ||||| |||
+Sbjct  66226  GTAAGCAGTGTTGTTGTACCAAACAAAAACA  66256
+
+
+>OL703598.1 Emiliania huxleyi strain M217 plastid, complete genome
+Length=105293
+
+ Score = 279 bits (151),  Expect = 2e-70
+ Identities = 231/271 (85%), Gaps = 0/271 (0%)
+ Strand=Plus/Plus
+
+Query  21     TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+              |||||| |  || ||||| |||||||||||||| ||||| ||||||||||||||||||||
+Sbjct  65970  TAAATCTAATCCGTTTGGACCACGAAGTGGCTCAACCCAAGGAGCACGCATATCCCAGAA  66029
+
+Query  81     ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+              ||||||||||||||||||||||||||| ||||||| ||| |||||||| |||||||||||
+Sbjct  66030  ACGCATTGTCTCACCACCGAAGATAATCTCTCCAGAAGGCGAACGCATTAGGTACTTACC  66089
+
+Query  141    TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+              ||| || ||||| || || || || |||| |||||| ||||||||||||||||| || ||
+Sbjct  66090  TAAACCTGTTGGACCTTGCGCTGATGCAACGTTTGCACCTAAACGTTGGTCACGTACTAG  66149
+
+Query  201    GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+              ||| ||||| ||||||| ||| || || || || || ||||||||| ||||||||   ||
+Sbjct  66150  GAATGTAAAAGCTTGTGATTGCGAAGCTTCAGGACCTGTTGGTCCATAGAACTCACTTGG  66209
+
+Query  261    GTAAACAGTGTTGTTAAACCATACAAATACA  291
+              |||| ||||||||||  |||| ||||| |||
+Sbjct  66210  GTAAGCAGTGTTGTTGTACCAAACAAAAACA  66240
+
+
+>OL703597.1 Emiliania huxleyi strain L plastid, complete genome
+Length=107497
+
+ Score = 279 bits (151),  Expect = 2e-70
+ Identities = 231/271 (85%), Gaps = 0/271 (0%)
+ Strand=Plus/Plus
+
+Query  21     TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+              |||||| |  || ||||| |||||||||||||| ||||| ||||||||||||||||||||
+Sbjct  68176  TAAATCTAATCCGTTTGGACCACGAAGTGGCTCAACCCAAGGAGCACGCATATCCCAGAA  68235
+
+Query  81     ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+              ||||||||||||||||||||||||||| ||||||| ||| |||||||| |||||||||||
+Sbjct  68236  ACGCATTGTCTCACCACCGAAGATAATCTCTCCAGAAGGCGAACGCATTAGGTACTTACC  68295
+
+Query  141    TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+              ||| || ||||| || || || || |||| |||||| ||||||||||||||||| || ||
+Sbjct  68296  TAAACCTGTTGGACCTTGCGCTGATGCAACGTTTGCACCTAAACGTTGGTCACGTACTAG  68355
+
+Query  201    GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+              ||| ||||| ||||||| ||| || || || || || ||||||||| ||||||||   ||
+Sbjct  68356  GAATGTAAAAGCTTGTGATTGCGAAGCTTCAGGACCTGTTGGTCCATAGAACTCACTTGG  68415
+
+Query  261    GTAAACAGTGTTGTTAAACCATACAAATACA  291
+              |||| ||||||||||  |||| ||||| |||
+Sbjct  68416  GTAAGCAGTGTTGTTGTACCAAACAAAAACA  68446
+
+
+>OL703596.1 Emiliania huxleyi strain EH2 plastid, complete genome
+Length=105304
+
+ Score = 279 bits (151),  Expect = 2e-70
+ Identities = 231/271 (85%), Gaps = 0/271 (0%)
+ Strand=Plus/Plus
+
+Query  21     TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+              |||||| |  || ||||| |||||||||||||| ||||| ||||||||||||||||||||
+Sbjct  65981  TAAATCTAATCCGTTTGGACCACGAAGTGGCTCAACCCAAGGAGCACGCATATCCCAGAA  66040
+
+Query  81     ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+              ||||||||||||||||||||||||||| ||||||| ||| |||||||| |||||||||||
+Sbjct  66041  ACGCATTGTCTCACCACCGAAGATAATCTCTCCAGAAGGCGAACGCATTAGGTACTTACC  66100
+
+Query  141    TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+              ||| || ||||| || || || || |||| |||||| ||||||||||||||||| || ||
+Sbjct  66101  TAAACCTGTTGGACCTTGCGCTGATGCAACGTTTGCACCTAAACGTTGGTCACGTACTAG  66160
+
+Query  201    GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+              ||| ||||| ||||||| ||| || || || || || ||||||||| ||||||||   ||
+Sbjct  66161  GAATGTAAAAGCTTGTGATTGCGAAGCTTCAGGACCTGTTGGTCCATAGAACTCACTTGG  66220
+
+Query  261    GTAAACAGTGTTGTTAAACCATACAAATACA  291
+              |||| ||||||||||  |||| ||||| |||
+Sbjct  66221  GTAAGCAGTGTTGTTGTACCAAACAAAAACA  66251
+
+
+>OL703595.1 Emiliania huxleyi strain CCMP379 plastid, complete genome
+Length=105309
+
+ Score = 279 bits (151),  Expect = 2e-70
+ Identities = 231/271 (85%), Gaps = 0/271 (0%)
+ Strand=Plus/Plus
+
+Query  21     TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+              |||||| |  || ||||| |||||||||||||| ||||| ||||||||||||||||||||
+Sbjct  65988  TAAATCTAATCCGTTTGGACCACGAAGTGGCTCAACCCAAGGAGCACGCATATCCCAGAA  66047
+
+Query  81     ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+              ||||||||||||||||||||||||||| ||||||| ||| |||||||| |||||||||||
+Sbjct  66048  ACGCATTGTCTCACCACCGAAGATAATCTCTCCAGAAGGCGAACGCATTAGGTACTTACC  66107
+
+Query  141    TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+              ||| || ||||| || || || || |||| |||||| ||||||||||||||||| || ||
+Sbjct  66108  TAAACCTGTTGGACCTTGCGCTGATGCAACGTTTGCACCTAAACGTTGGTCACGTACTAG  66167
+
+Query  201    GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+              ||| ||||| ||||||| ||| || || || || || ||||||||| ||||||||   ||
+Sbjct  66168  GAATGTAAAAGCTTGTGATTGCGAAGCTTCAGGACCTGTTGGTCCATAGAACTCACTTGG  66227
+
+Query  261    GTAAACAGTGTTGTTAAACCATACAAATACA  291
+              |||| ||||||||||  |||| ||||| |||
+Sbjct  66228  GTAAGCAGTGTTGTTGTACCAAACAAAAACA  66258
+
+
+>OL703594.1 Emiliania huxleyi strain CCMP371 plastid, complete genome
+Length=105301
+
+ Score = 279 bits (151),  Expect = 2e-70
+ Identities = 231/271 (85%), Gaps = 0/271 (0%)
+ Strand=Plus/Plus
+
+Query  21     TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+              |||||| |  || ||||| |||||||||||||| ||||| ||||||||||||||||||||
+Sbjct  65980  TAAATCTAATCCGTTTGGACCACGAAGTGGCTCAACCCAAGGAGCACGCATATCCCAGAA  66039
+
+Query  81     ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+              ||||||||||||||||||||||||||| ||||||| ||| |||||||| |||||||||||
+Sbjct  66040  ACGCATTGTCTCACCACCGAAGATAATCTCTCCAGAAGGCGAACGCATTAGGTACTTACC  66099
+
+Query  141    TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+              ||| || ||||| || || || || |||| |||||| ||||||||||||||||| || ||
+Sbjct  66100  TAAACCTGTTGGACCTTGCGCTGATGCAACGTTTGCACCTAAACGTTGGTCACGTACTAG  66159
+
+Query  201    GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+              ||| ||||| ||||||| ||| || || || || || ||||||||| ||||||||   ||
+Sbjct  66160  GAATGTAAAAGCTTGTGATTGCGAAGCTTCAGGACCTGTTGGTCCATAGAACTCACTTGG  66219
+
+Query  261    GTAAACAGTGTTGTTAAACCATACAAATACA  291
+              |||| ||||||||||  |||| ||||| |||
+Sbjct  66220  GTAAGCAGTGTTGTTGTACCAAACAAAAACA  66250
+
+
+>OL703593.1 Emiliania huxleyi strain AWI1516 plastid, complete genome
+Length=105298
+
+ Score = 279 bits (151),  Expect = 2e-70
+ Identities = 231/271 (85%), Gaps = 0/271 (0%)
+ Strand=Plus/Plus
+
+Query  21     TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+              |||||| |  || ||||| |||||||||||||| ||||| ||||||||||||||||||||
+Sbjct  65975  TAAATCTAATCCGTTTGGACCACGAAGTGGCTCAACCCAAGGAGCACGCATATCCCAGAA  66034
+
+Query  81     ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+              ||||||||||||||||||||||||||| ||||||| ||| |||||||| |||||||||||
+Sbjct  66035  ACGCATTGTCTCACCACCGAAGATAATCTCTCCAGAAGGCGAACGCATTAGGTACTTACC  66094
+
+Query  141    TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+              ||| || ||||| || || || || |||| |||||| ||||||||||||||||| || ||
+Sbjct  66095  TAAACCTGTTGGACCTTGCGCTGATGCAACGTTTGCACCTAAACGTTGGTCACGTACTAG  66154
+
+Query  201    GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+              ||| ||||| ||||||| ||| || || || || || ||||||||| ||||||||   ||
+Sbjct  66155  GAATGTAAAAGCTTGTGATTGCGAAGCTTCAGGACCTGTTGGTCCATAGAACTCACTTGG  66214
+
+Query  261    GTAAACAGTGTTGTTAAACCATACAAATACA  291
+              |||| ||||||||||  |||| ||||| |||
+Sbjct  66215  GTAAGCAGTGTTGTTGTACCAAACAAAAACA  66245
+
+
+>OL703592.1 Emiliania huxleyi strain ARC30-1 plastid, complete genome
+Length=107497
+
+ Score = 279 bits (151),  Expect = 2e-70
+ Identities = 231/271 (85%), Gaps = 0/271 (0%)
+ Strand=Plus/Plus
+
+Query  21     TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+              |||||| |  || ||||| |||||||||||||| ||||| ||||||||||||||||||||
+Sbjct  68176  TAAATCTAATCCGTTTGGACCACGAAGTGGCTCAACCCAAGGAGCACGCATATCCCAGAA  68235
+
+Query  81     ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+              ||||||||||||||||||||||||||| ||||||| ||| |||||||| |||||||||||
+Sbjct  68236  ACGCATTGTCTCACCACCGAAGATAATCTCTCCAGAAGGCGAACGCATTAGGTACTTACC  68295
+
+Query  141    TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+              ||| || ||||| || || || || |||| |||||| ||||||||||||||||| || ||
+Sbjct  68296  TAAACCTGTTGGACCTTGCGCTGATGCAACGTTTGCACCTAAACGTTGGTCACGTACTAG  68355
+
+Query  201    GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+              ||| ||||| ||||||| ||| || || || || || ||||||||| ||||||||   ||
+Sbjct  68356  GAATGTAAAAGCTTGTGATTGCGAAGCTTCAGGACCTGTTGGTCCATAGAACTCACTTGG  68415
+
+Query  261    GTAAACAGTGTTGTTAAACCATACAAATACA  291
+              |||| ||||||||||  |||| ||||| |||
+Sbjct  68416  GTAAGCAGTGTTGTTGTACCAAACAAAAACA  68446
+
+
+>OL703591.1 Emiliania huxleyi strain 92F plastid, complete genome
+Length=108901
+
+ Score = 279 bits (151),  Expect = 2e-70
+ Identities = 231/271 (85%), Gaps = 0/271 (0%)
+ Strand=Plus/Plus
+
+Query  21     TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+              |||||| |  || ||||| |||||||||||||| ||||| ||||||||||||||||||||
+Sbjct  69580  TAAATCTAATCCGTTTGGACCACGAAGTGGCTCAACCCAAGGAGCACGCATATCCCAGAA  69639
+
+Query  81     ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+              ||||||||||||||||||||||||||| ||||||| ||| |||||||| |||||||||||
+Sbjct  69640  ACGCATTGTCTCACCACCGAAGATAATCTCTCCAGAAGGCGAACGCATTAGGTACTTACC  69699
+
+Query  141    TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+              ||| || ||||| || || || || |||| |||||| ||||||||||||||||| || ||
+Sbjct  69700  TAAACCTGTTGGACCTTGCGCTGATGCAACGTTTGCACCTAAACGTTGGTCACGTACTAG  69759
+
+Query  201    GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+              ||| ||||| ||||||| ||| || || || || || ||||||||| ||||||||   ||
+Sbjct  69760  GAATGTAAAAGCTTGTGATTGCGAAGCTTCAGGACCTGTTGGTCCATAGAACTCACTTGG  69819
+
+Query  261    GTAAACAGTGTTGTTAAACCATACAAATACA  291
+              |||| ||||||||||  |||| ||||| |||
+Sbjct  69820  GTAAGCAGTGTTGTTGTACCAAACAAAAACA  69850
+
+
+>OL703590.1 Emiliania huxleyi strain 92E plastid, complete genome
+Length=105304
+
+ Score = 279 bits (151),  Expect = 2e-70
+ Identities = 231/271 (85%), Gaps = 0/271 (0%)
+ Strand=Plus/Plus
+
+Query  21     TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+              |||||| |  || ||||| |||||||||||||| ||||| ||||||||||||||||||||
+Sbjct  65983  TAAATCTAATCCGTTTGGACCACGAAGTGGCTCAACCCAAGGAGCACGCATATCCCAGAA  66042
+
+Query  81     ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+              ||||||||||||||||||||||||||| ||||||| ||| |||||||| |||||||||||
+Sbjct  66043  ACGCATTGTCTCACCACCGAAGATAATCTCTCCAGAAGGCGAACGCATTAGGTACTTACC  66102
+
+Query  141    TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+              ||| || ||||| || || || || |||| |||||| ||||||||||||||||| || ||
+Sbjct  66103  TAAACCTGTTGGACCTTGCGCTGATGCAACGTTTGCACCTAAACGTTGGTCACGTACTAG  66162
+
+Query  201    GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+              ||| ||||| ||||||| ||| || || || || || ||||||||| ||||||||   ||
+Sbjct  66163  GAATGTAAAAGCTTGTGATTGCGAAGCTTCAGGACCTGTTGGTCCATAGAACTCACTTGG  66222
+
+Query  261    GTAAACAGTGTTGTTAAACCATACAAATACA  291
+              |||| ||||||||||  |||| ||||| |||
+Sbjct  66223  GTAAGCAGTGTTGTTGTACCAAACAAAAACA  66253
+
+
+>OL691558.1 Emiliania huxleyi strain M219 plastid, partial genome
+Length=105281
+
+ Score = 279 bits (151),  Expect = 2e-70
+ Identities = 231/271 (85%), Gaps = 0/271 (0%)
+ Strand=Plus/Plus
+
+Query  21     TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+              |||||| |  || ||||| |||||||||||||| ||||| ||||||||||||||||||||
+Sbjct  65954  TAAATCTAATCCGTTTGGACCACGAAGTGGCTCAACCCAAGGAGCACGCATATCCCAGAA  66013
+
+Query  81     ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+              ||||||||||||||||||||||||||| ||||||| ||| |||||||| |||||||||||
+Sbjct  66014  ACGCATTGTCTCACCACCGAAGATAATCTCTCCAGAAGGCGAACGCATTAGGTACTTACC  66073
+
+Query  141    TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+              ||| || ||||| || || || || |||| |||||| ||||||||||||||||| || ||
+Sbjct  66074  TAAACCTGTTGGACCTTGCGCTGATGCAACGTTTGCACCTAAACGTTGGTCACGTACTAG  66133
+
+Query  201    GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+              ||| ||||| ||||||| ||| || || || || || ||||||||| ||||||||   ||
+Sbjct  66134  GAATGTAAAAGCTTGTGATTGCGAAGCTTCAGGACCTGTTGGTCCATAGAACTCACTTGG  66193
+
+Query  261    GTAAACAGTGTTGTTAAACCATACAAATACA  291
+              |||| ||||||||||  |||| ||||| |||
+Sbjct  66194  GTAAGCAGTGTTGTTGTACCAAACAAAAACA  66224
+
+
+>OL691557.1 Emiliania huxleyi strain B39 plastid, partial genome
+Length=106889
+
+ Score = 279 bits (151),  Expect = 2e-70
+ Identities = 231/271 (85%), Gaps = 0/271 (0%)
+ Strand=Plus/Plus
+
+Query  21     TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+              |||||| |  || ||||| |||||||||||||| ||||| ||||||||||||||||||||
+Sbjct  67740  TAAATCTAATCCGTTTGGACCACGAAGTGGCTCAACCCAAGGAGCACGCATATCCCAGAA  67799
+
+Query  81     ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+              ||||||||||||||||||||||||||| ||||||| ||| |||||||| |||||||||||
+Sbjct  67800  ACGCATTGTCTCACCACCGAAGATAATCTCTCCAGAAGGCGAACGCATTAGGTACTTACC  67859
+
+Query  141    TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+              ||| || ||||| || || || || |||| |||||| ||||||||||||||||| || ||
+Sbjct  67860  TAAACCTGTTGGACCTTGCGCTGATGCAACGTTTGCACCTAAACGTTGGTCACGTACTAG  67919
+
+Query  201    GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+              ||| ||||| ||||||| ||| || || || || || ||||||||| ||||||||   ||
+Sbjct  67920  GAATGTAAAAGCTTGTGATTGCGAAGCTTCAGGACCTGTTGGTCCATAGAACTCACTTGG  67979
+
+Query  261    GTAAACAGTGTTGTTAAACCATACAAATACA  291
+              |||| ||||||||||  |||| ||||| |||
+Sbjct  67980  GTAAGCAGTGTTGTTGTACCAAACAAAAACA  68010
+
+
+>OL691556.1 Emiliania huxleyi culture RCC:175 strain RCC175 plastid, complete 
+genome
+Length=107178
+
+ Score = 279 bits (151),  Expect = 2e-70
+ Identities = 231/271 (85%), Gaps = 0/271 (0%)
+ Strand=Plus/Plus
+
+Query  21     TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+              |||||| |  || ||||| |||||||||||||| ||||| ||||||||||||||||||||
+Sbjct  67857  TAAATCTAATCCGTTTGGACCACGAAGTGGCTCAACCCAAGGAGCACGCATATCCCAGAA  67916
+
+Query  81     ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+              ||||||||||||||||||||||||||| ||||||| ||| |||||||| |||||||||||
+Sbjct  67917  ACGCATTGTCTCACCACCGAAGATAATCTCTCCAGAAGGCGAACGCATTAGGTACTTACC  67976
+
+Query  141    TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+              ||| || ||||| || || || || |||| |||||| ||||||||||||||||| || ||
+Sbjct  67977  TAAACCTGTTGGACCTTGCGCTGATGCAACGTTTGCACCTAAACGTTGGTCACGTACTAG  68036
+
+Query  201    GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+              ||| ||||| ||||||| ||| || || || || || ||||||||| ||||||||   ||
+Sbjct  68037  GAATGTAAAAGCTTGTGATTGCGAAGCTTCAGGACCTGTTGGTCCATAGAACTCACTTGG  68096
+
+Query  261    GTAAACAGTGTTGTTAAACCATACAAATACA  291
+              |||| ||||||||||  |||| ||||| |||
+Sbjct  68097  GTAAGCAGTGTTGTTGTACCAAACAAAAACA  68127
+
+
+>JN022705.1 Emiliania huxleyi culture-collection CCMP:1516 plastid, complete 
+genome
+Length=105297
+
+ Score = 279 bits (151),  Expect = 2e-70
+ Identities = 231/271 (85%), Gaps = 0/271 (0%)
+ Strand=Plus/Plus
+
+Query  21     TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+              |||||| |  || ||||| |||||||||||||| ||||| ||||||||||||||||||||
+Sbjct  65975  TAAATCTAATCCGTTTGGACCACGAAGTGGCTCAACCCAAGGAGCACGCATATCCCAGAA  66034
+
+Query  81     ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+              ||||||||||||||||||||||||||| ||||||| ||| |||||||| |||||||||||
+Sbjct  66035  ACGCATTGTCTCACCACCGAAGATAATCTCTCCAGAAGGCGAACGCATTAGGTACTTACC  66094
+
+Query  141    TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+              ||| || ||||| || || || || |||| |||||| ||||||||||||||||| || ||
+Sbjct  66095  TAAACCTGTTGGACCTTGCGCTGATGCAACGTTTGCACCTAAACGTTGGTCACGTACTAG  66154
+
+Query  201    GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+              ||| ||||| ||||||| ||| || || || || || ||||||||| ||||||||   ||
+Sbjct  66155  GAATGTAAAAGCTTGTGATTGCGAAGCTTCAGGACCTGTTGGTCCATAGAACTCACTTGG  66214
+
+Query  261    GTAAACAGTGTTGTTAAACCATACAAATACA  291
+              |||| ||||||||||  |||| ||||| |||
+Sbjct  66215  GTAAGCAGTGTTGTTGTACCAAACAAAAACA  66245
+
+
+>NC_007288.1 Emiliania huxleyi chloroplast, complete genome
+ AY741371.1 Emiliania huxleyi strain CCMP 373 chloroplast, complete genome
+Length=105309
+
+ Score = 279 bits (151),  Expect = 2e-70
+ Identities = 231/271 (85%), Gaps = 0/271 (0%)
+ Strand=Plus/Plus
+
+Query  21     TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+              |||||| |  || ||||| |||||||||||||| ||||| ||||||||||||||||||||
+Sbjct  65985  TAAATCTAATCCGTTTGGACCACGAAGTGGCTCAACCCAAGGAGCACGCATATCCCAGAA  66044
+
+Query  81     ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+              ||||||||||||||||||||||||||| ||||||| ||| |||||||| |||||||||||
+Sbjct  66045  ACGCATTGTCTCACCACCGAAGATAATCTCTCCAGAAGGCGAACGCATTAGGTACTTACC  66104
+
+Query  141    TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+              ||| || ||||| || || || || |||| |||||| ||||||||||||||||| || ||
+Sbjct  66105  TAAACCTGTTGGACCTTGCGCTGATGCAACGTTTGCACCTAAACGTTGGTCACGTACTAG  66164
+
+Query  201    GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+              ||| ||||| ||||||| ||| || || || || || ||||||||| ||||||||   ||
+Sbjct  66165  GAATGTAAAAGCTTGTGATTGCGAAGCTTCAGGACCTGTTGGTCCATAGAACTCACTTGG  66224
+
+Query  261    GTAAACAGTGTTGTTAAACCATACAAATACA  291
+              |||| ||||||||||  |||| ||||| |||
+Sbjct  66225  GTAAGCAGTGTTGTTGTACCAAACAAAAACA  66255
+
+
+>AB158790.1 Gephyrocapsa oceanica plastid psbC mRNA for photosystem II CP43 
+protein, partial cds
+Length=1057
+
+ Score = 279 bits (151),  Expect = 2e-70
+ Identities = 231/271 (85%), Gaps = 0/271 (0%)
+ Strand=Plus/Minus
+
+Query  21    TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+             |||||| |  || ||||| |||||||||||||| ||||| ||||||||||||||||||||
+Sbjct  1009  TAAATCTAATCCGTTTGGACCACGAAGTGGCTCAACCCAAGGAGCACGCATATCCCAGAA  950
+
+Query  81    ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+             ||||||||||||||||||||||||||| ||||||| ||| |||||||| |||||||||||
+Sbjct  949   ACGCATTGTCTCACCACCGAAGATAATCTCTCCAGAAGGCGAACGCATTAGGTACTTACC  890
+
+Query  141   TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+             ||| || ||||| || || || || |||| |||||| ||||||||||||||||| || ||
+Sbjct  889   TAAACCTGTTGGACCTTGCGCTGATGCAACGTTTGCACCTAAACGTTGGTCACGTACTAG  830
+
+Query  201   GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+             ||| ||||| ||||||| ||| || || || || || ||||||||| ||||||||   ||
+Sbjct  829   GAATGTAAAAGCTTGTGATTGCGAAGCTTCAGGACCTGTTGGTCCATAGAACTCACTTGG  770
+
+Query  261   GTAAACAGTGTTGTTAAACCATACAAATACA  291
+             |||| ||||||||||  |||| ||||| |||
+Sbjct  769   GTAAGCAGTGTTGTTGTACCAAACAAAAACA  739
+
+
+>AY675523.1 Emiliania huxleyi photosystem II 44 kDa protein (psbC) gene, 
+complete cds; chloroplast
+Length=1416
+
+ Score = 279 bits (151),  Expect = 2e-70
+ Identities = 231/271 (85%), Gaps = 0/271 (0%)
+ Strand=Plus/Minus
+
+Query  21    TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+             |||||| |  || ||||| |||||||||||||| ||||| ||||||||||||||||||||
+Sbjct  1125  TAAATCTAATCCGTTTGGACCACGAAGTGGCTCAACCCAAGGAGCACGCATATCCCAGAA  1066
+
+Query  81    ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+             ||||||||||||||||||||||||||| ||||||| ||| |||||||| |||||||||||
+Sbjct  1065  ACGCATTGTCTCACCACCGAAGATAATCTCTCCAGAAGGCGAACGCATTAGGTACTTACC  1006
+
+Query  141   TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+             ||| || ||||| || || || || |||| |||||| ||||||||||||||||| || ||
+Sbjct  1005  TAAACCTGTTGGACCTTGCGCTGATGCAACGTTTGCACCTAAACGTTGGTCACGTACTAG  946
+
+Query  201   GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+             ||| ||||| ||||||| ||| || || || || || ||||||||| ||||||||   ||
+Sbjct  945   GAATGTAAAAGCTTGTGATTGCGAAGCTTCAGGACCTGTTGGTCCATAGAACTCACTTGG  886
+
+Query  261   GTAAACAGTGTTGTTAAACCATACAAATACA  291
+             |||| ||||||||||  |||| ||||| |||
+Sbjct  885   GTAAGCAGTGTTGTTGTACCAAACAAAAACA  855
+
+
+>OL703607.1 Gephyrocapsa oceanica strain RCC3711 plastid, complete genome
+Length=105599
+
+ Score = 278 bits (150),  Expect = 6e-70
+ Identities = 228/267 (85%), Gaps = 0/267 (0%)
+ Strand=Plus/Plus
+
+Query  21     TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+              |||||| |  || ||||| |||||||||||||| ||||| ||||||||||||||||||||
+Sbjct  66279  TAAATCTAATCCGTTTGGACCACGAAGTGGCTCAACCCAAGGAGCACGCATATCCCAGAA  66338
+
+Query  81     ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+              ||||||||||||||||||||||||||| ||||||| ||| |||||||| |||||||||||
+Sbjct  66339  ACGCATTGTCTCACCACCGAAGATAATCTCTCCAGAAGGCGAACGCATTAGGTACTTACC  66398
+
+Query  141    TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+              ||| || ||||| || || || || |||| |||||| ||||||||||||||||| || ||
+Sbjct  66399  TAAACCTGTTGGACCTTGCGCTGATGCAACGTTTGCACCTAAACGTTGGTCACGTACTAG  66458
+
+Query  201    GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+              ||| ||||| ||||||| ||| || || || || || ||||||||| ||||||||   ||
+Sbjct  66459  GAATGTAAAAGCTTGTGATTGCGAAGCTTCAGGACCTGTTGGTCCATAGAACTCACTTGG  66518
+
+Query  261    GTAAACAGTGTTGTTAAACCATACAAA  287
+              |||| ||||||||||  |||| |||||
+Sbjct  66519  GTAAGCAGTGTTGTTGTACCAAACAAA  66545
+
+
+>JX292161.1 Emiliania huxleyi photosystem II CP43 chlorophyll apoprotein 
+(psbC) gene, partial cds; chloroplast
+ JX292168.1 Emiliania huxleyi photosystem II CP43 chlorophyll apoprotein 
+(psbC) mRNA, partial cds; chloroplast
+Length=1405
+
+ Score = 274 bits (148),  Expect = 8e-69
+ Identities = 230/271 (85%), Gaps = 0/271 (0%)
+ Strand=Plus/Minus
+
+Query  21    TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+             |||||| |  || ||||| |||||||||||||| ||||| ||||||||||||||||||||
+Sbjct  1119  TAAATCTAATCCGTTTGGACCACGAAGTGGCTCAACCCAAGGAGCACGCATATCCCAGAA  1060
+
+Query  81    ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+             ||||||||| ||||||||||||||||| ||||||| ||| |||||||| |||||||||||
+Sbjct  1059  ACGCATTGTTTCACCACCGAAGATAATCTCTCCAGAAGGCGAACGCATTAGGTACTTACC  1000
+
+Query  141   TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+             ||| || ||||| || || || || |||| |||||| ||||||||||||||||| || ||
+Sbjct  999   TAAACCTGTTGGACCTTGCGCTGATGCAACGTTTGCACCTAAACGTTGGTCACGTACTAG  940
+
+Query  201   GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+             ||| ||||| ||||||| ||| || || || || || ||||||||| ||||||||   ||
+Sbjct  939   GAATGTAAAAGCTTGTGATTGCGAAGCTTCAGGACCTGTTGGTCCATAGAACTCACTTGG  880
+
+Query  261   GTAAACAGTGTTGTTAAACCATACAAATACA  291
+             |||| ||||||||||  |||| ||||| |||
+Sbjct  879   GTAAGCAGTGTTGTTGTACCAAACAAAAACA  849
+
+
+>ON844103.1 Emiliania huxleyi strain CCMP3266 plastid, complete genome
+Length=109012
+
+ Score = 268 bits (145),  Expect = 4e-67
+ Identities = 229/271 (85%), Gaps = 0/271 (0%)
+ Strand=Plus/Plus
+
+Query  21     TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+              |||||| |  |||||||| |||||||||||||| ||||| ||||||||||||||||||||
+Sbjct  45549  TAAATCTAATCCATTTGGACCACGAAGTGGCTCAACCCAAGGAGCACGCATATCCCAGAA  45608
+
+Query  81     ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+              |||||||||||||||||| |||||||| ||||||| ||| |||||||| |||||||||||
+Sbjct  45609  ACGCATTGTCTCACCACCAAAGATAATCTCTCCAGAAGGCGAACGCATTAGGTACTTACC  45668
+
+Query  141    TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+              ||| || ||||| || || || || ||||  ||||| ||||||||||||||||| || ||
+Sbjct  45669  TAAACCTGTTGGACCTTGCGCTGATGCAACATTTGCACCTAAACGTTGGTCACGTACTAG  45728
+
+Query  201    GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+              ||| ||||| ||||||| ||| || || || || || ||||||||| ||||||||   ||
+Sbjct  45729  GAATGTAAAAGCTTGTGATTGCGAAGCTTCAGGACCTGTTGGTCCATAGAACTCACTTGG  45788
+
+Query  261    GTAAACAGTGTTGTTAAACCATACAAATACA  291
+               ||| ||||||||||  |||| ||||| |||
+Sbjct  45789  ATAAGCAGTGTTGTTGTACCAAACAAAAACA  45819
+
+
+>OL322706.1 Emiliania huxleyi strain RCC1216 plastid, complete genome
+ OL322707.1 Emiliania huxleyi strain RCC1217 plastid, complete genome
+Length=109012
+
+ Score = 268 bits (145),  Expect = 4e-67
+ Identities = 229/271 (85%), Gaps = 0/271 (0%)
+ Strand=Plus/Plus
+
+Query  21     TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+              |||||| |  |||||||| |||||||||||||| ||||| ||||||||||||||||||||
+Sbjct  69710  TAAATCTAATCCATTTGGACCACGAAGTGGCTCAACCCAAGGAGCACGCATATCCCAGAA  69769
+
+Query  81     ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+              |||||||||||||||||| |||||||| ||||||| ||| |||||||| |||||||||||
+Sbjct  69770  ACGCATTGTCTCACCACCAAAGATAATCTCTCCAGAAGGCGAACGCATTAGGTACTTACC  69829
+
+Query  141    TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+              ||| || ||||| || || || || ||||  ||||| ||||||||||||||||| || ||
+Sbjct  69830  TAAACCTGTTGGACCTTGCGCTGATGCAACATTTGCACCTAAACGTTGGTCACGTACTAG  69889
+
+Query  201    GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+              ||| ||||| ||||||| ||| || || || || || ||||||||| ||||||||   ||
+Sbjct  69890  GAATGTAAAAGCTTGTGATTGCGAAGCTTCAGGACCTGTTGGTCCATAGAACTCACTTGG  69949
+
+Query  261    GTAAACAGTGTTGTTAAACCATACAAATACA  291
+               ||| ||||||||||  |||| ||||| |||
+Sbjct  69950  ATAAGCAGTGTTGTTGTACCAAACAAAAACA  69980
+
+
+>AY876215.1 Emiliania huxleyi strain SAG 33.90 photosystem II CP43 chlorophyll 
+apoprotein (psbC) gene, partial cds; chloroplast
+Length=1002
+
+ Score = 268 bits (145),  Expect = 4e-67
+ Identities = 229/271 (85%), Gaps = 0/271 (0%)
+ Strand=Plus/Minus
+
+Query  21   TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+            |||||| |  |||||||| |||||||||||||| ||||| ||||||||||||||||||||
+Sbjct  993  TAAATCTAATCCATTTGGACCACGAAGTGGCTCAACCCAAGGAGCACGCATATCCCAGAA  934
+
+Query  81   ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+            |||||||||||||||||| |||||||| ||||||| ||| |||||||| |||||||||||
+Sbjct  933  ACGCATTGTCTCACCACCAAAGATAATCTCTCCAGAAGGCGAACGCATTAGGTACTTACC  874
+
+Query  141  TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+            ||| || ||||| || || || || ||||  ||||| ||||||||||||||||| || ||
+Sbjct  873  TAAACCTGTTGGACCTTGCGCTGATGCAACATTTGCACCTAAACGTTGGTCACGTACTAG  814
+
+Query  201  GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+            ||| ||||| ||||||| ||| || || || || || ||||||||| ||||||||   ||
+Sbjct  813  GAATGTAAAAGCTTGTGATTGCGAAGCTTCAGGACCTGTTGGTCCATAGAACTCACTTGG  754
+
+Query  261  GTAAACAGTGTTGTTAAACCATACAAATACA  291
+             ||| ||||||||||  |||| ||||| |||
+Sbjct  753  ATAAGCAGTGTTGTTGTACCAAACAAAAACA  723
+
+
+>NC_066179.1 Eustigmatophyceae sp. WTwin 8/9 T-6m6.8 plastid, complete genome
+ ON929295.1 Eustigmatophyceae sp. WTwin 8/9 T-6m6.8 plastid, complete genome
+Length=119531
+
+ Score = 267 bits (144),  Expect = 1e-66
+ Identities = 227/268 (85%), Gaps = 1/268 (0%)
+ Strand=Plus/Minus
+
+Query  21     TAA-ATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGA  79
+              ||| |||||| |||||||||||||||||||| |||| |||||| ||||| | ||||||||
+Sbjct  30649  TAATATCAAGTCCATTTGGTCCACGAAGTGGTTCTAACCATGGTGCACGTAAATCCCAGA  30590
+
+Query  80     AACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTAC  139
+              |||||||||| |||||||| ||||| ||||||||| ||||||| | ||| || || ||||
+Sbjct  30589  AACGCATTGTTTCACCACCAAAGATGATTTCTCCACTAGGTGATCTCATTAGATATTTAC  30530
+
+Query  140    CTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAA  199
+              |||| || ||||| || ||||| | ||| |  ||||||||||||||||||||||||||||
+Sbjct  30529  CTAAACCTGTTGGACCTTGTGCTGTAGCTACATTTGCTCCTAAACGTTGGTCACGAACAA  30470
+
+Query  200    GGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAG  259
+              |||||||||||||||| |||||||| || ||||| || ||||| |||||||| |||   |
+Sbjct  30469  GGAAAGTAAATGCTTGCGCTTGTGAAGCTTCTGGACCTGTTGGACCAAAGAATTCACTTG  30410
+
+Query  260    GGTAAACAGTGTTGTTAAACCATACAAA  287
+              | ||| |||| |||||| ||||  ||||
+Sbjct  30409  GATAAGCAGTATTGTTATACCAAGCAAA  30382
+
+
+>JX297813.1 Uncultured Pelagomonas plastid, complete genome
+Length=91306
+
+ Score = 267 bits (144),  Expect = 1e-66
+ Identities = 216/252 (86%), Gaps = 0/252 (0%)
+ Strand=Plus/Minus
+
+Query  31     CCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAAACGCATTGTC  90
+              ||||||||||||||||| ||||| |||||||||||||| | |||||||||||||||||||
+Sbjct  58482  CCATTTGGTCCACGAAGAGGCTCAACCCATGGAGCACGTAAATCCCAGAAACGCATTGTC  58423
+
+Query  91     TCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACCTAATCCAGTT  150
+              |||||||||||||||| ||||||| ||||||||||||| | ||| |||||||| ||||| 
+Sbjct  58422  TCACCACCGAAGATAACTTCTCCACTAGGTGAACGCATTAAGTATTTACCTAAACCAGTC  58363
+
+Query  151    GGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAGGAAAGTAAAT  210
+              || || ||||| ||||| | ||| || || | |||||||||||| || ||||| ||||||
+Sbjct  58362  GGACCTTGTGCTGAAGCTACGTTAGCACCAAGACGTTGGTCACGTACTAGGAATGTAAAT  58303
+
+Query  211    GCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGGGTAAACAGTG  270
+              | |||||||||||| || |||||||| ||||| ||| ||||||||  ||| ||| |||| 
+Sbjct  58302  GTTTGTGCTTGTGAAGCTTCTGGTCCTGTTGGGCCATAGAACTCACTAGGATAAGCAGTA  58243
+
+Query  271    TTGTTAAACCAT  282
+              |||||  |||||
+Sbjct  58242  TTGTTGTACCAT  58231
+
+
+>LC604816.1 Trebouxiophyceae sp. M-hakoo 311 chloroplast DNA, complete genome
+Length=90934
+
+ Score = 255 bits (138),  Expect = 3e-63
+ Identities = 236/284 (83%), Gaps = 3/284 (1%)
+ Strand=Plus/Minus
+
+Query  4      TCGTTCTTAAGCTTTGATAA-ATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGG  62
+              ||||| || || |||| |||  || || || ||||| ||||| |||||||| | ||||||
+Sbjct  77586  TCGTTTTTCAG-TTTGTTAAGGTCTAGACCGTTTGGACCACGTAGTGGCTCAAGCCATGG  77528
+
+Query  63     AGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGA  122
+              | |||| | |||||||||||||||||| ||||||||||||||||| || ||||| || ||
+Sbjct  77527  ACCACGGAAATCCCAGAAACGCATTGTTTCACCACCGAAGATAATCTCACCAGTTGGAGA  77468
+
+Query  123    ACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAA  182
+              |||||| ||||| ||||| |  |||||||| || || ||||| || | ||| || || | 
+Sbjct  77467  ACGCATTAGGTATTTACCAAGACCAGTTGGACCTTGAGCAGATGCTACGTTAGCACCAAG  77408
+
+Query  183    ACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGG  242
+              ||||||||||||||||||||||||||||||||||| |||||| || ||||| ||||||||
+Sbjct  77407  ACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGATTGTGAAGCTTCTGGACCAGTTGG  77348
+
+Query  243    TCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCAT-ACA  285
+               |||||||| |||   |||||| |||||||||| |||||| |||
+Sbjct  77347  GCCAAAGAATTCACTTGGGTAAGCAGTGTTGTTGAACCATGACA  77304
+
+
+>NC_066976.1 Eutreptiella eupharyngea isolate K-0027 chloroplast, complete 
+genome
+ OK136184.1 Eutreptiella eupharyngea isolate K-0027 chloroplast, complete 
+genome
+Length=105379
+
+ Score = 254 bits (137),  Expect = 1e-62
+ Identities = 237/286 (83%), Gaps = 4/286 (1%)
+ Strand=Plus/Minus
+
+Query  1      ATATC-GTTCTTAAGCTTTG-ATAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCC  58
+              |||||  |||||||  ||||  ||||||||| || ||||| ||||| |  ||||| | ||
+Sbjct  50567  ATATCATTTCTTAA--TTTGTTTAAATCAAGACCGTTTGGACCACGTAAAGGCTCAAGCC  50510
+
+Query  59     ATGGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAG  118
+              ||||| |||| | |||||||||||||||||||||||||||||| ||||| || |||||||
+Sbjct  50509  ATGGACCACGGAAATCCCAGAAACGCATTGTCTCACCACCGAAAATAATCTCACCAGTAG  50450
+
+Query  119    GTGAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTC  178
+              | |||||||| | |||||||||||  ||||| || || |||||||||||||  ||||| |
+Sbjct  50449  GAGAACGCATTAAGTACTTACCTAGACCAGTAGGACCTTGTGCAGAAGCAACATTTGCAC  50390
+
+Query  179    CTAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAG  238
+              ||| |||||||||||| || | |||||||||||| || | ||||||||| || || ||||
+Sbjct  50389  CTAGACGTTGGTCACGTACTAAGAAAGTAAATGCCTGAGATTGTGATGCTTCAGGACCAG  50330
+
+Query  239    TTGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCATAC  284
+              |||| |||||||| |||   || ||||||||  |||||||||||||
+Sbjct  50329  TTGGACCAAAGAATTCACTTGGATAAACAGTAGTGTTAAACCATAC  50284
+
+
+>KX839260.1 Monodopsis sp. MarTras21 chloroplast, complete genome
+Length=124999
+
+ Score = 243 bits (131),  Expect = 2e-59
+ Identities = 217/260 (83%), Gaps = 0/260 (0%)
+ Strand=Plus/Minus
+
+Query  31     CCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAAACGCATTGTC  90
+              ||||||||||| || ||||| |||| ||| || ||||| | |||||||||||||||||| 
+Sbjct  30764  CCATTTGGTCCGCGCAGTGGTTCTAACCAAGGCGCACGTAAATCCCAGAAACGCATTGTT  30705
+
+Query  91     TCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACCTAATCCAGTT  150
+              |||||||| ||||| ||||| ||| ||||||| | ||| |  || ||||| |  || |||
+Sbjct  30704  TCACCACCAAAGATGATTTCACCACTAGGTGATCTCATTAAATATTTACCAAGACCTGTT  30645
+
+Query  151    GGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAGGAAAGTAAAT  210
+              || || |||||||| ||||  ||||| ||||||||||||||||| |||||||||||||||
+Sbjct  30644  GGACCTTGTGCAGATGCAACATTTGCACCTAAACGTTGGTCACGTACAAGGAAAGTAAAT  30585
+
+Query  211    GCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGGGTAAACAGTG  270
+              ||||||||||||||||| || ||||| ||||||||| | || |||  ||||||  |||||
+Sbjct  30584  GCTTGTGCTTGTGATGCTTCAGGTCCCGTTGGTCCATAAAATTCACTAGGGTATGCAGTG  30525
+
+Query  271    TTGTTAAACCATACAAATAC  290
+              |||||| |||| || |||||
+Sbjct  30524  TTGTTATACCAAACGAATAC  30505
+
+
+>NC_012101.1 Monomastix sp. OKE-1 chloroplast, complete genome
+ FJ493497.1 Monomastix sp. OKE-1 chloroplast, complete genome
+Length=114528
+
+ Score = 239 bits (129),  Expect = 3e-58
+ Identities = 217/261 (83%), Gaps = 0/261 (0%)
+ Strand=Plus/Plus
+
+Query  21      TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+               |||||| |  || ||||| ||||||||||| |||||||||||||||||||||||||||||
+Sbjct  100913  TAAATCTAAACCGTTTGGACCACGAAGTGGTTCTACCCATGGAGCACGCATATCCCAGAA  100972
+
+Query  81      ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+               ||||||||| |||||||| || || ||||| ||||| ||||||||||| | ||| |||||
+Sbjct  100973  ACGCATTGTTTCACCACCAAAAATGATTTCACCAGTTGGTGAACGCATTAAGTATTTACC  101032
+
+Query  141     TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+               ||  || ||||| || ||||| || |||| ||| || |||||||||||||||||||| | 
+Sbjct  101033  TAGACCTGTTGGACCTTGTGCTGATGCAACGTTAGCACCTAAACGTTGGTCACGAACTAA  101092
+
+Query  201     GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+               ||| || || ||||| |||||   ||||||||| || ||||| |||||||| |||   ||
+Sbjct  101093  GAATGTGAAAGCTTGCGCTTGGCTTGCCTCTGGACCTGTTGGACCAAAGAATTCACTTGG  101152
+
+Query  261     GTAAACAGTGTTGTTAAACCA  281
+               |||||| || || ||||||||
+Sbjct  101153  GTAAACCGTATTATTAAACCA  101173
+
+
+>MZ133414.1 Carteria radiosa PsbC (psbC) gene, complete cds; chloroplast
+Length=1386
+
+ Score = 233 bits (126),  Expect = 1e-56
+ Identities = 216/261 (83%), Gaps = 0/261 (0%)
+ Strand=Plus/Minus
+
+Query  21    TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+             |||||| |  || ||||| ||||| || || |||| ||| ||| |||| | |||||||||
+Sbjct  1095  TAAATCTAATCCGTTTGGACCACGTAGAGGTTCTAACCAAGGACCACGGAAATCCCAGAA  1036
+
+Query  81    ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+             |||||| || |||||||| || || ||||| ||||||||||||||||| |  || |||||
+Sbjct  1035  ACGCATAGTTTCACCACCAAAAATGATTTCACCAGTAGGTGAACGCATTAAATATTTACC  976
+
+Query  141   TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+             ||||||||| || || |||||||||||||  || ||||||||||||||||||||||||||
+Sbjct  975   TAATCCAGTAGGACCTTGTGCAGAAGCAACATTAGCTCCTAAACGTTGGTCACGAACAAG  916
+
+Query  201   GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+             ||||||||||||||| | ||||||||| || || || ||||| ||  |||| |||   ||
+Sbjct  915   GAAAGTAAATGCTTGAGATTGTGATGCTTCAGGACCCGTTGGACCGTAGAATTCACTTGG  856
+
+Query  261   GTAAACAGTGTTGTTAAACCA  281
+              ||| | ||||||||||||||
+Sbjct  855   ATAAGCTGTGTTGTTAAACCA  835
+
+
+>EF520307.1 Pseudo-nitzschia turgiduloides strain 7A1 PsbC (psbC) gene, partial 
+cds; chloroplast
+Length=1179
+
+ Score = 233 bits (126),  Expect = 1e-56
+ Identities = 184/213 (86%), Gaps = 0/213 (0%)
+ Strand=Plus/Minus
+
+Query  34    TTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAAACGCATTGTCTCA  93
+             ||||| ||||| | |||||| |||||||||||||| | ||||||||||||||||||||||
+Sbjct  1016  TTTGGACCACGTAATGGCTCAACCCATGGAGCACGTAAATCCCAGAAACGCATTGTCTCA  957
+
+Query  94    CCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACCTAATCCAGTTGGT  153
+             |||||||||||||| |||||| | ||||||||||| | ||| |||||||| |||||||| 
+Sbjct  956   CCACCGAAGATAATCTCTCCACTTGGTGAACGCATTAAGTATTTACCTAAACCAGTTGGA  897
+
+Query  154   CCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAGGAAAGTAAATGCT  213
+             || |||||||| | ||  ||||| ||||| |||||||||||||| | ||| || ||||||
+Sbjct  896   CCTTGTGCAGATGAAACATTTGCACCTAATCGTTGGTCACGAACTAAGAATGTGAATGCT  837
+
+Query  214   TGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCA  246
+             |||| ||||||||| ||||| |||||||| |||
+Sbjct  836   TGTGATTGTGATGCTTCTGGACCAGTTGGACCA  804
+
+
+>HQ710770.1 Pelagomonas calceolata culture CCMP:1214 photosystem II thylakoid 
+membran protein (psbC) gene, partial cds; plastid
+Length=1008
+
+ Score = 230 bits (124),  Expect = 2e-55
+ Identities = 196/232 (84%), Gaps = 0/232 (0%)
+ Strand=Plus/Minus
+
+Query  51    CTCTACCCATGGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTC  110
+             ||| |||||||||||||| | ||||||||||||||||||||||||||||||||||| |||
+Sbjct  1008  CTCAACCCATGGAGCACGTAAATCCCAGAAACGCATTGTCTCACCACCGAAGATAACTTC  949
+
+Query  111   TCCAGTAGGTGAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAAT  170
+             |||| ||||||||||||| | ||| |||||||| ||||| || || ||||| ||||| | 
+Sbjct  948   TCCACTAGGTGAACGCATTAAGTATTTACCTAAACCAGTCGGACCTTGTGCTGAAGCTAC  889
+
+Query  171   GTTTGCTCCTAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTC  230
+             ||| || || | |||||||||||| || ||||| ||||||| |||||||||||| || ||
+Sbjct  888   GTTAGCACCAAGACGTTGGTCACGTACTAGGAATGTAAATGTTTGTGCTTGTGAAGCTTC  829
+
+Query  231   TGGTCCAGTTGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCAT  282
+             |||||| ||||| ||| |||| |||  ||| ||| |||| |||||  |||||
+Sbjct  828   TGGTCCTGTTGGGCCATAGAATTCACTAGGATAAGCAGTATTGTTGTACCAT  777
+
+
+>OP297527.1 Coscinodiscophyceae sp. strain AJA027-32 photosystem II CP43 
+protein (psbC) gene, partial cds; chloroplast
+Length=1054
+
+ Score = 226 bits (122),  Expect = 2e-54
+ Identities = 229/282 (81%), Gaps = 2/282 (1%)
+ Strand=Plus/Minus
+
+Query  1    ATATCGTTCTTAAGCTTTGATAA-ATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCA  59
+            |||||||| ||||  |||| ||| ||| |  || ||||| ||||| |  || || |||||
+Sbjct  979  ATATCGTTTTTAA-TTTTGTTAATATCTAATCCGTTTGGACCACGTAAAGGTTCAACCCA  921
+
+Query  60   TGGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGG  119
+            ||||||||| | |||||||||||||||||||||||||||||| |||||||||||| ||||
+Sbjct  920  TGGAGCACGTAAATCCCAGAAACGCATTGTCTCACCACCGAAAATAATTTCTCCACTAGG  861
+
+Query  120  TGAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCC  179
+             |||||||| | ||| |||||||| |||||||| || |||||||||| ||  || |||||
+Sbjct  860  AGAACGCATTAAGTATTTACCTAAACCAGTTGGACCTTGTGCAGAAGAAACATTAGCTCC  801
+
+Query  180  TAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGT  239
+            ||||||||| || ||||| | ||| ||||| ||||| | ||| ||||| || || |||||
+Sbjct  800  TAAACGTTGATCTCGAACTAAGAATGTAAAAGCTTGAGATTGCGATGCTTCAGGACCAGT  741
+
+Query  240  TGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCA  281
+             || ||| | ||||||  ||| ||| | || |||||| ||||
+Sbjct  740  CGGGCCATATAACTCACTAGGATAAGCTGTATTGTTATACCA  699
+
+
+>OP297526.1 Coscinodiscophyceae sp. strain ECT3886 flatcentric photosystem 
+II CP43 protein (psbC) gene, partial cds; chloroplast
+Length=1054
+
+ Score = 226 bits (122),  Expect = 2e-54
+ Identities = 229/282 (81%), Gaps = 2/282 (1%)
+ Strand=Plus/Minus
+
+Query  1    ATATCGTTCTTAAGCTTTGATAA-ATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCA  59
+            |||||||| ||||  |||| ||| ||| |  || ||||| ||||| |  || || |||||
+Sbjct  979  ATATCGTTTTTAA-TTTTGTTAATATCTAATCCGTTTGGACCACGTAAAGGTTCAACCCA  921
+
+Query  60   TGGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGG  119
+            ||||||||| | |||||||||||||||||||||||||||||| |||||||||||| ||||
+Sbjct  920  TGGAGCACGTAAATCCCAGAAACGCATTGTCTCACCACCGAAAATAATTTCTCCACTAGG  861
+
+Query  120  TGAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCC  179
+             |||||||| | ||| |||||||| |||||||| || |||||||||| ||  || |||||
+Sbjct  860  AGAACGCATTAAGTATTTACCTAAACCAGTTGGACCTTGTGCAGAAGAAACATTAGCTCC  801
+
+Query  180  TAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGT  239
+            ||||||||| || ||||| | ||| ||||| ||||| | ||| ||||| || || |||||
+Sbjct  800  TAAACGTTGATCTCGAACTAAGAATGTAAAAGCTTGAGATTGCGATGCTTCAGGACCAGT  741
+
+Query  240  TGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCA  281
+             || ||| | ||||||  ||| ||| | || |||||| ||||
+Sbjct  740  CGGGCCATATAACTCACTAGGATAAGCTGTATTGTTATACCA  699
+
+
+>OM827251.1 Guinardia striata chloroplast, complete genome
+Length=121778
+
+ Score = 226 bits (122),  Expect = 2e-54
+ Identities = 208/251 (83%), Gaps = 0/251 (0%)
+ Strand=Plus/Minus
+
+Query  31     CCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAAACGCATTGTC  90
+              |||||||| ||||| |  |||||||||||||||||||| | |||||||||||||||||||
+Sbjct  31183  CCATTTGGACCACGTAACGGCTCTACCCATGGAGCACGTAAATCCCAGAAACGCATTGTC  31124
+
+Query  91     TCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACCTAATCCAGTT  150
+              |||||||||||||| ||||||||| | ||||||||||| | ||| |||||||| ||||| 
+Sbjct  31123  TCACCACCGAAGATGATTTCTCCACTTGGTGAACGCATTAAGTATTTACCTAAACCAGTA  31064
+
+Query  151    GGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAGGAAAGTAAAT  210
+              || || |||||||| | ||  ||||| ||||||||||| || || || | ||||||||| 
+Sbjct  31063  GGACCTTGTGCAGATGAAACATTTGCACCTAAACGTTGATCTCGTACTAAGAAAGTAAAC  31004
+
+Query  211    GCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGGGTAAACAGTG  270
+              ||||| | ||| ||||| ||||| ||||| || ||| | |  |||  ||||||| |||||
+Sbjct  31003  GCTTGAGATTGCGATGCTTCTGGACCAGTAGGACCATAAAGTTCACTAGGGTAAGCAGTG  30944
+
+Query  271    TTGTTAAACCA  281
+              |||||  ||||
+Sbjct  30943  TTGTTGTACCA  30933
+
+
+>NC_024817.1 Prasinoderma coloniale culture-collection CCMP:1220 chloroplast, 
+complete genome
+ KJ746598.1 Prasinoderma coloniale culture-collection CCMP:1220 chloroplast, 
+complete genome
+Length=77750
+
+ Score = 226 bits (122),  Expect = 2e-54
+ Identities = 231/285 (81%), Gaps = 2/285 (1%)
+ Strand=Plus/Minus
+
+Query  1     ATATCGTTCTTAAGCTTTG-ATAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCA  59
+             ||||| |||||||  ||||  || ||| || || || || ||||| || || ||||||||
+Sbjct  7472  ATATCATTCTTAA-TTTTGTTTAGATCTAGACCGTTAGGACCACGTAGAGGTTCTACCCA  7414
+
+Query  60    TGGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGG  119
+             |||| |||| | |||||||||||||||||||||||||||||| |||||||| ||||||||
+Sbjct  7413  TGGACCACGGAAATCCCAGAAACGCATTGTCTCACCACCGAAAATAATTTCGCCAGTAGG  7354
+
+Query  120   TGAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCC  179
+              |||||||| | ||||||||| |  || ||||| || |||||||| |||| ||| || ||
+Sbjct  7353  AGAACGCATTAAGTACTTACCAAGACCTGTTGGACCTTGTGCAGATGCAACGTTAGCACC  7294
+
+Query  180   TAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGT  239
+             || |||||||||||| || ||||| |||||||  || |  |||||||| || |   ||||
+Sbjct  7293  TAGACGTTGGTCACGTACTAGGAATGTAAATGTCTGAGACTGTGATGCTTCAGCCGCAGT  7234
+
+Query  240   TGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCATAC  284
+             ||| |||||||| |||  ||| ||||||||||||||  |||| ||
+Sbjct  7233  TGGACCAAAGAATTCACTAGGATAAACAGTGTTGTTGTACCAAAC  7189
+
+
+>KJ577930.1 Coscinodiscophyceae sp. TN-2014 isolate ECT3886hemidiscoid photosystem 
+II CP43 protein (psbC) gene, partial cds; chloroplast
+Length=1153
+
+ Score = 226 bits (122),  Expect = 2e-54
+ Identities = 229/282 (81%), Gaps = 2/282 (1%)
+ Strand=Plus/Minus
+
+Query  1    ATATCGTTCTTAAGCTTTGATAA-ATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCA  59
+            |||||||| ||||  |||| ||| ||| |  || ||||| ||||| |  || || |||||
+Sbjct  982  ATATCGTTTTTAA-TTTTGTTAATATCTAATCCGTTTGGACCACGTAAAGGTTCAACCCA  924
+
+Query  60   TGGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGG  119
+            ||||||||| | |||||||||||||||||||||||||||||| |||||||||||| ||||
+Sbjct  923  TGGAGCACGTAAATCCCAGAAACGCATTGTCTCACCACCGAAAATAATTTCTCCACTAGG  864
+
+Query  120  TGAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCC  179
+             |||||||| | ||| |||||||| |||||||| || |||||||||| ||  || |||||
+Sbjct  863  AGAACGCATTAAGTATTTACCTAAACCAGTTGGACCTTGTGCAGAAGAAACATTAGCTCC  804
+
+Query  180  TAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGT  239
+            ||||||||| || ||||| | ||| ||||| ||||| | ||| ||||| || || |||||
+Sbjct  803  TAAACGTTGATCTCGAACTAAGAATGTAAAAGCTTGAGATTGCGATGCTTCAGGACCAGT  744
+
+Query  240  TGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCA  281
+             || ||| | ||||||  ||| ||| | || |||||| ||||
+Sbjct  743  CGGGCCATATAACTCACTAGGATAAGCTGTATTGTTATACCA  702
+
+
+>NC_040294.1 Characiopsis acuta strain ACOI 456 plastid, complete genome
+ MK281452.1 Characiopsis acuta strain ACOI 456 plastid, complete genome
+Length=121124
+
+ Score = 224 bits (121),  Expect = 9e-54
+ Identities = 219/267 (82%), Gaps = 4/267 (1%)
+ Strand=Plus/Minus
+
+Query  25     TCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAAACGC  84
+              ||||| || ||||||||||||||||| || | ||| |||||||| | |||||||||||||
+Sbjct  30506  TCAAGACCGTTTGGTCCACGAAGTGGTTCAAGCCAAGGAGCACGTAAATCCCAGAAACGC  30447
+
+Query  85     ATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACCTAAT  144
+              || || |||||||| || || ||||| ||| | ||||| | ||| | ||| |||||||||
+Sbjct  30446  ATAGTTTCACCACCTAAAATGATTTCACCACTTGGTGATCTCATTAAGTATTTACCTAAT  30387
+
+Query  145    CCAGTTGGTCCCTGTGCAGAAGC-A-ATGTTTGCTCCTAAACGTTGGTCACGAACAAGGA  202
+              || ||||| || || || | ||| | || ||| | ||||| |||||||||||||||||||
+Sbjct  30386  CCTGTTGGACCTTGAGCTGTAGCCACAT-TTT-CACCTAATCGTTGGTCACGAACAAGGA  30329
+
+Query  203    AAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGGGT  262
+              |||||||||||||||||||||| || ||||   ||||||| ||| |||| |||  ||| |
+Sbjct  30328  AAGTAAATGCTTGTGCTTGTGAAGCTTCTGCCGCAGTTGGACCATAGAATTCACTAGGAT  30269
+
+Query  263    AAACAGTGTTGTTAAACCATACAAATA  289
+              || ||||||| |||||||| || ||||
+Sbjct  30268  AAGCAGTGTTATTAAACCAAACGAATA  30242
+
+
+>HQ710793.1 Tribonema aequale voucher UTEX 50 photosystem II thylakoid membran 
+protein (psbC) gene, partial cds; plastid
+Length=1008
+
+ Score = 220 bits (119),  Expect = 1e-52
+ Identities = 197/236 (83%), Gaps = 0/236 (0%)
+ Strand=Plus/Minus
+
+Query  52    TCTACCCATGGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCT  111
+             |||||||| ||||||||||||||||||||||||||||| |||||||| || |||||||| 
+Sbjct  1007  TCTACCCAAGGAGCACGCATATCCCAGAAACGCATTGTTTCACCACCAAAAATAATTTCA  948
+
+Query  112   CCAGTAGGTGAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATG  171
+             ||| | ||||| | ||| | |||||||||||| |||||||| || || || || ||||  
+Sbjct  947   CCACTTGGTGATCTCATTAAGTACTTACCTAAACCAGTTGGACCTTGAGCGGATGCAACA  888
+
+Query  172   TTTGCTCCTAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCT  231
+             || || ||||||||||||||||| || | ||| ||||||||||||||||||||||| || 
+Sbjct  887   TTAGCACCTAAACGTTGGTCACGTACTAAGAATGTAAATGCTTGTGCTTGTGATGCTTCA  828
+
+Query  232   GGTCCAGTTGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAA  287
+             || |||||||| |||||||| ||   ||||||  | || |||||| |||| |||||
+Sbjct  827   GGACCAGTTGGACCAAAGAATTCGCTAGGGTATGCTGTATTGTTATACCAAACAAA  772
+
+
+>MH511707.1 Pandorina morum ribosomal protein L20 (rpl20) and photosystem 
+II 44 kDa protein (psbC) genes, complete cds; plastid
+Length=9981
+
+ Score = 217 bits (117),  Expect = 1e-51
+ Identities = 213/261 (82%), Gaps = 0/261 (0%)
+ Strand=Plus/Minus
+
+Query  21    TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+             ||||||||| |||||||| ||||| || || |||| ||||||  |||| | |||||||||
+Sbjct  8687  TAAATCAAGACCATTTGGACCACGCAGAGGTTCTAACCATGGGCCACGGAAATCCCAGAA  8628
+
+Query  81    ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+             ||||||||| |||||||| || |||||||| || |||||||||||||| |  || |||||
+Sbjct  8627  ACGCATTGTTTCACCACCAAAAATAATTTCACCTGTAGGTGAACGCATTAAATATTTACC  8568
+
+Query  141   TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+              |  |||||||| || |||||||| |||| ||| || |||||||||||||||||||||||
+Sbjct  8567  AAGACCAGTTGGACCTTGTGCAGATGCAACGTTAGCACCTAAACGTTGGTCACGAACAAG  8508
+
+Query  201   GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+             ||||||||| ||||||| |||   ||| || || || ||||| ||| |||| |||   ||
+Sbjct  8507  GAAAGTAAACGCTTGTGATTGACTTGCTTCAGGACCTGTTGGACCATAGAATTCACTTGG  8448
+
+Query  261   GTAAACAGTGTTGTTAAACCA  281
+              ||  | || |||||||||||
+Sbjct  8447  ATATGCTGTATTGTTAAACCA  8427
+
+
+>MK212028.1 Vischeria stellata strain SAG 33.83 chloroplast, complete genome
+Length=126824
+
+ Score = 217 bits (117),  Expect = 1e-51
+ Identities = 211/258 (82%), Gaps = 0/258 (0%)
+ Strand=Plus/Minus
+
+Query  24     ATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAAACG  83
+              |||||| |||||||| ||||||||||| ||||||||||||||||| | ||||||||| ||
+Sbjct  30465  ATCAAGACCATTTGGACCACGAAGTGGTTCTACCCATGGAGCACGTAAATCCCAGAATCG  30406
+
+Query  84     CATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACCTAA  143
+              ||| || |||||||| || || ||||| ||| ||||||| | ||| |  || ||||||||
+Sbjct  30405  CATCGTTTCACCACCAAAAATGATTTCACCACTAGGTGATCTCATTAAATATTTACCTAA  30346
+
+Query  144    TCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAGGAA  203
+               || || || || || || |  ||||  ||||| |||| |||||||||||||||||||||
+Sbjct  30345  ACCTGTAGGACCTTGAGCCGTTGCAACATTTGCACCTAGACGTTGGTCACGAACAAGGAA  30286
+
+Query  204    AGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGGGTA  263
+              |||||||||||| ||||||||||| || || || ||||| ||| |||| |||   || ||
+Sbjct  30285  AGTAAATGCTTGGGCTTGTGATGCTTCAGGACCTGTTGGACCATAGAATTCACTTGGATA  30226
+
+Query  264    AACAGTGTTGTTAAACCA  281
+              | | ||||||||| ||||
+Sbjct  30225  AGCTGTGTTGTTATACCA  30208
+
+
+>NC_040300.1 Vischeria sp. ACOI 3415 plastid, complete genome
+ MK281458.1 Vischeria sp. ACOI 3415 plastid, complete genome
+Length=126352
+
+ Score = 211 bits (114),  Expect = 7e-50
+ Identities = 210/258 (81%), Gaps = 0/258 (0%)
+ Strand=Plus/Minus
+
+Query  24     ATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAAACG  83
+              |||||| |||||||| ||||||||||| ||||||||||||||||| | ||||||||| ||
+Sbjct  30430  ATCAAGACCATTTGGACCACGAAGTGGTTCTACCCATGGAGCACGTAAATCCCAGAATCG  30371
+
+Query  84     CATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACCTAA  143
+              ||| || |||||||| || || ||||| ||| ||||||| | ||| |  || ||||||||
+Sbjct  30370  CATCGTTTCACCACCAAAAATGATTTCACCACTAGGTGATCTCATTAAATATTTACCTAA  30311
+
+Query  144    TCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAGGAA  203
+               || || || || || || |  ||||  ||||| |||| |||||||||||||||||||||
+Sbjct  30310  ACCTGTAGGACCTTGAGCCGTTGCAACATTTGCACCTAGACGTTGGTCACGAACAAGGAA  30251
+
+Query  204    AGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGGGTA  263
+              |||||||||||| |||||||| || || || || ||||| ||| |||| |||   || ||
+Sbjct  30250  AGTAAATGCTTGGGCTTGTGAGGCTTCAGGACCTGTTGGACCATAGAATTCACTTGGATA  30191
+
+Query  264    AACAGTGTTGTTAAACCA  281
+              | | ||||||||| ||||
+Sbjct  30190  AGCTGTGTTGTTATACCA  30173
+
+
+>MK895950.1 Pediastrum duplex plastid, complete genome
+Length=199241
+
+ Score = 209 bits (113),  Expect = 2e-49
+ Identities = 233/292 (80%), Gaps = 3/292 (1%)
+ Strand=Plus/Minus
+
+Query  1     ATATCGTTCTTAAGCTTTG-ATAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCA  59
+             ||||| || || || ||||  |||||| |  |||||||| ||||| | |||||||| |||
+Sbjct  2296  ATATCATTTTTTAG-TTTGTTTAAATCTAAACCATTTGGACCACGTAATGGCTCTAGCCA  2238
+
+Query  60    TGGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGG  119
+             |||| |||| |  ||||| ||||||||||| ||||| || ||||| |||||||| || ||
+Sbjct  2237  TGGACCACGGAAGTCCCAAAAACGCATTGTTTCACCTCCAAAGATGATTTCTCCTGTTGG  2178
+
+Query  120   TGAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCC  179
+              |||||||| | ||| || || |  || || || || ||||| ||||||| |||||||||
+Sbjct  2177  AGAACGCATTAAGTATTTCCCAAGACCTGTAGGACCTTGTGCTGAAGCAACGTTTGCTCC  2118
+
+Query  180   TAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGT  239
+             ||| |||||||||||||||||||||||||||||||| | ||| ||||| || || || ||
+Sbjct  2117  TAAGCGTTGGTCACGAACAAGGAAAGTAAATGCTTGAGATTGAGATGCTTCAGGACCGGT  2058
+
+Query  240   TGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAATACA  291
+             ||| ||| | ||||||   || ||  | |||||||||||||| | | |||||
+Sbjct  2057  TGGACCATAAAACTCACTTGGATATGCTGTGTTGTTAAACCA-AGACATACA  2007
+
+
+>MF536515.1 Pediastrum duplex strain UTEX LB1364 chloroplast clone chunk-rrl
+Length=48683
+
+ Score = 209 bits (113),  Expect = 2e-49
+ Identities = 233/292 (80%), Gaps = 3/292 (1%)
+ Strand=Plus/Minus
+
+Query  1      ATATCGTTCTTAAGCTTTG-ATAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCA  59
+              ||||| || || || ||||  |||||| |  |||||||| ||||| | |||||||| |||
+Sbjct  15240  ATATCATTTTTTAG-TTTGTTTAAATCTAAACCATTTGGACCACGTAATGGCTCTAGCCA  15182
+
+Query  60     TGGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGG  119
+              |||| |||| |  ||||| ||||||||||| ||||| || ||||| |||||||| || ||
+Sbjct  15181  TGGACCACGGAAGTCCCAAAAACGCATTGTTTCACCTCCAAAGATGATTTCTCCTGTTGG  15122
+
+Query  120    TGAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCC  179
+               |||||||| | ||| || || |  || || || || ||||| ||||||| |||||||||
+Sbjct  15121  AGAACGCATTAAGTATTTCCCAAGACCTGTAGGACCTTGTGCTGAAGCAACGTTTGCTCC  15062
+
+Query  180    TAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGT  239
+              ||| |||||||||||||||||||||||||||||||| | ||| ||||| || || || ||
+Sbjct  15061  TAAGCGTTGGTCACGAACAAGGAAAGTAAATGCTTGAGATTGAGATGCTTCAGGACCGGT  15002
+
+Query  240    TGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAATACA  291
+              ||| ||| | ||||||   || ||  | |||||||||||||| | | |||||
+Sbjct  15001  TGGACCATAAAACTCACTTGGATATGCTGTGTTGTTAAACCA-AGACATACA  14951
+
+
+>JN630572.1 Pediastrum duplex photosystem II 44 kDa protein (psbC) gene, 
+partial cds; chloroplast
+Length=1090
+
+ Score = 209 bits (113),  Expect = 2e-49
+ Identities = 233/292 (80%), Gaps = 3/292 (1%)
+ Strand=Plus/Minus
+
+Query  1    ATATCGTTCTTAAGCTTTG-ATAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCA  59
+            ||||| || || || ||||  |||||| |  |||||||| ||||| | |||||||| |||
+Sbjct  897  ATATCATTTTTTAG-TTTGTTTAAATCTAAACCATTTGGACCACGTAATGGCTCTAGCCA  839
+
+Query  60   TGGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGG  119
+            |||| |||| |  ||||| ||||||||||| ||||| || ||||| |||||||| || ||
+Sbjct  838  TGGACCACGGAAGTCCCAAAAACGCATTGTTTCACCTCCAAAGATGATTTCTCCTGTTGG  779
+
+Query  120  TGAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCC  179
+             |||||||| | ||| || || |  || || || || ||||| ||||||| |||||||||
+Sbjct  778  AGAACGCATTAAGTATTTCCCAAGACCTGTAGGACCTTGTGCTGAAGCAACGTTTGCTCC  719
+
+Query  180  TAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGT  239
+            ||| |||||||||||||||||||||||||||||||| | ||| ||||| || || || ||
+Sbjct  718  TAAGCGTTGGTCACGAACAAGGAAAGTAAATGCTTGAGATTGAGATGCTTCAGGACCGGT  659
+
+Query  240  TGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAATACA  291
+            ||| ||| | ||||||   || ||  | |||||||||||||| | | |||||
+Sbjct  658  TGGACCATAAAACTCACTTGGATATGCTGTGTTGTTAAACCA-AGACATACA  608
+
+
+>GU325311.1 Synura echinulata strain SAG15.92 photosystem II CP43 chlorophyll 
+apoprotein (psbC) gene, partial cds; plastid
+Length=1021
+
+ Score = 209 bits (113),  Expect = 2e-49
+ Identities = 207/254 (81%), Gaps = 0/254 (0%)
+ Strand=Plus/Minus
+
+Query  38    GTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAAACGCATTGTCTCACCAC  97
+             ||||||| | ||| |||| ||| ||||| || | ||||||||||||||| || || ||||
+Sbjct  1021  GTCCACGTAATGGTTCTAACCAAGGAGCTCGTAAATCCCAGAAACGCATCGTTTCTCCAC  962
+
+Query  98    CGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCT  157
+             | || |||||||||||| | ||||||||||| |  || || ||||| ||||| || || |
+Sbjct  961   CAAAAATAATTTCTCCACTTGGTGAACGCATTAAATATTTTCCTAACCCAGTAGGACCTT  902
+
+Query  158   GTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTG  217
+             |||||||||| |  || ||||||||||||||||||||||||||||||||||| |||||||
+Sbjct  901   GTGCAGAAGCGACATTGGCTCCTAAACGTTGGTCACGAACAAGGAAAGTAAAAGCTTGTG  842
+
+Query  218   CTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAA  277
+             |||| ||||| || || ||||| || ||||| || |||  ||| ||  | || |||||| 
+Sbjct  841   CTTGAGATGCTTCAGGCCCAGTAGGACCAAAAAATTCACTAGGATATGCTGTATTGTTAT  782
+
+Query  278   ACCATACAAATACA  291
+             |||| ||||| |||
+Sbjct  781   ACCAAACAAAAACA  768
+
+
+>NC_066180.1 Neustupella aerophytica strain CAUP Q 801 plastid, complete genome
+ ON929296.1 Neustupella aerophytica strain CAUP Q 801 plastid, complete genome
+Length=125957
+
+ Score = 207 bits (112),  Expect = 9e-49
+ Identities = 212/262 (81%), Gaps = 0/262 (0%)
+ Strand=Plus/Minus
+
+Query  24     ATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAAACG  83
+              |||||| ||||| || |||||||| || ||||||||||||||||| | ||||||||| ||
+Sbjct  30452  ATCAAGACCATTCGGACCACGAAGAGGTTCTACCCATGGAGCACGTAAATCCCAGAATCG  30393
+
+Query  84     CATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACCTAA  143
+              ||| || |||||||| ||||| ||||| ||| ||||||| | ||| |  || ||||||||
+Sbjct  30392  CATAGTTTCACCACCAAAGATGATTTCACCACTAGGTGATCTCATTAAATATTTACCTAA  30333
+
+Query  144    TCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAGGAA  203
+               || ||||| || || || |  || |  ||||| |||| |||||||||||||||||||||
+Sbjct  30332  ACCTGTTGGACCTTGAGCCGTTGCCACATTTGCACCTAGACGTTGGTCACGAACAAGGAA  30273
+
+Query  204    AGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGGGTA  263
+              ||||||||||||||||||||| || || || || ||||| ||| ||||||||   || ||
+Sbjct  30272  AGTAAATGCTTGTGCTTGTGAAGCTTCAGGACCTGTTGGACCATAGAACTCACTTGGATA  30213
+
+Query  264    AACAGTGTTGTTAAACCATACA  285
+                | || |||||| ||||| ||
+Sbjct  30212  TGCTGTATTGTTATACCATGCA  30191
+
+
+>MH511721.1 Pandorina colemaniae CP43 chlorophyll apoprotein of photosystem 
+II (psbC), cell division protein (ftsH), D2 reaction center 
+protein of photosystem II (psbD), photosystem II protein 
+J (psbJ), ATP synthase CF0 subunit IV (atpI), photosystem I 
+reaction center subunit IX (psaJ), ribosomal protein S12 (rps12), 
+and hypothetical chloroplast RF1 (ycf1) genes, complete 
+cds; plastid
+Length=31857
+
+ Score = 204 bits (110),  Expect = 1e-47
+ Identities = 233/293 (80%), Gaps = 5/293 (2%)
+ Strand=Plus/Plus
+
+Query  1     ATATCGTTCTTAAGCTTTGA-TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCA  59
+             |||||||| ||||| |||   ||| ||||| |||||||| ||||| ||||| |||| |||
+Sbjct  1358  ATATCGTTTTTAAG-TTTATTTAAGTCAAGACCATTTGGACCACGTAGTGGTTCTAACCA  1416
+
+Query  60    TGGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGG  119
+             |||| |||| | |||||| ||||||||||| |||||||| || || ||||| || || ||
+Sbjct  1417  TGGACCACGGAAATCCCAAAAACGCATTGTTTCACCACCAAAAATGATTTCACCTGTTGG  1476
+
+Query  120   TGAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCC  179
+             ||||||||| |  || ||||| |  ||||| || || ||||| ||||||| ||| || ||
+Sbjct  1477  TGAACGCATTAAATATTTACCAAGACCAGTAGGACCTTGTGCCGAAGCAACGTTAGCACC  1536
+
+Query  180   TAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTG-TGATGCCTCTGGTCCAG  238
+             |||||||||||||||||||||||||||||||||||||| |||   | || || || ||||
+Sbjct  1537  TAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGATTGACTA-GCTTCAGGACCAG  1595
+
+Query  239   TTGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAATACA  291
+             |||| ||  | || |||   || ||  | ||||| |||||||| | | |||||
+Sbjct  1596  TTGGACCGTAAAATTCACTTGGATATGCTGTGTTATTAAACCA-AGACATACA  1647
+
+
+>NC_045244.1 Fragilariopsis cylindrus chloroplast, complete genome
+ MK217824.1 Fragilariopsis cylindrus chloroplast, complete genome
+Length=123275
+
+ Score = 204 bits (110),  Expect = 1e-47
+ Identities = 202/248 (81%), Gaps = 0/248 (0%)
+ Strand=Plus/Minus
+
+Query  34     TTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAAACGCATTGTCTCA  93
+              ||||| ||||| | ||| || |||||||| ||||| | ||||||||||||||||||||||
+Sbjct  21502  TTTGGACCACGTAATGGTTCAACCCATGGTGCACGTAAATCCCAGAAACGCATTGTCTCA  21443
+
+Query  94     CCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACCTAATCCAGTTGGT  153
+              |||||||||||||| |||||| | || |||||||| | ||| |||||||| |||||||| 
+Sbjct  21442  CCACCGAAGATAATCTCTCCACTTGGCGAACGCATTAAGTATTTACCTAAACCAGTTGGA  21383
+
+Query  154    CCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAGGAAAGTAAATGCT  213
+              || ||||| || | ||  || || ||||| ||||| |||||||| | ||| || ||||||
+Sbjct  21382  CCTTGTGCTGATGAAACATTAGCACCTAATCGTTGATCACGAACTAAGAATGTGAATGCT  21323
+
+Query  214    TGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTG  273
+              |||| |||||| || ||||| |||||||||||| | || |||   |||||| | || || 
+Sbjct  21322  TGTGATTGTGAAGCTTCTGGACCAGTTGGTCCATATAATTCACTTGGGTAAGCTGTATTA  21263
+
+Query  274    TTAAACCA  281
+              ||| ||||
+Sbjct  21262  TTATACCA  21255
+
+
+>EF520304.1 Fragilariopsis cylindrus strain E8C2 PsbC (psbC) gene, partial 
+cds; chloroplast
+Length=1178
+
+ Score = 204 bits (110),  Expect = 1e-47
+ Identities = 202/248 (81%), Gaps = 0/248 (0%)
+ Strand=Plus/Minus
+
+Query  34    TTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAAACGCATTGTCTCA  93
+             ||||| ||||| | ||| || |||||||| ||||| | ||||||||||||||||||||||
+Sbjct  1015  TTTGGACCACGTAATGGTTCAACCCATGGTGCACGTAAATCCCAGAAACGCATTGTCTCA  956
+
+Query  94    CCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACCTAATCCAGTTGGT  153
+             |||||||||||||| |||||| | || |||||||| | ||| |||||||| |||||||| 
+Sbjct  955   CCACCGAAGATAATCTCTCCACTTGGCGAACGCATTAAGTATTTACCTAAACCAGTTGGA  896
+
+Query  154   CCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAGGAAAGTAAATGCT  213
+             || ||||| || | ||  || || ||||| ||||| |||||||| | ||| || ||||||
+Sbjct  895   CCTTGTGCTGATGAAACATTAGCACCTAATCGTTGATCACGAACTAAGAATGTGAATGCT  836
+
+Query  214   TGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTG  273
+             |||| |||||| || ||||| |||||||||||| | || |||   |||||| | || || 
+Sbjct  835   TGTGATTGTGAAGCTTCTGGACCAGTTGGTCCATATAATTCACTTGGGTAAGCTGTATTA  776
+
+Query  274   TTAAACCA  281
+             ||| ||||
+Sbjct  775   TTATACCA  768
+
+
+>NC_035287.1 Dasyclonium flaccidum isolate PD1087 chloroplast, complete genome
+ MF101443.1 Dasyclonium flaccidum isolate PD1087 chloroplast, complete genome
+Length=170203
+
+ Score = 200 bits (108),  Expect = 1e-46
+ Identities = 215/268 (80%), Gaps = 2/268 (1%)
+ Strand=Plus/Plus
+
+Query  21      TAAATC-AAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGA  79
+               |||||| ||| ||||| ||||| |  |||||||||||||| || || |  |  ||||| |
+Sbjct  166732  TAAATCTAAG-CCATTAGGTCCTCTTAGTGGCTCTACCCAAGGCGCTCTTAGGTCCCAAA  166790
+
+Query  80      AACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTAC  139
+               | | |||||| |||||||| || |||||||||||| | ||||| | ||| |  |||||||
+Sbjct  166791  ATCTCATTGTTTCACCACCAAAAATAATTTCTCCACTTGGTGATCTCATTAAATACTTAC  166850
+
+Query  140     CTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAA  199
+               | || ||||||||||| |||||||| ||||  ||||||||||| | ||| || |  ||||
+Sbjct  166851  CCAACCCAGTTGGTCCTTGTGCAGATGCAACATTTGCTCCTAATCTTTGATCTCTTACAA  166910
+
+Query  200     GGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAG  259
+               | ||||||||||||||||||||||||||||| || |||||||| ||| | ||||||   |
+Sbjct  166911  GAAAAGTAAATGCTTGTGCTTGTGATGCCTCAGGACCAGTTGGCCCATAAAACTCACTTG  166970
+
+Query  260     GGTAAACAGTGTTGTTAAACCATACAAA  287
+               ||||| | || || ||| |||| |||||
+Sbjct  166971  GGTAAGCTGTATTATTATACCAAACAAA  166998
+
+
+>MK787212.1 Vischeria stellata strain SAG 33.83 photosystem II thylakoid 
+membrane protein (psbC) gene, partial cds; plastid
+Length=984
+
+ Score = 198 bits (107),  Expect = 5e-46
+ Identities = 197/242 (81%), Gaps = 0/242 (0%)
+ Strand=Plus/Minus
+
+Query  40   CCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCG  99
+            ||||||||||| ||||||||||||||||| | ||||||||| ||||| || |||||||| 
+Sbjct  983  CCACGAAGTGGTTCTACCCATGGAGCACGTAAATCCCAGAATCGCATCGTTTCACCACCA  924
+
+Query  100  AAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGT  159
+            || || ||||| ||| ||||||| | ||| |  || |||||||| || || || || || 
+Sbjct  923  AAAATGATTTCACCACTAGGTGATCTCATTAAATATTTACCTAAACCTGTAGGACCTTGA  864
+
+Query  160  GCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCT  219
+            || |  ||||  ||||| |||| ||||||||||||||||||||||||||||||||| |||
+Sbjct  863  GCCGTTGCAACATTTGCACCTAGACGTTGGTCACGAACAAGGAAAGTAAATGCTTGGGCT  804
+
+Query  220  TGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAAC  279
+            |||||||| || || || ||||| ||| |||| |||   || ||| | ||||||||| ||
+Sbjct  803  TGTGATGCTTCAGGACCTGTTGGACCATAGAATTCACTTGGATAAGCTGTGTTGTTATAC  744
+
+Query  280  CA  281
+            ||
+Sbjct  743  CA  742
+
+
+>NC_029674.1 Bracteacoccus minor strain UTEX 66 chloroplast, complete genome
+ KT199253.1 Bracteacoccus minor strain UTEX 66 chloroplast, complete genome
+Length=192761
+
+ Score = 198 bits (107),  Expect = 5e-46
+ Identities = 231/292 (79%), Gaps = 3/292 (1%)
+ Strand=Plus/Minus
+
+Query  1      ATATCGTTCTTAAGCTTTG-ATAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCA  59
+              |||||||| ||||| ||||  ||| || || || ||||| || |  || || |||| |||
+Sbjct  88234  ATATCGTTTTTAAG-TTTGTTTAAGTCTAGACCGTTTGGACCTCTTAGCGGTTCTAACCA  88176
+
+Query  60     TGGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGG  119
+              |||  |||| | |||||||||||||||||| |||||||| || || ||||| ||||||||
+Sbjct  88175  TGGTCCACGGAAATCCCAGAAACGCATTGTTTCACCACCAAAAATGATTTCACCAGTAGG  88116
+
+Query  120    TGAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCC  179
+              ||| | ||| |  || ||||| |  ||||| || || || || ||||| | ||| || ||
+Sbjct  88115  TGATCTCATTAAATATTTACCAAGACCAGTAGGACCTTGAGCTGAAGCTACGTTAGCACC  88056
+
+Query  180    TAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGT  239
+              ||||||||||||||||||||||||||| || ||||||| |||||| || ||||| || ||
+Sbjct  88055  TAAACGTTGGTCACGAACAAGGAAAGTGAAAGCTTGTGATTGTGAAGCTTCTGGACCTGT  87996
+
+Query  240    TGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAATACA  291
+              ||| ||  | ||||||  ||| ||| | |||||||||||||| | | |||||
+Sbjct  87995  TGGACCGTAAAACTCACTAGGATAAGCTGTGTTGTTAAACCA-AGACATACA  87945
+
+
+>JN630562.1 Bracteacoccus minor photosystem II 44 kDa protein (psbC) gene, 
+partial cds; chloroplast
+Length=1071
+
+ Score = 198 bits (107),  Expect = 5e-46
+ Identities = 231/292 (79%), Gaps = 3/292 (1%)
+ Strand=Plus/Minus
+
+Query  1    ATATCGTTCTTAAGCTTTG-ATAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCA  59
+            |||||||| ||||| ||||  ||| || || || ||||| || |  || || |||| |||
+Sbjct  878  ATATCGTTTTTAAG-TTTGTTTAAGTCTAGACCGTTTGGACCTCTTAGCGGTTCTAACCA  820
+
+Query  60   TGGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGG  119
+            |||  |||| | |||||||||||||||||| |||||||| || || ||||| ||||||||
+Sbjct  819  TGGTCCACGGAAATCCCAGAAACGCATTGTTTCACCACCAAAAATGATTTCACCAGTAGG  760
+
+Query  120  TGAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCC  179
+            ||| | ||| |  || ||||| |  ||||| || || || || ||||| | ||| || ||
+Sbjct  759  TGATCTCATTAAATATTTACCAAGACCAGTAGGACCTTGAGCTGAAGCTACGTTAGCACC  700
+
+Query  180  TAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGT  239
+            ||||||||||||||||||||||||||| || ||||||| |||||| || ||||| || ||
+Sbjct  699  TAAACGTTGGTCACGAACAAGGAAAGTGAAAGCTTGTGATTGTGAAGCTTCTGGACCTGT  640
+
+Query  240  TGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAATACA  291
+            ||| ||  | ||||||  ||| ||| | |||||||||||||| | | |||||
+Sbjct  639  TGGACCGTAAAACTCACTAGGATAAGCTGTGTTGTTAAACCA-AGACATACA  589
+
+
+>MT581990.1 Eustigmatophyceae sp. HSY-2011b strain CCMP 3154 PsbC (psbC) 
+gene, partial cds; plastid
+Length=1379
+
+ Score = 198 bits (107),  Expect = 5e-46
+ Identities = 202/249 (81%), Gaps = 1/249 (0%)
+ Strand=Plus/Minus
+
+Query  33    ATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAAACGCATTGTCTC  92
+             ||||||  |||| ||||| |||| ||| || || |  | ||||||||| ||||| || ||
+Sbjct  1379  ATTTGG-ACACGTAGTGGTTCTAGCCAAGGTGCTCTTAAATCCCAGAATCGCATGGTTTC  1321
+
+Query  93    ACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACCTAATCCAGTTGG  152
+             |||||| ||||| ||||||||| ||||||||||||| |  || ||||||||||| |||||
+Sbjct  1320  ACCACCTAAGATGATTTCTCCACTAGGTGAACGCATTAAATATTTACCTAATCCTGTTGG  1261
+
+Query  153   TCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAGGAAAGTAAATGC  212
+              || ||||| |||||||  ||||||||||| |||||||||||||||||||||||||||||
+Sbjct  1260  ACCTTGTGCTGAAGCAACATTTGCTCCTAATCGTTGGTCACGAACAAGGAAAGTAAATGC  1201
+
+Query  213   TTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGGGTAAACAGTGTT  272
+             ||| | |||||| || || |   | || |||||| | ||||||  ||| ||| |||| ||
+Sbjct  1200  TTGAGATTGTGAAGCTTCCGCAGCTGTAGGTCCATAAAACTCACTAGGATAAGCAGTATT  1141
+
+Query  273   GTTAAACCA  281
+              || |||||
+Sbjct  1140  ATTGAACCA  1132
+
+
+>KT625233.1 Haematococcus lacustris clone contig-25 chloroplast, partial 
+genome
+Length=6387
+
+ Score = 196 bits (106),  Expect = 2e-45
+ Identities = 210/262 (80%), Gaps = 0/262 (0%)
+ Strand=Plus/Minus
+
+Query  21    TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+             |||||| |  ||||| || || || || || || ||||| ||  |||| | |||||||||
+Sbjct  5378  TAAATCTAAACCATTAGGACCGCGTAGAGGTTCAACCCAAGGGCCACGGAAATCCCAGAA  5319
+
+Query  81    ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+             |||||| || ||||||||||| |||||||| ||||| || |||||||| |  || |||||
+Sbjct  5318  ACGCATAGTTTCACCACCGAAAATAATTTCACCAGTTGGAGAACGCATTAAATATTTACC  5259
+
+Query  141   TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+             ||| ||||| || || || ||||| || |  || || |||||||||||||||||||||||
+Sbjct  5258  TAAACCAGTAGGACCTTGAGCAGATGCTACATTGGCCCCTAAACGTTGGTCACGAACAAG  5199
+
+Query  201   GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+             ||||||||| ||||| |||||||| || || || || || || ||| | ||||||  |||
+Sbjct  5198  GAAAGTAAAAGCTTGAGCTTGTGAAGCTTCAGGACCTGTAGGACCATAAAACTCACTAGG  5139
+
+Query  261   GTAAACAGTGTTGTTAAACCAT  282
+              ||| |||| ||||||||||||
+Sbjct  5138  ATAAGCAGTATTGTTAAACCAT  5117
+
+
+>KT625088.1 Chlorogonium capillatum culture UTEX:11 clone Contig4 chloroplast, 
+partial genome
+Length=50588
+
+ Score = 196 bits (106),  Expect = 2e-45
+ Identities = 176/211 (83%), Gaps = 0/211 (0%)
+ Strand=Plus/Plus
+
+Query  72     ATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAG  131
+              ||||||||||||||| || |||||||| ||||||||||| |||||||| |||||||| | 
+Sbjct  34127  ATCCCAGAAACGCATAGTTTCACCACCAAAGATAATTTCACCAGTAGGAGAACGCATTAA  34186
+
+Query  132    GTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTC  191
+               || |||||||| ||||| || || || ||||| |||| ||| || ||||||||||||||
+Sbjct  34187  ATATTTACCTAAACCAGTAGGACCTTGCGCAGATGCAACGTTAGCACCTAAACGTTGGTC  34246
+
+Query  192    ACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAA  251
+              ||||||||||||||| |||||||| ||||| || || ||||| || || |||||| ||||
+Sbjct  34247  ACGAACAAGGAAAGTGAATGCTTGAGCTTGAGAAGCTTCTGGACCTGTCGGTCCATAGAA  34306
+
+Query  252    CTCAGAAGGGTAAACAGTGTTGTTAAACCAT  282
+               |||   || ||| |||| ||||| ||||||
+Sbjct  34307  TTCACTTGGATAAGCAGTATTGTTGAACCAT  34337
+
+
+>MK875392.1 Gloiopeltis sp. JP1 voucher Hiroshi Kawai:KU-d5018 photosystem 
+II CP43 apoprotein (psbC) gene, partial cds; chloroplast
+Length=1091
+
+ Score = 195 bits (105),  Expect = 7e-45
+ Identities = 214/268 (80%), Gaps = 2/268 (1%)
+ Strand=Plus/Minus
+
+Query  21    TAAATC-AAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGA  79
+             |||||| ||| || || ||||| |  || || || ||||||||||| |  | ||||||||
+Sbjct  1079  TAAATCTAAG-CCGTTAGGTCCTCTTAGAGGTTCGACCCATGGAGCTCTTAAATCCCAGA  1021
+
+Query  80    AACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTAC  139
+             |||||||||||||||||||||| |||||||| ||| | || || | |||||| |||||||
+Sbjct  1020  AACGCATTGTCTCACCACCGAATATAATTTCACCACTTGGAGATCTCATAAGATACTTAC  961
+
+Query  140   CTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAA  199
+             |||||||||||||||| || ||||||||||  ||||||||||| | ||| || |  || |
+Sbjct  960   CTAATCCAGTTGGTCCTTGAGCAGAAGCAACATTTGCTCCTAATCTTTGATCTCTTACTA  901
+
+Query  200   GGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAG  259
+             | |||||||| |||||||| || ||||| || || || ||||| ||  | || ||    |
+Sbjct  900   GAAAAGTAAAAGCTTGTGCCTGAGATGCTTCCGGACCTGTTGGACCGTAAAATTCGCTTG  841
+
+Query  260   GGTAAACAGTGTTGTTAAACCATACAAA  287
+             ||||| | ||||||||| ||||||| ||
+Sbjct  840   GGTAAGCCGTGTTGTTATACCATACGAA  813
+
+
+>MF093006.1 Gedaniella paucistriata isolate SZCZCH1281 photosystem II CP43 
+protein (psbC) gene, partial cds; chloroplast
+Length=1099
+
+ Score = 195 bits (105),  Expect = 7e-45
+ Identities = 185/225 (82%), Gaps = 0/225 (0%)
+ Strand=Plus/Minus
+
+Query  31   CCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAAACGCATTGTC  90
+            |||||||| ||||| | ||| ||  |||| |||||||| | |||||||||||||||||||
+Sbjct  971  CCATTTGGACCACGTAATGGTTCCTCCCAAGGAGCACGTAAATCCCAGAAACGCATTGTC  912
+
+Query  91   TCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACCTAATCCAGTT  150
+            |||||||||||||||||||||||| | ||||||||||| | ||| |||||||| || || 
+Sbjct  911  TCACCACCGAAGATAATTTCTCCACTTGGTGAACGCATTAAGTATTTACCTAAACCTGTC  852
+
+Query  151  GGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAGGAAAGTAAAT  210
+            || || || || || | ||  || || ||||||||||| || ||||| ||||||||||||
+Sbjct  851  GGACCTTGCGCTGATGAAACATTAGCACCTAAACGTTGATCTCGAACTAGGAAAGTAAAT  792
+
+Query  211  GCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCA  255
+            ||||| | |||||| || ||||| || ||||| ||  | ||||||
+Sbjct  791  GCTTGAGATTGTGAAGCTTCTGGACCTGTTGGACCGTATAACTCA  747
+
+
+>KT943694.1 Navicula sp. SZCZCH100 photosystem II CP43 protein (psbC) gene, 
+partial cds; chloroplast
+ KT943704.1 Halamphora sp. SZCZCH452 photosystem II CP43 protein (psbC) gene, 
+partial cds; chloroplast
+Length=1016
+
+ Score = 195 bits (105),  Expect = 7e-45
+ Identities = 224/283 (79%), Gaps = 2/283 (1%)
+ Strand=Plus/Minus
+
+Query  1    ATATCGTTCTTAAGCTTTGATAA-ATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCA  59
+            ||||| || ||||  |||| ||| ||| |  || ||||| ||||| |  || || |||||
+Sbjct  962  ATATCATTTTTAA-TTTTGTTAATATCTAAACCGTTTGGACCACGTAAAGGTTCAACCCA  904
+
+Query  60   TGGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGG  119
+            ||| ||||| | |||||| |||||||||||||||||||||||||||||||| ||| | ||
+Sbjct  903  TGGTGCACGTAAATCCCAAAAACGCATTGTCTCACCACCGAAGATAATTTCACCACTTGG  844
+
+Query  120  TGAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCC  179
+            ||||||||| |  || |||||||| |||||||| || || || || | ||  ||||| ||
+Sbjct  843  TGAACGCATTAAATATTTACCTAAACCAGTTGGACCTTGCGCTGATGAAACATTTGCACC  784
+
+Query  180  TAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGT  239
+            ||||||||| || ||||| | ||| ||||| |||||||||||||| || ||||| |||||
+Sbjct  783  TAAACGTTGATCTCGAACTAAGAATGTAAAAGCTTGTGCTTGTGACGCTTCTGGACCAGT  724
+
+Query  240  TGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCAT  282
+            ||| ||| | || |||  ||| ||  | || || ||| |||||
+Sbjct  723  TGGACCATATAATTCACTAGGATAGGCTGTATTATTATACCAT  681
+
+
+>AY876217.1 Pavlova gyrans strain CCMP 607 photosystem II CP43 chlorophyll 
+apoprotein (psbC) gene, partial cds; chloroplast
+Length=1002
+
+ Score = 195 bits (105),  Expect = 7e-45
+ Identities = 211/264 (80%), Gaps = 0/264 (0%)
+ Strand=Plus/Minus
+
+Query  24   ATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAAACG  83
+            ||| || || || ||||| |  || ||||| | ||| |||||||||||||||||||||||
+Sbjct  990  ATCTAGACCGTTAGGTCCTCTTAGCGGCTCAATCCAAGGAGCACGCATATCCCAGAAACG  931
+
+Query  84   CATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACCTAA  143
+            |||||| |||||||| |  || || || || | |||||| ||||| ||||||||||| | 
+Sbjct  930  CATTGTTTCACCACCTAGAATGATCTCGCCTGAAGGTGAGCGCATTAGGTACTTACCAAG  871
+
+Query  144  TCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAGGAA  203
+             ||||| || || || |||||||| | ||| || || |  | |||||||||||| |||||
+Sbjct  870  ACCAGTAGGACCTTGAGCAGAAGCTACGTTGGCACCAAGTCTTTGGTCACGAACTAGGAA  811
+
+Query  204  AGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGGGTA  263
+            ||||||||||||||| ||||| || ||||| ||||| || |||||||| |||  ||||||
+Sbjct  810  AGTAAATGCTTGTGCCTGTGAAGCTTCTGGGCCAGTAGGGCCAAAGAATTCACTAGGGTA  751
+
+Query  264  AACAGTGTTGTTAAACCATACAAA  287
+            | | ||||| ||  |||| |||||
+Sbjct  750  AGCTGTGTTATTGTACCAAACAAA  727
+
+
+>MH511750.1 Volvulina compacta subunit VII of photosystem I (Fe-Spolypeptide) 
+(psaC), K protein of photosystem II (psbK), and photosystem 
+II 44 kDa protein (psbC) genes, complete cds; plastid
+Length=11821
+
+ Score = 193 bits (104),  Expect = 2e-44
+ Identities = 179/216 (83%), Gaps = 2/216 (1%)
+ Strand=Plus/Plus
+
+Query  1     ATATCGTTCTTAAGCTTTG-ATAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCA  59
+             ||||| || ||||| ||||  |||||| |  |||||||| ||||| || || |||| |||
+Sbjct  9338  ATATCATTTTTAAG-TTTGTTTAAATCTAAACCATTTGGACCACGTAGAGGTTCTAGCCA  9396
+
+Query  60    TGGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGG  119
+             |||| |||| | |||||| || |||||||| |||||||| || || ||||| || || ||
+Sbjct  9397  TGGACCACGGAAATCCCAAAAGCGCATTGTTTCACCACCAAAAATGATTTCACCTGTTGG  9456
+
+Query  120   TGAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCC  179
+             ||||||||| | ||| ||||| |  || ||||| || ||||||||||||| ||| || ||
+Sbjct  9457  TGAACGCATTAAGTATTTACCAAGACCTGTTGGACCTTGTGCAGAAGCAACGTTAGCACC  9516
+
+Query  180   TAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTG  215
+             ||||||||||||||||||||||||||||||||||||
+Sbjct  9517  TAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTG  9552
+
+
+>MH064030.1 Nitzschia cf. spathulata strain KSA2016-35 thin Nitz-F27 photosystem 
+II subunit C (psbC) gene, partial cds; chloroplast
+Length=1183
+
+ Score = 193 bits (104),  Expect = 2e-44
+ Identities = 223/282 (79%), Gaps = 2/282 (1%)
+ Strand=Plus/Minus
+
+Query  1     ATATCGTTCTTAAGCTTTGATAA-ATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCA  59
+             ||||| || ||||  |||| ||| ||| |  || ||||| ||||| | ||| || |||||
+Sbjct  1016  ATATCATTTTTAA-TTTTGTTAATATCTAAACCGTTTGGACCACGTAATGGTTCAACCCA  958
+
+Query  60    TGGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGG  119
+              || ||||| | ||||||||| ||||||||||||||||||||||||||||| ||| | ||
+Sbjct  957   AGGCGCACGTAAATCCCAGAATCGCATTGTCTCACCACCGAAGATAATTTCCCCACTTGG  898
+
+Query  120   TGAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCC  179
+             ||||||||| | ||| |||||||| |||||||| || ||||| || | ||  ||||| ||
+Sbjct  897   TGAACGCATTAAGTATTTACCTAAACCAGTTGGACCTTGTGCTGATGAAACATTTGCACC  838
+
+Query  180   TAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGT  239
+             ||||||||| || ||||| | ||| ||||||| ||| | ||| ||||| || || |||||
+Sbjct  837   TAAACGTTGATCTCGAACTAAGAATGTAAATGTTTGAGATTGCGATGCTTCAGGACCAGT  778
+
+Query  240   TGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCA  281
+             ||| ||  | || |||  ||| ||| | || |||||| ||||
+Sbjct  777   TGGACCGTATAATTCACTAGGATAAGCTGTATTGTTATACCA  736
+
+
+>KU179143.1 Nitzschia sp. KSA0035 photosystem II CP43 protein (psbC) gene, 
+partial cds; chloroplast
+Length=1011
+
+ Score = 193 bits (104),  Expect = 2e-44
+ Identities = 223/282 (79%), Gaps = 2/282 (1%)
+ Strand=Plus/Minus
+
+Query  1    ATATCGTTCTTAAGCTTTGATAA-ATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCA  59
+            ||||| || ||||  |||| ||| ||| |  || ||||| ||||| | ||| || |||||
+Sbjct  941  ATATCATTTTTAA-TTTTGTTAATATCTAAACCGTTTGGACCACGTAATGGTTCAACCCA  883
+
+Query  60   TGGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGG  119
+             || ||||| | ||||||||| ||||||||||||||||||||||||||||| ||| | ||
+Sbjct  882  AGGCGCACGTAAATCCCAGAATCGCATTGTCTCACCACCGAAGATAATTTCCCCACTTGG  823
+
+Query  120  TGAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCC  179
+            ||||||||| | ||| |||||||| |||||||| || ||||| || | ||  ||||| ||
+Sbjct  822  TGAACGCATTAAGTATTTACCTAAACCAGTTGGACCTTGTGCTGATGAAACATTTGCACC  763
+
+Query  180  TAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGT  239
+            ||||||||| || ||||| | ||| ||||||| ||| | ||| ||||| || || |||||
+Sbjct  762  TAAACGTTGATCTCGAACTAAGAATGTAAATGTTTGAGATTGAGATGCTTCAGGACCAGT  703
+
+Query  240  TGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCA  281
+            ||| ||  | || |||  ||| ||| | || |||||| ||||
+Sbjct  702  TGGACCGTATAATTCACTAGGATAAGCTGTATTGTTATACCA  661
+
+
+>NC_025530.1 Pedinomonas tuberculata culture-collection SAG:42.84 chloroplast, 
+complete genome
+ KM462867.1 Pedinomonas tuberculata culture-collection SAG:42.84 chloroplast, 
+complete genome
+Length=126694
+
+ Score = 193 bits (104),  Expect = 2e-44
+ Identities = 199/246 (81%), Gaps = 2/246 (1%)
+ Strand=Plus/Minus
+
+Query  1      ATATCGTTCTTAAGCTTTG-ATAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCA  59
+              |||||  ||||||| ||||  |||||| |  |||||||| ||||| | ||| |||| |||
+Sbjct  82498  ATATCACTCTTAAG-TTTGTTTAAATCTAAACCATTTGGACCACGTAATGGTTCTAACCA  82440
+
+Query  60     TGGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGG  119
+               ||| |||| | |||||||||||||||||| |||||||| || || ||||| || || ||
+Sbjct  82439  AGGACCACGGAAATCCCAGAAACGCATTGTTTCACCACCAAAAATGATTTCACCCGTCGG  82380
+
+Query  120    TGAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCC  179
+               |||||||| |  || || ||||| || || ||||| ||||||||||| | ||| || ||
+Sbjct  82379  AGAACGCATTAAATATTTTCCTAAACCTGTAGGTCCTTGTGCAGAAGCTACGTTAGCCCC  82320
+
+Query  180    TAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGT  239
+              |||||||||||||||||||||||||||||| | ||||||||| || || || || |||||
+Sbjct  82319  TAAACGTTGGTCACGAACAAGGAAAGTAAAGGTTTGTGCTTGAGAAGCTTCAGGACCAGT  82260
+
+Query  240    TGGTCC  245
+               || ||
+Sbjct  82259  AGGACC  82254
+
+
+>MG677935.1 Haematococcus lacustris strain UTEX 2505 chloroplast, complete 
+genome
+Length=1352306
+
+ Score = 191 bits (103),  Expect = 9e-44
+ Identities = 209/262 (80%), Gaps = 0/262 (0%)
+ Strand=Plus/Minus
+
+Query  21       TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+                |||||| |  ||||| || || || || || || ||||| ||  |||| | |||||||||
+Sbjct  1315054  TAAATCTAAACCATTAGGACCGCGTAGAGGTTCAACCCAAGGGCCACGGAAATCCCAGAA  1314995
+
+Query  81       ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+                |||||| || ||||||||||| |||||||| ||||| || |||||||| |  || || ||
+Sbjct  1314994  ACGCATAGTTTCACCACCGAAAATAATTTCACCAGTTGGAGAACGCATTAAATATTTCCC  1314935
+
+Query  141      TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+                ||| ||||| || || || ||||| || |  || || |||||||||||||||||||||||
+Sbjct  1314934  TAAACCAGTAGGACCTTGAGCAGATGCTACATTGGCCCCTAAACGTTGGTCACGAACAAG  1314875
+
+Query  201      GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+                ||||||||| ||||| |||||||| || || || || || || ||| | ||||||  |||
+Sbjct  1314874  GAAAGTAAAAGCTTGAGCTTGTGAAGCTTCAGGACCTGTAGGACCATAAAACTCACTAGG  1314815
+
+Query  261      GTAAACAGTGTTGTTAAACCAT  282
+                 ||| |||| ||||||||||||
+Sbjct  1314814  ATAAGCAGTATTGTTAAACCAT  1314793
+
+
+>NC_037007.1 Haematococcus lacustris voucher UTEX:2505 chloroplast, complete 
+genome
+Length=1352306
+
+ Score = 191 bits (103),  Expect = 9e-44
+ Identities = 209/262 (80%), Gaps = 0/262 (0%)
+ Strand=Plus/Minus
+
+Query  21       TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+                |||||| |  ||||| || || || || || || ||||| ||  |||| | |||||||||
+Sbjct  1315054  TAAATCTAAACCATTAGGACCGCGTAGAGGTTCAACCCAAGGGCCACGGAAATCCCAGAA  1314995
+
+Query  81       ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+                |||||| || ||||||||||| |||||||| ||||| || |||||||| |  || || ||
+Sbjct  1314994  ACGCATAGTTTCACCACCGAAAATAATTTCACCAGTTGGAGAACGCATTAAATATTTCCC  1314935
+
+Query  141      TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+                ||| ||||| || || || ||||| || |  || || |||||||||||||||||||||||
+Sbjct  1314934  TAAACCAGTAGGACCTTGAGCAGATGCTACATTGGCCCCTAAACGTTGGTCACGAACAAG  1314875
+
+Query  201      GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+                ||||||||| ||||| |||||||| || || || || || || ||| | ||||||  |||
+Sbjct  1314874  GAAAGTAAAAGCTTGAGCTTGTGAAGCTTCAGGACCTGTAGGACCATAAAACTCACTAGG  1314815
+
+Query  261      GTAAACAGTGTTGTTAAACCAT  282
+                 ||| |||| ||||||||||||
+Sbjct  1314814  ATAAGCAGTATTGTTAAACCAT  1314793
+
+
+>MN709220.1 Haematococcus lacustris strain FACHB-712 chloroplast, complete 
+genome
+Length=1351631
+
+ Score = 191 bits (103),  Expect = 9e-44
+ Identities = 209/262 (80%), Gaps = 0/262 (0%)
+ Strand=Plus/Minus
+
+Query  21       TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+                |||||| |  ||||| || || || || || || ||||| ||  |||| | |||||||||
+Sbjct  1278289  TAAATCTAAACCATTAGGACCGCGTAGAGGTTCAACCCAAGGGCCACGGAAATCCCAGAA  1278230
+
+Query  81       ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+                |||||| || ||||||||||| |||||||| ||||| || |||||||| |  || || ||
+Sbjct  1278229  ACGCATAGTTTCACCACCGAAAATAATTTCACCAGTTGGAGAACGCATTAAATATTTCCC  1278170
+
+Query  141      TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+                ||| ||||| || || || ||||| || |  || || |||||||||||||||||||||||
+Sbjct  1278169  TAAACCAGTAGGACCTTGAGCAGATGCTACATTGGCCCCTAAACGTTGGTCACGAACAAG  1278110
+
+Query  201      GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+                ||||||||| ||||| |||||||| || || || || || || ||| | ||||||  |||
+Sbjct  1278109  GAAAGTAAAAGCTTGAGCTTGTGAAGCTTCAGGACCTGTAGGACCATAAAACTCACTAGG  1278050
+
+Query  261      GTAAACAGTGTTGTTAAACCAT  282
+                 ||| |||| ||||||||||||
+Sbjct  1278049  ATAAGCAGTATTGTTAAACCAT  1278028
+
+
+>LC380367.1 Chlamydomonas sp. YgT1301A1 chloroplast psbC gene for photosystem 
+II CP43 apoprotein, partial cds
+Length=936
+
+ Score = 187 bits (101),  Expect = 1e-42
+ Identities = 173/209 (83%), Gaps = 0/209 (0%)
+ Strand=Plus/Minus
+
+Query  73   TCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGG  132
+            ||||| ||||||||||| |||||||| || || || || || || || |||||||| |  
+Sbjct  906  TCCCAAAAACGCATTGTTTCACCACCAAAAATGATCTCACCTGTTGGAGAACGCATTAAA  847
+
+Query  133  TACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCA  192
+            || |||||||| || ||||| || ||||||||||| | ||| || |||||||||||||||
+Sbjct  846  TATTTACCTAAACCCGTTGGACCTTGTGCAGAAGCTACGTTAGCACCTAAACGTTGGTCA  787
+
+Query  193  CGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAAC  252
+            ||||||||||||||||||||||| |||||   ||| || || |||||||| ||| |||| 
+Sbjct  786  CGAACAAGGAAAGTAAATGCTTGAGCTTGACTTGCTTCAGGGCCAGTTGGACCATAGAAT  727
+
+Query  253  TCAGAAGGGTAAACAGTGTTGTTAAACCA  281
+            |||  ||||||| |||||||||| |||||
+Sbjct  726  TCACTAGGGTAAGCAGTGTTGTTGAACCA  698
+
+
+>KT369349.1 Rotundella rotunda PSII 43 kDa protein (psbC) gene, complete 
+cds; chloroplast
+Length=1386
+
+ Score = 183 bits (99),  Expect = 1e-41
+ Identities = 214/271 (79%), Gaps = 1/271 (0%)
+ Strand=Plus/Minus
+
+Query  21    TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+             |||||| |  ||||| || ||||| | ||| |||| ||| ||| |||| | |||||||||
+Sbjct  1095  TAAATCTAAACCATTAGGACCACGTAATGGTTCTAACCAAGGACCACGGAAATCCCAGAA  1036
+
+Query  81    ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+             ||||||||| |||||||| || || |||||||| || ||||| | ||| |  || |||||
+Sbjct  1035  ACGCATTGTTTCACCACCAAAAATGATTTCTCCTGTTGGTGATCTCATTAAATATTTACC  976
+
+Query  141   TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+              |  || || || || ||||||||||| | ||| ||||||||||||||||||||||||||
+Sbjct  975   AAGACCTGTAGGCCCTTGTGCAGAAGCTACGTTAGCTCCTAAACGTTGGTCACGAACAAG  916
+
+Query  201   GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+             ||||||||| | ||| | |||||| || || || || || || ||| |||| |||   ||
+Sbjct  915   GAAAGTAAACGTTTGAGATTGTGAAGCTTCAGGACCTGTAGGACCATAGAATTCACTTGG  856
+
+Query  261   GTAAACAGTGTTGTTAAACCATACAAATACA  291
+             |||| ||||||| || ||||| | | |||||
+Sbjct  855   GTAAGCAGTGTTATTGAACCA-AGACATACA  826
+
+
+>KC145491.1 Sphaeropleales sp. KF-2013b strain BCP-WJT54VFNP11 photosystem 
+II 44 kDa protein (psbC) gene, partial cds; chloroplast
+Length=1106
+
+ Score = 183 bits (99),  Expect = 1e-41
+ Identities = 214/271 (79%), Gaps = 1/271 (0%)
+ Strand=Plus/Minus
+
+Query  21   TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+            |||||| |  ||||| || ||||| | ||| |||| ||| ||| |||| | |||||||||
+Sbjct  885  TAAATCTAAACCATTAGGACCACGTAATGGTTCTAACCAAGGACCACGGAAATCCCAGAA  826
+
+Query  81   ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+            ||||||||| |||||||| || || |||||||| || ||||| | ||| |  || |||||
+Sbjct  825  ACGCATTGTTTCACCACCAAAAATGATTTCTCCTGTTGGTGATCTCATTAAATATTTACC  766
+
+Query  141  TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+             |  || || || || ||||||||||| | ||| ||||||||||||||||||||||||||
+Sbjct  765  AAGACCTGTAGGCCCTTGTGCAGAAGCTACGTTAGCTCCTAAACGTTGGTCACGAACAAG  706
+
+Query  201  GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+            ||||||||| | ||| | |||||| || || || || || || ||| |||| |||   ||
+Sbjct  705  GAAAGTAAACGTTTGAGATTGTGAAGCTTCAGGACCTGTAGGACCATAGAATTCACTTGG  646
+
+Query  261  GTAAACAGTGTTGTTAAACCATACAAATACA  291
+            |||| ||||||| || ||||| | | |||||
+Sbjct  645  GTAAGCAGTGTTATTGAACCA-AGACATACA  616
+
+
+>MG762001.2 Marchantia polymorpha subsp. ruderalis chloroplast, complete 
+genome
+Length=120288
+
+ Score = 182 bits (98),  Expect = 5e-41
+ Identities = 205/258 (79%), Gaps = 1/258 (0%)
+ Strand=Plus/Minus
+
+Query  34     TTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAAACGCATTGTCTCA  93
+              ||||||||||| | ||| |||| |||||||||||| | |||||| ||||||||||| || 
+Sbjct  40664  TTTGGTCCACGTAATGGTTCTAACCATGGAGCACGAAGATCCCAAAAACGCATTGTTTCT  40605
+
+Query  94     CCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACCTAATCCAGTTGGT  153
+              ||||| || ||||||||||||||||||||||||||||  || || ||||||||||| || 
+Sbjct  40604  CCACCAAAAATAATTTCTCCAGTAGGTGAACGCATAATATATTTTCCTAATCCAGTAGGC  40545
+
+Query  154    CCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAGGAAAGTAAATGCT  213
+              || || || ||| | |  || ||||| | |||||| || | ||| |  |||||||| |||
+Sbjct  40544  CCTTGAGCTGAACCTACATTAGCTCCAAGACGTTGATCTCTAACTAAAAAAGTAAAAGCT  40485
+
+Query  214    TGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTG  273
+              || ||||| || || ||||| ||||| || ||| | ||||||   || ||| |||| || 
+Sbjct  40484  TGAGCTTGAGAAGCTTCTGGACCAGTAGGACCATAAAACTCACTCGGATAAGCAGTATTA  40425
+
+Query  274    TTAAACCATACAAATACA  291
+              || ||||| ||||| |||
+Sbjct  40424  TTGAACCAAACAAA-ACA  40408
+
+
+>MK875388.1 Gloiopeltis furcata voucher Hiroshi Kawai:KU-d22892 photosystem 
+II CP43 apoprotein (psbC) gene, partial cds; chloroplast
+Length=1070
+
+ Score = 182 bits (98),  Expect = 5e-41
+ Identities = 188/233 (81%), Gaps = 0/233 (0%)
+ Strand=Plus/Minus
+
+Query  55    ACCCATGGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCA  114
+             ||||||||||| |  | |||||||||||||||||||||||||||||| || ||||| || 
+Sbjct  1045  ACCCATGGAGCTCTTAAATCCCAGAAACGCATTGTCTCACCACCGAATATTATTTCACCG  986
+
+Query  115   GTAGGTGAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTT  174
+              | || || | |||||| || || || ||||||||||||||||| |||||||||| ||| 
+Sbjct  985   CTTGGAGACCTCATAAGATATTTTCCCAATCCAGTTGGTCCCTGGGCAGAAGCAACGTTA  926
+
+Query  175   GCTCCTAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGT  234
+             |||||||| | ||| || |  || ||||||||||| |||||||| || ||||| ||||| 
+Sbjct  925   GCTCCTAATCTTTGATCTCTTACTAGGAAAGTAAAAGCTTGTGCCTGAGATGCTTCTGGA  866
+
+Query  235   CCAGTTGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAA  287
+             || ||||| ||| | || |||   || ||| | ||||||||| ||||||| ||
+Sbjct  865   CCTGTTGGACCATAAAATTCACTTGGATAAGCTGTGTTGTTATACCATACGAA  813
+
+
+>MK202952.1 Marchantia polymorpha subsp. ruderalis strain KBDI00084 chloroplast, 
+complete genome
+Length=120304
+
+ Score = 182 bits (98),  Expect = 5e-41
+ Identities = 205/258 (79%), Gaps = 1/258 (0%)
+ Strand=Plus/Minus
+
+Query  34     TTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAAACGCATTGTCTCA  93
+              ||||||||||| | ||| |||| |||||||||||| | |||||| ||||||||||| || 
+Sbjct  40667  TTTGGTCCACGTAATGGTTCTAACCATGGAGCACGAAGATCCCAAAAACGCATTGTTTCT  40608
+
+Query  94     CCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACCTAATCCAGTTGGT  153
+              ||||| || ||||||||||||||||||||||||||||  || || ||||||||||| || 
+Sbjct  40607  CCACCAAAAATAATTTCTCCAGTAGGTGAACGCATAATATATTTTCCTAATCCAGTAGGC  40548
+
+Query  154    CCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAGGAAAGTAAATGCT  213
+              || || || ||| | |  || ||||| | |||||| || | ||| |  |||||||| |||
+Sbjct  40547  CCTTGAGCTGAACCTACATTAGCTCCAAGACGTTGATCTCTAACTAAAAAAGTAAAAGCT  40488
+
+Query  214    TGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTG  273
+              || ||||| || || ||||| ||||| || ||| | ||||||   || ||| |||| || 
+Sbjct  40487  TGAGCTTGAGAAGCTTCTGGACCAGTAGGACCATAAAACTCACTCGGATAAGCAGTATTA  40428
+
+Query  274    TTAAACCATACAAATACA  291
+              || ||||| ||||| |||
+Sbjct  40427  TTGAACCAAACAAA-ACA  40411
+
+
+>NC_042505.1 Marchantia polymorpha plastid, complete genome
+ MH635409.1 Marchantia polymorpha plastid, complete genome
+Length=120314
+
+ Score = 182 bits (98),  Expect = 5e-41
+ Identities = 205/258 (79%), Gaps = 1/258 (0%)
+ Strand=Plus/Minus
+
+Query  34     TTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAAACGCATTGTCTCA  93
+              ||||||||||| | ||| |||| |||||||||||| | |||||| ||||||||||| || 
+Sbjct  40665  TTTGGTCCACGTAATGGTTCTAACCATGGAGCACGAAGATCCCAAAAACGCATTGTTTCT  40606
+
+Query  94     CCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACCTAATCCAGTTGGT  153
+              ||||| || ||||||||||||||||||||||||||||  || || ||||||||||| || 
+Sbjct  40605  CCACCAAAAATAATTTCTCCAGTAGGTGAACGCATAATATATTTTCCTAATCCAGTAGGC  40546
+
+Query  154    CCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAGGAAAGTAAATGCT  213
+              || || || ||| | |  || ||||| | |||||| || | ||| |  |||||||| |||
+Sbjct  40545  CCTTGAGCTGAACCTACATTAGCTCCAAGACGTTGATCTCTAACTAAAAAAGTAAAAGCT  40486
+
+Query  214    TGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTG  273
+              || ||||| || || ||||| ||||| || ||| | ||||||   || ||| |||| || 
+Sbjct  40485  TGAGCTTGAGAAGCTTCTGGACCAGTAGGACCATAAAACTCACTCGGATAAGCAGTATTA  40426
+
+Query  274    TTAAACCATACAAATACA  291
+              || ||||| ||||| |||
+Sbjct  40425  TTGAACCAAACAAA-ACA  40409
+
+
+>NC_037507.1 Marchantia polymorpha subsp. ruderalis chloroplast DNA, complete 
+genome, strain: Kitashirakawa-2
+ LC192146.1 Marchantia polymorpha subsp. ruderalis chloroplast DNA, complete 
+genome, strain: Kitashirakawa-2
+Length=120304
+
+ Score = 182 bits (98),  Expect = 5e-41
+ Identities = 205/258 (79%), Gaps = 1/258 (0%)
+ Strand=Plus/Minus
+
+Query  34     TTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAAACGCATTGTCTCA  93
+              ||||||||||| | ||| |||| |||||||||||| | |||||| ||||||||||| || 
+Sbjct  40667  TTTGGTCCACGTAATGGTTCTAACCATGGAGCACGAAGATCCCAAAAACGCATTGTTTCT  40608
+
+Query  94     CCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACCTAATCCAGTTGGT  153
+              ||||| || ||||||||||||||||||||||||||||  || || ||||||||||| || 
+Sbjct  40607  CCACCAAAAATAATTTCTCCAGTAGGTGAACGCATAATATATTTTCCTAATCCAGTAGGC  40548
+
+Query  154    CCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAGGAAAGTAAATGCT  213
+              || || || ||| | |  || ||||| | |||||| || | ||| |  |||||||| |||
+Sbjct  40547  CCTTGAGCTGAACCTACATTAGCTCCAAGACGTTGATCTCTAACTAAAAAAGTAAAAGCT  40488
+
+Query  214    TGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTG  273
+              || ||||| || || ||||| ||||| || ||| | ||||||   || ||| |||| || 
+Sbjct  40487  TGAGCTTGAGAAGCTTCTGGACCAGTAGGACCATAAAACTCACTCGGATAAGCAGTATTA  40428
+
+Query  274    TTAAACCATACAAATACA  291
+              || ||||| ||||| |||
+Sbjct  40427  TTGAACCAAACAAA-ACA  40411
+
+
+>KT364744.3 Cloning vector pCS CL0*b, complete sequence
+Length=8844
+
+ Score = 182 bits (98),  Expect = 5e-41
+ Identities = 205/258 (79%), Gaps = 1/258 (0%)
+ Strand=Plus/Minus
+
+Query  34   TTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAAACGCATTGTCTCA  93
+            ||||||||||| | ||| |||| |||||||||||| | |||||| ||||||||||| || 
+Sbjct  472  TTTGGTCCACGTAATGGTTCTAACCATGGAGCACGAAGATCCCAAAAACGCATTGTTTCT  413
+
+Query  94   CCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACCTAATCCAGTTGGT  153
+            ||||| || ||||||||||||||||||||||||||||  || || ||||||||||| || 
+Sbjct  412  CCACCAAAAATAATTTCTCCAGTAGGTGAACGCATAATATATTTTCCTAATCCAGTAGGC  353
+
+Query  154  CCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAGGAAAGTAAATGCT  213
+            || || || ||| | |  || ||||| | |||||| || | ||| |  |||||||| |||
+Sbjct  352  CCTTGAGCTGAACCTACATTAGCTCCAAGACGTTGATCTCTAACTAAAAAAGTAAAAGCT  293
+
+Query  214  TGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTG  273
+            || ||||| || || ||||| ||||| || ||| | ||||||   || ||| |||| || 
+Sbjct  292  TGAGCTTGAGAAGCTTCTGGACCAGTAGGACCATAAAACTCACTCGGATAAGCAGTATTA  233
+
+Query  274  TTAAACCATACAAATACA  291
+            || ||||| ||||| |||
+Sbjct  232  TTGAACCAAACAAA-ACA  216
+
+
+>LC068606.1 Chloroplast transformation vector pCSGFP DNA, complete sequence
+Length=5919
+
+ Score = 182 bits (98),  Expect = 5e-41
+ Identities = 205/258 (79%), Gaps = 1/258 (0%)
+ Strand=Plus/Minus
+
+Query  34   TTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAAACGCATTGTCTCA  93
+            ||||||||||| | ||| |||| |||||||||||| | |||||| ||||||||||| || 
+Sbjct  473  TTTGGTCCACGTAATGGTTCTAACCATGGAGCACGAAGATCCCAAAAACGCATTGTTTCT  414
+
+Query  94   CCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACCTAATCCAGTTGGT  153
+            ||||| || ||||||||||||||||||||||||||||  || || ||||||||||| || 
+Sbjct  413  CCACCAAAAATAATTTCTCCAGTAGGTGAACGCATAATATATTTTCCTAATCCAGTAGGC  354
+
+Query  154  CCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAGGAAAGTAAATGCT  213
+            || || || ||| | |  || ||||| | |||||| || | ||| |  |||||||| |||
+Sbjct  353  CCTTGAGCTGAACCTACATTAGCTCCAAGACGTTGATCTCTAACTAAAAAAGTAAAAGCT  294
+
+Query  214  TGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTG  273
+            || ||||| || || ||||| ||||| || ||| | ||||||   || ||| |||| || 
+Sbjct  293  TGAGCTTGAGAAGCTTCTGGACCAGTAGGACCATAAAACTCACTCGGATAAGCAGTATTA  234
+
+Query  274  TTAAACCATACAAATACA  291
+            || ||||| ||||| |||
+Sbjct  233  TTGAACCAAACAAA-ACA  217
+
+
+>AP025455.1 Marchantia polymorpha subsp. ruderalis Tak-1 chloroplast DNA, 
+complete genome
+Length=120306
+
+ Score = 182 bits (98),  Expect = 5e-41
+ Identities = 205/258 (79%), Gaps = 1/258 (0%)
+ Strand=Plus/Minus
+
+Query  34     TTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAAACGCATTGTCTCA  93
+              ||||||||||| | ||| |||| |||||||||||| | |||||| ||||||||||| || 
+Sbjct  40669  TTTGGTCCACGTAATGGTTCTAACCATGGAGCACGAAGATCCCAAAAACGCATTGTTTCT  40610
+
+Query  94     CCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACCTAATCCAGTTGGT  153
+              ||||| || ||||||||||||||||||||||||||||  || || ||||||||||| || 
+Sbjct  40609  CCACCAAAAATAATTTCTCCAGTAGGTGAACGCATAATATATTTTCCTAATCCAGTAGGC  40550
+
+Query  154    CCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAGGAAAGTAAATGCT  213
+              || || || ||| | |  || ||||| | |||||| || | ||| |  |||||||| |||
+Sbjct  40549  CCTTGAGCTGAACCTACATTAGCTCCAAGACGTTGATCTCTAACTAAAAAAGTAAAAGCT  40490
+
+Query  214    TGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTG  273
+              || ||||| || || ||||| ||||| || ||| | ||||||   || ||| |||| || 
+Sbjct  40489  TGAGCTTGAGAAGCTTCTGGACCAGTAGGACCATAAAACTCACTCGGATAAGCAGTATTA  40430
+
+Query  274    TTAAACCATACAAATACA  291
+              || ||||| ||||| |||
+Sbjct  40429  TTGAACCAAACAAA-ACA  40413
+
+
+>MK875387.1 Gloiopeltis furcata voucher Hiroshi Kawai:KU-d3071 photosystem 
+II CP43 apoprotein (psbC) gene, partial cds; chloroplast
+Length=1068
+
+ Score = 176 bits (95),  Expect = 2e-39
+ Identities = 187/233 (80%), Gaps = 0/233 (0%)
+ Strand=Plus/Minus
+
+Query  55    ACCCATGGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCA  114
+             ||||||||||| |  | |||||||||||||||||||||||||||||| || ||||| || 
+Sbjct  1045  ACCCATGGAGCTCTTAAATCCCAGAAACGCATTGTCTCACCACCGAATATGATTTCACCG  986
+
+Query  115   GTAGGTGAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTT  174
+              | || || | ||| || || || || ||||||||||||||||| |||||||||| ||| 
+Sbjct  985   CTTGGAGACCTCATTAGATATTTTCCCAATCCAGTTGGTCCCTGGGCAGAAGCAACGTTA  926
+
+Query  175   GCTCCTAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGT  234
+             |||||||| | ||| || |  || ||||||||||| |||||||| || ||||| ||||| 
+Sbjct  925   GCTCCTAATCTTTGATCTCTTACTAGGAAAGTAAAAGCTTGTGCCTGAGATGCTTCTGGA  866
+
+Query  235   CCAGTTGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAA  287
+             || ||||| ||| | || |||   || ||| | ||||||||| ||||||| ||
+Sbjct  865   CCTGTTGGACCATAAAATTCACTTGGATAAGCTGTGTTGTTATACCATACGAA  813
+
+
+>LC380348.1 Chlamydomonas fasciata NIES-437 chloroplast psbC gene for photosystem 
+II CP43 apoprotein, partial cds
+Length=2154
+
+ Score = 176 bits (95),  Expect = 2e-39
+ Identities = 198/249 (80%), Gaps = 2/249 (1%)
+ Strand=Plus/Minus
+
+Query  34    TTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAAACGCATTGTCTCA  93
+             ||||| ||||| || || |||| ||| ||| |||| | |||||||||||||||||| |||
+Sbjct  2093  TTTGGACCACGTAGAGGTTCTAACCAAGGACCACGGAAATCCCAGAAACGCATTGTTTCA  2034
+
+Query  94    CCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACCTAATCCAGTTGGT  153
+             ||||| || || ||||| || || || |||||||| |  || ||||| |  || || || 
+Sbjct  2033  CCACCAAAAATGATTTCACCTGTTGGAGAACGCATTAAATATTTACCAAGACCTGTAGGA  1974
+
+Query  154   CCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAGGAAAGTAAATGCT  213
+             || ||||||||||| | ||| || ||||||||||||||||||||||||||||||||||||
+Sbjct  1973  CCTTGTGCAGAAGCTACGTTAGCACCTAAACGTTGGTCACGAACAAGGAAAGTAAATGCT  1914
+
+Query  214   TGTGCTTGTGAT-GCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGGGTAAACAGTGTT  272
+             || | ||| | | || || || || ||||| ||  | || ||   ||||||| |||||||
+Sbjct  1913  TGAGATTG-GCTAGCTTCAGGACCTGTTGGACCGTAAAATTCGCTAGGGTAAGCAGTGTT  1855
+
+Query  273   GTTAAACCA  281
+             ||| |||||
+Sbjct  1854  GTTGAACCA  1846
+
+
+>NC_042418.1 Reboulia hemisphaerica chloroplast, complete genome
+ MK477551.1 Reboulia hemisphaerica chloroplast, complete genome
+Length=122596
+
+ Score = 171 bits (92),  Expect = 1e-37
+ Identities = 205/261 (79%), Gaps = 1/261 (0%)
+ Strand=Plus/Minus
+
+Query  31     CCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAAACGCATTGTC  90
+              |||||||| || || | ||| |||| |||||||||||| | |||||| ||||||||||| 
+Sbjct  41708  CCATTTGGACCTCGTAATGGTTCTAACCATGGAGCACGAAGATCCCAAAAACGCATTGTT  41649
+
+Query  91     TCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACCTAATCCAGTT  150
+              || ||||| || ||||||||||||||||||||||||||||  || || ||||| ||||| 
+Sbjct  41648  TCTCCACCAAAAATAATTTCTCCAGTAGGTGAACGCATAATATATTTTCCTAAACCAGTA  41589
+
+Query  151    GGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAGGAAAGTAAAT  210
+              ||||| || || ||| | |  || ||||| | |||||| || | ||| |  |||||||| 
+Sbjct  41588  GGTCCTTGAGCTGAACCTACATTAGCTCCAAGACGTTGATCTCTAACTAAAAAAGTAAAA  41529
+
+Query  211    GCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGGGTAAACAGTG  270
+              ||||| ||||| || || || || ||||| |||||| | || |||  ||| ||| | || 
+Sbjct  41528  GCTTGAGCTTGAGAAGCTTCCGGACCAGTAGGTCCATAAAATTCACTAGGATAAGCTGTA  41469
+
+Query  271    TTGTTAAACCATACAAATACA  291
+              || || ||||| ||||| |||
+Sbjct  41468  TTATTGAACCAAACAAA-ACA  41449
+
+
+>NC_030359.1 Cylindrocystis brebissonii culture-collection SAG:615-1 chloroplast, 
+complete genome
+ KU646495.1 Cylindrocystis brebissonii culture-collection SAG:615-1 chloroplast, 
+complete genome
+Length=136938
+
+ Score = 171 bits (92),  Expect = 1e-37
+ Identities = 225/291 (77%), Gaps = 1/291 (0%)
+ Strand=Plus/Plus
+
+Query  1      ATATCGTTCTTAAGCTTTGATAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCAT  60
+              ||||| ||||| |  |||  ||| || |  ||||| ||||| ||||| || |||| ||||
+Sbjct  74996  ATATCTTTCTTTAATTTTCCTAAGTCTAATCCATTAGGTCCTCGAAGAGGTTCTAACCAT  75055
+
+Query  61     GGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGT  120
+              |||||||| | |||||| |||||||| || ||||||||||||||||||||||||||||| 
+Sbjct  75056  GGAGCACGTAAATCCCAAAAACGCATAGTTTCACCACCGAAGATAATTTCTCCAGTAGGA  75115
+
+Query  121    GAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCT  180
+              || | ||| |  || || ||||| ||||| ||||| || || ||  | |  || || || 
+Sbjct  75116  GATCTCATTAAATATTTTCCTAAACCAGTAGGTCCTTGAGCCGACCCTACATTAGCACCC  75175
+
+Query  181    AAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTT  240
+              || | |||||| |  || || |||||||| ||||||||||| ||||| || |||||||| 
+Sbjct  75176  AATCTTTGGTCTCTTACTAGAAAAGTAAAAGCTTGTGCTTGAGATGCTTCAGGTCCAGTA  75235
+
+Query  241    GGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAATACA  291
+              |||||| | || |||   || ||| | || || |||||||| ||||| |||
+Sbjct  75236  GGTCCATAAAATTCACTTGGATAAGCTGTATTATTAAACCAAACAAA-ACA  75285
+
+
+>MK875389.1 Gloiopeltis furcata voucher Hiroshi Kawai:KU-d22888 photosystem 
+II CP43 apoprotein (psbC) gene, partial cds; chloroplast
+Length=1071
+
+ Score = 167 bits (90),  Expect = 1e-36
+ Identities = 187/235 (80%), Gaps = 1/235 (0%)
+ Strand=Plus/Minus
+
+Query  55    ACCCATGGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCA  114
+             ||||||||||| |  | |||||||||||||||||||||||||||||| || ||||| || 
+Sbjct  1045  ACCCATGGAGCTCTTAAATCCCAGAAACGCATTGTCTCACCACCGAATATGATTTCACCG  986
+
+Query  115   GTAGGTGAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTT  174
+              | || || | |||||| || || || |||||||| |||||||| |||||||||| ||| 
+Sbjct  985   CTCGGAGACCTCATAAGATATTTTCCCAATCCAGTCGGTCCCTGGGCAGAAGCAACGTTA  926
+
+Query  175   GCTCCTAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGT  234
+             |||||||| | ||| || |  || || |||||||| |||||||| || ||||| ||||| 
+Sbjct  925   GCTCCTAATCTTTGATCTCTTACTAGAAAAGTAAAAGCTTGTGCCTGAGATGCTTCTGGA  866
+
+Query  235   CCAGTTGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCATAC-AAAT  288
+             || ||||| ||| | || ||    || ||| | ||||||||| ||||||| ||||
+Sbjct  865   CCTGTTGGACCATAAAATTCGCTTGGATAAGCTGTGTTGTTATACCATACGAAAT  811
+
+
+>AB044532.1 Paulschulzia pseudovolvox chloroplast psbC gene for photosystem 
+II CP43 apoprotein, strain:UTEX 167
+Length=465
+
+ Score = 167 bits (90),  Expect = 1e-36
+ Identities = 153/184 (83%), Gaps = 1/184 (1%)
+ Strand=Plus/Minus
+
+Query  108  TTCTCCAGTAGGTGAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGC  167
+            ||| ||||||||||||||||| |  || ||||| |  || ||||| || |||||||||||
+Sbjct  465  TTCACCAGTAGGTGAACGCATTAAATATTTACCAAGACCTGTTGGACCTTGTGCAGAAGC  406
+
+Query  168  AATGTTTGCTCCTAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGC  227
+            |||||| || ||||||||||||||||||||||||||||| || ||||| | ||| || ||
+Sbjct  405  AATGTTAGCACCTAAACGTTGGTCACGAACAAGGAAAGTGAAAGCTTGAGATTGAGAAGC  346
+
+Query  228  CTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAA  287
+             || || || ||||||||| ||||||||  ||||||| |||||||||| ||||| | | |
+Sbjct  345  TTCAGGACCCGTTGGTCCATAGAACTCACTAGGGTAAGCAGTGTTGTTGAACCA-AGAGA  287
+
+Query  288  TACA  291
+            ||||
+Sbjct  286  TACA  283
+
+
+>MF927459.1 Pelagophyceae sp. CCMP3390 photosystem II thylakoid membrane 
+protein (psbC) gene, partial cds; plastid
+Length=921
+
+ Score = 163 bits (88),  Expect = 2e-35
+ Identities = 176/220 (80%), Gaps = 0/220 (0%)
+ Strand=Plus/Minus
+
+Query  63   AGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGA  122
+            |||||| | |||||||||||||||||||||||||||||| || | ||| ||| | |||||
+Sbjct  921  AGCACGTAAATCCCAGAAACGCATTGTCTCACCACCGAAAATTACTTCACCACTTGGTGA  862
+
+Query  123  ACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAA  182
+            |||||| |  || || |||||||| ||||| || || || ||||| |  || || || | 
+Sbjct  861  ACGCATTAAATATTTTCCTAATCCTGTTGGACCTTGAGCTGAAGCTACATTAGCACCAAG  802
+
+Query  183  ACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGG  242
+            |||||||||||| |||||||| || |||| ||| ||||| || || ||||| || |||||
+Sbjct  801  ACGTTGGTCACGTACAAGGAATGTGAATGTTTGCGCTTGAGACGCTTCTGGACCTGTTGG  742
+
+Query  243  TCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCAT  282
+             ||| |||| |||  ||||||| |||| |||||  |||||
+Sbjct  741  ACCATAGAATTCACTAGGGTAAGCAGTATTGTTGTACCAT  702
+
+
+>KT625010.1 Chloromonas radiata clone contig2 chloroplast, partial genome
+Length=12654
+
+ Score = 159 bits (86),  Expect = 2e-34
+ Identities = 192/244 (79%), Gaps = 3/244 (1%)
+ Strand=Plus/Minus
+
+Query  49    GGCTCTACCCATGGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATT  108
+             ||||||| ||| ||  |||| | |||||||||||||||||| ||||||||||||||||||
+Sbjct  2474  GGCTCTAACCAAGGGCCACGGAAATCCCAGAAACGCATTGTTTCACCACCGAAGATAATT  2415
+
+Query  109   TCTCCAGTAGGTGAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCA  168
+             ||||||||||| || | ||| |  || |||||||| || || || || || |||||||| 
+Sbjct  2414  TCTCCAGTAGGAGATCTCATTAAATATTTACCTAAACCTGTAGGACCTTGAGCAGAAGCT  2355
+
+Query  169   ATGTTTGCTCCTAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTG-TGATGC  227
+             | ||||||||||||||| ||||| | ||| | ||||||||| ||||||| |||   | ||
+Sbjct  2354  ACGTTTGCTCCTAAACGCTGGTCTCTAACTAAGAAAGTAAAAGCTTGTGATTGACTA-GC  2296
+
+Query  228   CTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAA  287
+              || ||||| || || ||| | || ||    || ||| |||| ||||| ||||| | | |
+Sbjct  2295  TTCAGGTCCCGTCGGGCCATAAAATTCGCTTGGATAAGCAGTATTGTTGAACCA-AGACA  2237
+
+Query  288   TACA  291
+             ||||
+Sbjct  2236  TACA  2233
+
+
+>MW429510.1 Fossombronia mylioides voucher 90016 chloroplast, complete genome
+Length=122741
+
+ Score = 159 bits (86),  Expect = 2e-34
+ Identities = 201/258 (78%), Gaps = 1/258 (0%)
+ Strand=Plus/Minus
+
+Query  34     TTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAAACGCATTGTCTCA  93
+              ||||| || || | ||| |||| |||||||||||| | |||||| ||||||||||| || 
+Sbjct  41474  TTTGGACCTCGTAATGGTTCTAACCATGGAGCACGAAGATCCCAAAAACGCATTGTTTCT  41415
+
+Query  94     CCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACCTAATCCAGTTGGT  153
+              ||||| || ||||||||||||||||||||||||||||  || || ||||| ||||| |||
+Sbjct  41414  CCACCAAAAATAATTTCTCCAGTAGGTGAACGCATAATATATTTTCCTAAACCAGTAGGT  41355
+
+Query  154    CCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAGGAAAGTAAATGCT  213
+              || || || ||| | |  || ||||| | |||||| || |  || |  |||||||| |||
+Sbjct  41354  CCTTGAGCTGAACCTACATTAGCTCCAAGACGTTGATCTCTGACTAAAAAAGTAAAAGCT  41295
+
+Query  214    TGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTG  273
+              || ||||| || || || || ||||| |||||| | || |||  ||| ||| | || || 
+Sbjct  41294  TGAGCTTGAGAAGCTTCCGGACCAGTAGGTCCATAAAATTCACTAGGATAAGCTGTATTA  41235
+
+Query  274    TTAAACCATACAAATACA  291
+              || ||||| ||||| |||
+Sbjct  41234  TTGAACCAAACAAA-ACA  41218
+
+
+>MF927460.1 Pelagophyceae sp. CCMP3361 photosystem II thylakoid membrane 
+protein (psbC) gene, partial cds; plastid
+Length=797
+
+ Score = 158 bits (85),  Expect = 9e-34
+ Identities = 169/211 (80%), Gaps = 0/211 (0%)
+ Strand=Plus/Minus
+
+Query  72   ATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAG  131
+            |||||||||||||||||||||||||||||| || | ||| ||| | ||||||||||| | 
+Sbjct  791  ATCCCAGAAACGCATTGTCTCACCACCGAAAATTACTTCACCACTTGGTGAACGCATTAA  732
+
+Query  132  GTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTC  191
+             || || |||||||| ||||| || || || ||||| |  || || || | |||||||||
+Sbjct  731  ATATTTTCCTAATCCTGTTGGACCTTGAGCTGAAGCTACATTAGCACCAAGACGTTGGTC  672
+
+Query  192  ACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAA  251
+            ||| |||||||| || |||| ||| ||||| || || ||||| || ||||| ||| ||||
+Sbjct  671  ACGTACAAGGAATGTGAATGTTTGCGCTTGAGACGCTTCTGGACCTGTTGGACCATAGAA  612
+
+Query  252  CTCAGAAGGGTAAACAGTGTTGTTAAACCAT  282
+             |||  ||||||| |||| |||||  |||||
+Sbjct  611  TTCACTAGGGTAAGCAGTATTGTTGTACCAT  581
+
+
+>KX131180.1 Hariotina sp. MMOGRB0030F chloroplast, complete genome
+Length=210757
+
+ Score = 158 bits (85),  Expect = 9e-34
+ Identities = 141/169 (83%), Gaps = 0/169 (0%)
+ Strand=Plus/Minus
+
+Query  65      CACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAAC  124
+               |||| | |||||||||||||||||| |||||||| || || ||||| || || ||||| |
+Sbjct  108224  CACGGAAATCCCAGAAACGCATTGTTTCACCACCAAAAATGATTTCACCTGTTGGTGATC  108165
+
+Query  125     GCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAAC  184
+                ||| |  || || ||||  || ||||| || ||||||||||| | |||||| |||||||
+Sbjct  108164  TCATTAAATATTTCCCTAGACCCGTTGGACCTTGTGCAGAAGCTACGTTTGCCCCTAAAC  108105
+
+Query  185     GTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGG  233
+               ||||||||||||||||||||||||| ||||||| ||| ||||| |||||
+Sbjct  108104  GTTGGTCACGAACAAGGAAAGTAAACGCTTGTGATTGAGATGCTTCTGG  108056
+
+
+ Score = 158 bits (85),  Expect = 9e-34
+ Identities = 141/169 (83%), Gaps = 0/169 (0%)
+ Strand=Plus/Plus
+
+Query  65      CACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAAC  124
+               |||| | |||||||||||||||||| |||||||| || || ||||| || || ||||| |
+Sbjct  207089  CACGGAAATCCCAGAAACGCATTGTTTCACCACCAAAAATGATTTCACCTGTTGGTGATC  207148
+
+Query  125     GCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAAC  184
+                ||| |  || || ||||  || ||||| || ||||||||||| | |||||| |||||||
+Sbjct  207149  TCATTAAATATTTCCCTAGACCCGTTGGACCTTGTGCAGAAGCTACGTTTGCCCCTAAAC  207208
+
+Query  185     GTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGG  233
+               ||||||||||||||||||||||||| ||||||| ||| ||||| |||||
+Sbjct  207209  GTTGGTCACGAACAAGGAAAGTAAACGCTTGTGATTGAGATGCTTCTGG  207257
+
+
+>MK814710.1 Polyneura bonnemaisonii isolate PD2997_1 plastid, partial genome
+Length=10135
+
+ Score = 154 bits (83),  Expect = 1e-32
+ Identities = 187/239 (78%), Gaps = 0/239 (0%)
+ Strand=Plus/Plus
+
+Query  49   GGCTCTACCCATGGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATT  108
+            || ||||||||||| || |  | |||||| || | |||||| || ||||| || || |||
+Sbjct  393  GGTTCTACCCATGGTGCTCTTAAATCCCAAAATCTCATTGTTTCTCCACCAAATATTATT  452
+
+Query  109  TCTCCAGTAGGTGAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCA  168
+            || ||| | ||||| | |||||| || || |||| |||||| ||||| |||||||| |||
+Sbjct  453  TCACCACTTGGTGATCTCATAAGATATTTTCCTAGTCCAGTAGGTCCTTGTGCAGATGCA  512
+
+Query  169  ATGTTTGCTCCTAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCC  228
+            |  ||||||||||| | ||| || |  ||||||||||||||||||||||||||||| || 
+Sbjct  513  ACATTTGCTCCTAATCTTTGATCTCTTACAAGGAAAGTAAATGCTTGTGCTTGTGAAGCT  572
+
+Query  229  TCTGGTCCAGTTGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAA  287
+            || || || ||||||||| | || |||  ||| ||| | || || ||  |||| |||||
+Sbjct  573  TCAGGACCTGTTGGTCCATAAAATTCACTAGGATAAGCTGTATTATTGTACCAAACAAA  631
+
+
+>MG778350.1 Elakatothrix viridis PSII 43 kDa protein (psbC) gene, complete 
+cds; chloroplast
+Length=1664
+
+ Score = 152 bits (82),  Expect = 4e-32
+ Identities = 205/266 (77%), Gaps = 1/266 (0%)
+ Strand=Plus/Minus
+
+Query  21    TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAA  80
+             |||||| || ||||| || || |  | |||||||| ||||||  | || | |||||| ||
+Sbjct  1148  TAAATCTAGACCATTAGGACCTCTTAATGGCTCTAACCATGGTCCGCGAAAATCCCAAAA  1089
+
+Query  81    ACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACC  140
+             |||||| || |||||||| ||||||||||| |||||||| || | ||| |  || || ||
+Sbjct  1088  ACGCATAGTTTCACCACCAAAGATAATTTCACCAGTAGGAGATCTCATTAAATATTTTCC  1029
+
+Query  141   TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+              |  || || || || ||||||||||| |  || || ||||| |||||||||||||||||
+Sbjct  1028  AAGACCTGTAGGACCTTGTGCAGAAGCTACATTAGCACCTAATCGTTGGTCACGAACAAG  969
+
+Query  201   GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGG  260
+             ||||||||||||||| | ||| || || || || || || || ||| | || |||  |||
+Sbjct  968   GAAAGTAAATGCTTGAGATTGAGAAGCTTCAGGACCCGTAGGACCATAAAATTCACTAGG  909
+
+Query  261   GTAAACAGTGTTGTTAAACCAT-ACA  285
+              ||| | || || ||||||||| |||
+Sbjct  908   ATAAGCTGTATTATTAAACCATGACA  883
+
+
+>KC145504.1 Pseudomuriella engadinensis strain UTEX 58 photosystem II 44 
+kDa protein (psbC) gene, partial cds; chloroplast
+Length=1057
+
+ Score = 150 bits (81),  Expect = 1e-31
+ Identities = 199/257 (77%), Gaps = 4/257 (2%)
+ Strand=Plus/Minus
+
+Query  1    ATATCGTTCTTAAGCTTTG-ATAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCA  59
+            |||||||| || || ||||  ||| || |  || || |||||||| | ||| |||| |||
+Sbjct  891  ATATCGTTTTTCAG-TTTGTTTAAGTCTAAACCGTTAGGTCCACGTAATGGTTCTAACCA  833
+
+Query  60   TGGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGG  119
+             ||| |||| |  ||||||||||||||||| ||||| || || || ||||| || || ||
+Sbjct  832  AGGACCACGGAAGTCCCAGAAACGCATTGTTTCACCTCCAAAAATGATTTCACCTGTTGG  773
+
+Query  120  TGAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCC  179
+            ||| | ||| | ||| |||||||| || || ||||| || || || || | ||| || ||
+Sbjct  772  TGATCTCATTAAGTATTTACCTAAACCTGTAGGTCCTTGCGCTGATGCTACGTTAGCACC  713
+
+Query  180  TAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTG-TGATGCCTCTGGTCCAG  238
+            |||||||||||||||||||||||||||||| ||||| | |||   | || || || || |
+Sbjct  712  TAAACGTTGGTCACGAACAAGGAAAGTAAACGCTTGAGATTGACTA-GCTTCAGGACCTG  654
+
+Query  239  TTGGTCCAAAGAACTCA  255
+            |||| ||| | ||||||
+Sbjct  653  TTGGACCATAAAACTCA  637
+
+
+>NC_028586.1 Bracteacoccus giganteus culture-collection UTEX:1251 chloroplast, 
+complete genome
+ KT625421.1 Bracteacoccus giganteus culture-collection UTEX:1251 chloroplast, 
+complete genome
+Length=242897
+
+ Score = 148 bits (80),  Expect = 5e-31
+ Identities = 183/234 (78%), Gaps = 2/234 (1%)
+ Strand=Plus/Minus
+
+Query  1      ATATCGTTCTTAAGCTTTGA-TAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCA  59
+              |||||||| ||||| |||   |||||| |  || |||||||| |  ||||| |||| |||
+Sbjct  64867  ATATCGTTTTTAAG-TTTATTTAAATCTAAACCGTTTGGTCCTCTTAGTGGTTCTAGCCA  64809
+
+Query  60     TGGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGG  119
+              |||  |||| | ||||||||||||||| || |||||||| || ||||| || || |||||
+Sbjct  64808  TGGTCCACGGAAATCCCAGAAACGCATCGTTTCACCACCAAAAATAATCTCACCTGTAGG  64749
+
+Query  120    TGAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCC  179
+               || | ||| |  || ||||| |  || || ||||| || || ||||| | ||| || ||
+Sbjct  64748  CGATCTCATTAAATATTTACCAAGACCTGTAGGTCCTTGAGCTGAAGCTACGTTCGCACC  64689
+
+Query  180    TAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGG  233
+              ||||||||||||||||||||||||||| || ||||| | |||||| || || ||
+Sbjct  64688  TAAACGTTGGTCACGAACAAGGAAAGTGAAAGCTTGAGATTGTGAAGCTTCAGG  64635
+
+
+>KX284710.1 Riquetophycus sp. plastid, complete genome
+Length=180384
+
+ Score = 145 bits (78),  Expect = 7e-30
+ Identities = 205/268 (76%), Gaps = 2/268 (1%)
+ Strand=Plus/Minus
+
+Query  21      TAAATC-AAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGA  79
+               ||| || ||| ||||| ||||| |  |  || ||||||||||| || |  | |||||| |
+Sbjct  133070  TAAGTCTAAG-CCATTAGGTCCTCTTAAAGGTTCTACCCATGGTGCTCTTAGATCCCAAA  133012
+
+Query  80      AACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTAC  139
+               |||||||||| ||||| || || || ||||||||| | ||||| | ||| |  || || |
+Sbjct  133011  AACGCATTGTTTCACCGCCAAATATTATTTCTCCACTGGGTGATCTCATTAAATATTTTC  132952
+
+Query  140     CTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAA  199
+               ||||||| ||||| || ||||| || || |  || || ||||  | ||| || |  || |
+Sbjct  132951  CTAATCCTGTTGGACCTTGTGCTGATGCTACATTAGCACCTAGCCTTTGATCTCTTACTA  132892
+
+Query  200     GGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAG  259
+               |||||||||||||||||||||||||||| || |||||||| |||||| |||| ||    |
+Sbjct  132891  GGAAAGTAAATGCTTGTGCTTGTGATGCTTCAGGTCCAGTAGGTCCATAGAATTCGCTTG  132832
+
+Query  260     GGTAAACAGTGTTGTTAAACCATACAAA  287
+               ||||  | ||||| ||| |||| |||||
+Sbjct  132831  GGTATGCTGTGTTATTATACCACACAAA  132804
+
+
+>NC_025525.1 Myrmecia israelensis culture-collection UTEX:1181 chloroplast, 
+complete genome
+ KM462861.1 Myrmecia israelensis culture-collection UTEX:1181 chloroplast, 
+complete genome
+Length=146596
+
+ Score = 145 bits (78),  Expect = 7e-30
+ Identities = 173/220 (79%), Gaps = 1/220 (0%)
+ Strand=Plus/Plus
+
+Query  72      ATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAG  131
+               |||||| |||||||| || |||||||| || ||||| || ||||| ||||| | ||| | 
+Sbjct  112202  ATCCCAAAAACGCATCGTTTCACCACCAAAAATAATCTCACCAGTTGGTGATCTCATTAA  112261
+
+Query  132     GTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTC  191
+                || ||||| |  ||||| |||||||| |||||||| | |||||| ||||||||||||||
+Sbjct  112262  ATATTTACCAAGACCAGTAGGTCCCTGAGCAGAAGCTACGTTTGCACCTAAACGTTGGTC  112321
+
+Query  192     ACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAA  251
+               ||||||||||||||| || ||||||| ||| || || || || || || || ||| | ||
+Sbjct  112322  ACGAACAAGGAAAGTGAAAGCTTGTGATTGAGAGGCTTCAGGACCGGTAGGACCATAAAA  112381
+
+Query  252     CTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAATACA  291
+                ||    || ||| |||| ||||| ||||| || | ||||
+Sbjct  112382  TTCGCTTGGATAAGCAGTATTGTTGAACCAAACCA-TACA  112420
+
+
+>NC_029669.1 Pseudomuriella schumacherensis strain SAG 2137 chloroplast, complete 
+genome
+ KT199256.1 Pseudomuriella schumacherensis strain SAG 2137 chloroplast, complete 
+genome
+Length=220357
+
+ Score = 137 bits (74),  Expect = 1e-27
+ Identities = 220/292 (75%), Gaps = 3/292 (1%)
+ Strand=Plus/Plus
+
+Query  1      ATATCGTTCTTAAGCTTTG-ATAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCA  59
+              |||||||| || || ||||  |||||| |  || || |||||||| | ||| |||| |||
+Sbjct  82406  ATATCGTTTTTCAG-TTTGTTTAAATCTAAACCGTTAGGTCCACGTAATGGTTCTAACCA  82464
+
+Query  60     TGGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGG  119
+               ||| |||| | |||||||||||||||||| || || || || || ||||| || || ||
+Sbjct  82465  AGGACCACGGAAATCCCAGAAACGCATTGTTTCTCCTCCAAAAATGATTTCACCTGTTGG  82524
+
+Query  120    TGAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCC  179
+              ||| | ||| |  || |||||||| || || || || || || || || | ||| || ||
+Sbjct  82525  TGATCTCATTAAATATTTACCTAAACCTGTAGGACCTTGCGCTGATGCTACGTTAGCACC  82584
+
+Query  180    TAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGT  239
+              ||||||||||||||||||||||||||| || ||||| | ||| || || || || || ||
+Sbjct  82585  TAAACGTTGGTCACGAACAAGGAAAGTGAAGGCTTGAGATTGAGACGCTTCAGGACCCGT  82644
+
+Query  240    TGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAATACA  291
+               || ||  | |||||    || ||| | ||  |||||||||| | | |||||
+Sbjct  82645  AGGGCCGTAAAACTCGCTTGGATAAGCTGTTGTGTTAAACCA-AGACATACA  82695
+
+
+>CP003946.1 Leptolyngbya sp. PCC 7376, complete genome
+Length=5125950
+
+ Score = 137 bits (74),  Expect = 1e-27
+ Identities = 204/268 (76%), Gaps = 3/268 (1%)
+ Strand=Plus/Plus
+
+Query  25       TCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCATGGAGCACGCATATCCCAGAAACGC  84
+                ||||| ||||| || ||||| || ||||| | ||| ||| |||| | |||||||||||||
+Sbjct  4848852  TCAAGACCATTAGGACCACGGAGAGGCTCAAGCCAAGGACCACGGAAATCCCAGAAACGC  4848911
+
+Query  85       ATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACCTAAT  144
+                ||||||||||||||||  ||||| || |||||||| |||||||| || || ||||| |  
+Sbjct  4848912  ATTGTCTCACCACCGAGAATAATCTCGCCAGTAGGGGAACGCATGAGATATTTACCAAGA  4848971
+
+Query  145      CCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAGGAAA  204
+                ||||| || || || |||||| | | ||| || || | |  |||||||||| | ||||| 
+Sbjct  4848972  CCAGTAGGACCTTGAGCAGAACCTACGTTCGCACCCATAGATTGGTCACGAGCTAGGAAG  4849031
+
+Query  205      GTAAATGCTTGTGCTTGTGATGCCTCTG-GTCCAGTTGGTCCAAAGAACTCAGAAGGGTA  263
+                 | || || || |  || || || || | ||  ||| || ||  | || |||  ||| ||
+Sbjct  4849032  ATTAACGCCTGAGACTGAGAAGCTTCAGCGTT-AGTAGGACCGTAAAATTCACTAGGATA  4849090
+
+Query  264      AACAGTGTTGTTAAACCATACAAATACA  291
+                | |||||||||||||||| ||||| |||
+Sbjct  4849091  AGCAGTGTTGTTAAACCAAACAAA-ACA  4849117
+
+
+>JN630576.1 Pseudomuriella sp. SAG 2137 photosystem II 44 kDa protein (psbC) 
+gene, partial cds; chloroplast
+Length=1041
+
+ Score = 137 bits (74),  Expect = 1e-27
+ Identities = 220/292 (75%), Gaps = 3/292 (1%)
+ Strand=Plus/Minus
+
+Query  1    ATATCGTTCTTAAGCTTTG-ATAAATCAAGCCCATTTGGTCCACGAAGTGGCTCTACCCA  59
+            |||||||| || || ||||  |||||| |  || || |||||||| | ||| |||| |||
+Sbjct  848  ATATCGTTTTTCAG-TTTGTTTAAATCTAAACCGTTAGGTCCACGTAATGGTTCTAACCA  790
+
+Query  60   TGGAGCACGCATATCCCAGAAACGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGG  119
+             ||| |||| | |||||||||||||||||| || || || || || ||||| || || ||
+Sbjct  789  AGGACCACGGAAATCCCAGAAACGCATTGTTTCTCCTCCAAAAATGATTTCACCTGTTGG  730
+
+Query  120  TGAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCC  179
+            ||| | ||| |  || |||||||| || || || || || || || || | ||| || ||
+Sbjct  729  TGATCTCATTAAATATTTACCTAAACCTGTAGGACCTTGCGCTGATGCTACGTTAGCACC  670
+
+Query  180  TAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGT  239
+            ||||||||||||||||||||||||||| || ||||| | ||| || || || || || ||
+Sbjct  669  TAAACGTTGGTCACGAACAAGGAAAGTGAAGGCTTGAGATTGAGACGCTTCAGGACCCGT  610
+
+Query  240  TGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAATACA  291
+             || ||  | |||||    || ||| | ||  |||||||||| | | |||||
+Sbjct  609  AGGGCCGTAAAACTCGCTTGGATAAGCTGTTGTGTTAAACCA-AGACATACA  559
+
+
+>LC380372.1 Vitreochlamys nekrassovii SAG 11-10 chloroplast psbC gene for 
+photosystem II CP43 apoprotein, partial cds
+Length=886
+
+ Score = 134 bits (72),  Expect = 1e-26
+ Identities = 133/163 (82%), Gaps = 2/163 (1%)
+ Strand=Plus/Minus
+
+Query  93   ACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACCTAATCCAGTTGG  152
+            ||||||||| || ||||| || |||||||||||||| |  || |||||||| ||||| ||
+Sbjct  886  ACCACCGAAAATGATTTCACCTGTAGGTGAACGCATTAAATATTTACCTAAACCAGTAGG  827
+
+Query  153  TCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAGGAAAGTAAATGC  212
+             || || ||||| |||||||| || ||||||||||||||||||||||||||||| || ||
+Sbjct  826  ACCTTGAGCAGATGCAATGTTAGCACCTAAACGTTGGTCACGAACAAGGAAAGTGAAAGC  767
+
+Query  213  TTGTGCTTGTGAT-GCCTCTGGTCCAGTTGGTCCAAAGAACTC  254
+            ||| | ||| | | || || || || ||||| ||| |||| ||
+Sbjct  766  TTGAGATTG-GCTAGCTTCAGGGCCTGTTGGACCATAGAATTC  725
+
+
+>LC380370.1 Lobomonas francei SAG 45-1 chloroplast psbC gene for photosystem 
+II CP43 apoprotein, partial cds
+Length=1549
+
+ Score = 130 bits (70),  Expect = 2e-25
+ Identities = 151/191 (79%), Gaps = 2/191 (1%)
+ Strand=Plus/Minus
+
+Query  93    ACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACCTAATCCAGTTGG  152
+             ||||||||| || ||||| || |||||||||||||| |  || |||||||| || || ||
+Sbjct  1549  ACCACCGAAAATGATTTCACCTGTAGGTGAACGCATTAAATATTTACCTAAACCTGTAGG  1490
+
+Query  153   TCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAGGAAAGTAAATGC  212
+              || |||||||| || | ||| || ||||||||||||||||||||||||||||| || ||
+Sbjct  1489  ACCTTGTGCAGATGCTACGTTAGCACCTAAACGTTGGTCACGAACAAGGAAAGTGAAAGC  1430
+
+Query  213   TTGTGCTTGTGAT-GCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGGGTAAACAGTGT  271
+              || | ||| | | || ||||| || || || ||  |||| |||   || ||| ||||||
+Sbjct  1429  CTGAGATTG-GCTAGCTTCTGGACCTGTAGGACCGTAGAATTCACTTGGATAAGCAGTGT  1371
+
+Query  272   TGTTAAACCAT  282
+             |||| ||||||
+Sbjct  1370  TGTTGAACCAT  1360
+
+
+>AB044507.1 Pandorina morum chloroplast psbC gene for photosystem II CP43 
+apoprotein, strain:UTEX 2326
+Length=748
+
+ Score = 128 bits (69),  Expect = 7e-25
+ Identities = 139/174 (80%), Gaps = 0/174 (0%)
+ Strand=Plus/Minus
+
+Query  108  TTCTCCAGTAGGTGAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGC  167
+            ||| || |||||||||||||| |  || ||||| |  |||||||| || |||||||| ||
+Sbjct  748  TTCACCTGTAGGTGAACGCATTAAATATTTACCAAGACCAGTTGGACCTTGTGCAGATGC  689
+
+Query  168  AATGTTTGCTCCTAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGC  227
+            || ||| || |||||||||||||||||||||||||||||||| ||||||| |||   |||
+Sbjct  688  AACGTTAGCACCTAAACGTTGGTCACGAACAAGGAAAGTAAACGCTTGTGATTGACTTGC  629
+
+Query  228  CTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCA  281
+             || || || ||||| ||| |||| |||   || ||  | || |||||||||||
+Sbjct  628  TTCAGGACCTGTTGGACCATAGAATTCACTTGGATATGCTGTATTGTTAAACCA  575
+
+
+>AB044504.1 Volvulina boldii chloroplast psbC gene for photosystem II CP43 
+apoprotein, strain:UTEX 2185
+Length=780
+
+ Score = 128 bits (69),  Expect = 7e-25
+ Identities = 147/185 (79%), Gaps = 3/185 (2%)
+ Strand=Plus/Minus
+
+Query  108  TTCTCCAGTAGGTGAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGC  167
+            ||| ||||| ||||||||||| |  || ||||| |  |||||||| || ||||| |||||
+Sbjct  780  TTCACCAGTTGGTGAACGCATTAAATATTTACCAAGACCAGTTGGACCTTGTGCTGAAGC  721
+
+Query  168  AATGTTTGCTCCTAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTG-TGATG  226
+            || ||| || ||||||||||||||||||||||||||||| |||||||||| |||   | |
+Sbjct  720  AACGTTAGCACCTAAACGTTGGTCACGAACAAGGAAAGTGAATGCTTGTGATTGACTA-G  662
+
+Query  227  CCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCATACAA  286
+            | ||||| || ||||| ||  |||| |||   || ||| | || ||||||||||| | | 
+Sbjct  661  CTTCTGGGCCTGTTGGACCGTAGAATTCACTTGGATAAGCTGTATTGTTAAACCA-AGAC  603
+
+Query  287  ATACA  291
+            |||||
+Sbjct  602  ATACA  598
+
+
+>AB044498.1 Volvulina compacta chloroplast psbC gene for photosystem II CP43 
+apoprotein, strain:NIES-582
+Length=780
+
+ Score = 128 bits (69),  Expect = 7e-25
+ Identities = 146/184 (79%), Gaps = 1/184 (1%)
+ Strand=Plus/Minus
+
+Query  108  TTCTCCAGTAGGTGAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGC  167
+            ||| || || || |||||||| || |||||||| |  || ||||| || |||||||| ||
+Sbjct  780  TTCACCTGTTGGAGAACGCATTAGATACTTACCAAGACCTGTTGGACCTTGTGCAGATGC  721
+
+Query  168  AATGTTTGCTCCTAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTGTGATGC  227
+            || ||| || |||||||||||||||||||||||||||||||||||||||| |||   |||
+Sbjct  720  AACGTTAGCACCTAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGATTGACTTGC  661
+
+Query  228  CTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCATACAAA  287
+             || || || || || ||  | ||||||   |||||| | ||||| |||||||| | | |
+Sbjct  660  TTCAGGACCTGTCGGACCGTAAAACTCACTTGGGTAAGCTGTGTTATTAAACCA-AGACA  602
+
+Query  288  TACA  291
+            ||||
+Sbjct  601  TACA  598
+
+
+>AF481843.1 Elakatothrix viridis strain SAG 9.94 voucher SAG:9.94 photosystem 
+II CP43 protein (psbC) gene, partial cds; chloroplast
+Length=939
+
+ Score = 122 bits (66),  Expect = 3e-23
+ Identities = 159/205 (78%), Gaps = 1/205 (0%)
+ Strand=Plus/Minus
+
+Query  82   CGCATTGTCTCACCACCGAAGATAATTTCTCCAGTAGGTGAACGCATAAGGTACTTACCT  141
+            ||||| || |||||||| ||||||||||| |||||||| || | ||| |  || || || 
+Sbjct  939  CGCATAGTTTCACCACCAAAGATAATTTCACCAGTAGGAGATCTCATTAAATATTTTCCA  880
+
+Query  142  AATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAGG  201
+            |  || || || || ||||||||||| |  || || ||||| ||||||||||||||||||
+Sbjct  879  AGACCTGTAGGACCTTGTGCAGAAGCTACATTAGCACCTAATCGTTGGTCACGAACAAGG  820
+
+Query  202  AAAGTAAATGCTTGTGCTTGTGATGCCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGGG  261
+            |||||||||||||| | ||| || || || || || || || ||| | || |||  ||| 
+Sbjct  819  AAAGTAAATGCTTGAGATTGAGAAGCTTCAGGACCCGTAGGACCATAAAATTCACTAGGA  760
+
+Query  262  TAAACAGTGTTGTTAAACCAT-ACA  285
+            ||| | || || ||||||||| |||
+Sbjct  759  TAAGCTGTATTATTAAACCATGACA  735
+
+
+>AB044508.1 Pandorina morum chloroplast psbC gene for photosystem II CP43 
+apoprotein, strain:UTEX 1727
+Length=780
+
+ Score = 122 bits (66),  Expect = 3e-23
+ Identities = 98/114 (86%), Gaps = 0/114 (0%)
+ Strand=Plus/Minus
+
+Query  108  TTCTCCAGTAGGTGAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGC  167
+            ||| || || ||||||||||| |  ||||||||||| || || || || |||||||||||
+Sbjct  780  TTCACCTGTTGGTGAACGCATTAAATACTTACCTAACCCGGTAGGACCTTGTGCAGAAGC  721
+
+Query  168  AATGTTTGCTCCTAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTG  221
+            || ||| || ||||||||||||||||||||||||||||| |||||||||| |||
+Sbjct  720  AACGTTAGCACCTAAACGTTGGTCACGAACAAGGAAAGTGAATGCTTGTGATTG  667
+
+
+>AB044499.1 Volvulina pringsheimii chloroplast psbC gene for photosystem 
+II CP43 apoprotein, strain:UTEX 1020
+Length=780
+
+ Score = 122 bits (66),  Expect = 3e-23
+ Identities = 146/185 (79%), Gaps = 3/185 (2%)
+ Strand=Plus/Minus
+
+Query  108  TTCTCCAGTAGGTGAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGC  167
+            ||| || || ||||||||||| |  || ||||| |  || ||||| || |||||||||||
+Sbjct  780  TTCACCTGTTGGTGAACGCATTAAATATTTACCAAGACCTGTTGGACCTTGTGCAGAAGC  721
+
+Query  168  AATGTTTGCTCCTAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTG-TGATG  226
+            || ||| || |||||||||||||||||||||||||||||||||||||||| |||   | |
+Sbjct  720  AACGTTAGCACCTAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGATTGACTA-G  662
+
+Query  227  CCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCATACAA  286
+            | || || || ||||| ||  |||| ||   ||| ||| | ||||| |||||||| | | 
+Sbjct  661  CTTCAGGACCCGTTGGACCGTAGAATTCGCTAGGATAAGCCGTGTTATTAAACCA-AGAC  603
+
+Query  287  ATACA  291
+            |||||
+Sbjct  602  ATACA  598
+
+
+>AB044512.1 Pandorina colemaniae chloroplast psbC gene for photosystem II 
+CP43 apoprotein, strain:NIES-572
+Length=780
+
+ Score = 117 bits (63),  Expect = 1e-21
+ Identities = 145/185 (78%), Gaps = 3/185 (2%)
+ Strand=Plus/Minus
+
+Query  108  TTCTCCAGTAGGTGAACGCATAAGGTACTTACCTAATCCAGTTGGTCCCTGTGCAGAAGC  167
+            ||| || || ||||||||||| |  || ||||| |  ||||| || || |||||||||||
+Sbjct  780  TTCACCTGTTGGTGAACGCATTAAATATTTACCAAGACCAGTAGGACCTTGTGCAGAAGC  721
+
+Query  168  AATGTTTGCTCCTAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGCTTG-TGATG  226
+            || ||| || |||||||||||||||||||||||||||||||||||||||| |||   | |
+Sbjct  720  AACGTTAGCACCTAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGTGATTGACTA-G  662
+
+Query  227  CCTCTGGTCCAGTTGGTCCAAAGAACTCAGAAGGGTAAACAGTGTTGTTAAACCATACAA  286
+            | || || |||||||| ||  | || |||   || ||  | ||||| |||||||| | | 
+Sbjct  661  CTTCAGGACCAGTTGGACCGTAAAATTCACTTGGATATGCTGTGTTATTAAACCA-AGAC  603
+
+Query  287  ATACA  291
+            |||||
+Sbjct  602  ATACA  598
+
+
+>KY792694.1 Hariotina reticulata CF0 subunit I of ATP synthase (atpF) and 
+photosystem II CP43 chlorophyll apoprotein (psbC) genes, complete 
+cds; chloroplast
+Length=8995
+
+ Score = 110 bits (59),  Expect = 2e-19
+ Identities = 82/93 (88%), Gaps = 1/93 (1%)
+ Strand=Plus/Minus
+
+Query  141   TAATCCAGTTGGTCCCTGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAG  200
+             ||| || ||||| || ||||||||||| | |||||| |||||||||||||||||||||||
+Sbjct  4721  TAA-CCCGTTGGACCTTGTGCAGAAGCTACGTTTGCCCCTAAACGTTGGTCACGAACAAG  4663
+
+Query  201   GAAAGTAAATGCTTGTGCTTGTGATGCCTCTGG  233
+             ||||||||| ||||||| ||| ||||| |||||
+Sbjct  4662  GAAAGTAAACGCTTGTGATTGAGATGCTTCTGG  4630
+
+
+>NC_028582.1 Jenufa minuta culture-collection CAUP:H 8102 chloroplast, complete 
+genome
+ KT625414.1 Jenufa minuta culture-collection CAUP:H 8102 chloroplast, complete 
+genome
+Length=206680
+
+ Score = 93.5 bits (50),  Expect = 3e-14
+ Identities = 68/77 (88%), Gaps = 0/77 (0%)
+ Strand=Plus/Minus
+
+Query  157    TGTGCAGAAGCAATGTTTGCTCCTAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGT  216
+              |||||||| || || || || |||||||||||||||||||||||||||||||||||||||
+Sbjct  26534  TGTGCAGATGCGATATTAGCACCTAAACGTTGGTCACGAACAAGGAAAGTAAATGCTTGT  26475
+
+Query  217    GCTTGTGATGCCTCTGG  233
+              | |||||| || || ||
+Sbjct  26474  GATTGTGAAGCTTCAGG  26458
+
+
+
+Lambda      K        H
+    1.33    0.621     1.12 
+
+Gapped
+Lambda      K        H
+    1.28    0.460    0.850 
+
+Effective search space used: 340858450826820
+
+
+  Database: Nucleotide collection (nt)
+    Posted date:  Sep 23, 2023 03:56 PM
+  Number of letters in database: 1,339,658,403,746
+  Number of sequences in database:  99,225,353
+
+
+
+Matrix: blastn matrix 1 -2
+Gap Penalties: Existence: 0, Extension: 2.5
