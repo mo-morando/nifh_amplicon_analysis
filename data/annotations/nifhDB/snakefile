@@ -1,7 +1,7 @@
 ## Copyright (C) 2023 Michael (Mo) Morando and Jonathan D. Magasin
 ##
-## Annotate ASVs from stage FilterAuids using three tools that are included in the
-## DADA2 nifH pipeline's "data/annotations/scripts" directory:
+## Annotate ASVs from stage FilterAuids using three tools from the "data/
+## annotations/scripts" directory:
 ##  1. BlastnARB2017          - Blastn ASVs against the 2017 ARB nifH database
 ##  2. BlastxGenome879        - Blastx ASVs against the Zehr Lab's database with
 ##                              879 diazotroph genomes.
@@ -20,11 +20,51 @@
 ##                                from metagenome assembly, to provide increase ##                                resolution of UCYN-A ASVs.
 ##
 ##
-## This Makefile runs each of the annotation tools, then searches the cyano /
-## NCD DB, and then stitches together all the results into auids.annot.tsv,
-## using scripts/makeAnnotationTable.R
+##  Final product:             -  annotation_tab.csv
+##
+##
+## This snakefile is run in two stages:
+## Stage one - Generating BLAST databases
+## Each of these databases are generated from fasta files specific to those mentioned above. These databases are then used to annotate the query the nifH database fasta to provide taxonomic identification from several sources. These individual annotation tables are then processed and merged into a unified annotiaton table. A consensus ID is then made for each AUID based on this unified annotation table.
 ##
 ## Usage:
+##    general:
+##      snakemake -c1 <rule>
+##
+##      snakemake -c1 all_make_databases
+##      -generate BLAST databases
+##
+##      snakemake -c1 all
+##      -generate unified nifh ASV database annotation table
+##
+##      Various intermediate steps
+##
+##      Cleaning rules:
+##
+##      superclean_make_databases
+##
+##      clean_blast
+##
+##      clean_filter_annotation_headers
+##
+##      clean_filter_annotation
+##
+##      clean_prefix_headers
+##
+##      clean_add_auid_key
+##
+##      clean_merge_annotations
+##
+##      superclean_merge_directory
+##
+##      clean_annotation_directories
+##
+##      clean_all
+##
+##      superclean_all
+##
+
+
 ##    make                # Generate all annotation types.  Make auids.annot.tsv
 ##    make ARB2017        #   Do just the blastn against ARB 2017
 ##    make Genome879      #   Do just the blastx against Genome879
@@ -966,11 +1006,11 @@ rule all:
 
 
 ## Clean rule for database generation
-rule clean_make_databases:
+rule superclean_make_databases:
     shell:
         """
-        echo "Cleaning all_make_databases..."
-        echo "Deleting all output files..."
+        echo "SUPER cleaning all_make_databases..."
+        echo "Deleting all 'all_make_databases' files and directories..."
         snakemake -c1 --delete-all-output all_make_databases
         """
 
