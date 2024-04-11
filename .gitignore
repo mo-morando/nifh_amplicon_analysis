@@ -1,0 +1,43 @@
+# Plots
+.jpeg
+
+# Vscode related
+*.code-workspace
+.vscode
+
+# log files
+logs/
+
+# History files
+.Rhistory
+.Rapp.history
+
+# Session Data files
+.RData
+.RDataTmp
+
+# User-specific files
+.Ruserdata
+
+# RStudio files
+.Rproj.user/
+
+# R Environment Variables
+.Renviron
+
+# Conda environments
+.conda/
+envs/
+
+# Snakefile specifics
+.snakemake
+
+# OS generated files #
+######################
+.DS_Store*
+.VolumeIcon.icns
+.fseventsd
+Icon?
+.gdb_history
+ehthumbs.db
+Thumbs.db
