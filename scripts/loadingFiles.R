@@ -7,33 +7,24 @@ library("tidyverse")
 ### _ Loading in the data
 cat("Load in the data")
 
-### annotation files
+### annotation file with consensus ID already intact
 #### read in annotations table
 # ## - new annotation file
-# # annoNifHDB_updt <- read_tsv("~/mmorando@ucsc.edu_gDrive/My Drive/data/amplicon_review/all_studies/master_annotation/filtered_annotations/nifHDB/auids.annot_nifhDB.tsv")
-# annoNifHDB_updt <- read_csv("/Users/mo/Projects/nifH_amp_project/myWork/data/annotations/nifhDB/test_consensus_tax_annotation.csv", col_types = cols(
-#   cluster = col_character()
-# )) %>%
-#   select(-"Unnamed: 0") %>%
-#   mutate(across(everything(), ~ ifelse(. == "nan", NA, .)))
-# # c(AUID.162578, AUID.176395, AUID.177000)
-
 # _# updated by me 20240219
 # _# updated by me 20240219
 
 annotations_new_auids <- read_csv("data/annotations/nifhDB/merged_database/annotation_tab.csv")
 
 annoNifHDB_updt <- annotations_new_auids %>%
-  # select(-AUID) %>%
   rename(AUID = AUID_OLD)
 
 # _# updated by me 20240219
 # _# updated by me 20240219
 
 
-#### ! Now I am temporarily using Jonathans annotations to speed this up
-## ! but they are not what I will use, and do not have the UCYN-A oligos
-## ! Once i remake my new annotatino file remove this
+#### ! Testing my scripts/workflow with an annotation file produced by the nifH
+## ! worflow from thallasophile
+## ! BUT they do not have the UCYN-A oligos
 # annotations_new_auids <- read_tsv("data/annotations/nifhDB/jonathan/FOR_MO_ESSD/auids.annot.tsv")
 # annotations_new_auids <- read_csv("annotationsall_updatedauids_nifhdb.csv")
 # annotations_new_auids <- read_csv("annotationsall_updatedauids_nifhdb_consensus_tax_annotation.csv")
@@ -43,50 +34,51 @@ annoNifHDB_updt <- annotations_new_auids %>%
 #   rename(AUID = AUID_OLD)
 # ## !! Remove down to here
 
-annoNifHDB_updt %>%
-  distinct(subcluster) %>%
-  view()
 
-annoNifHDB_updt %>%
-  # filter(AUID_NEW=="AUID.12250")
-  filter(AUID == "AUID.12250") %>%
-  view()
-
-annoNifHDB_updt %>%
-  # filter(AUID_NEW=="AUID.12250")
-  filter(subcluster == "nan") %>%
-  # filter(subcluster %in% "nan") %>%
-  view()
-
-## - make CON column as the consesus id column since this is what the rest of the script uses
-## then make the nifH_cluster column used by the rest of script
-## fix some things
+## - make CON column as the consesus id column since this is what the rest of
+## then make the nifH_cluster
+## All used in the subsequent scripts
 annoNifHDB_updt <- annoNifHDB_updt %>%
   mutate(
     CON = consensus_id,
-    nifH_cluster = if_else(cluster == 3 | cluster == 4 | cluster == 2, as.character(cluster), subcluster),
-    nifH_cluster = if_else(grepl("UCYN-B|croco", ncd_cyano_id, ignore.case = T), "1B", nifH_cluster),
-    nifH_cluster = if_else(nifH_cluster == "1J" | nifH_cluster == "1K",
-      "1J/1K", nifH_cluster
+    nifH_cluster = if_else(
+      cluster == 3 | cluster == 4 | cluster == 2,
+      as.character(cluster),
+      subcluster
     ),
-    nifH_cluster = if_else(nifH_cluster == "1P" | nifH_cluster == "1O",
-      "1O/1P", nifH_cluster
+    nifH_cluster = if_else(
+      grepl("UCYN-B|croco", ncd_cyano_id, ignore.case = T),
+      "1B",
+      nifH_cluster
     ),
-    nifH_cluster = if_else(is.na(nifH_cluster) | subcluster == "nan", "unknown", nifH_cluster)
+    nifH_cluster = if_else(
+      nifH_cluster == "1J" | nifH_cluster == "1K",
+      "1J/1K",
+      nifH_cluster
+    ),
+    nifH_cluster = if_else(
+      nifH_cluster == "1P" | nifH_cluster == "1O",
+      "1O/1P",
+      nifH_cluster
+    ),
+    nifH_cluster = if_else(
+      is.na(nifH_cluster) | subcluster == "nan",
+      "unknown",
+      nifH_cluster
+    )
   )
 
-annoNifHDB_updt
-
-# ! TODO: The CON id need to be cleaned up
+# ! TODO: The consensus ID/CON need to be cleaned up
 ## _ MAGs need to be identified
 ## _ TARA prefixes should be removed or MAG### should come first
 ## _ Lots of these need to be made more broad or another column needs to identify things like this is a gamma A and this is a Psuedomonas
-annoNifHDB_updt %>%
-  select(CON, subcluster, nifH_cluster) %>%
-  distinct(CON, .keep_all = T) %>%
-  view()
+# annoNifHDB_updt %>%
+#   select(consecutive_id, subcluster, nifH_cluster) %>%
+#   distinct(CON, .keep_all = T) %>%
+#   view()
 
 ## add a column for parsing nifH clusters of interest
+## variable with clusters of interest
 clusters_of_interest <- c(
   "1A",
   "1J/1K",
@@ -97,7 +89,7 @@ clusters_of_interest <- c(
   "4",
   "2"
 )
-
+## add new column
 annoNifHDB_updt <- annoNifHDB_updt %>%
   mutate(
     cluster_stats = ifelse(test = nifH_cluster %in% clusters_of_interest,
@@ -107,14 +99,18 @@ annoNifHDB_updt <- annoNifHDB_updt %>%
   )
 
 
-### *  remove ASVs that cannot be resolved and Syne-like
+# _##  remove ASVs that cannot be resolved and Syne-like
+# _##  remove ASVs that cannot be resolved and Syne-like
+#### Synechococcus like nifh sequences make it through to this point but the
+## annotaions help identify these.
 
 ## - make Synechococcus auid key
-grep_text <- "synechococcus"
+grep_text <- "Synechococcus"
 
 syne_auid_key <- annoNifHDB_updt %>%
   filter(grepl(grep_text, genome879_nifh_sseqid, ignore.case = TRUE)) %>%
   pull(AUID)
+
 ## - make unknown auid key
 unknown_con <- "unknownnan"
 unknown_cluster <- "unknown"
@@ -134,34 +130,18 @@ dim(annoNifHDB_updt)
 #     filter(is.na(nifH_cluster) | nifH_cluster == "nan") %>%
 #     view()
 
-
-# annoNifHDB_updt %>%
-#     # filter(subcluster == "1J")  %>%
-#     filter(grepl("Cyano", genome879_nifh_tax, ignore.case = T)) %>%
-#     # filter(grepl("UCYN-B|croco", ncd_cyano_id, ignore.case = T)) %>%
-#     distinct(ncd_cyano_id, subcluster, .keep_all = T) %>%
-#     view()
-
-# cat("Load in annotation file", annoNifHDB_updt, "the data")
 cat("Load in annotation file 'annoNifHDB_updt' the data")
 
 ## - Add groups for stats and plotting
 annoNifHDB_updt <- annoNifHDB_updt %>%
-  #   filter(AUID %in% nifhDB_cnts$AUID) %>%
-  # left_join(phyloAll, by = "AUID") %>%
-  # mutate(
-  #     CON = if_else(gamma_cluster == "unk" | is.na(gamma_cluster), ConsClassKTK, gamma_cluster)
-  # ) %>%
   mutate(
     group1 = if_else(nifH_cluster %in% c("1A", "3"), "1A C3", nifH_cluster),
-    # group2 = if_else(nifH_cluster %in% c('1A', '3', '1J/1K'), '1A C3 1J/1K', nifH_cluster),
     group2 = if_else(nifH_cluster %in% c("1A", "3", "1J/1K"), "1A,  3,  &  1J/1K", nifH_cluster),
     group3 = if_else(nifH_cluster %in% c("1A", "3"), "1A C3",
       if_else(nifH_cluster %in% c("1G", "1J/1K"), "1B 1J/1K", nifH_cluster)
     ),
     group4 = if_else(nifH_cluster %in% c("1A", "3", "1J/1K"), "1A/C3 1J/1K", "1B & 1G"),
     CyanoCON = if_else(nifH_cluster == "1B", CON, nifH_cluster),
-    # JKalphaCON = if_else(nifH_cluster == "1J/1K" & ConsClassKTK %in% JKalphaSlct, ConsClassKTK, nifH_cluster),
     crocoCMB = if_else(grepl("croco", CON, ignore.case = T) & CON == "Crocosphera_DQ118216_Moisander", "CDQmois",
       if_else(grepl("croco", CON, ignore.case = T), "CrocoCMB", CON)
     ),
@@ -171,11 +151,10 @@ annoNifHDB_updt <- annoNifHDB_updt %>%
     CyanoGroupsIV = if_else(CON == "UCYN-A3" | CON == "UCYN-A1", "A1-A3",
       if_else(CON == "UCYN-A2" | CON == "UCYN-A4", "A2-A4", CON)
     )
-    # CyanoGammaCON = if_else(nifH_cluster=='1B' | nifH_cluster=='1G', CON, nifH_cluster),
-    # CyanoGammaCON = if_else(CON %in% CyanosToRemove$CON | CON %in% GammasToRemove, nifH_cluster, CyanoGammaCON)
   )
 
-
+## _### CMAP environmental data #####
+## _### CMAP environmental data #####
 
 ### - CMAP
 CMAP_20230719 <- read_csv("~/mmorando@ucsc.edu - Google Drive/My Drive/data/amplicon_review/all_studies/merged_metadata/nifHDB/firstAttempt/20230719_colocalized_nifH.csv")
@@ -209,18 +188,12 @@ photic_samples_key <- CMAP_coloc %>%
   filter(photic == TRUE) %>%
   pull(SAMPLEID)
 
-remove_aphotic_samples <- function(df, photic_samples = photic_samples_key) {
-  subbed_df <- df %>%
-    filter(SAMPLEID %in% photic_samples)
+# remove_aphotic_samples <- function(df, photic_samples = photic_samples_key) {
+#   subbed_df <- df %>%
+#     filter(SAMPLEID %in% photic_samples)
 
-  return(subbed_df)
-}
-
-temp <- c("SRR13612800", "SRR13612801")
-temp <- tibble(SAMPLEID = temp)
-
-remove_aphotic_samples(temp)
-
+#   return(subbed_df)
+# }
 
 
 CMAP_coloc <- CMAP_coloc %>%
@@ -262,15 +235,13 @@ CMAP_coloc <- CMAP_coloc %>%
     ),
     hemi = factor(hemi, c("northernHemi", "southernHemi")),
     lat_abs = abs(lat),
-    Size_fraction = if_else(Size_fraction %in% c("whole", "Sterivex", "0.22") | is.na(Size_fraction), "0.2", Size_fraction),
+    Size_fraction = if_else(
+      Size_fraction %in% c("whole", "Sterivex", "0.22") | is.na(Size_fraction),
+      "0.2",
+      Size_fraction
+    ),
     date = str_remove(time, " .+$"),
     month = str_remove_all(str_extract(date, "-.+-"), "-"),
-    # geoRegion = cut(.$lat_abs,
-    #   breaks = c(-1, 23, 35, 66, 100),
-    #   labels = c("Tropics", "Subtropic", "Temperate", "Polar")
-    # ),
-    # geoRegion = factor(geoRegion, c("Tropics", "Subtropic", "Temperate", "Polar")),
-    # season = str_remove_all(str_extract(date, "-.+-"), "-"),
     season = if_else(month %in% c("03", "04", "05") & hemi == "northernHemi", "spring",
       if_else(month %in% c("09", "10", "11") & hemi == "northernHemi", "fall",
         if_else(month %in% c("06", "07", "08") & hemi == "northernHemi", "summer",
@@ -292,10 +263,7 @@ CMAP_coloc <- CMAP_coloc %>%
     CMAP_NP_WOA_clim = CMAP_nitrate_WOA_clim_tblWOA_Climatology / CMAP_phosphate_WOA_clim_tblWOA_Climatology,
     CMAP_NP_WOA_clim = CMAP_n_an_clim_tblWOA_2018_1deg_Climatology / CMAP_p_an_clim_tblWOA_2018_1deg_Climatology
   ) %>%
-  # select(-c(time, Region, geo_loc_name, Size_fraction, nearestLand.Lon, nearestLand.Lat, lat)) %>%
-  # rename_with(~str_remove(string = ., pattern = 'CMAP')) %>%
   rename_with(~ str_remove(string = ., pattern = "CMAP_")) %>%
-  # rename_with(~str_extract(string = ., pattern = '^.+darwin'), contains('darwin')) %>%
   rename_with(~ coalesce(str_extract(string = ., pattern = "^[A-Za-z0-9]+_darwin"), .)) %>%
   rename_with(~ str_replace(string = ., pattern = "clim_tblWOA_2018_qrtdeg_Climatology", replacement = "WOA_2018_qrtdeg")) %>%
   rename_with(~ str_replace(string = ., pattern = "clim_tblWOA_2018_1deg_Climatology", replacement = "WOA_2018_1deg")) %>%
@@ -340,6 +308,11 @@ CMAP_coloc <- CMAP_coloc %>%
 # # view()
 
 
+# _### FASTA FILE ####
+# _### FASTA FILE ####
+# _### FASTA FILE ####
+
+
 ### - nifh database fasta
 fastaFile_DB <- Biostrings::readDNAStringSet("~/mmorando@ucsc.edu - Google Drive/My Drive/data/amplicon_review/all_studies/master_fasta/nifHDB/auid.filtered.nifHDB.fasta")
 seq_name <- names(fastaFile_DB)
@@ -355,8 +328,6 @@ dfExpnd.fa <- nifHDB.fa_df %>%
   ## remove unknown and syne-like sequences
   filter(!AUID %in% syne_auid_key) %>%
   filter(!AUID %in% unknownnan_auid_key)
-
-
 
 dfExpnd.fa_nifHDB <- dfExpnd.fa %>%
   #   filter(AUID %in% TargetAUIDs ) %>%
@@ -382,6 +353,12 @@ Biostrings::writeXStringSet(
   format = "fasta"
 )
 
+Biostrings::writeXStringSet(
+  x = seqs,
+  filepath = paste("../analysis/files/nifHDB_filtered.fa", sep = ""),
+  format = "fasta"
+)
+
 ### - fasta
 # dfExpnd.fa_nifHDB
 # str(dfExpnd.fa_nifHDB)
@@ -394,9 +371,6 @@ Biostrings::writeXStringSet(
 
 
 ### - count/abundance tables
-### FIXME: there is a problem with the annotation table right now where there are about 1500 missing ASVs compared with the nifH database
-### So I have to add some
-
 nifhDB_cnts <- read.table("~/mmorando@ucsc.edu - Google Drive/My Drive/data/amplicon_review/all_studies/master_fasta/nifHDB/auid.abundances.filtered.nifHDB.tsv", header = TRUE, sep = "\t", row.names = 1) %>%
   rownames_to_column("AUID") %>%
   rename_all(~ str_remove(., pattern = ".*___")) %>%
@@ -405,30 +379,27 @@ nifhDB_cnts <- read.table("~/mmorando@ucsc.edu - Google Drive/My Drive/data/ampl
 dim(nifhDB_cnts)
 names(nifhDB_cnts)
 
-### remove unknown and syne-like sequences
-## remove unknown and syne-like sequences
+## -# remove unknown and syne-like sequences
+#* # remove unknown and syne-like sequences
 nifhDB_cnts <- nifhDB_cnts %>%
   filter(!AUID %in% syne_auid_key) %>%
   filter(!AUID %in% unknownnan_auid_key)
 
-### remove samples from NEMO that I have no idea what they are
-
+### remove samples from NEMO that do not fit the criteria for the nifh database
 (nifhDB_cnts <- nifhDB_cnts %>%
   select(-matches("Turk\\d+\\.e")) %>%
   select(-matches("Harding229\\.66705_S229|Harding230\\.66706_S230|Harding231\\.66709_S231")))
 
 
+## -# Create a relative abundance table
 ##### calculate relative abundance
 nifhDB_RA <- nifhDB_cnts %>%
-  # column_to_rownames('AUID') %>%
-  # group_by(SAMPLEID) %>%
   mutate(across(where(is.numeric), ~ . / sum(., na.rm = T)))
-# mutate(relative_abundance = count / sum(count)) %>%
-# pivot_wider(names_from = ASV, values_from = relative_abundance)
 
+## check to verify that this worked
+## Values should all be 1
 nifhDB_RA %>%
   summarise(across(where(is.numeric), sum)) %>%
-  # filter(.!=1) %>%
   view()
 
 
@@ -447,17 +418,24 @@ nifhDB_RA_T <- nifhDB_RA %>%
 #   SAMPLEID = str_remove(pattern = '.*___', SAMPLEID)
 # )
 
-### - count files
+
+### _ Finished loading in the data ### _ Finished loading in the data
+### _ Finished loading in the data ### _ Finished loading in the data
+### _ Finished loading in the data ### _ Finished loading in the data
+cat("
+Files loaded:
+dfExpnd.fa_nifHDB
 nifhDB_cnts
 nifhDB_cnts_T
-# nifhDB_cnts_T_lng
+nifhDB_RA
+nifhDB_RA_T
+annoNifHDB_updt
+CMAP_coloc
 
+")
+cat("Done loading script!!!
+")
 
-
-### _ Finished loading in the data ### _ Finished loading in the data
-### _ Finished loading in the data ### _ Finished loading in the data
-### _ Finished loading in the data ### _ Finished loading in the data
-cat("Done loading script!!!")
 cat("Woooooooohooooooo!!!")
 ### _ Finished loading in the data ### _ Finished loading in the data
 ### _ Finished loading in the data ### _ Finished loading in the data

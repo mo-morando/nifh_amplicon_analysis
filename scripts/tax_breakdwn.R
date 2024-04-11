@@ -36,7 +36,7 @@ counts_df_T_lng_AUID_deduped %>%
 query_df <- counts_df_T_lng_AUID_deduped %>%
   replace_na(list(. = 0)) %>%
   remove_samples_nucleic_acid(nucleic_acid_type = "DNA") %>%
-  remove_unknown_auids() %>%
+  # remove_unknown_auids() %>%
   left_join(CMAP_coloc %>%
     select(SAMPLEID, studyID))
 
@@ -73,7 +73,7 @@ query_df %>%
 
 #### - By study ID
 
-## * calculate over total data, so each study ID is a percentage of the total
+## * calculate over pooled data, so each study ID is a percentage of the total
 (nifhdb_all_counts_AUID_dedup_total_study_id <- sum_tax(
   abundance_table = query_df,
   annotation_table = annoNifHDB_updt,
@@ -89,7 +89,7 @@ query_df %>%
 
 
 ## * Clean up table so that everything below a certain threshold is summed together as 'other'
-(nifhdb_all_counts_AUID_dedup_total_study_id_clean <- clean_percentages(
+(nifhdb_all_counts_AUID_dedup_total_study_id_clean <- suppressMessages(clean_percentages(
   df = nifhdb_all_counts_AUID_dedup_total_study_id,
   grouping_by = studyID,
   clean_var = percentage_total_counts_nifH_cluster_total_study_id,
@@ -99,7 +99,7 @@ query_df %>%
   percentage_id = percentage_total_counts_nifH_cluster_total_study_id_clean,
   column_var_mutate = nifH_cluster_modified,
   column_var = nifH_cluster
-))
+)))
 ### ! FIXME: the percentages are being calculated by totals and not totals within each study ID
 
 
@@ -120,7 +120,7 @@ query_df %>%
 
 
 ## * Clean up table so that everything below a certain threshold is summed together as 'other'
-(nifhdb_all_counts_AUID_dedup_study_id_total_clean <- clean_percentages(
+(nifhdb_all_counts_AUID_dedup_study_id_total_clean <- suppressMessages(clean_percentages(
   df = nifhdb_all_counts_AUID_dedup_study_id_total,
   grouping_by = studyID,
   clean_var = percentage_total_counts_nifH_cluster_study_id_total,
@@ -130,7 +130,7 @@ query_df %>%
   percentage_id = percentage_total_counts_nifH_cluster_study_id_total_clean,
   column_var_mutate = nifH_cluster_modified,
   column_var = nifH_cluster
-))
+)))
 
 # nifhdb_all_counts_AUID_dedup_study_id_total %>%
 #   select(studyID, nifH_cluster, percentage_total_counts_nifH_cluster_study_id_total) %>%
@@ -145,7 +145,7 @@ query_df %>%
 query_df <- RA_df_T_lng_mean_RA_AUID_deduped %>%
   replace_na(list(. = 0)) %>%
   remove_samples_nucleic_acid(nucleic_acid_type = "DNA") %>%
-  remove_unknown_auids() %>%
+  # remove_unknown_auids() %>%
   left_join(CMAP_coloc %>%
     select(SAMPLEID, studyID))
 
@@ -180,7 +180,7 @@ query_df <- RA_df_T_lng_mean_RA_AUID_deduped %>%
 
 #### - By study ID
 
-## * calculate over total data, so each study ID is a percentage of the total
+## * calculate over pooled data, so each study ID is a percentage of the total
 (nifhdb_all_RA_AUID_dedup_total_study_id <- sum_tax(
   abundance_table = query_df,
   annotation_table = annoNifHDB_updt,
@@ -202,7 +202,7 @@ query_df <- RA_df_T_lng_mean_RA_AUID_deduped %>%
 
 
 ## * Clean up table so that everything below a certain threshold is summed together as 'other'
-nifhdb_all_RA_AUID_dedup_total_study_id_clean <- nifhdb_all_RA_AUID_dedup_total_study_id %>%
+nifhdb_all_RA_AUID_dedup_total_study_id_clean <- suppressMessages(nifhdb_all_RA_AUID_dedup_total_study_id %>%
   clean_percentages(
     grouping_by = studyID,
     clean_var = percentage_total_rel_abund_total_nifH_cluster_study_id,
@@ -212,7 +212,7 @@ nifhdb_all_RA_AUID_dedup_total_study_id_clean <- nifhdb_all_RA_AUID_dedup_total_
     percentage_id = percentage_total_rel_abund_total_nifH_cluster_study_id_clean,
     column_var_mutate = nifH_cluster_modified,
     column_var = nifH_cluster
-  )
+  ))
 
 
 ## * calculate over each study ID, so each percentage is based on its own study.
@@ -232,7 +232,7 @@ nifhdb_all_RA_AUID_dedup_total_study_id_clean <- nifhdb_all_RA_AUID_dedup_total_
 
 
 ## * Clean up table so that everything below a certain threshold is summed together as 'other'
-(nifhdb_all_rel_abund_AUID_dedup_study_id_total_clean <- clean_percentages(
+(nifhdb_all_rel_abund_AUID_dedup_study_id_total_clean <- suppressMessages(clean_percentages(
   df = nifhdb_all_rel_abund_AUID_dedup_study_id_total,
   grouping_by = studyID,
   clean_var = percentage_total_rel_abund_nifH_cluster_study_id_total,
@@ -242,7 +242,7 @@ nifhdb_all_RA_AUID_dedup_total_study_id_clean <- nifhdb_all_RA_AUID_dedup_total_
   percentage_id = percentage_total_rel_abund_nifH_cluster_study_id_total_clean,
   column_var_mutate = nifH_cluster_modified,
   column_var = nifH_cluster
-))
+)))
 
 # nifhdb_all_rel_abund_AUID_dedup_study_id_total %>%
 #   select(studyID, nifH_cluster, percentage_total_rel_abund_nifH_cluster_study_id_total) %>%
@@ -259,7 +259,7 @@ nifhdb_all_RA_AUID_dedup_total_study_id_clean <- nifhdb_all_RA_AUID_dedup_total_
   replace_na(list(. = 0)) %>%
   remove_samples_nucleic_acid(nucleic_acid_type = "DNA") %>%
   remove_aphotic_samples() %>%
-  remove_unknown_auids() %>%
+  # remove_unknown_auids() %>%
   # filter(AUID %in% unknownnan_auids) %>%
   left_join(CMAP_coloc %>%
     select(SAMPLEID, studyID)) %>%
@@ -541,7 +541,7 @@ ggsave("/Users/mo/Projects/nifH_amp_project/myWork/analysis/plots/bar_chart_nifh
 
 # to_plot <- nifhdb_all_counts_AUID_dedup_study_id_total_clean
 custom_order_w_total <- c(
-  "total data",
+  "pooled data",
   "AK2HI",
   "BentzonTilia_2015",
   "Ding_2021",
@@ -565,9 +565,9 @@ custom_order_w_total <- c(
   "Turk_2021"
 )
 
-#* # make tibble that joins the total data with study ID data
+#* # make tibble that joins the pooled data with study ID data
 #* # rename columns to be the same for binding
-#* # make new studyId for total data
+#* # make new studyId for pooled data
 temp <- nifhdb_all_counts_AUID_dedup_study_id_total %>%
   bind_rows(nifhdb_all_counts_AUID_dedup_clean %>%
     rename(
@@ -575,7 +575,7 @@ temp <- nifhdb_all_counts_AUID_dedup_study_id_total %>%
       percentage_total_counts_nifH_cluster_study_id_total = percentage_nifH_cluster
     ) %>%
     mutate(
-      studyID = "total data", #* # make new studyId for total data
+      studyID = "pooled data", #* # make new studyId for pooled data
       cluster_stats = nifH_cluster #* # this is needed for plotting
     )) %>%
   mutate(
@@ -623,7 +623,7 @@ temp <- nifhdb_all_rel_abund_AUID_dedup_study_id_total %>%
       percentage_total_rel_abund_nifH_cluster_study_id_total = percentage_nifH_cluster
     ) %>%
     mutate(
-      studyID = "total data", #* # make new studyId for total data
+      studyID = "pooled data", #* # make new studyId for pooled data
       cluster_stats = nifH_cluster #* # this is needed for plotting
     )) %>%
   mutate(

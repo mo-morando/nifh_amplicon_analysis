@@ -41,18 +41,6 @@ merge_annotations <- function(
 }
 
 
-
-# remove_variables <- function(pattern_to_remove) {
-#    # List all variables in the environment
-# all_vars <- ls()
-
-# # Find variables containing "pattern" in their names and remove them
-# to_remove <- all_vars[grep(pattern_to_remove, all_vars)]
-# rm(list = to_remove)
-# }
-
-# remove_variables("temp");ls()
-
 transform_data_lng <- function(
     input_df,
     starts_with_col,
@@ -107,14 +95,28 @@ add_total_row <- function(
   return(df_with_total_count)
 }
 
-cat(
-  'USEAGE:
-add_total_row(
-    column_name = "studyID",
-    summary_column = n,
-    all_columns = FALSE
-    )'
-)
+# cat(
+#   'USEAGE:
+# add_total_row(
+#     column_name = "studyID",
+#     summary_column = n,
+#     all_columns = FALSE
+#     )'
+# )
+
+# unique_sample_id_key <- sample_types_all %>%
+#   left_join(
+#     CMAP_coloc
+#     # %>%
+#     # select(SAMPLEID, studyID, lat, lon, time, depth)
+#   ) %>%
+#   group_by(across(all_of(unique_sample_column_ids))) %>%
+#   # mutate(group_id = ifelse(n() > 1, as.character(cur_group_id()), NA)) %>%
+#   mutate(group_id = as.character(cur_group_id())) %>%
+#   ungroup() %>%
+#   select(SAMPLEID, sample_type, nucleicAcidType, group_id)
+
+
 
 ### adds group id using the unique_sample_id_key
 ###

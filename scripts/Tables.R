@@ -124,10 +124,10 @@ cmap_catalog <- read_csv("~/mmorando@ucsc.edu - Google Drive/My Drive/data/ampli
 
 cmap_catalog %>%
   filter(
-    Table_Name == "tblArgoMerge_REP" #| Table_Name == "tblWOA_2018_1deg_Climatology"
+    Table_Name == "tblWind_NRT_hourly" #| Table_Name == "tblWOA_2018_1deg_Climatology"
     # filter(grepl("argo",Table_Name, ignore.case = TRUE) #| Table_Name == "tblWOA_2018_1deg_Climatology"
   ) %>%
-  view()
+  print(n = 30)
 
 
 cmap_var_cat_replace <- tibble(

@@ -6,11 +6,8 @@ library(patchwork)
 
 
 
-### photic samples
+## -# photic samples
 number_of_aphotic_samples <- nrow(CMAP_coloc) - nrow(remove_aphotic_samples
-(CMAP_coloc))
-
-number_of_aphotic_samples <- nrow(CMAP_20230719) - nrow(remove_aphotic_samples
 (CMAP_coloc))
 
 number_of_photic_samples <- nrow(CMAP_coloc) -
@@ -20,41 +17,60 @@ cat("
 
     Total number of samples: ", nrow(CMAP_coloc), "
     Number of aphotic samples:", number_of_aphotic_samples, "
-    Number of photic samples:", number_of_photic_samples,
+    Number of photic samples:", number_of_photic_samples, "\n\n",
   sep = " "
 )
-### DNA/RNA samples
 
-number_of_DNA_samples <- nrow(CMAP_20230719) - nrow(remove_samples_nucleic_acid(CMAP_coloc, "RNA", DNA_samples_key))
+
+## -# DNA/RNA samples
+count_and_arrange(unique_sample_id_key, c("nucleicAcidType"))
+
+number_of_DNA_samples <- nrow(cmapTab) - nrow(remove_samples_nucleic_acid(CMAP_coloc, "RNA", DNA_samples_key))
 
 cat("
 
-    Number of DNA samples:", number_of_DNA_samples,
+Total number of DNA samples:", number_of_DNA_samples, "\n\n",
   sep = " "
 )
 
-number_of_RNA_samples <- nrow(CMAP_20230719) - nrow(remove_samples_nucleic_acid(CMAP_coloc, "DNA", DNA_samples_key))
+number_of_RNA_samples <- nrow(cmapTab) - nrow(remove_samples_nucleic_acid(CMAP_coloc, "DNA", DNA_samples_key))
 
 cat("
 
-Number of RNA samples:", number_of_RNA_samples,
+Total number of RNA samples:", number_of_RNA_samples, "\n\n",
   sep = " "
 )
 
-### duplicate samples
-number_of_duplicate_samples <- unique_sample_id_key %>%
-  filter(sample_type %in% "Duplicate_Samples") %>%
+cat("
+
+    Total number of samples: ", nrow(CMAP_coloc), "
+    Total number of DNA samples:", number_of_DNA_samples, "
+    Total number of RNA samples:", number_of_RNA_samples, "\n\n",
+  sep = " "
+)
+
+
+## -# replicate samples
+count_and_arrange(unique_sample_id_key, c("replicate_flag"))
+
+number_of_replicate_samples <- unique_sample_id_key %>%
+  filter(replicate_flag %in% "Replicate_Sample") %>%
   count() %>%
   pull()
 
 
-cat("Number of duplicate samples:", number_of_duplicate_samples,
+cat("Number of replicate samples:", number_of_replicate_samples, "\n\n",
   sep = " "
 )
 
 
+#-# Size_fraction
+count_and_arrange(unique_sample_id_key, c("size_frac_flag"))
 
 
+
+# Stats on samples types
+count_and_arrange(unique_sample_id_key, c("replicate_flag", "nucleicAcidType", "size_frac_flag"), replicate_flag)
 
 ## - nucleicAcidType
 
@@ -96,10 +112,10 @@ count_and_arrange(CMAP_coloc, c("photic", "nucleicAcidType"))
 # count_and_arrange(sample_types_all, c("sample_type", "SAMPLEID"), sample_type)  %>% add_total_row
 
 ## - sample type
-(sample_type <- count_and_arrange(sample_types_all, c("sample_type", "nucleicAcidType"), sample_type) %>%
-  # add_total_row(n, "sample_type", all_columns = FALSE) %>%
+
+(sample_type <- count_and_arrange(unique_sample_id_key, c("replicate_flag", "nucleicAcidType", "size_frac_flag"), replicate_flag) %>%
   mutate(
-    new_group = paste(sample_type, nucleicAcidType, sep = "_"),
+    new_group = paste(replicate_flag, nucleicAcidType, size_frac_flag, sep = "_"),
     tibble_id = "sample_id"
   ) %>%
   add_percentage(n,
@@ -107,6 +123,18 @@ count_and_arrange(CMAP_coloc, c("photic", "nucleicAcidType"))
     grouping_by = NULL,
     remove_columns = "total"
   ))
+
+# (sample_type <- count_and_arrange(sample_types_all, c("sample_type", "nucleicAcidType"), sample_type) %>%
+#   # add_total_row(n, "sample_type", all_columns = FALSE) %>%
+#   mutate(
+#     new_group = paste(sample_type, nucleicAcidType, sep = "_"),
+#     tibble_id = "sample_id"
+#   ) %>%
+#   add_percentage(n,
+#     percentage,
+#     grouping_by = NULL,
+#     remove_columns = "total"
+#   ))
 
 ### * Plot
 to_plot <- sample_type
@@ -267,6 +295,8 @@ samples_per_ocean %>%
   arrange(desc(ocean))
 # print(samples_per_studyid, n = 50)
 
+299 / 429 * 100
+
 to_plot <- samples_per_ocean
 
 viridis_color_pallete <- get_viridis_colors(to_plot, hemi, "magma", -1, 0)
@@ -365,7 +395,7 @@ ggsave("/Users/mo/Projects/nifH_amp_project/myWork/analysis/plots/Samples_per_mo
 ### * lat_abs
 samples_per_lat_abs <- count_and_arrange(query_df, c("lat_abs", "hemi"))
 
-print(samples_per_lat_abs, n = 1000)
+# print(samples_per_lat_abs, n = 1000)
 
 # histogram_plot(samples_per_lat_abs, lat_abs,
 #     hemi, 1,
@@ -590,7 +620,7 @@ samples_per_sst_tblSST_AVHRR_OI_NRT <- count_and_arrange(
   query_df, c("sst_tblSST_AVHRR_OI_NRT", "hemi")
 )
 
-print(samples_per_sst_tblSST_AVHRR_OI_NRT, n = 1000)
+# print(samples_per_sst_tblSST_AVHRR_OI_NRT, n = 1000)
 
 # histogram_plot(
 #     df = samples_per_sst_tblSST_AVHRR_OI_NRT,
@@ -628,7 +658,7 @@ samples_per_PO4_tblPisces_NRT <- count_and_arrange(
   query_df, c("PO4_tblPisces_NRT", "hemi")
 )
 
-print(samples_per_PO4_tblPisces_NRT, n = 1000)
+# print(samples_per_PO4_tblPisces_NRT, n = 1000)
 
 # histogram_plot(
 #     df = samples_per_PO4_tblPisces_NRT,
@@ -698,7 +728,7 @@ samples_per_ocean_plot_sub <- samples_per_ocean_plot + theme(
 #   # widths = c(1, 5)  # This adjusts the height ratio between the top and bottom plots
 # )
 
-ggsave("/Users/mo/Projects/nifH_amp_project/myWork/analysis/plots/Samples_per_abslat_ocean_sst_po4_hemi_cmb_hist.jpeg", height = 8.5, width = 14, units = "in", dpi = 300)
+ggsave("/Users/mo/Projects/nifH_amp_project/myWork/analysis/plots/Samples_per_abslat_ocean_sst_po4_hemi_cmb_hist.jpeg", height = 8.5, width = 16, units = "in", dpi = 300)
 
 # ## combine plots   OLD PLOT HERE
 
@@ -718,7 +748,7 @@ samples_per_logFe <- count_and_arrange(
   query_df, c("logFe", "hemi")
 )
 
-print(samples_per_logFe, n = 1000)
+# print(samples_per_logFe, n = 1000)
 
 histogram_plot_x_or_y(
   df = samples_per_logFe, aes_var = "x",
@@ -748,7 +778,7 @@ samples_per_PP_tblPisces_NRT <- count_and_arrange(
   query_df, c("PP_tblPisces_NRT", "hemi")
 )
 
-print(samples_per_PP_tblPisces_NRT, n = 1000)
+# print(samples_per_PP_tblPisces_NRT, n = 1000)
 
 histogram_plot_x_or_y(
   df = samples_per_PP_tblPisces_NRT, aes_var = "x",
@@ -778,7 +808,7 @@ samples_per_CHL_tblPisces_NRT <- count_and_arrange(
   query_df, c("CHL_tblPisces_NRT", "hemi")
 )
 
-print(samples_per_CHL_tblPisces_NRT, n = 1000)
+# print(samples_per_CHL_tblPisces_NRT, n = 1000)
 
 histogram_plot_x_or_y(
   df = samples_per_CHL_tblPisces_NRT, aes_var = "x",
