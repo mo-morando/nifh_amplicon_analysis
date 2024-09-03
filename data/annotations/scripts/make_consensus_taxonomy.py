@@ -106,9 +106,11 @@ def assign_consensus_id(
             # .fillna(annotation_table["subcluster"])
             .fillna(
                 annotation_table.apply(
-                    lambda row: "unknown" + row["cluster"]
-                    if (row["cluster"] == "3" or row["cluster"] == "4")
-                    else "unknown" + row["subcluster"],
+                    lambda row: (
+                        "unknown" + row["cluster"]
+                        if (row["cluster"] == "3" or row["cluster"] == "4")
+                        else "unknown" + row["subcluster"]
+                    ),
                     axis=1,
                 )
                 # annotation_table.apply(
