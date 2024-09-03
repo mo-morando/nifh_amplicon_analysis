@@ -1,0 +1,58 @@
+Input file modification timestamps are as follows:
+2024-03-14  CMAP/data/CMAP_metadata.csv.gz
+2024-03-14  GatherMetadata/metadata.csv
+2024-03-22  FilterAuids/auid.abundances.filtered.tsv.gz
+2024-03-22  FilterAuids/auid.filtered.fasta
+2024-03-28  AnnotateAuids/auids.annot.tsv
+
+>>>>> Making the nifH ASV database <<<<<
+Loading libraries...done.
+Loading the abundance table...done.  9416 ASVs X 890 working samples.
+Note that 6 samples have 0 total reads. They will be dropped after ASV annotations are checked.
+Loading sample metadata...done.  8812 samples X 21 metadata variables.
+Loading the CMAP environmental variables...done.  887 samples X 105 CMAP environmental variables.
+
+Loading annotation...done.
+Loading AUID sequences...Loaded 9416 AUIDs.
+
+Filtering out AUIDs that had no annotation from workflow stage AnnotateAuids:
+  Number of rows removed from: 'abundTab':	1507
+  Number of rows removed from: 'asvSeqs':	1507
+After filtering out unannotated ASVs, there are a total of 25 samples that have 0 total reads. They will be dropped shortly.
+ASVs in FASTA and abundance table are 1:1.
+
+Forcing abundTab to have only integers to be vegan-friendly.
+After this step there are still 34397432 reads.
+Dropping samples that have 0 reads.  25 samples dropped:
+Gradoville54.68692 Gradoville55.68715 Gradoville59.68766 Gradoville63.68775 Harding146.63211_S146 Harding148.63217_S148 Harding162.64203_S162 Harding168.64227_S168 Harding173.64267_S173 SRR10759549 SRR10759552 SRR10759574 SRR10759576 SRR10759586 SRR10759590 SRR10759598 SRR10759606 SRR10759636 SRR10759658 SRR10759662 SRR10759664 SRR10759674 SRR10759675 DRR205315 DRR205322 
+
+Shrinking CMAP and sample metadata tables to have just the samples in the abundance table.
+   3 samples in the abundance table have no environmental data (sampsWithoutEnvdata.txt)
+   0 samples in the abundance table have no sample metadata (sampsWithoutMetadata.txt)
+
+Checking consistency of data tables (e.g. same AUIDs and samples).
+
+Saved workspace.RData which contains the following:
+  These objects comprise the nifH ASV database:
+     asvSeqs      ASV sequences, 1:1 with abundTab. Each ASV has an ID of the form 'AUID.<number>'.
+                  The number only ensures uniqueness.  It does not indicate the ASV's abundance.
+     abundTab     ASV abundance counts for all retained samples. Samples with 0 reads are excluded,
+                  for example, those dropped by FilterAuids, or by WorkspaceStartup when ASVs
+                  with no annotation get removed.  Every count is an integer so the table can be
+                  used with the R vegan package.
+     relabundTab  ASV relative abundances for all retained samples.
+     annotTab     Annotation for ASVs in abundTab.
+     metaTab      Metadata for samples in abundTab.
+     cmapTab      Environmental data for samples in abundTab.
+
+  The workspace.RData includes the above as well as the following:
+     asvCyanos    Cyanobacteria ASVs based on best hit in Genome879.
+     asvNCDs      Non-cyanobacgteria ASVs based on best hit in Genome879.
+     GetTaxa()    Find ASVs with a specified taxonomic level (kingdom to genus) based on the ASV's
+                  best hit in Genome879.
+ 
+The workspace objects can be used with R tidyverse, or without. No R packages are required.
+
+Wrote files comprising the nifH ASV database.
+>>>>> Finished making the nifH ASV database <<<<<
+

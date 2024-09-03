@@ -94,7 +94,7 @@ extract_cmap_info_from_names <- function(cmap_names) {
   return(extracted_cmap_info)
 }
 
-cmap_names <- tibble("CMAP_ID" = names(CMAP_20230719)) %>%
+cmap_names <- tibble("CMAP_ID" = names(cmap_coloc)) %>%
   filter(grepl("CMAP", CMAP_ID))
 
 cmap_variables <- extract_cmap_info_from_names(cmap_names)
@@ -104,7 +104,7 @@ cmap_variables <- extract_cmap_info_from_names(cmap_names)
 #   filter(grepl("CMAP", CMAP_ID)) %>%
 #   extract(CMAP_ID, into = c("Variable", "Table"), regex = "CMAP_(.*?)_(tbl.*)", remove = FALSE)
 
-tibble(str_match(names(CMAP_20230719), "CMAP_(.*?)_(tbl.*)"))
+tibble(str_match(names(cmap_coloc), "CMAP_(.*?)_(tbl.*)"))
 
 ### _ write out table that will be used to query the cmap catalog and extract only the varibles used in this study
 ## _ the script to do this next step can be found
@@ -120,13 +120,15 @@ cmap_catalog <- read_csv("~/mmorando@ucsc.edu - Google Drive/My Drive/data/ampli
 ## ! use the bit for now
 (cmap_var_cat_na <- cmap_variables %>%
   left_join(cmap_catalog) %>%
-  filter(is.na(Long_Name)))
+  filter(!is.na(Long_Name)))
 
 cmap_catalog %>%
   filter(
-    Table_Name == "tblWind_NRT_hourly" #| Table_Name == "tblWOA_2018_1deg_Climatology"
+    # Table_Name == "tblWind_NRT_hourly" #| Table_Name == "tblArgoMerge_REP"
+    Table_Name == "tblMercator_MLD_NRT" #| Table_Name == "tblArgoMerge_REP"
     # filter(grepl("argo",Table_Name, ignore.case = TRUE) #| Table_Name == "tblWOA_2018_1deg_Climatology"
   ) %>%
+  view()
   print(n = 30)
 
 
@@ -172,7 +174,7 @@ view()
 ## ! use the bit for now
 
 
-supp_table_2 <- cmap_catalog %>%
+supp_table_2 <- cmap_var_cat_na %>%
   select(-(Variable_25th:Unstructured_Variable_Metadata))
 
 

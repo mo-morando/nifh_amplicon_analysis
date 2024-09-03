@@ -1,6 +1,35 @@
+#' Module Docstring:
+#'
+#' This script contains a collection of functions designed to perform various data processing tasks using ggplot2 and tidyverse packages in R. Below are the main functionalities of the script:
+#'
+#' - Custom Theme Function:
+#'     - `theme_custom`: Define a custom theme for ggplot2 plots.
+#'
+#' - Color Functions:
+#'     - `get_viridis_colors`: Generate a custom color palette based on the viridis color scheme.
+#'     - `nifh_cluster_colours`: Define custom colors for nifh clusters.
+#'
+#' - Plotting Functions:
+#'     - `create_custom_plot_point`: Create a custom dot plot.
+#'     - `bar_plot`: Create a simple custom bar plot.
+#'     - `histogram_plot`: Create a simple custom histogram plot.
+#'     - `histogram_plot_x_or_y`: Create a custom histogram plot with options to specify x or y axis.
+#'
+#' These functions can be used individually to customize plot aesthetics and create visually appealing visualizations.
+#'
+#' @import tidyverse
+#' @importFrom viridisLite viridis
+#'
+
 # Function to define the custom theme
 eb <- element_blank()
 
+#' Define a custom theme for ggplot2 plots
+#'
+#' This function defines a custom theme for ggplot2 plots, including modifications to plot titles, axes, grids, and legends.
+#'
+#' @return A ggplot2 theme object.
+#'
 theme_custom <- function() {
   theme_bw() +
     theme(
@@ -21,8 +50,11 @@ theme_custom <- function() {
         face = "bold",
         colour = "black"
       ),
-      legend.title = element_text(size = 20, face = "bold"),
-      legend.text = element_text(size = 17, face = "bold"),
+      # legend.title = element_text(size = 20), # size of legend title
+      # legend.key.size = unit(2, "lines"), # size of legend keys
+      # legend.text = element_text(size = 17), # size of legend text
+      # legend.spacing.x = unit(0.5, "lines"), # horizontal spacing between legend elements
+      # legend.spacing.y = unit(0.5, "lines"), # vertical spacing between legend elements
       legend.box = "horizontal",
       legend.direction = "horizontal",
       axis.text.y = element_text(size = 21, face = "bold"),
@@ -30,7 +62,18 @@ theme_custom <- function() {
     )
 }
 
-### custom colors
+#' Generate custom color palette based on viridis color scheme
+#'
+#' This function generates a custom color palette based on the viridis color scheme.
+#'
+#' @param df_to_plot Dataframe to plot.
+#' @param plot_by Variable to plot.
+#' @param pallette_type Type of viridis color palette (e.g., "D").
+#' @param color_direction Direction of color scheme.
+#' @param begin_point Starting point of the color scheme.
+#'
+#' @return A vector of custom color palette.
+#'
 get_viridis_colors <- function(
     df_to_plot,
     plot_by,
@@ -52,24 +95,16 @@ get_viridis_colors <- function(
   return(custom_palette)
 }
 
-## colours specific to nifh clusters
-# nifh_cluster_colours <- c(
-#   "1A" = "steelblue",
-#   "1J/1K" = "chocolate4",
-#   "1O/1P" = "magenta",
-#   # "3" = "goldenrod2",
-#   "3" = "red",
-#   "1G" = "chocolate1",
-#   "1B" = "green2",
-#   "other" = "lightgrey",
-#   "unknown" = "darkgrey"
-# )
-
+#' Define custom colors for nifh clusters
+#'
+#' This function defines custom colors for nifh clusters.
+#'
+#' @return A named vector of custom colors.
+#'
 nifh_cluster_colours <- c(
   "1A" = "steelblue",
   "1J/1K" = "chocolate4",
   "1O/1P" = "magenta",
-  # "3" = "goldenrod2",
   "3" = "red",
   "1G" = "chocolate1",
   "1B" = "green2",
@@ -79,7 +114,24 @@ nifh_cluster_colours <- c(
   "2" = "blue"
 )
 
-# Function to create a custom dot plot
+#' Create a custom dot plot
+#'
+#' This function creates a custom dot plot using ggplot2.
+#'
+#' @param data1 Dataframe containing points for the plot.
+#' @param data2 Dataframe containing labels for the points.
+#' @param x1 X-axis variable for data1.
+#' @param y1 Y-axis variable for data1.
+#' @param x2 X-axis variable for data2.
+#' @param y2 Y-axis variable for data2.
+#' @param colour Variable for point color.
+#' @param group Variable for grouping points.
+#' @param size Variable for point size.
+#' @param label Variable for point labels.
+#' @param legend_position Position of the legend.
+#'
+#' @return A ggplot2 object representing the custom dot plot.
+#'
 create_custom_plot_point <- function(
     data1, data2, x1, y1, x2, y2,
     colour, group, size, label, legend_position) {
@@ -124,7 +176,28 @@ create_custom_plot_point <- function(
     theme(legend.position = legend_position)
 }
 
-# Function to create a simple custom bar plot
+#' Create a simple custom bar plot
+#'
+#' This function creates a simple custom bar plot using ggplot2.
+#'
+#' @param df Dataframe containing plot data.
+#' @param x X-axis variable.
+#' @param y Y-axis variable.
+#' @param fill Fill variable for bars.
+#' @param fill_pallete Color palette for fill variable.
+#' @param width Width of bars.
+#' @param fill_lab Label for fill legend.
+#' @param colour_lab Label for color legend.
+#' @param title_lab Title label for the plot.
+#' @param subtitle_lab Subtitle label for the plot.
+#' @param x_lab X-axis label.
+#' @param y_lab Y-axis label.
+#' @param legend_position Position of the legend.
+#' @param legend_direction Direction of the legend.
+#' @param print_out Boolean, determines if plot is printed. Default is FALSE
+#'
+#' @return A ggplot2 object representing the custom bar plot.
+#'
 bar_plot <- function(
     df, x, y,
     fill = NULL,
@@ -136,7 +209,10 @@ bar_plot <- function(
     subtitle_lab = NULL,
     x_lab, y_lab = "Number of samples",
     legend_position = "bottom",
-    legend_direction = "horizontal") {
+    legend_direction = "horizontal",
+    n_row = 1,
+    x_axis_angle = FALSE,
+    print_out = FALSE) {
   gg <- ggplot({{ df }}, aes(x = {{ x }}, y = {{ y }}, fill = {{ fill }})) +
     geom_bar(stat = "identity", colour = "#3a3838", width = width) +
     labs(
@@ -147,57 +223,77 @@ bar_plot <- function(
       x = x_lab,
       y = y_lab
     ) +
-    # theme_bw() +
-    # theme_minimal() +
     scale_fill_manual(values = fill_pallete) +
-    # scale_fill_manual(values = viridis_color_pallete) +
     theme_custom() +
     theme(
       legend.position = legend_position,
-      legend.direction = legend_direction
+      legend.direction = legend_direction,
+      legend.key.size = unit(2, "lines"), # size of legend keys
+      legend.text = element_text(size = 16), # size of legend text
+      legend.title = element_text(size = 25), # size of legend title
+      legend.spacing.x = unit(0.5, "lines"), # horizontal spacing between legend elements
+      legend.spacing.y = unit(0.5, "lines") # vertical spacing between legend elements
     )
-  # theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 15)) +
-  # guides(fill = "none")
+
+  # Conditionally set x-axis angle
+  if (x_axis_angle) {
+    gg <- gg +
+      theme(
+        axis.text.x = element_text(angle = 45, hjust = 1, size = 17, face = "bold"),
+        axis.title.x = element_blank()
+      )
+  }
+
+  gg <- gg + guides(fill = guide_legend(nrow = n_row))
+
+  if (print_out) {
+    print(gg) # print plot if prompted
+  }
+
   return(gg)
 }
 
-# Function to create a simple custom histogram plot
-# histogram_plot <- function(
-#     df, y, fill = NULL, binwith = 1,
-#     x_lab = "Number of samples", y_lab) {
-#   # FIXME: gg <- ggplot({{ df }}, aes(y = {{ y }}, fill = as.factor({{ fill }}))) +
-#   gg <- ggplot({{ df }}, aes(y = {{ y }}, fill = {{ fill }})) +
-#     geom_histogram(binwidth = binwith, colour = "black") +
-#     labs(
-#       x = x_lab,
-#       y = y_lab
-#     ) +
-#     # theme_bw() +
-#     # theme_minimal() +
-#     theme_custom() +
-#     # theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 15)) +
-#     guides(fill = "none")
-#   return(gg)
-# }
-
+#' Create a simple custom histogram plot
+#'
+#' This function creates a simple custom histogram plot using ggplot2.
+#'
+#' @param df Dataframe containing plot data.
+#' @param y Y-axis variable.
+#' @param fill Fill variable for bars.
+#' @param binwidth Width of bins for histogram.
+#' @param x_lab X-axis label.
+#' @param y_lab Y-axis label.
+#'
+#' @return A ggplot2 object representing the custom histogram plot.
+#'
 histogram_plot <- function(
-    df, y, fill = NULL, binwith = 1,
+    df, y, fill = NULL, binwidth = 1,
     x_lab = "Number of samples", y_lab) {
-  # FIXME: gg <- ggplot({{ df }}, aes(y = {{ y }}, fill = as.factor({{ fill }}))) +
   gg <- ggplot({{ df }}, aes(y = {{ y }}, fill = {{ fill }})) +
-    geom_histogram(binwidth = binwith, colour = "black") +
+    geom_histogram(binwidth = binwidth, colour = "black") +
     labs(
       x = x_lab,
       y = y_lab
     ) +
-    # theme_bw() +
-    # theme_minimal() +
-    theme_custom() #+
-  # theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 15)) +
-  # guides(fill = "none")
+    theme_custom()
   return(gg)
 }
 
+#' Create a custom histogram plot with options to specify x or y axis
+#'
+#' This function creates a custom histogram plot with options to specify x or y axis using ggplot2.
+#'
+#' @param df Dataframe containing plot data.
+#' @param aes_var Variable to map to x or y axis.
+#' @param x X-axis variable.
+#' @param y Y-axis variable.
+#' @param fill Fill variable for bars.
+#' @param binwidth Width of bins for histogram.
+#' @param x_lab X-axis label.
+#' @param y_lab Y-axis label.
+#'
+#' @return A ggplot2 object representing the custom histogram plot.
+#'
 histogram_plot_x_or_y <- function(
     df, aes_var,
     x = NULL, y = NULL, fill = NULL, binwidth = 1,
@@ -216,8 +312,7 @@ histogram_plot_x_or_y <- function(
       x = x_lab,
       y = y_lab
     ) +
-    theme_custom() #+
-  # guides(fill = "none")
+    theme_custom()
 
   return(gg)
 }
@@ -226,8 +321,8 @@ histogram_plot_x_or_y <- function(
 ### _ Finished loading in the data ### _ Finished loading in the data
 ### _ Finished loading in the data ### _ Finished loading in the data
 ### _ Finished loading in the data ### _ Finished loading in the data
-cat("Done loading script!!!")
-cat("Woooooooohooooooo!!!")
+cat("Done loading script!!!\n")
+cat("Woooooooohooooooo!!!\n\n")
 ### _ Finished loading in the data ### _ Finished loading in the data
 ### _ Finished loading in the data ### _ Finished loading in the data
 ### _ Finished loading in the data ### _ Finished loading in the data
