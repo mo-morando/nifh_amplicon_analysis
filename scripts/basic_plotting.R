@@ -212,6 +212,7 @@ bar_plot <- function(
     legend_direction = "horizontal",
     n_row = 1,
     x_axis_angle = FALSE,
+    facet = FALSE,
     print_out = FALSE) {
   gg <- ggplot({{ df }}, aes(x = {{ x }}, y = {{ y }}, fill = {{ fill }})) +
     geom_bar(stat = "identity", colour = "#3a3838", width = width) +
@@ -245,6 +246,10 @@ bar_plot <- function(
   }
 
   gg <- gg + guides(fill = guide_legend(nrow = n_row))
+
+  if (facet) {
+    gg <- gg + facet_wrap(~facet_by)
+  }
 
   if (print_out) {
     print(gg) # print plot if prompted

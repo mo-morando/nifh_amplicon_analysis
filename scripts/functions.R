@@ -30,6 +30,38 @@ cat("Loading the tidyverse library...\n")
 library(tidyverse)
 
 
+#' Source a file with error handling and path validation
+#'
+#' @param file_path Character string specifying the path to the file to be sourced
+#' @return Invisible NULL. Prints status messages.
+#' @examples
+#' source_file("/path/to/your/file.R")
+source_file <- function(file_path) {
+  for (file in file_path) {
+    # Check if file exists
+    if (!file.exists(file)) {
+      stop("File does not exist: ", file, "\n")
+    }
+
+    # Try to source the file
+    tryCatch(
+      {
+          source(file)
+          cat("Successfully sourced : ", file, "\n")
+      },
+    error = function(e) {
+      stop("Error sourcing : ", file_path, ":", conditionMessage(e), "\n")
+    },
+    warning = function(w) {
+      cat("Warning while sourcing : ", file_path, ":", conditionMessage(w), "\n")
+    }
+  )
+  }
+  
+  cat("Finished sourcing files. \n")
+}
+
+
 #' Define function to create a new directory
 cat("Defining function to create a new directory...\n")
 
@@ -53,6 +85,112 @@ create_dir <- function(dir_path) {
     cat(paste("Directory: '", dir_path, "' already exists\n", sep = ""))
   }
 }
+
+
+#' Print Dimensions of Non-Function Objects in a List
+#' 
+#' This function iterates through each object in a list, excluding functions,
+#' and prints the object's name and dimensions.
+#' 
+#' @param list A character vector or list containing names of objects in the workspace.
+#' @return NULL
+#' @export
+#' 
+#' @examples
+#' print_object_dimensions(list_of_objects)
+#' 
+#' @seealso
+#' /code{\link{print}}
+#' 
+print_object_dimensions <- function(list) {
+  # Loop through each object in the list
+  for (obj in list) {
+    # Check if the object is not a function
+    if (!is.function(get(obj))) {
+      # Print the object's name
+      cat("Object:", obj, "\n")
+      # Print the dimensions of the object
+      if (!is.null(dim(get(obj)))) {
+        cat("Dimensions:", paste(dim(get(obj)), collapse = "x"), "\n\n")
+      }
+      cat("Dimensions: None\n\n")
+    }
+  }
+}
+
+
+
+cat("Defining function to write files from a list...\n")
+#' Write files list
+#'
+#' This function writes objects from a list to files with specified names, file paths and extentions.
+#'
+#' @param file_list A list of tibbles to be written to CSV files
+#' @param out_ext Optional. The file extension to be added to the file names
+#' @param path Optional. The directory where the files will be written. Defaults to the current directory
+#'
+#' @return NULL
+#'
+#' @export
+#'
+#' @examples
+#' write_file_list(
+#'  file_list = object_list,
+#'  path = files_out_path,
+#'  out_ext = ".csv"
+#')
+#' write_files(list(dataframe1, dataframe2), names(list(dataframe1 = dataframe1, dataframe2 = dataframe2)), ".csv")
+#'
+#' @seealso
+#' /code{\link{main}}
+#'
+#' @author Michael (Mo) Morando
+#'
+#'
+write_file_list <- function(file_list, path = ".", out_ext = ".csv") {
+   cat("Writing files from list to path:", path, "\n")
+   
+   # Ensure file_list is a list and it has names
+   if (!is.list(file_list) && !is.null(names(file_list))) {
+	  stop("file_list must be a list, and have associated names.")
+   }
+
+   # Extract names to list
+   file_list_names <- names(file_list)
+   
+   # Iterate over the file_list and save files
+   for (i in seq_along(file_list)) {
+	file_path <- file.path(path, paste0(file_list_names[i], out_ext))
+
+	# Determine the type and write accordingly
+	file_data <- file_list[[i]]
+	if (inherits(file_data, c("tbl_df", "data.frame"))) {
+		write_csv(file_data, file_path)
+	}
+
+	else if (is.list(file_data)) {
+	   write_csv(tibble( "temp_col_id" = unlist(file_data)), file = file_path)
+	}
+
+	else if (is.character(file_data)) {
+	   if(!is.null(names(file_data)) && all(names(file_data) != "")) {
+		write_csv(tibble("key" = names(file_data), "value" = file_data), 
+		file = file_path)
+	   } else {
+      # file_path <- file.path(path, paste0(file_list_names[i], ".tsv"))
+		  writeLines(file_data, con = file_path, sep = ",")
+	   }
+	
+	}else {
+	   cat("Skipping file:", file_list_names[i], "- unsupported type.\n")
+	   next
+	}
+
+    cat("Wrote file:", file_list_names[i], "\n")
+	}
+}
+
+
 
 #' Define merging functions
 cat("Defining merging functions...\n")
@@ -350,7 +488,7 @@ cat("Defining function to remove duplicates based on group ID...\n")
 #'
 #' @return Dataframe with duplicates removed.
 #'
-dedup_by_group <- function(df, ...) {
+dedup_by_group <- function(df, group_id_key = unique_sample_id_key, ...) {
   cat("Removing duplicates based on group ID...\n")
   contains_group_id <- "group_id" %in% names(df)
   if (contains_group_id) {
@@ -358,7 +496,7 @@ dedup_by_group <- function(df, ...) {
       distinct(..., .keep_all = TRUE)
   } else {
     df_deup <- df %>%
-      add_group_id() %>%
+      add_group_id(group_id_key) %>%
       distinct(..., .keep_all = TRUE)
   }
   rows_removed <- nrow(df) - nrow(df_deup)

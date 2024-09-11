@@ -1,6 +1,7 @@
 # nifhDB_cnts
 # annoNifHDB_updt
 
+library(tidyverse)
 library(patchwork)
 
 ### _ Loading in functions

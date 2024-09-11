@@ -1,0 +1,184 @@
+
+configfile: "config.yaml"
+
+
+rule all:
+    input:
+        expand(f"{config['output_dir']}/{{file}}.csv", file=config["files_stb"]),
+        expand(f"{config['output_dir']}/{{file}}.csv", file=config["files_out_bss"]),
+        expand(
+            f"{config['plot_dir']}/{{file}}{config['plot_ext']}",
+            file=config["files_out_plot"],
+        ),
+
+
+# Loading workspace files
+rule load_files:
+    input:
+        workspace=config["workspace"],
+    params:
+        output_dir=config["output_dir"],
+    output:
+        expand(f"{config['output_dir']}/{{file}}.csv", file=config["files_to_process"]),
+    log:
+        f"{config['output_dir']}/logs/load_files.log",
+    shell:
+        "Rscript loading_files.R --workspace {input.workspace} --output_path {params.output_dir} > {log} 2>&1"
+
+
+# Loading workspace files
+rule preprocess_files:
+    input:
+        expand(f"{config['output_dir']}/{{file}}.csv", file=config["files_to_process"]),
+    params:
+        input_files=",".join(config["files_to_process"]),
+        input_dir=config["output_dir"],
+        output_dir=config["output_dir"],
+    output:
+        expand(f"{config['output_dir']}/{{file}}.csv", file=config["files_stb"]),
+    log:
+        f"{config['output_dir']}/logs/preprocess_files.log",
+    shell:
+        """
+        Rscript preprocess_files.R --files {params.input_files} --input_path {params.input_dir} --output_path {params.output_dir} > {log} 2>&1
+        """
+
+
+rule basic_sample_stats:
+    input:
+        # expand(f"{config['output_dir']}/{{file}}.csv", file=config["files_bss"]),
+        expand(f"{config['output_dir']}/{{file}}.csv", file=config["files_stb"]),
+    params:
+        input_files=",".join(config["files_bss"]),
+        input_dir=config["output_dir"],
+        output_dir=config["output_dir"],
+    output:
+        expand(f"{config['output_dir']}/{{file}}.csv", file=config["files_out_bss"]),
+    log:
+        f"{config['output_dir']}/logs/basic_sample_stats.log",
+    shell:
+        """
+        Rscript basic_samp_stats.R --files {params.input_files} --input_path {params.input_dir} --output_path {params.output_dir} > {log} 2>&1
+        """
+
+
+rule make_plots:
+    input:
+        expand(f"{config['output_dir']}/{{file}}.csv", file=config["files_out_bss"]),
+    params:
+        input_files=",".join(config["files_in_plot"]),
+        input_dir=config["output_dir"],
+        output_dir=config["plot_dir"],
+        plot_ext=config["plot_ext"],
+    output:
+        expand(
+            f"{config['plot_dir']}/{{file}}{config['plot_ext']}",
+            file=config["files_out_plot"],
+        ),
+    log:
+        f"{config['output_dir']}/logs/make_plots.log",
+    shell:
+        """
+        Rscript plots_out.R --files {params.input_files} --input_path {params.input_dir} --output_path {params.output_dir} --plot_ext {params.plot_ext} > {log} 2>&1
+        """
+
+
+# Cleaning rules
+rule clean_load_files:
+    params:
+        files=expand(
+            f"{config['output_dir']}/{{file}}.csv", file=config["files_to_process"]
+        ),
+        log=f"{config['output_dir']}/logs/load_files.log",
+    shell:
+        """
+        for file in {params.files}; do
+            if [ -f "$file" ]; then
+            rm "$file"
+            echo "Removed $file"
+            fi
+        done
+        if [ -f "{params.log}" ]; then
+            rm "{params.log}"
+            echo "Removed {params.log}"
+        fi
+        """
+
+
+rule clean_preprocessd_files:
+    params:
+        files=expand(f"{config['output_dir']}/{{file}}.csv", file=config["files_stb"]),
+        log=f"{config['output_dir']}/logs/preprocess_files.log",
+    shell:
+        """
+        for file in {params.files}; do
+            if [ -f "$file" ]; then
+            rm "$file" 
+            echo "Removed $file"
+            fi
+        done
+        if [ -f {params.log} ]; then
+        rm "{params.log}"
+        echo "Removed {params.log}"
+        fi
+        """
+
+
+rule clean_basic_stats:
+    params:
+        files=expand(
+            f"{config['output_dir']}/{{file}}.csv", file=config["files_out_bss"]
+        ),
+        log=f"{config['output_dir']}/logs/basic_sample_stats.log",
+    shell:
+        """
+        for file in {params.files}; do
+            if [ -f "$file" ]; then
+                rm "$file"
+                echo "Removed $file"
+            fi
+        done
+        if [ -f "{params.log}" ]; then
+            rm "{params.log}"
+            echo "Removed {params.log}"
+        fi
+        """
+
+
+rule clean_make_plots:
+    params:
+        files=expand(
+            f"{config['plot_dir']}/{{file}}{config['plot_ext']}",
+            file=config["files_out_plot"],
+        ),
+        log=f"{config['output_dir']}/logs/make_plots.log",
+    shell:
+        """
+        for file in {params.files}; do
+            if [ -f "$file" ]; then
+            rm "$file"
+            echo "Removed $file"
+            fi
+        done
+        if [ -f "{params.log}" ]; then
+            rm "{params.log}"
+            echo "Removed {params.log}"
+        fi
+        """
+
+rule clean_all:
+    params:
+        log=f"{config['output_dir']}/logs",
+        files_dir=config["output_dir"],
+        plot_dir=config["plot_dir"],
+    shell:
+        """
+        for dir in {params}; do
+            if [ -d "$dir" ]; then
+            rm -r "$dir" 
+            echo "Removed $dir"
+            else
+                echo "Directory $dir does not exist"
+            fi
+        done
+        """

@@ -1,3 +1,5 @@
+#!/usr/bin/env Rscript
+
 # Check if the argparser library is available and install it if necessary
 if (!requireNamespace("argparser", quietly = TRUE)) {
   install.packages("argparser")
@@ -6,75 +8,138 @@ if (!requireNamespace("argparser", quietly = TRUE)) {
 library(tidyverse)
 library(argparser)
 
+# Load external functions and parameters
 source("/Users/mo/Projects/nifH_amp_project/myWork/scripts/functions.R")
 source("/Users/mo/Projects/nifH_amp_project/myWork/scripts/basic_plotting.R")
 
-## - functions
-cat("
-
-Functions needed:
-transform_data_lng
-add_group_id
-dedupe_by_group
-remove_samples_nucleic_acid
-count_and_arrange
-
-")
-
-#### -
 
 # _# Processing the files of the workspace
 cat("\nProcessing the files of the workspace\n")
+#  Print out what script is running
+script_name <- basename(commandArgs(trailingOnly = FALSE)[4])
+cat("Running script:", script_name, "\n")
+cat("Load in the data\n")
+
+#' Set up the argument parser
+#'
+#' This function creates and configures an argument parser for processing workspace files.
+#'
+#' @return A configured argument parser object
+#' @importFrom argparser arg_parser add_argument
+#' @export
+#'
+#' @examples
+#' parser <- setup_parser()
+setup_parser <- function() {
+  parser <- arg_parser("Process the workspace files")
+  parser <- add_argument(parser, "--files",
+    help = "CVS list of files to read in",
+    default = "annoNifHDB_updt,metaTab,cmap_coloc,nifhDB_cnts,nifhDB_RA"
+  )
+  parser <- add_argument(parser,
+    arg = "--input_path",
+    help = "Input directory path",
+    default = "analysis/out_files"
+  )
+  parser <- add_argument(parser,
+    arg = "--output_path",
+    help = "Output directory path",
+    default = "analysis/out_files"
+  )
 
 
-files_in_path <- "analysis/out_files"
+  return(parser)
+}
 
-files_out_path <- "analysis/out_files"
+#' Parse command-line arguments
+#' 
+#' Parses the command-line arguments using the provided parser.
+#' 
+#' @param parser An argument parser object created by setup_parser()
+#' 
+#' @return A list containing:
+#'    \item{files_to_read}{A character vector of file names to read}
+#'    \item{files_in_pathd}{The input directory path}
+#'    \item{files_to_read}{The output directory path}
+#' @importFrom argparser parse_args
+#' @export 
+#' 
+#' @examples
+#' parser <- setup_parser()
+#' args <- parse_arg(parser)
+parse_arg <- function(parser) {
+  # Parse the arguments
+  argv <- parse_args(parser)
 
-files_to_read <- c(
-  "annoNifHDB_updt",
-"metaTab",
-"cmap_coloc",
-"nifhDB_cnts",
-"nifhDB_RA")
+  # Convert the comma-separated string to a vector
+  files_to_read <- strsplit(argv$files, ",")[[1]]
+  files_in_path <- argv$input_path
+  files_out_path <- argv$output_path
+
+  return(list(
+    files_to_read = files_to_read,
+    files_in_path = files_in_path,
+    files_out_path = files_out_path
+  ))
+}
+
+
+### _ Loading in the data
+
+# # define paths to read and write files
+# files_in_path <- "analysis/out_files"
+
+# files_out_path <- "analysis/out_files"
+
+# # Define the files needed for this script
+# files_to_read <- c(
+#   "annoNifHDB_updt",
+#   "metaTab",
+#   "cmap_coloc",
+#   "nifhDB_cnts",
+#   "nifhDB_RA"
+# )
 
 # for (file in files_to_read) {
 #   cat("Loading file:", file.path(files_in_path, paste0(file, ".csv")), "\n")
 #   assign(file, read_csv(file.path(files_in_path, paste0(file, ".csv"))))
 # }
 
+#' Load and Assign CSV Files
+#'
+#' This function reads a list of CSV files from a specified directory and assigns each file's data
+#' to a variable in the global environment using the file name as the variable name.
+#'
+#' Load CSV files
+#'
+#' @param file_list Character vector of file names to load
+#' @param path Directory path for input files
+#' @return List of loaded data frames
+#' @importFrom readr read_csv
 load_files <- function(file_list, path) {
-   for (file in file_list) {
-    cat("Loading file:", file.path(path, paste0(file, ".csv")), "\n")
-    assign(file, read_csv(file.path(path, paste0(file, ".csv"))), envir = .GlobalEnv)
+  data_list <- list()
+  for (file in file_list) {
+    file_path <- file.path(path, paste0(file, ".csv"))
+    if (file.exists(file_path)) {
+      cat("Loading file:", file_path, "\n")
+      data_list[[file]] <- read_csv(file_path, show_col_types = FALSE)
+    } else {
+      warning(paste("File not found:", file_path))
     }
+  }
+  return(data_list)
 }
-
-load_files(files_to_read, files_in_path)
-
-cat(ls())
-print(annoNifHDB_updt)
-
-#-# Processing annoNifHDB_updt
-
-
 
 #' Process annoNifHDB Update
 #'
-#' This function processes the annoNifHDB update data, performing various transformations
-#' and cleaning steps to prepare it for further analysis.
+#' This function processes the annoNifHDB update data, performing various
+#' transformations and cleaning steps to prepare it for further analysis.
 #'
 #' @param data A data frame containing annoNifHDB update data.
 #' @return A processed data frame ready for further analysis.
-#' @export
-#' @examples
-#' # Load the data
-#' data("annoNifHDB_updt")
-#'
-#' # Process the data
-#' processed_data <- process_annoNifHDB_updt(annoNifHDB_updt)
 process_annoNifHDB_updt <- function(data) {
   cat("Processing the annoNifHDB_updt files...\n")
+
   clusters_of_interest <- c(
     "1A",
     "1J/1K",
@@ -132,6 +197,9 @@ process_annoNifHDB_updt <- function(data) {
       )
     )
 
+  cat("process_annoNifHDB_updt is done!\n")
+
+
   return(processed_data)
 }
 
@@ -146,14 +214,6 @@ process_annoNifHDB_updt <- function(data) {
 #' @param metaTab A data frame containing metaTab data.
 #' @param cmap_coloc A data frame containing CMAP data with sample collection data.
 #' @return A merged data frame (cmap_coloc) with updated size fractions.
-#' @export
-#' @examples
-#' # Load the data
-#' data("metaTab")
-#' data("cmap_coloc")
-#'
-#' # Process the data
-#' processed_data <- process_metaTab(metaTab, cmap_coloc)
 process_metaTab <- function(metaTab, cmap_coloc) {
   cat("Processing the metaTab files...\n")
 
@@ -170,6 +230,10 @@ process_metaTab <- function(metaTab, cmap_coloc) {
   merged_data <- cmap_coloc %>%
     left_join(processed_metaTab, by = "SAMPLEID")
 
+  
+  cat("Processing the metaTab files is done!\n")
+  
+  
   return(merged_data)
 }
 # _##########################################################
@@ -268,14 +332,15 @@ cmap_clean_main <- function(cmap_coloc) {
   }
 
   # Read coastal/open ocean identification data
-  coastal_open_ids <- read_csv("data/workspace/coastal_openocean_ids/sample_classifications_in_nifH_ASV_DB.csv") %>%
+  coastal_open_ids <- read_csv("../data/workspace/coastal_openocean_ids/sample_classifications_in_nifH_ASV_DB.csv", show_col_types = FALSE) %>%
     rename(
       coastal_class = classification,
       studyID = StudyID
     )
 
+  #! FIXME: Must move file and change path to within this project directory
   #-# add Ocean regions for each study ID
-  studyid_regions <- read_csv("~/mmorando@ucsc.edu - Google Drive/My Drive/data/amplicon_review/all_studies/tables/Table1/studyid_regions.csv")
+  studyid_regions <- read_csv("~/mmorando@ucsc.edu - Google Drive/My Drive/data/amplicon_review/all_studies/tables/Table1/studyid_regions.csv", show_col_types = FALSE)
 
   # Define function to add study region to a tibble
   add_study_region <- function(tibble, key = studyid_regions) {
@@ -286,8 +351,9 @@ cmap_clean_main <- function(cmap_coloc) {
           "Southern", study_ocean
         )
       )
+  
 
-    return(tb_sr)
+  return(tb_sr)
   }
 
 
@@ -339,13 +405,13 @@ cmap_clean_main <- function(cmap_coloc) {
     filter(photic == TRUE) %>%
     pull(SAMPLEID)
 
-  return(list(cmap_coloc = cmap_coloc, photic_samples_key = photic_samples_key))
+  cat("Cleaning up cmap_coloc is done!\n")
+
+  return(list(
+    cmap_coloc = cmap_coloc,
+    photic_samples_key = photic_samples_key
+  ))
 }
-
-
-### _ Define some keys and process some of the tibbles for downstream analysis
-# cat("Load in the keys 🔑🗝️ ")
-cat("Defining keys...")
 
 
 ### - We have to have a tibble that identifies the different sample types and nucleic acid types
@@ -356,20 +422,14 @@ cat("Defining keys...")
 
 #' Process Sample Types
 #'
-#' This function processes the sample types in the CMAP data by splitting them into DNA and RNA,
-#' identifying sample types, averaging by sample type and nucleic acid type, and deduplicating by group.
+#' This function processes the sample types in the CMAP data by splitting them 
+#' into DNA and RNA, identifying sample types, averaging by sample type and 
+#' nucleic acid type, and deduplicating by group.
 #'
 #' @param cmap_coloc A data frame containing CMAP data with sample collection data.
-#' @return A processed data frame with sample types identified, averaged, and deduplicated.
-#' @export
-#' @examples
-#' # Load the data
-#' data("cmap_coloc")
-#'
-#' # Process the data
-#' processed_data <- process_sample_types(cmap_coloc)
+#' @return A list containing processed data frames and keys.
 process_sample_types <- function(cmap_coloc) {
-  cat("Define some keys and flags to calculate some basic sample stats and process some of the tibbles for downstream analysis...")
+  cat("Define some keys and flags to calculate some basic sample stats and process some of the tibbles for downstream analysis...\n")
   # Define columns representing a sampling point
   sampling_point <- c(
     "studyID",
@@ -397,7 +457,8 @@ process_sample_types <- function(cmap_coloc) {
         (num_distinct_size_fractions > 1) ~ "Two_Size_Fractions",
       )
     ) %>%
-    ungroup()
+    ungroup()  %>% 
+    suppressMessages()
 
   # Add size fraction flag to the main data frame
   cmap_coloc <- add_size_frac_key(
@@ -458,6 +519,8 @@ process_sample_types <- function(cmap_coloc) {
     select(all_of(unique_sample_column_ids), SAMPLEID, group_id) %>%
     distinct(SAMPLEID, group_id, .keep_all = TRUE)
 
+  cat("Done defining keys and some calculations\n")
+
   return(list(
     size_fraction_key = size_fraction_key,
     cmap_coloc = cmap_coloc,
@@ -469,33 +532,16 @@ process_sample_types <- function(cmap_coloc) {
 }
 
 
-
-# _# Construct some new tibbles for other types of analysis
 #' Construct New Tibbles for Other Types of Analysis
 #'
 #' This function constructs new tibbles for other types of analysis by transforming and processing the data.
 #'
 #' @param nifhDB_cnts A data frame containing nifH count data.
 #' @param nifhDB_RA A data frame containing nifH relative abundance data.
+#' @param unique_sample_id_key A data frame containing unique sample ID information.
 #' @return A list containing the constructed tibbles.
-#' @export
-#' @examples
-#' # Load the data
-#' data("nifhDB_cnts")
-#' data("nifhDB_RA")
-#'
-#' # Construct new tibbles
-#' new_tibbles <- construct_new_tibbles(nifhDB_cnts, nifhDB_RA)
 construct_new_tibbles <- function(nifhDB_cnts, nifhDB_RA, unique_sample_id_key) {
   cat("Constructing new tibbles for other types of analysis...\n")
-  
-  # # Initialize the variables
-  # df_T_lng_deduped <- NULL
-  # df_T_deduped <- NULL
-  # df_deduped <- NULL
-  # df_T_lng_mean_deduped <- NULL
-  # df_T_mean_deduped <- NULL
-  # df_mean_deduped <- NULL
 
   # Internal function to process data
   process_nifhDB_data <- function(data, is_cnts, grp_key) {
@@ -550,7 +596,7 @@ construct_new_tibbles <- function(nifhDB_cnts, nifhDB_RA, unique_sample_id_key) 
         grp_key = grp_key,
         mean_by = !!sym(value_col)
       )
-      print(head(df_T_lng_mean_deduped))
+      
       #-## now pivot wide #-## now pivot wide
       df_T_mean_deduped <- df_T_lng_mean_deduped %>%
         select(-any_of(c("RA", "group_id"))) %>%
@@ -575,14 +621,6 @@ construct_new_tibbles <- function(nifhDB_cnts, nifhDB_RA, unique_sample_id_key) 
     }
   }
 
-  # # Initialize the variables
-  # df_T_lng_deduped <- NULL
-  # df_T_deduped <- NULL
-  # df_deduped <- NULL
-  # df_T_lng_mean_deduped <- NULL
-  # df_T_mean_deduped <- NULL
-  # df_mean_deduped <- NULL
-
   # Process nifH count data
   nifhDB_cnts_results <- process_nifhDB_data(nifhDB_cnts, is_cnts = TRUE, grp_key = unique_sample_id_key)
   cat("Counts done!!\n\n")
@@ -596,99 +634,46 @@ construct_new_tibbles <- function(nifhDB_cnts, nifhDB_RA, unique_sample_id_key) 
   return(c(nifhDB_cnts_results, nifhDB_RA_results))
 }
 
+#' Main function to process the data
+#'
+#' @param files_to_read List of files to process
+#' @param files_in_path Input file path
+#' @param files_out_path Output file path
+#' @return A list of processed data frames
+main <- function(files_to_read, files_in_path, files_out_path) {
+  cat("preprocess_files.R script executed!!\n")
 
-# Get the names of all objects in the workspace
-# workspace_objects_final <- ls()
+  # Load the data
+  data_list <- load_files(files_to_read, files_in_path)
+  # data_list <- load_files(c("annoNifHDB_updt","metaTab","cmap_coloc","nifhDB_cnts","nifhDB_RA"), "analysis/out_files")
 
-# files_out_path <- "analysis/files/"
+  # Process data
 
-# write_workspace_to_csv(workspace_objects_final, )
+  annoNifHDB_updt <- process_annoNifHDB_updt(data_list$annoNifHDB_updt)
 
-
-main <- function() {
-  print("preprocess_files.R script executed!!")
-  annoNifHDB_updt <- process_annoNifHDB_updt(annoNifHDB_updt)
-  print("process_annoNifHDB_updt is done")
-
-  cmap_coloc <- process_metaTab(metaTab, cmap_coloc)
-  print("process_metaTab is done")
-
-  result <- cmap_clean_main(cmap_coloc)
-  cmap_coloc <- result$cmap_coloc
-  photic_samples_key <- result$photic_samples_key
-  print("cmap_clean_main is done")
-
-  # Call the process_sample_types function
-  result_list <- process_sample_types(cmap_coloc)
-  # Access elements from the returned list by their names
-  size_fraction_key <- result_list$size_fraction_key
-  cmap_coloc <- result_list$cmap_coloc
-  DNA_samples_key <- result_list$DNA_samples_key
-  sample_types_all <- result_list$sample_types_all
-  unique_sample_column_ids <- result_list$unique_sample_column_ids
-  unique_sample_id_key <- result_list$unique_sample_id_key
-
-  new_tibbles <- construct_new_tibbles(nifhDB_cnts, nifhDB_RA, unique_sample_id_key)
-  # Extract the constructed tibbles
-  # count samples
-  counts_df_T_lng <- new_tibbles[[1]]
-  counts_df_T_lng_AUID_deduped <- new_tibbles$df_T_lng_deduped
-  counts_df_T_AUID_deduped <- new_tibbles$df_T_deduped
-  counts_df_AUID_deduped <- new_tibbles$df_deduped
-  # RA samples
-  RA_df_T_lng <- new_tibbles[[5]]
-  RA_df_T_lng_mean_RA_AUID_deduped <- new_tibbles$df_T_lng_mean_deduped
-  RA_df_T_mean_RA_AUID_deduped <- new_tibbles$df_T_mean_deduped
-  RA_df_mean_RA_AUID_deduped <- new_tibbles$df_mean_deduped
-  print("construct_new_tibbles is done")
-  
-  print("Script is done")
-
-  # # Return the variables you want to access outside of this function
-  # return(list(
-  #   counts_df_T_lng_AUID_deduped = counts_df_T_lng_AUID_deduped,
-  #   counts_df_T_AUID_deduped = counts_df_T_AUID_deduped,
-  #   counts_df_AUID_deduped = counts_df_AUID_deduped,
-  #   RA_df_T_lng_mean_RA_AUID_deduped = RA_df_T_lng_mean_RA_AUID_deduped,
-  #   RA_df_T_mean_RA_AUID_deduped = RA_df_T_mean_RA_AUID_deduped,
-  #   RA_df_mean_RA_AUID_deduped = RA_df_mean_RA_AUID_deduped,
-  # ))
-}
-
-
-main <- function() {
-  print("preprocess_files.R script executed!!")
-  annoNifHDB_updt <- process_annoNifHDB_updt(annoNifHDB_updt)
-  print("process_annoNifHDB_updt is done")
-
-  cmap_coloc <- process_metaTab(metaTab, cmap_coloc)
-  print("process_metaTab is done")
+  cmap_coloc <- process_metaTab(data_list$metaTab, data_list$cmap_coloc)
 
   result <- cmap_clean_main(cmap_coloc)
   cmap_coloc <- result$cmap_coloc
   photic_samples_key <- result$photic_samples_key
-  print("cmap_clean_main is done")
 
   # Call the process_sample_types function
   result_list <- process_sample_types(cmap_coloc)
 
+  # # Access elements from the returned list by their names
+  # size_fraction_key <- result_list$size_fraction_key
+  # cmap_coloc <- result_list$cmap_coloc
+  # DNA_samples_key <- result_list$DNA_samples_key
+  # sample_types_all <- result_list$sample_types_all
+  # unique_sample_column_ids <- result_list$unique_sample_column_ids
+  # unique_sample_id_key <- result_list$unique_sample_id_key
 
-  # Call the process_sample_types function
-  result_list <- process_sample_types(cmap_coloc)
-  # Access elements from the returned list by their names
-  size_fraction_key <- result_list$size_fraction_key
-  cmap_coloc <- result_list$cmap_coloc
-  DNA_samples_key <- result_list$DNA_samples_key
-  sample_types_all <- result_list$sample_types_all
-  unique_sample_column_ids <- result_list$unique_sample_column_ids
-  unique_sample_id_key <- result_list$unique_sample_id_key
+  new_tibbles <- construct_new_tibbles(data_list$nifhDB_cnts, data_list$nifhDB_RA, result_list$unique_sample_id_key)
 
-  new_tibbles <- construct_new_tibbles(nifhDB_cnts, nifhDB_RA, unique_sample_id_key)
+  # cat(new_tibbles)
 
-  # print(new_tibbles)
-
-  # Access elements from the returned list by their names
-  return(list(
+  # Prepare the final results
+  final_results <- list(
     annoNifHDB_updt = annoNifHDB_updt,
     cmap_coloc = cmap_coloc,
     photic_samples_key = photic_samples_key,
@@ -696,7 +681,7 @@ main <- function() {
     DNA_samples_key = result_list$DNA_samples_key,
     sample_types_all = result_list$sample_types_all,
     unique_sample_column_ids = result_list$unique_sample_column_ids,
-    unique_sample_id_key = unique_sample_id_key,
+    unique_sample_id_key = result_list$unique_sample_id_key,
     counts_df_T_lng = new_tibbles[[1]],
     counts_df_T_lng_AUID_deduped = new_tibbles$df_T_lng_deduped,
     counts_df_T_AUID_deduped = new_tibbles$df_T_deduped,
@@ -705,247 +690,43 @@ main <- function() {
     RA_df_T_lng_mean_RA_AUID_deduped = new_tibbles$df_T_lng_mean_deduped,
     RA_df_T_mean_RA_AUID_deduped = new_tibbles$df_T_mean_deduped,
     RA_df_mean_RA_AUID_deduped = new_tibbles$df_mean_deduped
-  ))
+  )
+
+  return(final_results)
 }
 
 
+# Run if the script is being run directly
+if (sys.nframe() == 0 && !interactive()) {
+  parser <- setup_parser()
+  args <- parse_arg(parser)
 
-main_output = main()
+  final_results <- main(
+    args$files_to_read,
+    args$files_in_path,
+    args$files_out_path
+  )
 
-class(main_output)
-main_output$annoNifHDB_updt
-main_output$photic_samples_key
-view(main_output$photic_samples_key)
-class(main_output$photic_samples_key)
+  # Write out each processed data frame
+  # for ( name in names(final_results) ) {
+  #   write_csv(final_results[[name]], file.path(args$files_out_path, paste0("processed_", name, ".csv")))
+  #   cat(paste("Processed and saved", name, "\n"))
+  # }
 
+  write_file_list(
+  file_list = final_results,
+  path = args$files_out_path
+)
 
-# Access the elements by their names
-annoNifHDB_updt <- main_output$annoNifHDB_updt
-cmap_coloc <- main_output$cmap_coloc
-photic_samples_key <- main_output$photic_samples_key
-size_fraction_key <- main_output$size_fraction_key
-DNA_samples_key <- main_output$DNA_samples_key
-sample_types_all <- main_output$sample_types_all
-unique_sample_column_ids <- main_output$unique_sample_column_ids
-unique_sample_id_key <- main_output$unique_sample_id_key
-counts_df_T_lng <- main_output$counts_df_T_lng
-counts_df_T_lng_AUID_deduped <- main_output$counts_df_T_lng_AUID_deduped
-counts_df_T_AUID_deduped <- main_output$counts_df_T_AUID_deduped
-counts_df_AUID_deduped <- main_output$counts_df_AUID_deduped
-RA_df_T_lng <- main_output$RA_df_T_lng
-RA_df_T_lng_mean_RA_AUID_deduped <- main_output$RA_df_T_lng_mean_RA_AUID_deduped
-RA_df_T_mean_RA_AUID_deduped <- main_output$RA_df_T_mean_RA_AUID_deduped
-RA_df_mean_RA_AUID_deduped <- main_output$RA_df_mean_RA_AUID_deduped
+}
 
-
-
-
-
-# main_output = list(
-#     annoNifHDB_updt = annoNifHDB_updt,
-#     cmap_coloc = cmap_coloc,
-#     photic_samples_key = photic_samples_key,
-#     size_fraction_key = result_list$size_fraction_key,
-#     DNA_samples_key = result_list$DNA_samples_key,
-#     sample_types_all = result_list$sample_types_all,
-#     unique_sample_column_ids = result_list$unique_sample_column_ids,
-#     unique_sample_id_key = unique_sample_id_key,
-#     counts_df_T_lng = new_tibbles[[1]],
-#     counts_df_T_lng_AUID_deduped = new_tibbles$df_T_lng_deduped,
-#     counts_df_T_AUID_deduped = new_tibbles$df_T_deduped,
-#     counts_df_AUID_deduped = new_tibbles$df_deduped,
-#     RA_df_T_lng = new_tibbles[[5]],
-#     RA_df_T_lng_mean_RA_AUID_deduped = new_tibbles$df_T_lng_mean_deduped,
-#     RA_df_T_mean_RA_AUID_deduped = new_tibbles$df_T_mean_deduped,
-#     RA_df_mean_RA_AUID_deduped = new_tibbles$df_mean_deduped
-#   )
-
-# annoNifHDB_updt = annoNifHDB_updt
-#     cmap_coloc = cmap_coloc
-#     photic_samples_key = photic_samples_key
-#     size_fraction_key = result_list$size_fraction_key
-#     DNA_samples_key = result_list$DNA_samples_key
-#     sample_types_all = result_list$sample_types_all
-#     unique_sample_column_ids = result_list$unique_sample_column_ids
-#     unique_sample_id_key = unique_sample_id_key
-#     counts_df_T_lng = new_tibbles[[1]]
-#     counts_df_T_lng_AUID_deduped = new_tibbles$df_T_lng_deduped
-#     counts_df_T_AUID_deduped = new_tibbles$df_T_deduped
-#     counts_df_AUID_deduped = new_tibbles$df_deduped
-#     RA_df_T_lng = new_tibbles[[5]]
-#     RA_df_T_lng_mean_RA_AUID_deduped = new_tibbles$df_T_lng_mean_deduped
-#     RA_df_T_mean_RA_AUID_deduped = new_tibbles$df_T_mean_deduped
-#     RA_df_mean_RA_AUID_deduped = new_tibbles$df_mean_deduped
 
 ### _ Finished loading in the data ### _ Finished loading in the data
 ### _ Finished loading in the data ### _ Finished loading in the data
 ### _ Finished loading in the data ### _ Finished loading in the data
-cat("
-
-Done loading script!!!
-
-")
-cat("
-
-Woooooooohooooooo
-
-!!!")
+cat("\nDone running preprocess_files.R!!!\n")
+cat("\nWoooooooohooooooo!!!\n")
 
 ### _ Finished loading in the data ### _ Finished loading in the data
 ### _ Finished loading in the data ### _ Finished loading in the data
 ### _ Finished loading in the data ### _ Finished loading in the data
-
-
-
-
-# # Replace depth zero values to a surface depth
-# cmap_coloc <- cmap_coloc %>%
-#   mutate(
-#     depth =
-#       ifelse(depth == 0,
-#         2,
-#         depth
-#       )
-#   )
-
-# #-# to add DNA/RNA column
-# cmap_coloc <- cmap_coloc %>%
-#   mutate(nucleicAcidType = if_else(condition = LibrarySource == "METATRANSCRIPTOMIC", true = "RNA", false = "DNA"))
-
-
-# #-# Add coastal/open ocean identification column
-# coastal_open_ids <- read_csv("data/workspace/coastal_openocean_ids/sample_classifications_in_nifH_ASV_DB.csv") %>%
-#   rename(
-#     coastal_class = classification,
-#     studyID = StudyID
-#   )
-
-
-# #-# Define photic and aphotic samples
-# cmap_coloc <- cmap_coloc %>%
-#   left_join(coastal_open_ids) %>%
-#   mutate(
-#     photic = case_when(
-#       (coastal_class %in% "open ocean" & depth <= 100) ~ TRUE,
-#       (coastal_class %in% "coastal" & depth <= 50) ~ TRUE,
-#       TRUE ~ FALSE
-#     )
-#   )
-
-# ## Make photic sample key
-# photic_samples_key <- cmap_coloc %>%
-#   filter(photic == TRUE) %>%
-#   pull(SAMPLEID)
-
-
-# cmap_coloc <- cmap_coloc %>%
-#   mutate(
-#     # Determine hemisphere
-#     hemi = cut(.$lat,
-#       breaks = c(-Inf, 0, Inf),
-#       labels = c("southernHemi", "northernHemi")
-#     ),
-#     hemi = factor(hemi, c("northernHemi", "southernHemi")),
-#     lat_abs = abs(lat),
-#     # Standardize Size_fraction
-#     Size_fraction = if_else(
-#       Size_fraction %in% c("whole", "Sterivex", "0.22") | is.na(Size_fraction),
-#       "0.2",
-#       Size_fraction
-#     ),
-#     # Extract month and determine season
-#     date = str_remove(time, " .+$"),
-#     month = str_remove_all(str_extract(date, "-.+-"), "-"),
-#     year = str_extract(date, "^\\d{4}"),
-#     season = case_when(
-#       (month %in% c("03", "04", "05") & hemi == "northernHemi") ~ "spring",
-#       (month %in% c("06", "07", "08") & hemi == "northernHemi") ~ "summer",
-#       (month %in% c("09", "10", "11") & hemi == "northernHemi") ~ "fall",
-#       (month %in% c("12", "01", "02") & hemi == "northernHemi") ~ "winter",
-#       (month %in% c("03", "04", "05") & hemi == "southernHemi") ~ "fall",
-#       (month %in% c("06", "07", "08") & hemi == "southernHemi") ~ "winter",
-#       (month %in% c("09", "10", "11") & hemi == "southernHemi") ~ "spring",
-#       (month %in% c("12", "01", "02") & hemi == "southernHemi") ~ "summer",
-#       TRUE ~ NA
-#     ),
-#     season = factor(season, c("winter", "spring", "summer", "fall")),
-#     # Renaming columns
-#     CMAP_NP_darwin = CMAP_NO3_darwin_clim_tblDarwin_Nutrient_Climatology / CMAP_PO4_darwin_clim_tblDarwin_Nutrient_Climatology,
-#     CMAP_NP_Pisces_NRT = CMAP_NO3_tblPisces_NRT / CMAP_PO4_tblPisces_NRT,
-#     CMAP_NP_WOA_clim = CMAP_nitrate_WOA_clim_tblWOA_Climatology / CMAP_phosphate_WOA_clim_tblWOA_Climatology,
-#     CMAP_NP_WOA_clim = CMAP_n_an_clim_tblWOA_2018_1deg_Climatology / CMAP_p_an_clim_tblWOA_2018_1deg_Climatology
-#   ) %>%
-#   # Renaming columns with patterns
-#   rename_with(~ str_remove(string = ., pattern = "CMAP_")) %>%
-#   rename_with(~ coalesce(str_extract(string = ., pattern = "^[A-Za-z0-9]+_darwin"), .)) %>%
-#   rename_with(~ str_replace(string = ., pattern = "clim_tblWOA_2018_qrtdeg_Climatology", replacement = "WOA_2018_qrtdeg")) %>%
-#   rename_with(~ str_replace(string = ., pattern = "clim_tblWOA_2018_1deg_Climatology", replacement = "WOA_2018_1deg")) %>%
-#   rename_with(~ str_replace(string = ., pattern = "WOA_clim_tblWOA_Climatology", replacement = "WOA_clim")) %>%
-#   rename_with(~ str_replace(string = ., pattern = "clim_tblWOA_2018_MLD_qrtdeg_Climatology", replacement = "WOA_2018_MLD_qrtdeg")) %>%
-#   rename_with(~ str_replace(string = ., pattern = "^C_", replacement = "conductivity_")) %>%
-#   rename_with(~ str_replace(string = ., pattern = "^i_", replacement = "sigma_")) %>%
-#   rename_with(~ str_replace(string = ., pattern = "^t_", replacement = "temp_")) %>%
-#   rename_with(~ str_replace(string = ., pattern = "^A_", replacement = "AOU_")) %>%
-#   rename_with(~ str_replace(string = ., pattern = "^O_", replacement = "O2_sat_")) %>%
-#   rename_with(~ str_replace(string = ., pattern = "^n_", replacement = "NO3_")) %>%
-#   rename_with(~ str_replace(string = ., pattern = "^p_", replacement = "phosphate_")) %>%
-#   rename_with(~ str_replace(string = ., pattern = "^si_", replacement = "silica_")) %>%
-#   rename_with(~ str_replace(string = ., pattern = "^M_", replacement = "MLD_")) %>%
-#   rename_with(~ str_replace(string = ., pattern = "^s_", replacement = "salinity_")) %>%
-#   # Determine geographical region
-#   mutate(
-#     geoRegion = cut(.$lat_abs,
-#       breaks = c(-1, 23, 35, 66, 100),
-#       labels = c("Eq/Trop", "Sub-Trop", "Temp", "Poles")
-#     ),
-#     geoRegion = factor(geoRegion, c("Eq/Trop", "Sub-Trop", "Temp", "Poles")),
-#     logFe = log(Fe_tblPisces_NRT)
-#   ) %>%
-#   # ! FIXME: Fix Gradient crusies
-#   mutate(
-#     studyID = if_else(studyID == "Gradoville_2020" & grepl("2017", date), "Gradoville_2020_G2",
-#       if_else(studyID == "Gradoville_2020" & grepl("2016", date), "Gradoville_2020_G1", studyID)
-#     )
-#   )
-
-# ### add Ocean regions for each study ID
-# studyid_regions <- read_csv("~/mmorando@ucsc.edu - Google Drive/My Drive/data/amplicon_review/all_studies/tables/Table1/studyid_regions.csv")
-
-# ### identy studies from Southern Ocean
-# cmap_coloc <- cmap_coloc %>%
-#   left_join(studyid_regions) %>%
-#   # select(photic, SAMPLEID, studyID, study_ocean, everything()) %>%
-#   mutate(
-#     ocean = if_else(lat_abs >= 60 & hemi == "southernHemi", "Southern", study_ocean)
-#   )
-
-
-
-
-
-# #* Run functions to clean up CMAP
-# cmap_coloc <- cmap_coloc %>%
-#   rename_with(rename_cmap_columns) %>%
-#   mutate(
-#     hemi = determine_hemisphere(lat),
-#     lat_abs = abs(lat),
-#     Size_fraction = standardize_size_fraction(Size_fraction),
-#     date = str_remove(time, " .+$"),
-#     month = str_remove_all(str_extract(date, "-.+-"), "-"),
-#     year = str_extract(date, "^\\d{4}"),
-#     season = determine_season(month, hemi),
-#     season = factor(season, c("winter", "spring", "summer", "fall")),
-#     depth = replace_zero_depth(depth), # Replace depth zero values with a surface depth
-#     logFe = log(Fe_tblPisces_NRT),
-#     nucleicAcidType = add_nucleic_acid_type(LibrarySource), # Add DNA/RNA column
-#     geoRegion = determine_geo_region(lat_abs)
-#   ) %>%
-#   fix_studyid() %>%
-#   left_join(coastal_open_ids) %>%
-#   mutate(
-#     photic = case_when(
-#       (coastal_class %in% "open ocean" & depth <= 100) ~ TRUE,
-#       (coastal_class %in% "coastal" & depth <= 50) ~ TRUE,
-#       TRUE ~ FALSE
-#     )
-#   )
