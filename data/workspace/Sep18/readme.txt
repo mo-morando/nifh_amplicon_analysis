@@ -1,0 +1,1 @@
+This DB is identical to the Sep17 version except metaTab$Coastal_200km was changed to TRUE for 1 Hallstrom_2022 sample, 1 Shiozaki_202 sample, and all the BentzonTilia_2015 samples (that were not already TRUE).
