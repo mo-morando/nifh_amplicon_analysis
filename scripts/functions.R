@@ -46,20 +46,21 @@ source_file <- function(file_path) {
     # Try to source the file
     tryCatch(
       {
-          source(file)
-          cat("Successfully sourced : ", file, "\n")
+        source(file)
+        cat("Successfully sourced : ", file, "\n")
       },
-    error = function(e) {
-      stop("Error sourcing : ", file_path, ":", conditionMessage(e), "\n")
-    },
-    warning = function(w) {
-      cat("Warning while sourcing : ", file_path, ":", conditionMessage(w), "\n")
-    }
-  )
+      error = function(e) {
+        stop("Error sourcing : ", file_path, ":", conditionMessage(e), "\n")
+      },
+      warning = function(w) {
+        cat("Warning while sourcing : ", file_path, ":", conditionMessage(w), "\n")
+      }
+    )
   }
-  
+
   cat("Finished sourcing files. \n")
 }
+
 
 
 #' Define function to create a new directory
@@ -84,6 +85,60 @@ create_dir <- function(dir_path) {
   } else {
     cat(paste("Directory: '", dir_path, "' already exists\n", sep = ""))
   }
+}
+
+
+#' Load and Assign CSV Files
+#'
+#' @param file_list Character vector of file names to load
+#' @param path Directory path for input files
+#' @param verbose Logical. Whether to print status messages
+#' @return List of loaded data frames or character vectors
+#' @importFrom readr read_csv
+#' @examples
+#' \dontrun{
+#' files <- c("data1", "data2", "single_line")
+#' data_list <- load_files(files, "path/to/csv/files")
+#' }
+load_files <- function(file_list, path, verbose = TRUE) {
+  data_list <- list()
+
+  for (file in file_list) {
+    file_path <- file.path(path, paste0(file, ".csv"))
+    tryCatch(
+      {
+        if (file.exists(file_path)) {
+          if (verbose) cat("Loading file:", file_path, "\n")
+
+          # Check if the file has only one line
+          lines <- suppressWarnings(readLines(file_path, n = 2)) # Read only the first two lines
+          if (length(lines) == 1) {
+            # File contains a single line, read as character vector
+            data_list[[file]] <- read_csv(file_path, show_col_types = FALSE, col_names = FALSE)
+            if (verbose) cat("  File loaded as a data frame but without column
+          headers.\n")
+          } else {
+            # File contains multiple lines, read as a data frame
+            data_list[[file]] <- read_csv(file_path, show_col_types = FALSE)
+            if (verbose) {
+              cat(
+                "  File loaded as a data frame with",
+                nrow(data_list[[file]]), "rows and",
+                ncol(data_list[[file]]), "columns.\n"
+              )
+            }
+          }
+        } else {
+          warning(paste("File not found:", file_path))
+        }
+      },
+      error = function(e) {
+        cat("Error loading file", file_path, ":", conditionMessage(e), "\n")
+      }
+    )
+  }
+  if (verbose) cat("Finished loading", length(data_list), "file.\n")
+  return(data_list)
 }
 
 
@@ -139,7 +194,6 @@ cat("Defining function to write files from a list...\n")
 #'  path = files_out_path,
 #'  out_ext = ".csv"
 #')
-#' write_files(list(dataframe1, dataframe2), names(list(dataframe1 = dataframe1, dataframe2 = dataframe2)), ".csv")
 #'
 #' @seealso
 #' /code{\link{main}}
@@ -525,8 +579,10 @@ main_average_ra_dedup_by_group <- function(df_lng, ..., grp_key, mean_by) {
     group_by(...) %>%
     mutate(average_value_AUID = mean({{ mean_by }}, na.rm = TRUE)) %>%
     ungroup() %>%
-    dedup_by_group(...) %>%
-    ungroup() %>%
+    dedup_by_group(group_id_key = unique_sample_id_key, ...) %>%
+    ungroup()
+
+    
     return(df_lng_mean_ra_depup_by_group)
 }
 
@@ -547,7 +603,7 @@ main_cnts_dedup_by_group <- function(df_lng, ..., grp_key) {
   cat("Removing duplicates based on group ID in count table...\n")
   df_lng_mean_ra_depup_by_group <- df_lng %>%
     add_group_id(group_id_key = {{ grp_key }}) %>%
-    dedup_by_group(...) %>%
+    dedup_by_group(group_id_key = unique_sample_id_key, ...) %>%
     ungroup() %>%
     return(df_lng_mean_ra_depup_by_group)
 }
