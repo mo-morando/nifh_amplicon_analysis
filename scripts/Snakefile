@@ -4,11 +4,15 @@ configfile: "config.yaml"
 
 rule all:
     input:
-        expand(f"{config['output_dir']}/{{file}}.csv", file=config["files_stb"]),
-        expand(f"{config['output_dir']}/{{file}}.csv", file=config["files_out_bss"]),
+        # expand(f"{config['output_dir']}/{{file}}.csv", file=config["files_out_process"]),
+        # expand(f"{config['output_dir']}/{{file}}.csv", file=config["files_out_bss"]),
         expand(
             f"{config['plot_dir']}/{{file}}{config['plot_ext']}",
             file=config["files_out_plot"],
+        ),
+        expand(
+            f"{config['plot_dir']}/{{file}}{config['plot_ext']}",
+            file=config["files_out_plot_tax"],
         ),
 
 
@@ -35,7 +39,7 @@ rule preprocess_files:
         input_dir=config["output_dir"],
         output_dir=config["output_dir"],
     output:
-        expand(f"{config['output_dir']}/{{file}}.csv", file=config["files_stb"]),
+        expand(f"{config['output_dir']}/{{file}}.csv", file=config["files_out_process"]),
     log:
         f"{config['output_dir']}/logs/preprocess_files.log",
     shell:
@@ -46,10 +50,9 @@ rule preprocess_files:
 
 rule basic_sample_stats:
     input:
-        # expand(f"{config['output_dir']}/{{file}}.csv", file=config["files_bss"]),
-        expand(f"{config['output_dir']}/{{file}}.csv", file=config["files_stb"]),
+        expand(f"{config['output_dir']}/{{file}}.csv", file=config["files_out_process"]),
     params:
-        input_files=",".join(config["files_bss"]),
+        input_files=",".join(config["files_in_bss"]),
         input_dir=config["output_dir"],
         output_dir=config["output_dir"],
     output:
@@ -62,9 +65,26 @@ rule basic_sample_stats:
         """
 
 
-rule make_plots:
+rule samp_tax_brkdwn:
     input:
         expand(f"{config['output_dir']}/{{file}}.csv", file=config["files_out_bss"]),
+    params:
+        input_files=",".join(config["files_in_stb"]),
+        input_dir=config["output_dir"],
+        output_dir=config["output_dir"],
+    output:
+        expand(f"{config['output_dir']}/{{file}}.csv", file=config["files_out_stb"]),
+    log:
+        f"{config['output_dir']}/logs/samp_tax_brkdwn.log",
+    shell:
+        """
+        Rscript samp_n_tax_breakdwn.R --files {params.input_files} --input_path {params.input_dir} --output_path {params.output_dir} > {log} 2>&1
+        """
+
+
+rule make_plots:
+    input:
+        expand(f"{config['output_dir']}/{{file}}.csv", file=config["files_out_stb"]),
     params:
         input_files=",".join(config["files_in_plot"]),
         input_dir=config["output_dir"],
@@ -80,6 +100,27 @@ rule make_plots:
     shell:
         """
         Rscript plots_out.R --files {params.input_files} --input_path {params.input_dir} --output_path {params.output_dir} --plot_ext {params.plot_ext} > {log} 2>&1
+        """
+
+
+rule make_plots_tax:
+    input:
+        expand(f"{config['output_dir']}/{{file}}.csv", file=config["files_out_stb"]),
+    params:
+        input_files=",".join(config["files_in_plot_tax"]),
+        input_dir=config["output_dir"],
+        output_dir=config["plot_dir"],
+        plot_ext=config["plot_ext"],
+    output:
+        expand(
+            f"{config['plot_dir']}/{{file}}{config['plot_ext']}",
+            file=config["files_out_plot_tax"],
+        ),
+    log:
+        f"{config['output_dir']}/logs/make_plots_tax.log",
+    shell:
+        """
+        Rscript plots_taxonomy.R --files {params.input_files} --input_path {params.input_dir} --output_path {params.output_dir} --plot_ext {params.plot_ext} > {log} 2>&1
         """
 
 
@@ -107,7 +148,7 @@ rule clean_load_files:
 
 rule clean_preprocessd_files:
     params:
-        files=expand(f"{config['output_dir']}/{{file}}.csv", file=config["files_stb"]),
+        files=expand(f"{config['output_dir']}/{{file}}.csv", file=config["files_out_process"]),
         log=f"{config['output_dir']}/logs/preprocess_files.log",
     shell:
         """
@@ -145,6 +186,27 @@ rule clean_basic_stats:
         """
 
 
+rule clean_samp_tax_brkdwn:
+    params:
+        files=expand(
+            f"{config['output_dir']}/{{file}}.csv", file=config["files_out_stb"]
+        ),
+        log=f"{config['output_dir']}/logs/samp_tax_brkdwn.log",
+    shell:
+        """
+        for file in {params.files}; do
+            if [ -f "$file" ]; then
+                rm "$file"
+                echo "Removed $file"
+            fi
+        done
+        if [ -f "{params.log}" ]; then
+            rm "{params.log}"
+            echo "Removed {params.log}"
+        fi
+        """
+
+
 rule clean_make_plots:
     params:
         files=expand(
@@ -165,6 +227,29 @@ rule clean_make_plots:
             echo "Removed {params.log}"
         fi
         """
+
+
+rule clean_make_plots_tax:
+    params:
+        files=expand(
+            f"{config['plot_dir']}/{{file}}{config['plot_ext']}",
+            file=config["files_out_plot_tax"],
+        ),
+        log=f"{config['output_dir']}/logs/make_plots_tax.log",
+    shell:
+        """
+        for file in {params.files}; do
+            if [ -f "$file" ]; then
+            rm "$file"
+            echo "Removed $file"
+            fi
+        done
+        if [ -f "{params.log}" ]; then
+            rm "{params.log}"
+            echo "Removed {params.log}"
+        fi
+        """
+
 
 rule clean_all:
     params:
