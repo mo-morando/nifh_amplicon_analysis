@@ -1,0 +1,59 @@
+Loading table of pipeline outputs /home/jmagasin/DADA2_nifH_Global_NCD_Analysis/Manuscript/GitHubRepo/nifH-ASV-workflow/GatherAsvs/asvs.noChimera.fasta_table.tsv 
+Loading the ReadsGatherAsvs abundance table
+	 /home/jmagasin/DADA2_nifH_Global_NCD_Analysis/Manuscript/GitHubRepo/nifH-ASV-workflow/GatherAsvs/asv2auid.abundances.tsv.gz 
+...done.  Now merging it to the big table.
+Checking that all 'Reads' columns in the table are numeric.
+Checking for every sample that read counts decrease from each stage i to i+1 through the workflow.
+These have some strange increases in reads.
+                                            SampleWF             Sample           Study                         tag
+34                           AK2HI.1.no_SRA___X71535             X71535           AK2HI              AK2HI:1:no_SRA
+285 Gradoville_2020.4.SRP190508___Gradoville98.68885 Gradoville98.68885 Gradoville_2020 Gradoville_2020:4:SRP190508
+561        Mulholland_2018.1.SRP377046___SRR19399861        SRR19399861 Mulholland_2018 Mulholland_2018:1:SRP377046
+902          TianjUni_2016.1.SRP266399___SRR11948586        SRR11948586   TianjUni_2016   TianjUni_2016:1:SRP266399
+944                Turk_2021.14.no_SRA___SRR13612831        SRR13612831       Turk_2021         Turk_2021:14:no_SRA
+    ReadsPipeline ReadsGatherAsvs ReadsFilterAuids.Rare ReadsFilterAuids.NonNifH ReadsFilterAuids.Length
+34          29472           27966                 27967                    27967                   27936
+285         22059           22053                 22054                    22054                   22036
+561         50171           50169                 50170                    49970                   49595
+902         39011           39005                 39007                    38976                   38921
+944         34286           30981                 30982                    30792                   30733
+
+Here are the total reads and % retained at each stage:
+                            Reads       Pct
+ReadsPipeline            43250190 100.00000
+ReadsGatherAsvs          38654903  89.37511
+ReadsFilterAuids.Rare    36536265  84.47654
+ReadsFilterAuids.NonNifH 36010367  83.26060
+ReadsFilterAuids.Length  35050631  81.04157
+
+Writing out table of reads retained at each stage:  workflowTable.csv
+If you want to read this table in R, you should specify column classes:
+  wftab <- read.csv('workflowTable.csv', colClasses=c( rep(NA,4), rep('integer',8)))
+ or else some of the Reads count columns might be characters.  Not sure why.
+Preparing plot that shows for each study how the workflow progressed (reads retained at each stage).
+960 of 982 samples have >0 reads from the pipeline.  Using only them.
+Preparing data for ggplot...
+Here are the total read contributions by study:
+               study totreads  pct
+5     Hallstrom_2021 10243230 29.2
+10         Raes_2020  6998732 20.0
+4    Gradoville_2020  3439284  9.8
+8    Mulholland_2018  2430295  6.9
+20         Turk_2021  1895559  5.4
+9               NEMO  1631701  4.7
+7       Harding_2018  1570095  4.5
+3          Ding_2021  1314787  3.8
+1              AK2HI  1082478  3.1
+6     Hallstrom_2022   991148  2.8
+15  Shiozaki_2018LNO   623839  1.8
+12       Selden_2021   491846  1.4
+18     TianjUni_2016   486752  1.4
+11         Sato_2021   428573  1.2
+14  Shiozaki_2018GBC   395532  1.1
+16     Shiozaki_2020   286171  0.8
+13     Shiozaki_2017   240706  0.7
+19     TianjUni_2017   237799  0.7
+17         Tang_2020   174429  0.5
+2  BentzonTilia_2015    87675  0.3
+Plotting...
+Done. See workflowReadsRetainedEachStage.png and the 'overall' versions.

@@ -1,0 +1,33 @@
+Will use pipeline outputs rooted at ../.. 
+Loading ../../GatherAsvs/asvs.noChimera.fasta_table.tsv to get to the pipeline reads at each stage.
+
+Gathering the readCountsDuringProcessing* csv files for every pipeline run
+ (processing group), except not for those that had mixed-orientation seq libs.
+Found 45 readCountsDuringProcessing* csv's.
+Loading the reads at each stage for every pipeline run.
+Reformatting the data into a table of sample read pair counts at each stage.
+
+Stats on the % of paired reads retained (when *pipeline* finishes).
+ Only includes 960 samples that had >0 non-bimera ASVs.
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  0.006  36.534  55.924  51.646  70.703  89.244 
+
+Stats on the number of paired reads InNonChimericASVs (i.e. pipeline finish):
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+      1   15510   27841   44682   44284  746120 
+Writing Table_SreadsAtEachStage_samples.csv 
+
+Also writing out Table_SreadsAtEachStage_studies_medProportions.csv 
+ This table has the median (over samples in each study) proportions of reads
+ retained at each stage of the DADA2 pipeline. Median Initial and Final counts are
+ also provided.
+
+Also writing out Table_SreadsAtEachStage_studies_counts.csv 
+ which has the paired read counts at each stage for each study. (Not medians!)
+
+Saved pipeReadsRetainedEachStep.png
+
+Saved pipeReadsRetainedEachStep_overall.png
+NOTE!  The studies Shiozaki_2017 Shiozaki_2018GBC are mixed-orientation.
+ The stats reflect just the Normal pipepline runs, and since ~half of the reads in were
+ for the wrong strand and thus rejected, the proportions of reads will be < 50%.
