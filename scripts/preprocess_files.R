@@ -105,30 +105,30 @@ parse_arg <- function(parser) {
 #   assign(file, read_csv(file.path(files_in_path, paste0(file, ".csv"))))
 # }
 
-#' Load and Assign CSV Files
-#'
-#' This function reads a list of CSV files from a specified directory and assigns each file's data
-#' to a variable in the global environment using the file name as the variable name.
-#'
-#' Load CSV files
-#'
-#' @param file_list Character vector of file names to load
-#' @param path Directory path for input files
-#' @return List of loaded data frames
-#' @importFrom readr read_csv
-load_files <- function(file_list, path) {
-  data_list <- list()
-  for (file in file_list) {
-    file_path <- file.path(path, paste0(file, ".csv"))
-    if (file.exists(file_path)) {
-      cat("Loading file:", file_path, "\n")
-      data_list[[file]] <- read_csv(file_path, show_col_types = FALSE)
-    } else {
-      warning(paste("File not found:", file_path))
-    }
-  }
-  return(data_list)
-}
+# #' Load and Assign CSV Files
+# #'
+# #' This function reads a list of CSV files from a specified directory and assigns each file's data
+# #' to a variable in the global environment using the file name as the variable name.
+# #'
+# #' Load CSV files
+# #'
+# #' @param file_list Character vector of file names to load
+# #' @param path Directory path for input files
+# #' @return List of loaded data frames
+# #' @importFrom readr read_csv
+# load_files <- function(file_list, path) {
+#   data_list <- list()
+#   for (file in file_list) {
+#     file_path <- file.path(path, paste0(file, ".csv"))
+#     if (file.exists(file_path)) {
+#       cat("Loading file:", file_path, "\n")
+#       data_list[[file]] <- read_csv(file_path, show_col_types = FALSE)
+#     } else {
+#       warning(paste("File not found:", file_path))
+#     }
+#   }
+#   return(data_list)
+# }
 
 #' Process annoNifHDB Update
 #'
@@ -153,6 +153,7 @@ process_annoNifHDB_updt <- function(data) {
 
   processed_data <- data %>%
     mutate(
+      # CON = primary_id,
       CON = consensus_id,
       nifH_cluster = case_when(
         cluster %in% c(3, 4, 2) ~ as.character(cluster),
