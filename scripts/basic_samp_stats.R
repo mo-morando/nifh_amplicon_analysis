@@ -457,21 +457,12 @@ analyze_sample_statistics <- function(cmap_coloc, unique_sample_id_key) {
 
 #' Main function to execute analysis
 main <- function(files_to_read, files_in_path, files_out_path) {
-  # Retrieve arguments
-  # counts_df_T_lng <- read.csv(args$counts_df_T_lng)
-  # cmap_coloc <- read.csv(args$cmap_coloc)
-  # counts_df_T_lng <- args$counts_df_T_lng
-  # cmap_coloc <- args$cmap_coloc
-  # unique_sample_id_key <- args$unique_sample_id_key
-  # DNA_samples_key <- args$DNA_samples_key
 
+  # Load other files and scripts needed
   source_file(files_to_source)
 
   # Load the data
   data_list <- load_files(files_to_read, files_in_path)
-
-  # print(data_list)
-  # break()
 
   # Run the full script
   count_total_reads(
@@ -500,10 +491,6 @@ if (sys.nframe() == 0 && !interactive()) {
   args <- parse_arg(parser)
 
   final_results <- main(
-    # args$counts_df_T_lng,
-    # args$cmap_coloc,
-    # args$unique_sample_id_key,
-    # args$DNA_samples_key
     args$files_to_read,
     args$files_in_path,
     args$files_out_path
@@ -512,6 +499,8 @@ if (sys.nframe() == 0 && !interactive()) {
   # print(final_results)
 
   if (!is.null(final_results)) {
+     # Create output directory if it doesn't exist
+    create_dir(args$files_out_path)
     write_file_list(final_results, args$files_out_path)
   }
 
