@@ -11,14 +11,13 @@
 #'    - Ocean and hemisphere plots
 #'    - Depth distribution plots
 #'    - Oceanographic data plots (SST, PO4, Fe, etc.)
-#' @author Your Name
-#' @date 2024-09-10
+#' @author Michael Morando
+#' @date 2023-09-10
 
 # Load required libraries
 suppressPackageStartupMessages({
   library(tidyverse)
   library(patchwork)
-  # library(viridis)
   library(argparser)
 })
 
@@ -138,59 +137,104 @@ parse_arg <- function(parser) {
 }
 
 
-
-#' Load and Assign CSV Files
-#'
-#' @param file_list Character vector of file names to load
-#' @param path Directory path for input files
-#' @param verbose Logical. Whether to print status messages
-#' @return List of loaded data frames or character vectors
-#' @importFrom readr read_csv
-#' @examples
-#' \dontrun{
-#' files <- c("data1", "data2", "single_line")
-#' data_list <- load_files(files, "path/to/csv/files")
-#' }
-load_files <- function(file_list, path, verbose = TRUE) {
-  data_list <- list()
-
-  for (file in file_list) {
-    file_path <- file.path(path, paste0(file, ".csv"))
-    tryCatch(
-      {
-        if (file.exists(file_path)) {
-          if (verbose) cat("Loading file:", file_path, "\n")
-
-          # Check if the file has only one line
-          lines <- suppressWarnings(readLines(file_path, n = 2)) # Read only the first two lines
-          if (length(lines) == 1) {
-            # File contains a single line, read as character vector
-            data_list[[file]] <- read_csv(file_path, show_col_types = FALSE, col_names = FALSE)
-            if (verbose) cat("  File loaded as a data frame but without column
-          headers.\n")
-          } else {
-            # File contains multiple lines, read as a data frame
-            data_list[[file]] <- read_csv(file_path, show_col_types = FALSE)
-            if (verbose) {
-              cat(
-                "  File loaded as a data frame with",
-                nrow(data_list[[file]]), "rows and",
-                ncol(data_list[[file]]), "columns.\n"
-              )
-            }
-          }
-        } else {
-          warning(paste("File not found:", file_path))
-        }
-      },
-      error = function(e) {
-        cat("Error loading file", file_path, ":", conditionMessage(e), "\n")
-      }
-    )
+#' Validate parsed arguments
+#' 
+#' Validate the objects returned by the parse_arg() function
+#' 
+#' @param parsed_args A list containing the parsed arguments returned by parse_arg()
+#' 
+#' @return NULL
+#' 
+#' @example
+#' parser <- setup_parser()
+#' args <- parse_arg(parser)
+#' validate_parsed_args(args)
+validate_parsed_args <- function(parsed_args) {
+  # Check if files_to_read is a character vector
+  if (!is.character(parsed_args$files_to_read)) {
+    stop("files_to_read must be a character vector")
   }
-  if (verbose) cat("Finished loading", length(data_list), "file.\n")
-  return(data_list)
+
+  # Check if files_in_path is a valid directory path
+  if (!dir.exists(parsed_args$files_in_path)) {
+    stop("files_in_path: '", parsed_args$files_in_path, "' must be a valid directory path")
+  }
+
+  # Check if files_out_path is a valid directory path
+  if (!dir.exists(parsed_args$files_out_path)) {
+    warning("files_out_path: '", parsed_args$files_out_path, "' must be a valid directory path")
+  }
+
+  # Check if each file in files_to_read exists in files_in_path
+  missing_files <- character(0)
+  for (file in parsed_args$files_to_read) {
+    # if (!file.exists(file.path(parsed_args$files_in_path, file))) {
+    if (!any(startsWith(list.files(parsed_args$files_in_path), file))) {
+      missing_files <- c(missing_files, file)
+    }
+  }
+  if (length(missing_files) > 0) {
+    stop("The following files are missing in files_in_path:\n", paste("\t",missing_files, collapse = "\n"))
+  }
+
+  # All validations passed
+  cat("All parsed arguments are valid.\n")
 }
+
+
+
+# #' Load and Assign CSV Files
+# #'
+# #' @param file_list Character vector of file names to load
+# #' @param path Directory path for input files
+# #' @param verbose Logical. Whether to print status messages
+# #' @return List of loaded data frames or character vectors
+# #' @importFrom readr read_csv
+# #' @examples
+# #' \dontrun{
+# #' files <- c("data1", "data2", "single_line")
+# #' data_list <- load_files(files, "path/to/csv/files")
+# #' }
+# load_files <- function(file_list, path, verbose = TRUE) {
+#   data_list <- list()
+
+#   for (file in file_list) {
+#     file_path <- file.path(path, paste0(file, ".csv"))
+#     tryCatch(
+#       {
+#         if (file.exists(file_path)) {
+#           if (verbose) cat("Loading file:", file_path, "\n")
+
+#           # Check if the file has only one line
+#           lines <- suppressWarnings(readLines(file_path, n = 2)) # Read only the first two lines
+#           if (length(lines) == 1) {
+#             # File contains a single line, read as character vector
+#             data_list[[file]] <- read_csv(file_path, show_col_types = FALSE, col_names = FALSE)
+#             if (verbose) cat("  File loaded as a data frame but without column
+#           headers.\n")
+#           } else {
+#             # File contains multiple lines, read as a data frame
+#             data_list[[file]] <- read_csv(file_path, show_col_types = FALSE)
+#             if (verbose) {
+#               cat(
+#                 "  File loaded as a data frame with",
+#                 nrow(data_list[[file]]), "rows and",
+#                 ncol(data_list[[file]]), "columns.\n"
+#               )
+#             }
+#           }
+#         } else {
+#           warning(paste("File not found:", file_path))
+#         }
+#       },
+#       error = function(e) {
+#         cat("Error loading file", file_path, ":", conditionMessage(e), "\n")
+#       }
+#     )
+#   }
+#   if (verbose) cat("Finished loading", length(data_list), "file.\n")
+#   return(data_list)
+# }
 
 
 
@@ -276,13 +320,6 @@ generate_plots <- function(
     n_row = 10,
     x_axis_angle = TRUE
   )))
-
-  print(files_out_path)
-  print("\n")
-  print(plot_ext)
-  print("\n")
-  print(file.path(files_out_path, paste0("samp_nucleic_acid_type_light_bar_cmb_plot", plot_ext)))
-  print("\n")
 
   ggsave(file.path(files_out_path, paste0("samp_nucleic_acid_type_light_bar_cmb_plot", plot_ext)), height = 10.5, width = 14, units = "in", dpi = 300)
 
@@ -781,7 +818,6 @@ generate_plots <- function(
 
 #' Main function to execute analysis
 main <- function(files_to_read, files_in_path, files_out_path, plot_ext) {
-  source_file(files_to_source)
 
   # Load the data
   data_list <- load_files(files_to_read, files_in_path)
@@ -800,16 +836,25 @@ main <- function(files_to_read, files_in_path, files_out_path, plot_ext) {
     files_out_path = files_out_path
   )
 
-  message("Analysis completed successfully.")
+  message("\n\nPlots generated successfully.\n")
 }
 
 
 # Run if the script is being run directly
 if (sys.nframe() == 0 && !interactive()) {
+
+  source_file(files_to_source)
+
   parser <- setup_parser()
   args <- parse_arg(parser)
 
+  validate_parsed_args(parsed_args = args)
+
+  # Create output directory if it doesn't exist
+  create_dir(args$files_out_path)
+
   final_results <- main(
+    # files_to_source,
     args$files_to_read,
     args$files_in_path,
     args$files_out_path,

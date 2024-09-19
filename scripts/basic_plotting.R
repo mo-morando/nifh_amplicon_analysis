@@ -109,7 +109,7 @@ nifh_cluster_colours <- c(
   "1G" = "chocolate1",
   "1B" = "green2",
   "other" = "lightgrey",
-  "unknown" = "darkgrey",
+  # "unknown" = "darkgrey",
   "4" = "black",
   "2" = "blue"
 )
