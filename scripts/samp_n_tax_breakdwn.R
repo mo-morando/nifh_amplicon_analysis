@@ -8,85 +8,6 @@ suppressPackageStartupMessages({
 })
 
 
-cat("Defining function to write files from a list...\n")
-#' Write files list
-#'
-#' This function writes objects from a list to files with specified names, file paths and extensions.
-#'
-#' @param file_list A list of tibbles or nested lists to be written to CSV files
-#' @param out_ext Optional. The file extension to be added to the file names
-#' @param path Optional. The directory where the files will be written. Defaults to the current directory
-#'
-#' @return NULL
-#'
-#' @export
-#'
-#' @examples
-#' write_file_list(
-#'  file_list = object_list,
-#'  path = files_out_path,
-#'  out_ext = ".csv"
-#')
-#'
-#' @seealso
-#' /code{\link{main}}
-#'
-#' @author Michael (Mo) Morando
-#'
-#'
-write_files_list <- function(file_list, path = ".", out_ext = ".csv") {
-  cat("Writing files from list to path:", path, "\n")
-  
-  # Ensure file_list is a list and it has names
-  if (!is.list(file_list) || is.null(names(file_list))) {
-    stop("file_list must be a list, and have associated names.")
-  }
-  
-  # Recursive function to handle nested lists
-  write_files_recursive <- function(file_list, path, out_ext) {
-    for (i in seq_along(file_list)) {
-      file_name <- names(file_list)[i]
-      file_data <- file_list[[i]]
-      
-      if (is.list(file_data)) {
-        # If the element is a nested list, create a subdirectory and recursively write files
-        subdir_path <- file.path(path, file_name)
-        dir.create(subdir_path, recursive = TRUE)
-        write_files_recursive(file_data, subdir_path, out_ext)
-      } else {
-        file_path <- file.path(path, paste0(file_name, out_ext))
-        
-        # Determine the type and write accordingly
-        if (inherits(file_data, c("tbl_df", "data.frame"))) {
-          write_csv(file_data, file_path)
-        } else if (is.character(file_data)) {
-          if (!is.null(names(file_data)) && all(names(file_data) != "")) {
-            write_csv(tibble("key" = names(file_data), "value" = file_data), file = file_path)
-          } else {
-            writeLines(file_data, con = file_path, sep = ",")
-          }
-        } else {
-          cat("Skipping file:", file_name, "- unsupported type.\n")
-          next
-        }
-        
-        cat("Wrote file:", file_name, "\n")
-      }
-    }
-  }
-  
-  # Call the recursive function to write files
-  write_files_recursive(file_list, path, out_ext)
-}
-
-
-
-
-
-
-
-
-
 #' Source a file with error handling and path validation
 #'
 #' @param file_path Character string specifying the path to the file to be sourced
@@ -192,49 +113,49 @@ parse_arg <- function(parser) {
   ))
 }
 
-#' Validate parsed arguments
-#' 
-#' Validate the objects returned by the parse_arg() function
-#' 
-#' @param parsed_args A list containing the parsed arguments returned by parse_arg()
-#' 
-#' @return NULL
-#' 
-#' @example
-#' parser <- setup_parser()
-#' args <- parse_arg(parser)
-#' validate_parsed_args(args)
-validate_parsed_args <- function(parsed_args) {
-  # Check if files_to_read is a character vector
-  if (!is.character(parsed_args$files_to_read)) {
-    stop("files_to_read must be a character vector")
-  }
+# #' Validate parsed arguments
+# #' 
+# #' Validate the objects returned by the parse_arg() function
+# #' 
+# #' @param parsed_args A list containing the parsed arguments returned by parse_arg()
+# #' 
+# #' @return NULL
+# #' 
+# #' @example
+# #' parser <- setup_parser()
+# #' args <- parse_arg(parser)
+# #' validate_parsed_args(args)
+# validate_parsed_args <- function(parsed_args) {
+#   # Check if files_to_read is a character vector
+#   if (!is.character(parsed_args$files_to_read)) {
+#     stop("files_to_read must be a character vector")
+#   }
 
-  # Check if files_in_path is a valid directory path
-  if (!dir.exists(parsed_args$files_in_path)) {
-    stop("files_in_path: '", parsed_args$files_in_path, "' must be a valid directory path")
-  }
+#   # Check if files_in_path is a valid directory path
+#   if (!dir.exists(parsed_args$files_in_path)) {
+#     stop("files_in_path: '", parsed_args$files_in_path, "' must be a valid directory path")
+#   }
 
-  # # Check if files_out_path is a valid directory path
-  # if (!dir.exists(parsed_args$files_out_path)) {
-  #   stop("files_in_path: '", parsed_args$files_in_path, "' must be a valid directory path")
-  # }
+#   # # Check if files_out_path is a valid directory path
+#   # if (!dir.exists(parsed_args$files_out_path)) {
+#   #   stop("files_in_path: '", parsed_args$files_in_path, "' must be a valid directory path")
+#   # }
 
-  # Check if each file in files_to_read exists in files_in_path
-  missing_files <- character(0)
-  for (file in parsed_args$files_to_read) {
-    # if (!file.exists(file.path(parsed_args$files_in_path, file))) {
-    if (!any(startsWith(list.files(parsed_args$files_in_path), file))) {
-      missing_files <- c(missing_files, file)
-    }
-  }
-  if (length(missing_files > 0)) {
-    stop("The following files are missing in files_in_path:\n", paste("\t",missing_files, collapse = "\n"))
-  }
+#   # Check if each file in files_to_read exists in files_in_path
+#   missing_files <- character(0)
+#   for (file in parsed_args$files_to_read) {
+#     # if (!file.exists(file.path(parsed_args$files_in_path, file))) {
+#     if (!any(startsWith(list.files(parsed_args$files_in_path), file))) {
+#       missing_files <- c(missing_files, file)
+#     }
+#   }
+#   if (length(missing_files > 0)) {
+#     stop("The following files are missing in files_in_path:\n", paste("\t",missing_files, collapse = "\n"))
+#   }
 
-  # All validations passed
-  cat("All parsed arguments are valid.\n")
-}
+#   # All validations passed
+#   cat("All parsed arguments are valid.\n")
+# }
 
 
 
@@ -588,12 +509,10 @@ rel_abund_tables <- function(abundance_table, annotation_table, metatable, DNA_s
 #   filter_df(plt_flt = nifH_cluster == "unknown")
 
 
-main <- function(files_to_read, files_in_path, files_out_path) {
+main <- function(files_to_source, files_to_read, files_in_path, files_out_path) {
 
   #  Load other scripts and files
-  source_file(files_to_source)
-
-
+  
   # Load data
   data_list <- load_files(files_to_read, files_in_path)
 
@@ -625,6 +544,9 @@ main <- function(files_to_read, files_in_path, files_out_path) {
 
 # Execute script if being called from command-line
 if (sys.nframe() == 0 && !interactive()) {
+  
+  source_file(files_to_source)
+  
   parser <- setup_parser()
   args <- parse_arg(parser)
 
@@ -634,9 +556,10 @@ if (sys.nframe() == 0 && !interactive()) {
   options(dplyr.summarise.inform = FALSE)
 
   final_results <- main(
-    args$files_to_read,
-    args$files_in_path,
-    args$files_out_path
+    files_to_source = files_to_source,
+    files_to_read = args$files_to_read,
+    files_in_path = args$files_in_path,
+    files_out_path = args$files_out_path
   )
 
   if (!is.null(final_results)) {
