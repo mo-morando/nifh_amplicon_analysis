@@ -166,7 +166,7 @@ annotationsNifHDB %>%
 # CMAP_full = read_tsv('all_studies/merged_metadata/CMAP/GatherMetadata/metadata.cmap.tsv') %>% 
 #   rename(studyID = StudyID)
 # 
-# CMAP_full = read_csv('all_studies/merged_metadata/CMAP/20220831CMAP_colocalized_nifH.csv') %>% 
+# CMAP_full = read_csv('all_studies/merged_metadata/CMAP/20220831cmap_colocalized_nifH.csv') %>% 
 #   # mutate(
 #   #   StudyID = if_else(StudyID=='Gradoville_2020' & grepl('2017', DateTimeUTC), 'Gradoville_2020_G2', 
 #   #                     if_else(StudyID=='Gradoville_2020' & grepl('2016', DateTimeUTC), 'Gradoville_2020_G1', StudyID))
@@ -233,14 +233,14 @@ CMAP_full %>%
   
 CMAP_20230719 = read_csv('all_studies/merged_metadata/nifHDB/firstAttempt/20230719_colocalized_nifH.csv')
 
-CMAP_coloc = CMAP_20230719
+cmap_coloc = CMAP_20230719
 
 
 # dim(CMAP_full_old)
 dim(CMAP_full)
 names(CMAP_full)
-dim(CMAP_coloc)
-names(CMAP_coloc)
+dim(cmap_coloc)
+names(cmap_coloc)
 
 CMAP_full %>% 
   distinct(time)
@@ -256,7 +256,7 @@ CMAP_full %>%
 
 
 
-CMAP_pnts = CMAP_coloc %>% 
+CMAP_pnts = cmap_coloc %>% 
   distinct(
     # depth, 
     lat, lon, time,studyID) %>% mutate(
@@ -359,7 +359,7 @@ CMAP_pnts_smeta = CMAP_pnts %>%
   view()
 
 CMAP_pnts_smeta %>% 
-  left_join(CMAP_coloc %>% 
+  left_join(cmap_coloc %>% 
               distinct(
                 # depth, 
                 SAMPLEID, lat, lon, time,studyID) %>% mutate(
@@ -376,7 +376,7 @@ CMAP_pnts_smeta %>%
   select(-ends_with(".x"), -ends_with(".y")) %>% view()
 
 
-CMAP_coloc_WF = CMAP_coloc %>%
+cmap_coloc_WF = cmap_coloc %>%
   left_join(CMAP_pnts_smeta) %>% 
   
   mutate(#lat = as.numeric(Lat),
@@ -435,12 +435,12 @@ CMAP_coloc_WF = CMAP_coloc %>%
 #%>%
   # select(names(CMAPmeta))
 
-names(CMAP_coloc_WF)
-dim(CMAP_coloc_WF)
+names(cmap_coloc_WF)
+dim(cmap_coloc_WF)
 
 
 
-CMAP_coloc_WF %>% 
+cmap_coloc_WF %>% 
   filter(!is.na(kmToCoast)) %>% 
   view()
 
@@ -455,14 +455,14 @@ CMAP_coloc_WF %>%
 
 
 
-CMAP_coloc
+cmap_coloc
 
 abundTab =nifhDB_cnts
 
 metaCols = c("lat", "lon", "time", "studyID")
 
 
-metaTab = read.table("CMAP_coloc_20230810.cvs", header = T, sep = ",", colClasses = "character")
+metaTab = read.table("cmap_coloc_20230810.cvs", header = T, sep = ",", colClasses = "character")
 names(metaTab)
 
 if (!all(metaCols %in% colnames(metaTab))) {
@@ -581,7 +581,7 @@ str(newAbundTab)
 
 
 nifhDB_cnts_T %>% 
-  left_join(CMAP_coloc_WF)%>% 
+  left_join(cmap_coloc_WF)%>% 
   # left_join(CMAP_full_sub %>% 
   #             select(SAMPLEID, studyID))%>% 
   filter(is.na(studyID)) %>% 
@@ -598,7 +598,7 @@ nifhDB_cnts_T %>%
 nifhDB_cnts_T_CMAP = nifhDB_cnts_T %>% 
   # left_join(CMAP_full %>% 
   #             select( any_of(CMAP_cols))) %>% 
-  left_join(CMAP_coloc_WF) %>% 
+  left_join(cmap_coloc_WF) %>% 
   select( -contains('AUID'), everything(), contains('AUID')) %>% 
   mutate(
     depth = as.numeric(depth),
@@ -608,7 +608,7 @@ nifhDB_cnts_T_CMAP = nifhDB_cnts_T %>%
 nifhDB_RA_T_CMAP = nifhDB_RA_T %>% 
   # left_join(CMAP_full %>% 
   #             select( any_of(CMAP_cols))) %>% 
-  left_join(CMAP_coloc_WF) %>% 
+  left_join(cmap_coloc_WF) %>% 
   select( -contains('AUID'), everything(), contains('AUID')) %>% 
   mutate(
     depth = as.numeric(depth),
@@ -643,8 +643,8 @@ nifhDB_cnts_T_CMAP %>%
 #   view()
 # 
 # 
-# write_csv(CMAP_20230718, 'all_studies/merged_metadata/CMAP/20230718CMAP_colocalized_nifH.csv')
-# write_csv(CMAP_20230718, '/Users/mo/mikemojr@gmail.com - Google Drive/My Drive/Colab Notebooks/Untitled Folder/20230718CMAP_colocalized_nifH.csv')
+# write_csv(CMAP_20230718, 'all_studies/merged_metadata/CMAP/20230718cmap_colocalized_nifH.csv')
+# write_csv(CMAP_20230718, '/Users/mo/mikemojr@gmail.com - Google Drive/My Drive/Colab Notebooks/Untitled Folder/20230718cmap_colocalized_nifH.csv')
 
 
 
