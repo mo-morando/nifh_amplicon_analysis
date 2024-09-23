@@ -20,12 +20,13 @@ Table_SreadsAtEachStage_samples <- read_csv("analysis/Jmags/tables/Csvs_for_Tabl
 
 ### - Table 4
 # read_csv("~/mmorando@ucsc.edu_gDrive/My Drive/data/amplicon_review/all_studies/Jmag/Tables_and_plots/Workflow_stages/July25_has_updated_params_for_FilterAuids/workflowTable.csv")
-workflowTable <- read_csv("analysis/Jmags/tables/Csvs_for_Tables_4_and_5/table_5_for_manuscript.csv") %>% rename(
+workflowTable <- read_csv("analysis/Jmags/tables/Csvs_for_Tables_4_and_5/workflowTable.csv") %>% rename(
   studyID = Study,
 #   SAMPLEID = Sample,
   ReadsFilterAuids.Length_final = ReadsFilterAuids.Length
-)  %>%
-  select(-PctRetained)
+)  #%>%
+  # select(-PctRetained) %>% 
+  # filter(!studyID %in% c( "mean", "median", "sum"))
 
 ### add percentage column
 Table_SreadsAtEachStage_samples <- Table_SreadsAtEachStage_samples %>%
@@ -58,28 +59,28 @@ summarise_workflow_stages_table <- function(
     ungroup() %>%
     bind_rows(
       tibble(
-        {{ grp_by }} := "Total mean",
+        {{ grp_by }} := "mean",
         df %>%
           summarise(across(where(is.numeric), ~ mean(.))) #* This gives the mean over all the reads, not by study ID
       )
     ) %>%
     bind_rows(
       tibble(
-        {{ grp_by }} := "Total median",
+        {{ grp_by }} := "median",
         df %>%
           summarise(across(where(is.numeric), ~ median(.))) #* This gives the median over all the reads, not by study ID
       )
     ) %>%
     bind_rows(
       tibble(
-        {{ grp_by }} := "Total sum",
+        {{ grp_by }} := "sum",
         df %>%
           summarise(across(where(is.numeric), ~ sum(.))) #* this gives the total over all the reads
       )
     ) %>%
     mutate(
       PctReadPairsRetained =
-        ifelse(test = studyID == "Total sum",
+        ifelse(test = studyID == "sum",
           yes = round((1 - ({{ initial_col }} - {{ final_col }}) / {{ initial_col }}), 1) * 100,
           no = PctReadPairsRetained
         )
@@ -141,6 +142,7 @@ workflowTable_summary_format <- workflowTable_summary %>%
     "Study ID" = studyID,
     "DADA2 nifH pipeline" = ReadsPipeline,
     GatherAsvs = ReadsGatherAsvs,
+    "Small samples" = ReadsFilterAuids.SmallSamp,
     Rare = ReadsFilterAuids.Rare,
     NonNifH = ReadsFilterAuids.NonNifH,
     Length = ReadsFilterAuids.Length_final,
@@ -152,9 +154,9 @@ workflowTable_summary_format <- workflowTable_summary %>%
 
 write_csv(Table_SreadsAtEachStage_samples_summary_format_rename, "/Users/mo/Projects/nifH_amp_project/myWork/analysis/tables/Table_SreadsAtEachStage_samples_summary_format_rename.csv")
 
-write_csv(Table_SreadsAtEachStage_samples_summary_format_rename, "~/mmorando@ucsc.edu - Google Drive/My Drive/data/amplicon_review/all_studies/tables/Table1/Table_3.csv")
+write_csv(Table_SreadsAtEachStage_samples_summary_format_rename, "~/mmorando@ucsc.edu - Google Drive/My Drive/data/amplicon_review/all_studies/tables/Table1/Table_4.csv")
 
 
 write_csv(workflowTable_summary_format_rename, "/Users/mo/Projects/nifH_amp_project/myWork/analysis/tables/workflowTable_summary_format_rename.csv")
 
-write_csv(workflowTable_summary_format_rename, "~/mmorando@ucsc.edu - Google Drive/My Drive/data/amplicon_review/all_studies/tables/Table1/Table_4.csv")
+write_csv(workflowTable_summary_format_rename, "~/mmorando@ucsc.edu - Google Drive/My Drive/data/amplicon_review/all_studies/tables/Table1/Table_5.csv")
