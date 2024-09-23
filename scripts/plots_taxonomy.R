@@ -127,49 +127,49 @@ parse_arg <- function(parser) {
 
 
 
-#' Validate parsed arguments
-#'
-#' Validate the objects returned by the parse_arg() function
-#'
-#' @param parsed_args A list containing the parsed arguments returned by parse_arg()
-#'
-#' @return NULL
-#'
-#' @example
-#' parser <- setup_parser()
-#' args <- parse_arg(parser)
-#' validate_parsed_args(args)
-validate_parsed_args <- function(parsed_args) {
-  # Check if files_to_read is a character vector
-  if (!is.character(parsed_args$files_to_read)) {
-    stop("files_to_read must be a character vector")
-  }
+# #' Validate parsed arguments
+# #'
+# #' Validate the objects returned by the parse_arg() function
+# #'
+# #' @param parsed_args A list containing the parsed arguments returned by parse_arg()
+# #'
+# #' @return NULL
+# #'
+# #' @example
+# #' parser <- setup_parser()
+# #' args <- parse_arg(parser)
+# #' validate_parsed_args(args)
+# validate_parsed_args <- function(parsed_args) {
+#   # Check if files_to_read is a character vector
+#   if (!is.character(parsed_args$files_to_read)) {
+#     stop("files_to_read must be a character vector")
+#   }
 
-  # Check if files_in_path is a valid directory path
-  if (!dir.exists(parsed_args$files_in_path)) {
-    stop("files_in_path: '", parsed_args$files_in_path, "' must be a valid directory path")
-  }
+#   # Check if files_in_path is a valid directory path
+#   if (!dir.exists(parsed_args$files_in_path)) {
+#     stop("files_in_path: '", parsed_args$files_in_path, "' must be a valid directory path")
+#   }
 
-  # Check if files_out_path is a valid directory path
-  if (!dir.exists(parsed_args$files_out_path)) {
-    warning("files_in_path: '", parsed_args$files_in_path, "' must be a valid directory path")
-  }
+#   # Check if files_out_path is a valid directory path
+#   if (!dir.exists(parsed_args$files_out_path)) {
+#     warning("files_in_path: '", parsed_args$files_in_path, "' must be a valid directory path")
+#   }
 
-  # Check if each file in files_to_read exists in files_in_path
-  missing_files <- character(0)
-  for (file in parsed_args$files_to_read) {
-    # if (!file.exists(file.path(parsed_args$files_in_path, file))) {
-    if (!any(startsWith(list.files(parsed_args$files_in_path), paste0(file, ".")) )) {
-      missing_files <- c(missing_files, file)
-    }
-  }
-  if (length(missing_files > 0)) {
-    stop("The following files are missing in files_in_path:\n", paste("\t", missing_files, collapse = "\n"))
-  }
+#   # Check if each file in files_to_read exists in files_in_path
+#   missing_files <- character(0)
+#   for (file in parsed_args$files_to_read) {
+#     # if (!file.exists(file.path(parsed_args$files_in_path, file))) {
+#     if (!any(startsWith(list.files(parsed_args$files_in_path), paste0(file, ".")) )) {
+#       missing_files <- c(missing_files, file)
+#     }
+#   }
+#   if (length(missing_files > 0)) {
+#     stop("The following files are missing in files_in_path:\n", paste("\t", missing_files, collapse = "\n"))
+#   }
 
-  # All validations passed
-  cat("All parsed arguments are valid.\n")
-}
+#   # All validations passed
+#   cat("All parsed arguments are valid.\n")
+# }
 
 
 
@@ -628,7 +628,7 @@ bar_plots <- function(
   }
 
 
-  # First, counts data
+  # Next, relative abundance data
   tryCatch(
     {
       #* # make Tibble that joins the pooled data with study ID data
@@ -685,7 +685,7 @@ bar_plots <- function(
           fill_lab = bquote(bold(bold(italic(nifH)) ~ cluster)),
           x_lab = "Study ID",
           # y_lab = "% of total nifH cluster counts per study ID",
-          y_lab = bquote(bold("%" ~ total ~ reads)),
+          y_lab = bquote(bold("%" ~ relative ~ abundance)),
           legend_position = "bottom",
           x_axis_angle = TRUE,
           print_out = TRUE
