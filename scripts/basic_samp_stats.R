@@ -113,51 +113,51 @@ parse_arg <- function(parser) {
 
 
 
-#' Load and Assign CSV Files
-#'
-#' @param file_list Character vector of file names to load
-#' @param path Directory path for input files
-#' @param verbose Logical. Whether to print status messages
-#' @return List of loaded data frames or character vectors
-#' @importFrom readr read_csv
-#' @examples
-#' \dontrun{
-#' files <- c("data1", "data2", "single_line")
-#' data_list <- load_files(files, "path/to/csv/files")
-#' }
-load_files <- function(file_list, path, verbose = TRUE) {
-  data_list <- list()
+# #' Load and Assign CSV Files
+# #'
+# #' @param file_list Character vector of file names to load
+# #' @param path Directory path for input files
+# #' @param verbose Logical. Whether to print status messages
+# #' @return List of loaded data frames or character vectors
+# #' @importFrom readr read_csv
+# #' @examples
+# #' \dontrun{
+# #' files <- c("data1", "data2", "single_line")
+# #' data_list <- load_files(files, "path/to/csv/files")
+# #' }
+# load_files <- function(file_list, path, verbose = TRUE) {
+#   data_list <- list()
 
-  for (file in file_list) {
-    file_path <- file.path(path, paste0(file, ".csv"))
-    tryCatch({
-      if (file.exists(file_path)) {
-        if (verbose) cat("Loading file:", file_path, "\n")
+#   for (file in file_list) {
+#     file_path <- file.path(path, paste0(file, ".csv"))
+#     tryCatch({
+#       if (file.exists(file_path)) {
+#         if (verbose) cat("Loading file:", file_path, "\n")
 
-      # Check if the file has only one line
-      lines <- suppressWarnings(readLines(file_path, n = 2)) # Read only the first two lines
-      if ( length(lines) == 1) {
-          # File contains a single line, read as character vector
-          data_list[[file]] <- read_csv(file_path, show_col_types = FALSE, col_names = FALSE)
-          if (verbose) cat("  File loaded as a data frame but without column 
-          headers.\n")
-      } else {
-          # File contains multiple lines, read as a data frame
-          data_list[[file]] <- read_csv(file_path, show_col_types = FALSE)
-          if (verbose) cat("  File loaded as a data frame with",
-                          nrow(data_list[[file]]), "rows and",
-                          ncol(data_list[[file]]), "columns.\n")
-      }
-    } else {
-      warning(paste("File not found:", file_path))
-    }
-  }, error = function(e) {
-      cat("Error loading file", file_path, ":", conditionMessage(e), "\n")
-    })
-  }
-  if (verbose) cat("Finished loading", length(data_list), "file.\n")
-  return(data_list)
-}
+#       # Check if the file has only one line
+#       lines <- suppressWarnings(readLines(file_path, n = 2)) # Read only the first two lines
+#       if ( length(lines) == 1) {
+#           # File contains a single line, read as character vector
+#           data_list[[file]] <- read_csv(file_path, show_col_types = FALSE, col_names = FALSE)
+#           if (verbose) cat("  File loaded as a data frame but without column 
+#           headers.\n")
+#       } else {
+#           # File contains multiple lines, read as a data frame
+#           data_list[[file]] <- read_csv(file_path, show_col_types = FALSE)
+#           if (verbose) cat("  File loaded as a data frame with",
+#                           nrow(data_list[[file]]), "rows and",
+#                           ncol(data_list[[file]]), "columns.\n")
+#       }
+#     } else {
+#       warning(paste("File not found:", file_path))
+#     }
+#   }, error = function(e) {
+#       cat("Error loading file", file_path, ":", conditionMessage(e), "\n")
+#     })
+#   }
+#   if (verbose) cat("Finished loading", length(data_list), "file.\n")
+#   return(data_list)
+# }
 
 
 
