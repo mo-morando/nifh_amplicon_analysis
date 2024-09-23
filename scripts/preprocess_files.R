@@ -153,8 +153,7 @@ process_annoNifHDB_updt <- function(data) {
 
   processed_data <- data %>%
     mutate(
-      # CON = primary_id,
-      CON = consensus_id,
+      CON = primary_id,
       nifH_cluster = case_when(
         cluster %in% c(3, 4, 2) ~ as.character(cluster),
         is.na(subcluster) ~ as.character(cluster),
@@ -224,8 +223,11 @@ process_metaTab <- function(metaTab, cmap_coloc) {
         if_else(Size_fraction %in%
           c("whole", "Sterivex", "0.22") | is.na(Size_fraction),
         "0.2",
-        Size_fraction
-        )
+        Size_fraction),
+      coastal_class = if_else(
+        Coastal_200km == TRUE,
+        true = "coastal",
+        false = "open ocean")
     )
 
   merged_data <- cmap_coloc %>%
@@ -332,12 +334,12 @@ cmap_clean_main <- function(cmap_coloc) {
     column_name
   }
 
-  # Read coastal/open ocean identification data
-  coastal_open_ids <- read_csv("../data/workspace/coastal_openocean_ids/sample_classifications_in_nifH_ASV_DB.csv", show_col_types = FALSE) %>%
-    rename(
-      coastal_class = classification,
-      studyID = StudyID
-    )
+  # # Read coastal/open ocean identification data
+  # coastal_open_ids <- read_csv("../data/workspace/coastal_openocean_ids/sample_classifications_in_nifH_ASV_DB.csv", show_col_types = FALSE) %>%
+  #   rename(
+  #     coastal_class = classification,
+  #     studyID = StudyID
+  #   )
 
   #! FIXME: Must move file and change path to within this project directory
   #-# add Ocean regions for each study ID
@@ -370,7 +372,7 @@ cmap_clean_main <- function(cmap_coloc) {
 
   # Perform data cleaning and transformation steps
   cmap_coloc <- cmap_coloc %>%
-    left_join(coastal_open_ids) %>%
+    # left_join(coastal_open_ids) %>%
     rename_with(rename_cmap_columns) %>%
     mutate(
       depth = replace_zero_depth(depth),
