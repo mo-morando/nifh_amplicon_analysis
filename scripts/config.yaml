@@ -1,8 +1,8 @@
 # config.yaml
 
 # Input workspace
-workspace: "../data/workspace/archive/NifH_ASV_DB_March28_after_drop_19_empty_samples/workspace.RData"
-# workspace: "../data/workspace/Sep18/workspace.RData"
+# workspace: "../data/workspace/archive/NifH_ASV_DB_March28_after_drop_19_empty_samples/workspace.RData"
+workspace: "../data/workspace/Sep18/workspace.RData"
 
 # Output directories
 output_dir: "../analysis/out_files"
