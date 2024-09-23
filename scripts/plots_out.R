@@ -137,49 +137,49 @@ parse_arg <- function(parser) {
 }
 
 
-#' Validate parsed arguments
-#' 
-#' Validate the objects returned by the parse_arg() function
-#' 
-#' @param parsed_args A list containing the parsed arguments returned by parse_arg()
-#' 
-#' @return NULL
-#' 
-#' @example
-#' parser <- setup_parser()
-#' args <- parse_arg(parser)
-#' validate_parsed_args(args)
-validate_parsed_args <- function(parsed_args) {
-  # Check if files_to_read is a character vector
-  if (!is.character(parsed_args$files_to_read)) {
-    stop("files_to_read must be a character vector")
-  }
+# #' Validate parsed arguments
+# #' 
+# #' Validate the objects returned by the parse_arg() function
+# #' 
+# #' @param parsed_args A list containing the parsed arguments returned by parse_arg()
+# #' 
+# #' @return NULL
+# #' 
+# #' @example
+# #' parser <- setup_parser()
+# #' args <- parse_arg(parser)
+# #' validate_parsed_args(args)
+# validate_parsed_args <- function(parsed_args) {
+#   # Check if files_to_read is a character vector
+#   if (!is.character(parsed_args$files_to_read)) {
+#     stop("files_to_read must be a character vector")
+#   }
 
-  # Check if files_in_path is a valid directory path
-  if (!dir.exists(parsed_args$files_in_path)) {
-    stop("files_in_path: '", parsed_args$files_in_path, "' must be a valid directory path")
-  }
+#   # Check if files_in_path is a valid directory path
+#   if (!dir.exists(parsed_args$files_in_path)) {
+#     stop("files_in_path: '", parsed_args$files_in_path, "' must be a valid directory path")
+#   }
 
-  # Check if files_out_path is a valid directory path
-  if (!dir.exists(parsed_args$files_out_path)) {
-    warning("files_out_path: '", parsed_args$files_out_path, "' must be a valid directory path")
-  }
+#   # Check if files_out_path is a valid directory path
+#   if (!dir.exists(parsed_args$files_out_path)) {
+#     warning("files_out_path: '", parsed_args$files_out_path, "' must be a valid directory path")
+#   }
 
-  # Check if each file in files_to_read exists in files_in_path
-  missing_files <- character(0)
-  for (file in parsed_args$files_to_read) {
-    # if (!file.exists(file.path(parsed_args$files_in_path, file))) {
-    if (!any(startsWith(list.files(parsed_args$files_in_path), file))) {
-      missing_files <- c(missing_files, file)
-    }
-  }
-  if (length(missing_files) > 0) {
-    stop("The following files are missing in files_in_path:\n", paste("\t",missing_files, collapse = "\n"))
-  }
+#   # Check if each file in files_to_read exists in files_in_path
+#   missing_files <- character(0)
+#   for (file in parsed_args$files_to_read) {
+#     # if (!file.exists(file.path(parsed_args$files_in_path, file))) {
+#     if (!any(startsWith(list.files(parsed_args$files_in_path), file))) {
+#       missing_files <- c(missing_files, file)
+#     }
+#   }
+#   if (length(missing_files) > 0) {
+#     stop("The following files are missing in files_in_path:\n", paste("\t",missing_files, collapse = "\n"))
+#   }
 
-  # All validations passed
-  cat("All parsed arguments are valid.\n")
-}
+#   # All validations passed
+#   cat("All parsed arguments are valid.\n")
+# }
 
 
 
@@ -372,19 +372,33 @@ generate_plots <- function(
 
 
   ### -  Ocean and hemisphere
-  (samples_per_ocean <- count_and_arrange(
-    #   query_df, c("studyID", "nucleicAcidType")
-    #   query_df, c("ocean")
+  samples_per_ocean <- count_and_arrange(
     query_df, c("ocean", "hemi")
-  ))
-  samples_per_ocean %>%
-    left_join(
-      count_and_arrange(query_df, c("ocean"), "n_ocean", "n_ocean")
-    ) %>%
-    arrange(desc(ocean))
-  # print(samples_per_studyid, n = 50)
+  ) 
 
-  299 / 429 * 100
+  # samples_per_ocean <- query_df  %>% 
+  # count_and_arrange( c("ocean", "hemi")) %>%
+  #   add_percentage(n,
+  #     percentage,
+  #     grouping_by = NULL,
+  #     remove_columns = "total"
+  #   )
+
+  samples_per_ocean <- add_percentage(samples_per_ocean,
+    n,
+    percentage,
+    grouping_by = NULL,
+    remove_columns = "total"
+    )
+
+  # samples_per_ocean %>%
+  #   left_join(
+  #     count_and_arrange(query_df, c("ocean"), "n_ocean", "n_ocean")
+  #   ) %>%
+  #   arrange(desc(ocean))  
+  # # print(samples_per_studyid, n = 50)
+
+  # 299 / 429 * 100
 
   to_plot <- samples_per_ocean
 
@@ -410,7 +424,25 @@ generate_plots <- function(
   # theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 15))
   )
 
+
   ggsave(file.path(files_out_path, paste0("Samples_per_ocean_hemi_fill_bar", plot_ext)), height = 8.5, width = 14, units = "in", dpi = 300)
+
+
+  (samples_per_studyid_ocean <- count_and_arrange(
+    query_df, c("studyID", "ocean")) %>% 
+  add_percentage(n,
+            percentage,
+            grouping_by = NULL,
+            remove_columns = "total")
+  )
+
+
+  files_write_out_path <- "../analysis/out_files"
+
+  write_csv(samples_per_ocean, file.path(files_write_out_path, "samples_per_ocean.csv"))
+
+  write_csv(samples_per_studyid_ocean, file.path(files_write_out_path, "samples_per_studyid_ocean.csv"))
+
 
   ### month
   (samples_per_month <- count_and_arrange(query_df, c("month")))
@@ -718,11 +750,21 @@ generate_plots <- function(
   )
 
   #* # combine with patchwork
-  combined_plot_fig_5 <- (samples_per_lat_abs_plot_sub / sst_hist_sub) | (samples_per_ocean_plot_sub / po4_hist_sub)
+
+  combined_plot_fig_5 <- (
+    (samples_per_lat_abs_plot_sub + samples_per_ocean_plot_sub) / 
+    (sst_hist_sub + po4_hist_sub)
+  ) #+
+    # plot_layout(guides = "collect") &
+    # theme(
+    #   legend.position = "bottom",
+    #   legend.box.just = "center",
+    #   legend.direction = "horizontal"
+    # )
 
   print(combined_plot_fig_5)
 
-  ggsave(file.path(files_out_path, paste0("Samples_per_abslat_ocean_sst_po4_hemi_cmb_hist", plot_ext)), height = 8.5, width = 17, units = "in", dpi = 300, device = "svg")
+  ggsave(file.path(files_out_path, paste0("Samples_per_abslat_ocean_sst_po4_hemi_cmb_hist", plot_ext)), height = 8.5, width = 17, units = "in", dpi = 300)
 
 
   ### * logFe
