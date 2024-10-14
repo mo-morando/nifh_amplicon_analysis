@@ -545,9 +545,9 @@ bar_plots <- function(
         "Shiozaki_2018LNO",
         "Shiozaki_2020",
         "Tang_2020",
-        "TianjUni_2016",
-        "TianjUni_2017",
-        "Turk_2021"
+        "Wu_2019",
+        "Wu_2021",
+        "TurkKubo_2021"
       )
 
       #* # make Tibble that joins the pooled data with study ID data
@@ -1210,9 +1210,9 @@ if (sys.nframe() == 0 && !interactive()) {
 #   "Shiozaki_2018LNO",
 #   "Shiozaki_2020",
 #   "Tang_2020",
-#   "TianjUni_2016",
-#   "TianjUni_2017",
-#   "Turk_2021"
+#   "Wu_2019",
+#   "Wu_2021",
+#   "TurkKubo_2021"
 # )
 
 # #* # make tibble that joins the pooled data with study ID data

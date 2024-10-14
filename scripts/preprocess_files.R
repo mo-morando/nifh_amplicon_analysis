@@ -264,16 +264,23 @@ process_metaTab <- function(metaTab, cmap_coloc) {
       coastal_class = if_else(
         Coastal_200km == TRUE,
         true = "coastal",
-        false = "open ocean")
+        false = "open ocean"),
+      StudyID = case_when(
+        StudyID %in% "Turk_2021" ~ "TurkKubo_2021",
+        StudyID %in% "TianjUni_2016" ~ "Wu_2021",
+        StudyID %in% "TianjUni_2017"  ~ "Wu_2019",
+        .default = StudyID
+      )
     )
+
 
   merged_data <- cmap_coloc %>%
     left_join(processed_metaTab, by = "SAMPLEID")
 
-  
+
   cat("Processing the metaTab files is done!\n")
-  
-  
+
+
   return(merged_data)
 }
 # _##########################################################
@@ -295,9 +302,14 @@ cmap_clean_main <- function(cmap_coloc) {
     data %>%
       mutate(
         studyID = case_when(
-          studyID == "Gradoville_2020" & grepl("2017", date) ~ "Gradoville_2020_G2",
-          studyID == "Gradoville_2020" & grepl("2016", date) ~ "Gradoville_2020_G1",
-          TRUE ~ studyID
+          studyID == "Gradoville_2020" & grepl("2017", date)
+          ~ "Gradoville_2020_G2",
+          studyID == "Gradoville_2020" & grepl("2016", date)
+          ~ "Gradoville_2020_G1",
+          studyID %in% "Turk_2021" ~ "TurkKubo_2021",
+          studyID %in% "TianjUni_2016" ~ "Wu_2021",
+          studyID %in% "TianjUni_2017"  ~ "Wu_2019",
+          .default = studyID
         )
       )
   }
@@ -757,10 +769,10 @@ if (sys.nframe() == 0 && !interactive()) {
 
   if (!is.null(final_results)) {
     create_dir(args$files_out_path)
-  write_file_list(
-  file_list = final_results,
-  path = args$files_out_path
-)
+    write_file_list(
+      file_list = final_results,
+      path = args$files_out_path
+    )
   }
 
 }
