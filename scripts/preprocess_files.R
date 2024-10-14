@@ -5,20 +5,57 @@ if (!requireNamespace("argparser", quietly = TRUE)) {
   install.packages("argparser")
 }
 
+# Load required libraries
+suppressPackageStartupMessages({
 library(tidyverse)
 library(argparser)
+})
 
-# Load external functions and parameters
-source("/Users/mo/Projects/nifH_amp_project/myWork/scripts/functions.R")
-source("/Users/mo/Projects/nifH_amp_project/myWork/scripts/basic_plotting.R")
+#' Source a file with error handling and path validation
+#'
+#' @param file_path Character string specifying the path to the file to be sourced
+#' @return Invisible NULL. Prints status messages.
+#' @examples
+#' source_file("/path/to/your/file.R")
+source_file <- function(file_path) {
+  for (file in file_path) {
+    # Check if file exists
+    if (!file.exists(file)) {
+      stop("File does not exist: ", file, "\n")
+    }
+
+    # Try to source the file
+    tryCatch(
+      {
+        source(file)
+        cat("Successfully sourced : ", file, "\n")
+      },
+      error = function(e) {
+        stop("Error sourcing : ", file_path, ":", conditionMessage(e), "\n")
+      },
+      warning = function(w) {
+        cat("Warning while sourcing : ", file_path, ":", conditionMessage(w), "\n")
+      }
+    )
+  }
+
+  cat("Finished sourcing files. \n")
+}
 
 
-# _# Processing the files of the workspace
-cat("\nProcessing the files of the workspace\n")
-#  Print out what script is running
-script_name <- basename(commandArgs(trailingOnly = FALSE)[4])
-cat("Running script:", script_name, "\n")
-cat("Load in the data\n")
+# Source needed files
+files_to_source <- c(
+  "/Users/mo/Projects/nifH_amp_project/myWork/scripts/functions.R",
+  "/Users/mo/Projects/nifH_amp_project/myWork/scripts/basic_plotting.R"
+)
+
+
+# # _# Processing the files of the workspace
+# cat("\nProcessing the files of the workspace\n")
+# #  Print out what script is running
+# script_name <- basename(commandArgs(trailingOnly = FALSE)[4])
+# cat("Running script:", script_name, "\n")
+# cat("Load in the data\n")
 
 #' Set up the argument parser
 #'
@@ -39,12 +76,12 @@ setup_parser <- function() {
   parser <- add_argument(parser,
     arg = "--input_path",
     help = "Input directory path",
-    default = "analysis/out_files"
+    default = "../analysis/out_files"
   )
   parser <- add_argument(parser,
     arg = "--output_path",
     help = "Output directory path",
-    default = "analysis/out_files"
+    default = "../analysis/out_files"
   )
 
 
@@ -408,6 +445,7 @@ cmap_clean_main <- function(cmap_coloc) {
     filter(photic == TRUE) %>%
     pull(SAMPLEID)
 
+
   cat("Cleaning up cmap_coloc is done!\n")
 
   return(list(
@@ -701,8 +739,15 @@ main <- function(files_to_read, files_in_path, files_out_path) {
 
 # Run if the script is being run directly
 if (sys.nframe() == 0 && !interactive()) {
+
+  source_file(files_to_source)
+
+
   parser <- setup_parser()
   args <- parse_arg(parser)
+
+
+  validate_parsed_args(parsed_args = args)
 
   final_results <- main(
     args$files_to_read,
@@ -710,16 +755,13 @@ if (sys.nframe() == 0 && !interactive()) {
     args$files_out_path
   )
 
-  # Write out each processed data frame
-  # for ( name in names(final_results) ) {
-  #   write_csv(final_results[[name]], file.path(args$files_out_path, paste0("processed_", name, ".csv")))
-  #   cat(paste("Processed and saved", name, "\n"))
-  # }
-
+  if (!is.null(final_results)) {
+    create_dir(args$files_out_path)
   write_file_list(
   file_list = final_results,
   path = args$files_out_path
 )
+  }
 
 }
 

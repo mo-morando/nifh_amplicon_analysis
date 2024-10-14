@@ -1,13 +1,50 @@
 #!/usr/bin/env Rscript
 
-## load libraries
+# Load required libraries
+suppressPackageStartupMessages({
 library(tidyverse)
 library(argparser)
+})
 
-# load in functions and plotting parameter
-source("/Users/mo/Projects/nifH_amp_project/myWork/scripts/functions.R")
+print(getwd())
 
-source("/Users/mo/Projects/nifH_amp_project/myWork/scripts/basic_plotting.R")
+#' Source a file with error handling and path validation
+#'
+#' @param file_path Character string specifying the path to the file to be sourced
+#' @return Invisible NULL. Prints status messages.
+#' @examples
+#' source_file("/path/to/your/file.R")
+source_file <- function(file_path) {
+  for (file in file_path) {
+    # Check if file exists
+    if (!file.exists(file)) {
+      stop("File does not exist: ", file, "\n")
+    }
+
+    # Try to source the file
+    tryCatch(
+      {
+        source(file)
+        cat("Successfully sourced : ", file, "\n")
+      },
+      error = function(e) {
+        stop("Error sourcing : ", file_path, ":", conditionMessage(e), "\n")
+      },
+      warning = function(w) {
+        cat("Warning while sourcing : ", file_path, ":", conditionMessage(w), "\n")
+      }
+    )
+  }
+
+  cat("Finished sourcing files. \n")
+}
+
+
+# Source needed files
+files_to_source <- c(
+  "/Users/mo/Projects/nifH_amp_project/myWork/scripts/functions.R",
+  "/Users/mo/Projects/nifH_amp_project/myWork/scripts/basic_plotting.R"
+)
 
 # set working directory
 # setwd("/Users/mo/Projects/nifH_amp_project/myWork")
@@ -25,13 +62,13 @@ cat("Load in the data\n")
 setup_parser <- function() {
   parser <- arg_parser("Load and process nifH amplicon data from R workspace")
   parser <- add_argument(parser = parser,
-  arg = "--workspace",
-  help = "Path to R workspace file (.Rdata)",
-  default = "data/workspace/NifH_ASV_DB_March28_after_drop_19_empty_samples/workspace.RData")
+    arg = "--workspace",
+    help = "Path to R workspace file (.Rdata)",
+    default = "../data/workspace/Sep18/workspace.RData")
   parser <- add_argument(parser,
     arg = "--output_path",
     help = "Output directory path",
-    default = "analysis/out_files"
+    default = "../analysis/out_files"
   )
 
   return(parser)
@@ -39,11 +76,11 @@ setup_parser <- function() {
 
 
 #' Load R workspace
-#' 
+#'
 #' @param workspace_path Path to R workspace file
 #' @return Invisible NULL (objects are loaded into the global environment)
 load_workspace <- function(workspace_path) {
-  if ( !file.exists(workspace_path)) {
+  if (!file.exists(workspace_path)) {
     stop("Workspace file does not exist: ", workspace_path)
   }
 
@@ -119,8 +156,11 @@ main <- function(workspace_path, files_out_path) {
 
 # Run the script if it's being executed directly
 if (sys.nframe() == 0 && !interactive()) {
+
+  source_file(files_to_source)
+
   parser <- setup_parser()
   args <- parse_args(parser)
-  
+
   main(args$workspace, args$output_path)
 }
