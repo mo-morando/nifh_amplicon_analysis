@@ -1,8 +1,23 @@
 #!/usr/bin/env Rscript
 
+#' World Map Plot Generator for nifH Database
+#'
+#' This script processes input files and generates world plots for each study in the nifH database.
+#' It performs the following steps:
+#' 1. Loads required libraries
+#' 2. Sources necessary external files
+#' 3. Sets up command-line argument parsing
+#' 4. Defines custom themes and plotting functions
+#' 5. Loads and processes input data
+#' 6. Generates and saves world map plots
+#'
+#' @author Your Name
+
+
 # Load required libraries
 suppressPackageStartupMessages({
   library(tidyverse)
+  library(rlang)
   library(patchwork)
   library(argparser)
 })
@@ -14,28 +29,38 @@ suppressPackageStartupMessages({
 #' @examples
 #' source_file("/path/to/your/file.R")
 source_file <- function(file_path) {
-  for (file in file_path) {
-    # Check if file exists
-    if (!file.exists(file)) {
-      stop("File does not exist: ", file, "\n")
-    }
+  tryCatch(
+    {
+      for (file in file_path) {
+        # Check if file exists
+        if (!file.exists(file)) {
+          stop("File does not exist: ", file, "\n")
+        }
 
-    # Try to source the file
-    tryCatch(
-      {
-        source(file)
-        cat("Successfully sourced : ", file, "\n")
-      },
-      error = function(e) {
-        stop("Error sourcing : ", file_path, ":", conditionMessage(e), "\n")
-      },
-      warning = function(w) {
-        cat("Warning while sourcing : ", file_path, ":", conditionMessage(w), "\n")
+        # Try to source the file
+        tryCatch(
+          {
+            source(file)
+            cat("Successfully sourced : ", file, "\n")
+          },
+          error = function(e) {
+            stop("Error sourcing : ", file_path, ":", conditionMessage(e), "\n")
+          },
+          warning = function(w) {
+            cat("Warning while sourcing : ", file_path, ":", conditionMessage(w), "\n")
+          }
+        )
       }
-    )
-  }
 
-  cat("Finished sourcing files. \n")
+      cat("Finished sourcing files. \n")
+    },
+    error = function(e) {
+      stop(paste("Error in source_file:", conditionMessage(e)))
+    } # ,
+    # warning = function(w) {
+    #   warning(paste("Warning in source_file:", conditionMessage(w)))
+    # }
+  )
 }
 
 
@@ -45,6 +70,17 @@ files_to_source <- c(
   "/Users/mo/Projects/nifH_amp_project/myWork/scripts/basic_plotting.R"
 )
 
+
+#' Set up the argument parser
+#'
+#' This function creates and configures an argument parser for generating world plots
+#'
+#' @return A configured argument parser object
+#' @importFrom argparser arg_parser add_argument
+#' @export
+#'
+#' @examples
+#' parser <- setup_parser()
 setup_parser <- function() {
   parser <- arg_parser("Process input files and generate world plot of each study for nifH database")
   parser <- add_argument(
@@ -79,7 +115,6 @@ setup_parser <- function() {
   return(parser)
 }
 
-# cmap_coloc <- read_csv("/Users/mo/Projects/nifH_amp_project/myWork/analysis/out_files/cmap_coloc.csv")
 
 #' Parse command-line arguments
 #'
@@ -98,25 +133,37 @@ setup_parser <- function() {
 #' parser <- setup_parser()
 #' args <- parse_arg(parser)
 parse_arg <- function(parser) {
-  # Parse the arguments
-  argv <- parse_args(parser)
+  tryCatch(
+    {
+      # Parse the arguments
+      argv <- parse_args(parser)
 
-  # Convert the comma-separated string to a vector
-  files_to_read <- strsplit(argv$files, ",")[[1]]
-  files_in_path <- argv$input_path
-  files_out_path <- argv$output_path
-  plot_ext <- argv$plot_ext
-  plot_device <- argv$plot_device
+      # Convert the comma-separated string to a vector
+      files_to_read <- strsplit(argv$files, ",")[[1]]
+      files_in_path <- argv$input_path
+      files_out_path <- argv$output_path
+      plot_ext <- argv$plot_ext
+      plot_device <- argv$plot_device
 
-  return(list(
-    files_to_read = files_to_read,
-    files_in_path = files_in_path,
-    files_out_path = files_out_path,
-    plot_ext = plot_ext,
-    plot_device = plot_device
-  ))
+      return(list(
+        files_to_read = files_to_read,
+        files_in_path = files_in_path,
+        files_out_path = files_out_path,
+        plot_ext = plot_ext,
+        plot_device = plot_device
+      ))
+    },
+    # warning = function(w) {
+    #   cat("Warning occurred:\n")
+    #   cat("Warning message:", conditionMessage(w), "\n")
+    #   cat("Warning call:", deparse(conditionCall(w)), "\n")
+    # },
+    error = function(e) {
+      cat("Error call in:", deparse(conditionCall(e)), "\n")
+      stop(paste("Error parsing arguments due to:\n", conditionMessage(e)))
+    }
+  )
 }
-
 
 #' Define a custom theme for ggplot2 plots
 #'
@@ -146,83 +193,146 @@ theme_custom_maps <- function() {
 }
 
 
-### - load function for plotting world maps
+#' Create a custom world map plot
+#'
+#' @param data Data frame containing plot data
+#' @param x_var Variable for x-axis (longitude)
+#' @param y_var Variable for y-axis (latitude)
+#' @param color_var Variable for color coding points
+#' @param legend_nrow Number of rows in the legend
+#' @param world World map data
+#' @param fill_palette Color palette to use
+#' @param legend_position Position of the legend
+#' @return A ggplot object
 create_custom_worldmap_plot <- function(
     data,
     x_var,
     y_var,
     color_var,
     legend_nrow,
-    world,
     fill_palette = NULL,
     legend_position = "bottom") {
-  plot <- ggplot(data) +
-    geom_map(
-      data = world, map = world,
-      aes(long, lat, map_id = region),
-      color = "black", fill = "black", size = 0.2
-    ) +
-    geom_point(
-      aes(
-        x = {{ x_var }}, y = {{ y_var }}, color = {{ color_var }}
-      ),
-      data = data # %>% mutate(studyID = str_replace_all(studyID, "_", " "))
-      ,
-      alpha = 0.15,
-      size = 4, shape = 1, stroke = 3
-    ) +
-    # scale_color_manual(values = getPalette(palette_count)) +
-    scale_fill_manual(values = fill_palette) +
-    scale_x_continuous(expand = c(0, 0)) +
-    scale_y_continuous(expand = c(0, 0)) +
-    labs(
-      y = "Latitude",
-      x = "Longitude",
-      colour = "Study ID"
-    ) +
-    theme_bw(base_size = 10) +
-    theme(panel.grid = element_blank()) +
-    theme_custom_maps() +
-    theme(legend.position = legend_position) +
-    guides(colour = guide_legend(nrow = legend_nrow, byrow = TRUE, override.aes = list(alpha = 1))) +
-    coord_quickmap()
+  tryCatch(
+    {
+      tryCatch(
+        {
+          # Load world map data
+          world <- map_data("world")
+        },
+        error = function(e) {
+          cat("Error call in:", deparse(conditionCall(e)), "\n")
+          stop(paste(
+            "World map from map_data could not load due to:\n",
+            conditionMessage(e)
+          ))
+        }
+      )
 
-  return(plot)
+      # withCallingHandlers({
+      plot <- ggplot(data) +
+        geom_map(
+          data = world, map = world,
+          aes(long, lat, map_id = region),
+          color = "black", fill = "black", size = 0.2
+        ) +
+        geom_point(
+          aes(
+            x = {{ x_var }}, y = {{ y_var }}, color = {{ color_var }}
+          ),
+          data = data # %>% mutate(studyID = str_replace_all(studyID, "_", " "))
+          ,
+          alpha = 0.15,
+          size = 4, shape = 1, stroke = 3
+        ) +
+        # scale_color_manual(values = getPalette(palette_count)) +
+        scale_fill_manual(values = fill_palette) +
+        scale_x_continuous(expand = c(0, 0)) +
+        scale_y_continuous(expand = c(0, 0)) +
+        labs(
+          y = "Latitude",
+          x = "Longitude",
+          colour = "Study ID"
+        ) +
+        theme_bw(base_size = 10) +
+        theme(panel.grid = element_blank()) +
+        theme_custom_maps() +
+        theme(legend.position = legend_position) +
+        guides(colour = guide_legend(nrow = legend_nrow, byrow = TRUE, override.aes = list(alpha = 1))) +
+        coord_quickmap()
+
+      return(plot)
+    },
+    #   warning = function(w) {
+    #     cat("Warning occurred during create_custom_worldmap_plot:\n")
+    #     cat("Warning message:", conditionMessage(w), "\n")
+    #     cat("Warning call:", deparse(conditionCall(w)), "\n")
+    #     invokeRestart("muffleWarning")
+    #   }
+    # )
+    # },
+    error = function(e) {
+      cat("Error call in:\n", deparse(conditionCall(e)), "\n")
+      stop(cat("No plots created due to:\n", conditionMessage(e), "\n"))
+    }
+  )
 }
 
 
 ### write function where you do not need quotes to enter information
 filter_df <- function(x, plt_flt) {
-  cat("Input Variables:\n")
-  cat("x:", deparse(substitute(x)), "\n")
-  cat("plt_flt:", deparse(substitute(plt_flt)), "\n")
+  tryCatch(
+    {
+      filtered_data <- x %>%
+        filter({{ plt_flt }})
 
-  filtered_data <- x %>%
-    filter({{ plt_flt }})
-
-  return(filtered_data)
+      cat("Filtered df for photic zone samples only. Rows remaining:", nrow(filtered_data), "\n")
+      return(filtered_data)
+    },
+    error = function(e) {
+      cat("Error call in:", deparse(conditionCall(e)), "\n")
+      stop(cat("Filtered df was not created due to:\n", conditionMessage(e), "\n"))
+    }
+  )
 }
 
 
-
-# Function to generate color palette
+#' Generate a color-blind safe palette
+#'
+#' @param n Number of colors to generate
+#' @return Vector of color codes
 generate_cb_palette <- function(n) {
-  # Setting up pallete with color blind safe colors
-  # Define the base palette
-  cbpal_15 <- c(
-    "#000000", "#004949", "#009292", "#ff6db6", "#ffb6db", "#490092", "#006ddb", "#b66dff", "#6db6ff",
-    "#b6dbff", "#920000", "#924900", "#db6d00", "#24ff24", "#ffff6d"
+  tryCatch(
+    {
+      # Setting up pallete with color blind safe colors
+      # Define the base palette
+      cbpal_15 <- c(
+        "#000000", "#004949", "#009292", "#ff6db6", "#ffb6db", "#490092", "#006ddb", "#b66dff", "#6db6ff",
+        "#b6dbff", "#920000", "#924900", "#db6d00", "#24ff24", "#ffff6d"
+      )
+
+      # If n is less than or equal to 15, return the first n colors
+      if (n <= length(cbpal_15)) {
+        cat("Palette generated with", n, "colors.\n")
+        return(cbpal_15[1:n])
+      }
+
+
+      cat("Palette generated with", n, "colors using color ramp.\n")
+      return(colorRampPalette(cbpal_15)(n))
+    },
+    # warning = function(w) {
+    #   cat("Warning occurred in generate_cb_palette:\n")
+    #   cat("Warning message:", conditionMessage(w), "\n")
+    #   cat("Warning call:", deparse(conditionCall(w)), "\n")
+    # },
+    error = function(e) {
+      cat("Error call in: '", deparse(conditionCall(e)), "'\n")
+      stop(cat(
+        "Error caused no color palette to be generated:\n",
+        conditionMessage(e), "\n"
+      ))
+    }
   )
-
-  # If n is less than or equal to 15, return the first n colors
-  if (n <= length(cbpal_15)) {
-    cat("Palette generated!\n")
-    return(cbpal_15[1:n])
-  }
-
-
-  cat("Palette generated\n")
-  return(colorRampPalette(cbpal_15)(n))
 }
 
 
@@ -232,37 +342,33 @@ generate_cb_palette <- function(n) {
 #' 1. Extracts unique study IDs from the input data frame.
 #' 2. Filters the data frame for entries in the photic zone.
 #'
-#' @param data A data frame containing at least 'studyID' and 'plt_flt' columns.
-#' @param photic_filter The value used to filter for photic zone in the 'plt_flt' column.
-#'
-#' @return A list containing two elements:
-#'   - study_ids: A vector of unique study IDs.
-#'   - photic_data: A data frame filtered for the photic zone.
-#'
+#' @param data A data frame containing at least 'studyID' and 'plt_flt' columns
+#' @param photic_filter The value used to filter for photic zone in the 'plt_flt' column
+#' @return A list containing study_ids and photic_data
 #' @examples
 #' result <- extract_study_ids_and_filter_photic(cmap_coloc, photic = "photic")
-#' print(result$study_ids)
-#' head(result$photic_data)
 extract_study_ids_and_filter_photic <- function(data, photic_filter) {
-  # Extract unique study IDs
-  study_ids <- data %>%
-    distinct(studyID) %>%
-    pull(studyID)
+  tryCatch(
+    {
+      # Extract unique study IDs
+      study_ids <- data %>%
+        distinct(studyID) %>%
+        pull(studyID)
+      cat("There are", length(study_ids), "study IDs:", paste(study_ids, collapse = ", "), "\n")
 
-  cat("The study IDs are:", paste(study_ids, collapse = ", "), "\n")
+      # Filter data for photic zone
+      photic_data <- filter_df(x = data, plt_flt = photic)
 
-  # Filter data for photic zone
-  # photic_data <- data %>%
-  #   filter(plt_flt == photic_filter)
-
-  photic_data <- filter_df(x = data, plt_flt = photic)
-
-  cat("Filtered data for photic zone. Rows remaining:", nrow(photic_data), "\n")
-
-  return(list(
-    study_ids = study_ids,
-    photic_data = photic_data
-  ))
+      return(list(
+        study_ids = study_ids,
+        photic_data = photic_data
+      ))
+    },
+    error = function(e) {
+      cat("Error call in:", deparse(conditionCall(e)), "\n")
+      stop(cat("No filtered df produced:\n", conditionMessage(e), "\n"))
+    }
+  )
 }
 
 #' Create and Print World Map Plots
@@ -292,45 +398,60 @@ extract_study_ids_and_filter_photic <- function(data, photic_filter) {
 #'   legend_position = "bottom"
 #' )
 create_and_print_world_maps <- function(data, x_var, y_var, color_var, legend_nrow, fill_palette, legend_position, facet_var = "ocean") {
-  cat("Creating plots...\n")
-  # Load world map data
-  world <- map_data("world")
+  cat("Creating world plots...\n")
+  tryCatch(
+    {
+      # Create the main world map plot
+      world_map_plot <- create_custom_worldmap_plot(
+        data = data,
+        x_var = {{ x_var }},
+        y_var = {{ y_var }},
+        color_var = {{ color_var }},
+        legend_nrow = legend_nrow,
+        fill_palette = fill_palette,
+        legend_position = legend_position
+      ) %>% suppressWarnings()
 
-  # Create the main world map plot
-  world_map_plot <- create_custom_worldmap_plot(
-    data = data,
-    x_var = {{ x_var }},
-    y_var = {{ y_var }},
-    color_var = {{ color_var }},
-    legend_nrow = legend_nrow,
-    fill_palette = fill_palette,
-    legend_position = legend_position,
-    world = world
-  ) %>% suppressWarnings()
+      # Create the faceted plot
+      world_map_plot_faceted <- world_map_plot +
+        facet_wrap(as.formula(paste("~", facet_var))) +
+        theme(legend.position = legend_position)
 
-  # Create the faceted plot
-  world_map_plot_faceted <- world_map_plot +
-    facet_wrap(as.formula(paste("~", facet_var))) +
-    theme(legend.position = legend_position)
+      # Print the plots
+      print(world_map_plot)
+      print(world_map_plot_faceted)
 
-  # Print the plots
-  print(world_map_plot)
-  print(world_map_plot_faceted)
+      if (inherits(world_map_plot, "ggplot") && inherits(world_map_plot_faceted, "ggplot")) {
+        # Print a statement with the parameters
+        cat("Custom plots created with the following parameters:\n")
+        cat("x_var:", deparse(substitute(x_var)), "\n")
+        cat("y_var:", deparse(substitute(y_var)), "\n")
+        color_var_expr <- enquo(color_var)
+        cat("color_var:", as_name(color_var_expr), "\n")
+        cat("facet_var:", facet_var, "\n")
+        cat("legend_nrow:", legend_nrow, "\n")
+        cat("legend_position:", legend_position, "\n")
+      }
 
-  # Print a statement with the parameters
-  cat("Custom plots created with the following parameters:\n")
-  cat("x_var:", deparse(substitute(x_var)), "\n")
-  cat("y_var:", deparse(substitute(y_var)), "\n")
-  cat("color_var:", deparse(substitute(color_var)), "\n")
-  cat("facet_var:", facet_var, "\n")
-  cat("legend_nrow:", legend_nrow, "\n")
-  cat("legend_position:", legend_position, "\n")
-
-  # Return the plots
-  return(list(main_plot = world_map_plot, faceted_plot = world_map_plot_faceted))
+      # Return the plots
+      return(list(main_plot = world_map_plot, faceted_plot = world_map_plot_faceted))
+    },
+    error = function(e) {
+      cat("Error call in:", deparse(conditionCall(e)), "\n")
+      stop(cat("Plots were not created due to:\n", conditionMessage(e), "\n"))
+    }
+  )
 }
 
 
+#' Main function to process data and generate plots
+#'
+#' @param files_to_read List of files to read
+#' @param files_in_path Input directory path
+#' @param plot_var Variable to use for plotting
+#' @param files_out_path Output directory path
+#' @param plot_ext Plot file extension
+#' @param plot_device Plot device
 main <- function(
     files_to_read,
     files_in_path,
@@ -338,55 +459,64 @@ main <- function(
     files_out_path,
     plot_ext,
     plot_device) {
-  # Load the data
-  data_list <- load_files(files_to_read, files_in_path)
+  cat("Starting main function...\n")
 
-  df_photic <- extract_study_ids_and_filter_photic(
-    data = data_list$cmap_coloc,
-    photic_filter = "photic"
-  )
+  tryCatch({
+    # Load the data
+    data_list <- load_files(files_to_read, files_in_path)
+    cat("Data loaded successfully.\n")
 
-  # Generate colorblind safe pallette
-  cb_palette <- generate_cb_palette(
-    nrow(df_photic$photic_data %>% distinct({{ plot_var }}))
-  )
-
-  plot_results <- create_and_print_world_maps(
-    data = df_photic$photic_data,
-    x_var = lon,
-    y_var = lat,
-    color_var = {{ plot_var }},
-    legend_nrow = 3,
-    fill_palette = cb_palette,
-    legend_position = "bottom"
-  )
-
-
-  if (length(plot_results) == 2) {
-    save_custom_plot(
-      plot = plot_results$main_plot,
-      output_dir = files_out_path,
-      filename = "worldStnMap_nifhdb_allstudies",
-      file_ext = plot_ext,
-      height = 8.5,
-      width = 14,
-      dpi = 300,
-      device = plot_device
+    df_photic <- extract_study_ids_and_filter_photic(
+      data = data_list$cmap_coloc,
+      photic_filter = "photic"
     )
 
-    save_custom_plot(
-      plot = plot_results$faceted_plot,
-      output_dir = files_out_path,
-      filename = "worldStnMap_nifhdb_allstudies_fct_ocean",
-      file_ext = plot_ext,
-      height = 8.5,
-      width = 14,
-      dpi = 300,
-      device = plot_device
+    # Generate colorblind safe pallette
+    cb_palette <- generate_cb_palette(
+      nrow(df_photic$photic_data %>% distinct({{ plot_var }}))
     )
-  } else {
-    message("Plots did not get saved")
+
+    plot_results <- create_and_print_world_maps(
+      data = df_photic$photic_data,
+      x_var = lon,
+      y_var = lat,
+      color_var = {{ plot_var }},
+      legend_nrow = 3,
+      fill_palette = cb_palette,
+      legend_position = "bottom"
+    )
+
+
+    if (length(plot_results) == 2) {
+      save_custom_plot(
+        plot = plot_results$main_plot,
+        output_dir = files_out_path,
+        filename = "worldStnMap_nifhdb_allstudies",
+        file_ext = plot_ext,
+        height = 8.5,
+        width = 14,
+        dpi = 300,
+        device = plot_device
+      )
+
+      save_custom_plot(
+        plot = plot_results$faceted_plot,
+        output_dir = files_out_path,
+        filename = "worldStnMap_nifhdb_allstudies_fct_ocean",
+        file_ext = plot_ext,
+        height = 8.5,
+        width = 14,
+        dpi = 300,
+        device = plot_device
+      )
+    } else {
+      message("Error: Plots did not get saved")
+    }},
+  error = function(e) {
+    cat("Error in call:", deparse(conditionCall(e)), "\n")
+    stop(cat("Main function did not execute properly resulting in to plots being generated or saved due to:\n", conditionMessage(e), "\n"))
   }
+  )
 }
 
 
