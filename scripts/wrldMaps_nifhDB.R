@@ -461,61 +461,63 @@ main <- function(
     plot_device) {
   cat("Starting main function...\n")
 
-  tryCatch({
-    # Load the data
-    data_list <- load_files(files_to_read, files_in_path)
-    cat("Data loaded successfully.\n")
+  tryCatch(
+    {
+      # Load the data
+      data_list <- load_files(files_to_read, files_in_path)
+      cat("Data loaded successfully.\n")
 
-    df_photic <- extract_study_ids_and_filter_photic(
-      data = data_list$cmap_coloc,
-      photic_filter = "photic"
-    )
-
-    # Generate colorblind safe pallette
-    cb_palette <- generate_cb_palette(
-      nrow(df_photic$photic_data %>% distinct({{ plot_var }}))
-    )
-
-    plot_results <- create_and_print_world_maps(
-      data = df_photic$photic_data,
-      x_var = lon,
-      y_var = lat,
-      color_var = {{ plot_var }},
-      legend_nrow = 3,
-      fill_palette = cb_palette,
-      legend_position = "bottom"
-    )
-
-
-    if (length(plot_results) == 2) {
-      save_custom_plot(
-        plot = plot_results$main_plot,
-        output_dir = files_out_path,
-        filename = "worldStnMap_nifhdb_allstudies",
-        file_ext = plot_ext,
-        height = 8.5,
-        width = 14,
-        dpi = 300,
-        device = plot_device
+      df_photic <- extract_study_ids_and_filter_photic(
+        data = data_list$cmap_coloc,
+        photic_filter = "photic"
       )
 
-      save_custom_plot(
-        plot = plot_results$faceted_plot,
-        output_dir = files_out_path,
-        filename = "worldStnMap_nifhdb_allstudies_fct_ocean",
-        file_ext = plot_ext,
-        height = 8.5,
-        width = 14,
-        dpi = 300,
-        device = plot_device
+      # Generate colorblind safe pallette
+      cb_palette <- generate_cb_palette(
+        nrow(df_photic$photic_data %>% distinct({{ plot_var }}))
       )
-    } else {
-      message("Error: Plots did not get saved")
-    }},
-  error = function(e) {
-    cat("Error in call:", deparse(conditionCall(e)), "\n")
-    stop(cat("Main function did not execute properly resulting in to plots being generated or saved due to:\n", conditionMessage(e), "\n"))
-  }
+
+      plot_results <- create_and_print_world_maps(
+        data = df_photic$photic_data,
+        x_var = lon,
+        y_var = lat,
+        color_var = {{ plot_var }},
+        legend_nrow = 3,
+        fill_palette = cb_palette,
+        legend_position = "bottom"
+      )
+
+
+      if (length(plot_results) == 2) {
+        save_custom_plot(
+          plot = plot_results$main_plot,
+          output_dir = files_out_path,
+          filename = "worldStnMap_nifhdb_allstudies",
+          file_ext = plot_ext,
+          height = 8.5,
+          width = 14,
+          dpi = 300,
+          device = plot_device
+        )
+
+        save_custom_plot(
+          plot = plot_results$faceted_plot,
+          output_dir = files_out_path,
+          filename = "worldStnMap_nifhdb_allstudies_fct_ocean",
+          file_ext = plot_ext,
+          height = 8.5,
+          width = 14,
+          dpi = 300,
+          device = plot_device
+        )
+      } else {
+        message("Error: Plots did not get saved")
+      }
+    },
+    error = function(e) {
+      cat("Error in call:", deparse(conditionCall(e)), "\n")
+      stop(cat("Main function did not execute properly resulting in to plots being generated or saved due to:\n", conditionMessage(e), "\n"))
+    }
   )
 }
 
