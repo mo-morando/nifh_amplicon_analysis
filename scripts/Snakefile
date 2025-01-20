@@ -4,20 +4,26 @@ configfile: "config.yaml"
 
 rule all:
     input:
-        # expand(f"{config['output_dir']}/{{file}}.csv", file=config["files_out_process"]),
-        # expand(f"{config['output_dir']}/{{file}}.csv", file=config["files_out_bss"]),
         expand(
             f"{config['plot_dir']}/{{file}}{config['plot_ext']}",
             file=config["files_out_plot"],
         ),
+        # expand(
+        #     f"{config['plot_dir']}/{{file}}{config['plot_ext']}",
+        #     file=config["files_out_plot_tax"],
+        # ),
         expand(
             f"{config['plot_dir']}/{{file}}{config['plot_ext']}",
-            file=config["files_out_plot_tax"],
+            file=config["files_out_wrld_plt"],
+        ),
+        expand(
+            f"{config['output_dir']}/{{files}}.csv", files=config["files_out_tables"]
         ),
 
 
 # Loading workspace files
 rule load_files:
+    # priority: 1
     input:
         workspace=config["workspace"],
     params:
@@ -26,12 +32,15 @@ rule load_files:
         expand(f"{config['output_dir']}/{{file}}.csv", file=config["files_to_process"]),
     log:
         f"{config['output_dir']}/logs/load_files.log",
+    conda:
+        config["conda_env"]
     shell:
         "Rscript loading_files.R --workspace {input.workspace} --output_path {params.output_dir} > {log} 2>&1"
 
 
 # Loading workspace files
 rule preprocess_files:
+    # priority: 2
     input:
         expand(f"{config['output_dir']}/{{file}}.csv", file=config["files_to_process"]),
     params:
@@ -40,6 +49,8 @@ rule preprocess_files:
         output_dir=config["output_dir"],
     output:
         expand(f"{config['output_dir']}/{{file}}.csv", file=config["files_out_process"]),
+    conda:
+        config["conda_env"]
     log:
         f"{config['output_dir']}/logs/preprocess_files.log",
     shell:
@@ -49,6 +60,9 @@ rule preprocess_files:
 
 
 rule basic_sample_stats:
+    # priority: 3
+    conda:
+        config["conda_env"]
     input:
         expand(f"{config['output_dir']}/{{file}}.csv", file=config["files_out_process"]),
     params:
@@ -66,6 +80,9 @@ rule basic_sample_stats:
 
 
 rule samp_tax_brkdwn:
+    # priority: 4
+    conda:
+        config["conda_env"]
     input:
         expand(f"{config['output_dir']}/{{file}}.csv", file=config["files_out_bss"]),
     params:
@@ -83,6 +100,9 @@ rule samp_tax_brkdwn:
 
 
 rule make_plots:
+    # priority: 5
+    conda:
+        config["conda_env"]
     input:
         expand(f"{config['output_dir']}/{{file}}.csv", file=config["files_out_stb"]),
     params:
@@ -90,6 +110,7 @@ rule make_plots:
         input_dir=config["output_dir"],
         output_dir=config["plot_dir"],
         plot_ext=config["plot_ext"],
+        plot_device=config["plot_device"],
     output:
         expand(
             f"{config['plot_dir']}/{{file}}{config['plot_ext']}",
@@ -99,11 +120,14 @@ rule make_plots:
         f"{config['output_dir']}/logs/make_plots.log",
     shell:
         """
-        Rscript plots_out.R --files {params.input_files} --input_path {params.input_dir} --output_path {params.output_dir} --plot_ext {params.plot_ext} > {log} 2>&1
+        Rscript plots_out.R --files {params.input_files} --input_path {params.input_dir} --output_path {params.output_dir} --plot_ext {params.plot_ext} --plot_device {params.plot_device} > {log} 2>&1
         """
 
 
 rule make_plots_tax:
+    # priority: 6
+    conda:
+        config["conda_env"]
     input:
         expand(f"{config['output_dir']}/{{file}}.csv", file=config["files_out_stb"]),
     params:
@@ -111,6 +135,7 @@ rule make_plots_tax:
         input_dir=config["output_dir"],
         output_dir=config["plot_dir"],
         plot_ext=config["plot_ext"],
+        plot_device=config["plot_device"],
     output:
         expand(
             f"{config['plot_dir']}/{{file}}{config['plot_ext']}",
@@ -120,7 +145,63 @@ rule make_plots_tax:
         f"{config['output_dir']}/logs/make_plots_tax.log",
     shell:
         """
-        Rscript plots_taxonomy.R --files {params.input_files} --input_path {params.input_dir} --output_path {params.output_dir} --plot_ext {params.plot_ext} > {log} 2>&1
+        Rscript plots_taxonomy.R --files {params.input_files} --input_path {params.input_dir} --output_path {params.output_dir} --plot_ext {params.plot_ext} --plot_device {params.plot_device} > {log} 2>&1
+        """
+
+
+rule make_tables:
+    # priority: 7
+    conda:
+        config["conda_env"]
+    input:
+        expand(
+            f"{config['input_dir_tables']}/{{file}}.csv",
+            file=config["files_in_tables"],
+        ),
+        # lambda wildcards: ",".join(expand(f"{config['input_dir_tables']}/{{file}}.csv", file=config['files_in_tables']))
+        # input_files=",".join(config['files_in_tables'])
+    params:
+        input_files=",".join(config["files_in_tables"]),
+        input_dir=config["input_dir_tables"],
+        output_dir=config["output_dir"],
+    output:
+        expand(
+            f"{config['output_dir']}/{{files}}.csv", files=config["files_out_tables"]
+        ),
+    log:
+        f"{config['output_dir']}/logs/make_tables.log",
+    shell:
+        """
+        Rscript tables_4_5.R --files {params.input_files} --input_path {params.input_dir} --output_path {params.output_dir} > {log} 2>&1
+        """
+
+
+rule make_wrld_plts:
+    # priority: 8
+    conda:
+        config["conda_env"]
+    input:
+        # expand(f"{config['output_dir']}/{{file}}.csv", file=config["files_in_wrld_plt"]),
+        expand(
+            f"{config['plot_dir']}/{{file}}{config['plot_ext']}",
+            file=config["files_out_plot_tax"],
+        ),
+    params:
+        input_files=",".join(config["files_in_wrld_plt"]),
+        input_dir=config["output_dir"],
+        output_dir=config["plot_dir"],
+        plot_ext=config["plot_ext"],
+        plot_device=config["plot_device"],
+    output:
+        expand(
+            f"{config['plot_dir']}/{{file}}{config['plot_ext']}",
+            file=config["files_out_wrld_plt"],
+        ),
+    log:
+        f"{config['output_dir']}/logs/make_wrld_plts.log",
+    shell:
+        """
+        Rscript wrldMaps_nifhDB.R --files {params.input_files} --input_path {params.input_dir} --output_path {params.output_dir} --plot_ext {params.plot_ext} --plot_device {params.plot_device} > {log} 2>&1
         """
 
 
@@ -148,7 +229,9 @@ rule clean_load_files:
 
 rule clean_preprocessd_files:
     params:
-        files=expand(f"{config['output_dir']}/{{file}}.csv", file=config["files_out_process"]),
+        files=expand(
+            f"{config['output_dir']}/{{file}}.csv", file=config["files_out_process"]
+        ),
         log=f"{config['output_dir']}/logs/preprocess_files.log",
     shell:
         """
@@ -251,13 +334,65 @@ rule clean_make_plots_tax:
         """
 
 
-rule clean_all:
+rule clean_make_tables:
+    params:
+        files=expand(
+            f"{config['output_dir']}/{{files}}.csv", files=config["files_out_tables"]
+        ),
+        log=f"{config['output_dir']}/logs/make_tables.log",
+    shell:
+        """
+        for file in {params.files}; do
+            if [ -f "$file" ]; then
+            rm "$file"
+            echo "Removed $file"
+            fi
+        done
+        if [ -f {params.log} ]; then
+            rm "{params.log}"
+            echo "Removed {params.log}"
+        fi
+        """
+
+
+rule clean_make_wrld_plts:
+    params:
+        files=expand(
+            f"{config['plot_dir']}/{{file}}{config['plot_ext']}",
+            file=config["files_out_wrld_plt"],
+        ),
+        log=f"{config['output_dir']}/logs/make_wrld_plts.log",
+    shell:
+        """
+        for file in {params.files}; do
+            if [ -f "$file" ]; then
+            rm "$file"
+            echo "Removed $file"
+            fi
+        done
+        if [ -f "{params.log}" ]; then
+            rm "{params.log}"
+            echo "Removed {params.log}"
+        fi
+        """
+
+# Remove output files only but leave directory structure, log files, and conda environment
+rule clean:
+    shell:
+        """
+        echo "Cleaning output files only"
+        snakemake -c 1 --use-conda --delete-all-output
+        """
+
+# Remove all directories, outputs, logs, and conda environment
+rule superclean:
     params:
         log=f"{config['output_dir']}/logs",
         files_dir=config["output_dir"],
         plot_dir=config["plot_dir"],
     shell:
         """
+        echo "Cleaning all output files and directories"
         for dir in {params}; do
             if [ -d "$dir" ]; then
             rm -r "$dir" 
@@ -266,4 +401,9 @@ rule clean_all:
                 echo "Directory $dir does not exist"
             fi
         done
+        echo "Removing conda environment made by this snakefile"
+        if [ -d .snakemake/conda ]; then
+            rm -r .snakemake/conda/
+            echo "Conda environment removed"
+        fi
         """
