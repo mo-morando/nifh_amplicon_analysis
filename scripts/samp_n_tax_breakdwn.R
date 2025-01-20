@@ -246,12 +246,12 @@ count_tables <- function(abundance_table, annotation_table, metatable, DNA_sampl
 
     cat("Returning the cleaned count tables as a list...\n")
     # Return the cleaned count tables
-    list(
+    return(list(
       nifhdb_all_counts_AUID_dedup_study_id_total = nifhdb_all_counts_AUID_dedup_study_id_total,
       nifhdb_all_counts_AUID_dedup_clean = nifhdb_all_counts_AUID_dedup_clean,
       nifhdb_all_counts_AUID_dedup_total_study_id_clean = nifhdb_all_counts_AUID_dedup_total_study_id_clean,
       nifhdb_all_counts_AUID_dedup_study_id_total_clean = nifhdb_all_counts_AUID_dedup_study_id_total_clean
-    )
+    ))
   },
   warning = function(w) {
       cat("Warning occurred:\n")
