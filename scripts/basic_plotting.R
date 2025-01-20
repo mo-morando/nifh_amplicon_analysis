@@ -21,6 +21,26 @@
 #' @importFrom viridisLite viridis
 #'
 
+#' Define custom colors for nifh clusters
+#'
+#' This function defines custom colors for nifh clusters.
+#'
+#' @return A named vector of custom colors.
+#'
+nifh_cluster_colours <- c(
+  "1A" = "steelblue",
+  "1J/1K" = "chocolate4",
+  "1O/1P" = "magenta",
+  "3" = "red",
+  "1G" = "chocolate1",
+  "1B" = "green2",
+  "other" = "lightgrey",
+  # "unknown" = "darkgrey",
+  "4" = "black",
+  "2" = "blue"
+)
+
+
 # Function to define the custom theme
 eb <- element_blank()
 
@@ -95,24 +115,32 @@ get_viridis_colors <- function(
   return(custom_palette)
 }
 
-#' Define custom colors for nifh clusters
+#' Generate a colorblind-safe palette for nifH clusters
 #'
-#' This function defines custom colors for nifh clusters.
+#' This function generates a colorblind-safe palette based on the RColorBrewer "Paired" palette
+#' and assigns the colors to nifH cluster names.
 #'
-#' @return A named vector of custom colors.
+#' @param nifh_cluster_colours A named vector of nifH cluster names and their corresponding colors.
 #'
-nifh_cluster_colours <- c(
-  "1A" = "steelblue",
-  "1J/1K" = "chocolate4",
-  "1O/1P" = "magenta",
-  "3" = "red",
-  "1G" = "chocolate1",
-  "1B" = "green2",
-  "other" = "lightgrey",
-  # "unknown" = "darkgrey",
-  "4" = "black",
-  "2" = "blue"
-)
+#' @return A named vector of colorblind-safe colors assigned to nifH cluster names.
+#'
+#' @examples
+#' nifh_cluster_colours <- c("Cluster1" = "#FF0000", "Cluster2" = "#00FF00", "Cluster3" = "#0000FF")
+#' nifh_cluster_colours_colbldsafe <- generate_nifh_palette(nifh_cluster_colours)
+#'
+#' @import RColorBrewer
+#'
+#' @export
+generate_nifh_palette <- function(nifh_cluster_colours) {
+  # Generate palette
+  pal <- c(RColorBrewer::brewer.pal(12, "Paired")[c(8, 2, 11, 9, 5, 4, 10, 3)], "#777777")
+
+  # Assign colors to nifH cluster names
+  names(pal) <- names(nifh_cluster_colours)
+
+  return(pal)
+}
+
 
 #' Create a custom dot plot
 #'
@@ -320,6 +348,143 @@ histogram_plot_x_or_y <- function(
     theme_custom()
 
   return(gg)
+}
+
+
+## function for plotting
+scatter_line_plot <- function(
+    df,
+    x,
+    y,
+    colour = NULL,
+    colour_pallete = NULL,
+    group = NULL,
+    colour_lab = NULL,
+    fill_lab = NULL,
+    fill_pallete = NULL,
+    fill = NULL,
+    title_lab = NULL,
+    subtitle_lab = NULL,
+    shape_lab = NULL,
+    x_lab,
+    y_lab = "Number of samples",
+    legend_position = "bottom",
+    legend_direction = "horizontal") {
+  plot <- ggplot(
+    df,
+    aes(
+      y = {{ y }},
+      x = {{ x }},
+      colour = {{ colour }},
+      group = {{ group }},
+      # shape = hemi
+    )
+  ) +
+    geom_point(
+      aes(
+        # shape=df_type
+      ),
+      na.rm = T, size = 2, stroke = 1.5, # fill = 'black'
+      shape = 1 ## _# you have to comment this out if you want to do anything with the shapes, e.g., differentiate hemispheres
+    ) +
+    geom_smooth(
+      aes(
+        fill = {{ fill }}
+      ),
+      method = "loess", formula = y ~ x, se = T, alpha = 0.3, show.legend = F, linewidth = 2
+    ) +
+    scale_color_manual(values = colour_pallete) +
+    scale_fill_manual(values = fill_pallete) +
+    labs(
+      title = title_lab,
+      subtitle = subtitle_lab,
+      # x = expression(bold(paste(x_lab))),
+      x = eval(substitute(expression(bold(paste(x_lab))))),
+      y = eval(substitute(expression(bold(paste(y_lab))))),
+      colour = colour_lab,
+      shape = shape_lab,
+      fill = fill_lab
+    ) +
+    guides(
+      colour = guide_legend(
+        nrow = 1, byrow = TRUE,
+        override.aes = list(size = 8, stroke = 5)
+      ),
+      shape = guide_legend(nrow = 1, byrow = TRUE),
+      # shape = guide_legend(override.aes = list(size = 10))
+    ) +
+    ylim(0, 1.0) +
+    theme_custom() +
+    theme(
+      legend.position = legend_position,
+      legend.direction = legend_direction,
+      legend.key.size = unit(3, "lines"), # size of legend keys
+      # legend.key.height = unit(3, "cm"),
+      # legend.key.width = unit(3, "cm"),
+      legend.text = element_text(size = 20), # size of legend text
+      legend.title = element_text(size = 26), # size of legend title
+      legend.spacing.x = unit(0.5, "lines"), # horizontal spacing between legend elements
+      legend.spacing.y = unit(0.5, "lines") # vertical spacing between legend elements
+    )
+
+  return(plot)
+}
+
+
+#' Save a ggplot object as an image file
+#'
+#' This function saves a specified ggplot object as an image file with customizable parameters.
+#' If no plot is specified, it will save the last plot created.
+#'
+#' @param plot_obj The ggplot object to save. If not provided, the last plot will be used.
+#' @param output_dir The directory where the file will be saved. Default is 'files_out_path'.
+#' @param filename The name of the output file (without extension). Default is "Samples_per_studyID_ocean_fill_bar_facet_nucelic".
+#' @param file_ext The file extension for the output. Default is 'plot_ext'.
+#' @param height The height of the output image in inches. Default is 8.5.
+#' @param width The width of the output image in inches. Default is 14.
+#' @param dpi The resolution of the output image. Default is 300.
+#' @param device The device to use for plotting. Default is NULL (automatically chosen based on file extension).
+#'
+#' @return NULL
+#'
+#' @examples
+#' # Assuming you have a ggplot object named 'my_plot'
+#' save_custom_plot(plot = my_plot)
+#' save_custom_plot(plot = my_plot, height = 10, width = 16, dpi = 600)
+#' 
+#' # To save the last plot created
+#' save_custom_plot()
+#'
+#' @export
+save_custom_plot <- function(plot_obj = NULL,
+                             output_dir,
+                             filename,
+                             file_ext = plot_ext,
+                             height = 8.5,
+                             width = 14,
+                             dpi = 300,
+                             device = NULL) {
+  
+  # Use the provided plot or the last plot if not specified
+  if (is.null(plot_obj)) {
+    plot_obj <- last_plot()
+    cat("No plot specified. Using the last plot created.\n")
+  }
+  
+  # Construct the full file path
+  file_path <- file.path(output_dir, paste0(filename, file_ext))
+  
+  # Save the plot
+  ggsave(plot = plot_obj,
+         filename = file_path,
+         height = height,
+         width = width,
+         units = "in",
+         dpi = dpi,
+         device = get(device))
+  
+  # Print a success message
+  cat("Plot saved successfully: ", file_path, "\n")
 }
 
 
