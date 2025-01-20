@@ -1,8 +1,12 @@
 # config.yaml
 
+# Conda enviroment
+conda_env: "../environments/environment.yaml"
+
 # Input workspace
-# workspace: "../data/workspace/archive/NifH_ASV_DB_March28_after_drop_19_empty_samples/workspace.RData"
+workspace: "../data/workspace/archive/NifH_ASV_DB_March28_after_drop_19_empty_samples/workspace.RData"
 workspace: "../data/workspace/Sep18/workspace.RData"
+input_dir_tables: "../data/csvs_for_tables"
 
 # Output directories
 output_dir: "../analysis/out_files"
@@ -21,18 +25,17 @@ files_to_process:
 files_out_process:
   # - cmap_coloc  # !  cannot have the same name of a file as input and output for a snakefile!!
   # - annoNifHDB_updt
-  - counts_df_T_lng 
-  - counts_df_T_lng_AUID_deduped 
-  - counts_df_T_AUID_deduped 
+  - counts_df_T_lng
+  - counts_df_T_lng_AUID_deduped
+  - counts_df_T_AUID_deduped
   - counts_df_AUID_deduped
   - DNA_samples_key
   - unique_sample_id_key
-  - photic_samples_key 
-  - RA_df_T_lng 
-  - RA_df_T_lng_mean_RA_AUID_deduped 
-  - RA_df_T_mean_RA_AUID_deduped 
-  - RA_df_mean_RA_AUID_deduped 
-
+  - photic_samples_key
+  - RA_df_T_lng
+  - RA_df_T_lng_mean_RA_AUID_deduped
+  - RA_df_T_mean_RA_AUID_deduped
+  - RA_df_mean_RA_AUID_deduped
 
 # Files in for parameters basic_samp_stats.R
 files_in_bss:
@@ -51,7 +54,6 @@ files_out_bss:
   - samples_per_photic_nucacid
   - sample_type
 
-
 # Files in for samp_tax_brkdwn.R
 files_in_stb:
   - counts_df_T_lng_AUID_deduped,
@@ -64,15 +66,14 @@ files_in_stb:
 
 # Files in for samp_tax_brkdwn.R
 files_out_stb:
-  - nifhdb_all_counts_AUID_dedup_study_id_total 
-  - nifhdb_all_counts_AUID_dedup_clean 
-  - nifhdb_all_counts_AUID_dedup_total_study_id_clean 
-  - nifhdb_all_counts_AUID_dedup_study_id_total_clean 
-  - nifhdb_all_rel_abund_AUID_dedup_study_id_total 
-  - nifhdb_all_rel_abund_AUID_dedup_clean 
-  - nifhdb_all_rel_abund_AUID_dedup_total_study_id_clean 
-  - nifhdb_all_rel_abund_AUID_dedup_study_id_total_clean 
-
+  - nifhdb_all_counts_AUID_dedup_study_id_total
+  - nifhdb_all_counts_AUID_dedup_clean
+  - nifhdb_all_counts_AUID_dedup_total_study_id_clean
+  - nifhdb_all_counts_AUID_dedup_study_id_total_clean
+  - nifhdb_all_rel_abund_AUID_dedup_study_id_total
+  - nifhdb_all_rel_abund_AUID_dedup_clean
+  - nifhdb_all_rel_abund_AUID_dedup_total_study_id_clean
+  - nifhdb_all_rel_abund_AUID_dedup_study_id_total_clean
 
 # Files in for plots_out.R
 files_in_plot:
@@ -83,7 +84,6 @@ files_in_plot:
   - sample_type
   - unique_sample_id_key
   - cmap_coloc
-
 
 # Files out for plots_out.R
 files_out_plot:
@@ -99,14 +99,21 @@ files_out_plot:
   - Samples_per_depth_hemi_hist_cmb_plot
   - Samples_per_SST_hemi_hist
   - Samples_per_PO4_hemi_hist
-  - Samples_per_abslat_ocean_sst_po4_hemi_cmb_hist
+  # - Samples_per_abslat_ocean_sst_po4_hemi_cmb_hist
+  - f05
   - Samples_per_logFe_hemi_hist
   - Samples_per_PP_tblPisces_NRT_hemi_hist
   - Samples_per_CHL_tblPisces_NRT_hemi_hist
 
 # Plotting suffix/type
 plot_ext: ".svg"
-
+# plot_ext: ".jpeg"
+# plot_ext: ".png"
+# plot_ext: ".pdf"
+# plot_device: "jpeg"
+plot_device: "svg"
+# plot_device: "png"
+# plot_device: "cairo_pdf"
 
 # Files in for plots_taxonomy.R
 files_in_plot_tax:
@@ -118,13 +125,32 @@ files_in_plot_tax:
   - nifhdb_all_counts_AUID_dedup_study_id_total_clean
   - nifhdb_all_counts_AUID_dedup_study_id_total
   - nifhdb_all_rel_abund_AUID_dedup_study_id_total
+  - RA_df_T_lng_mean_RA_AUID_deduped
+  - cmap_coloc
+  - annoNifHDB_updt
 
 # Files in for plots_taxonomy.R
 files_out_plot_tax:
-  - DNA_perc_cnts_clst_all_bar 
-  - DNA_perc_cnts_clst_bar 
-  - DNA_perc_cnts_clst_pie 
-  - DNA_perc_combined_clst_pie 
-  - DNA_perc_rel_abund_clst_all_bar 
-  - DNA_perc_rel_abund_clst_bar 
+  - DNA_perc_cnts_clst_all_bar
+  - DNA_perc_cnts_clst_bar
+  - DNA_perc_cnts_clst_pie
+  - DNA_perc_combined_clst_pie
+  # - DNA_perc_rel_abund_clst_all_bar
+  - f07
+  - DNA_perc_rel_abund_clst_bar
   - DNA_perc_rel_abund_clst_pie
+
+files_in_tables:
+  - Table_SreadsAtEachStage_samples
+  - workflowTable
+
+files_out_tables:
+  - Table 4
+  - Table 5
+
+files_in_wrld_plt:
+  - cmap_coloc
+
+files_out_wrld_plt:
+  - worldStnMap_nifhdb_allstudies
+  - worldStnMap_nifhdb_allstudies_fct_ocean
