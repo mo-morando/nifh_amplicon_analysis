@@ -1,9 +1,10 @@
-# Check if the argparser library is available and install it if necessary
-if (!requireNamespace("argparser", quietly = TRUE)) {
-  install.packages("argparser")
-}
+#!/usr/bin/env Rscript
 
-library(argparser)
+# Load required libraries
+suppressPackageStartupMessages({
+  library(tidyverse)
+  library(argparser)
+})
 
 
 #' Source a file with error handling and path validation
@@ -27,10 +28,10 @@ source_file <- function(file_path) {
       },
     error = function(e) {
       stop("Error sourcing : ", file_path, ":", conditionMessage(e), "\n")
-    },
-    warning = function(w) {
-      cat("Warning while sourcing : ", file_path, ":", conditionMessage(w), "\n")
-    }
+    }#,
+    # warning = function(w) {
+    #   cat("Warning while sourcing : ", file_path, ":", conditionMessage(w), "\n")
+    # }
   )
   }
   
@@ -111,54 +112,60 @@ parse_arg <- function(parser) {
   ))
 }
 
-
-
-# #' Load and Assign CSV Files
-# #'
-# #' @param file_list Character vector of file names to load
-# #' @param path Directory path for input files
-# #' @param verbose Logical. Whether to print status messages
-# #' @return List of loaded data frames or character vectors
-# #' @importFrom readr read_csv
-# #' @examples
-# #' \dontrun{
-# #' files <- c("data1", "data2", "single_line")
-# #' data_list <- load_files(files, "path/to/csv/files")
-# #' }
-# load_files <- function(file_list, path, verbose = TRUE) {
-#   data_list <- list()
-
-#   for (file in file_list) {
-#     file_path <- file.path(path, paste0(file, ".csv"))
-#     tryCatch({
-#       if (file.exists(file_path)) {
-#         if (verbose) cat("Loading file:", file_path, "\n")
-
-#       # Check if the file has only one line
-#       lines <- suppressWarnings(readLines(file_path, n = 2)) # Read only the first two lines
-#       if ( length(lines) == 1) {
-#           # File contains a single line, read as character vector
-#           data_list[[file]] <- read_csv(file_path, show_col_types = FALSE, col_names = FALSE)
-#           if (verbose) cat("  File loaded as a data frame but without column 
-#           headers.\n")
-#       } else {
-#           # File contains multiple lines, read as a data frame
-#           data_list[[file]] <- read_csv(file_path, show_col_types = FALSE)
-#           if (verbose) cat("  File loaded as a data frame with",
-#                           nrow(data_list[[file]]), "rows and",
-#                           ncol(data_list[[file]]), "columns.\n")
-#       }
-#     } else {
-#       warning(paste("File not found:", file_path))
-#     }
-#   }, error = function(e) {
-#       cat("Error loading file", file_path, ":", conditionMessage(e), "\n")
-#     })
-#   }
-#   if (verbose) cat("Finished loading", length(data_list), "file.\n")
-#   return(data_list)
-# }
-
+#' Format and Print Table
+#'
+#' This function formats a table with custom options and prints it.
+#'
+#' @param data A data frame or tibble to be formatted and printed.
+#' @param zero_print Character to use for printing zero values. Default is ".".
+#' @param max_rows Maximum number of rows to print. Default is 1000.
+#' @param ... Additional arguments to be passed to format() function.
+#'
+#' @return Invisibly returns the formatted table if successful, or NULL if an error occurs.
+#'
+#' @examples
+#' # Assuming 'my_data' is your data frame or tibble
+#' format_and_print_table(my_data)
+#' format_and_print_table(my_data, zero_print = "0", max_rows = 100)
+#'
+#' @export
+format_and_print_table <- function(data, zero_print = ".", max_rows = 1000, ...) {
+  # Check if data is a data frame or tibble
+  if (!is.data.frame(data)) {
+    stop("Input must be a data frame or tibble.")
+  }
+  
+  tryCatch({
+    # Format the table
+    formatted_table <- tryCatch({
+      format(data, zero.print = zero_print, ...)
+    }, error = function(e) {
+      cat("Error call in: '", deparse(conditionCall(e)), "'\n")
+      stop(cat(
+        "Error caused no formatted table to be created:\n",
+        conditionMessage(e), "\n"
+      ))
+    })
+    
+    # Print the formatted table
+    tryCatch({
+      print(formatted_table, n = max_rows)
+    }, error = function(e) {
+      cat("Error call in: '", deparse(conditionCall(e)), "'\n")
+      warning(cat(
+        "Error caused formatted table not to be printed:\n",
+        conditionMessage(e), "\n"
+      ))
+    })
+    
+    # Return the formatted table invisibly
+    invisible(formatted_table)
+  }, error = function(e) {
+    cat("Error call in: '", deparse(conditionCall(e)), "'\n")
+    cat("Unexpected error:\n", conditionMessage(e), "\n")
+    invisible(NULL)
+  })
+}
 
 
 #' Count total reads in the nifH database
@@ -208,10 +215,10 @@ count_total_reads <- function(counts_df_T_lng, counts_df_T_lng_AUID_deduped, pho
     },
     error = function(e) {
       cat("Error:", conditionMessage(e), "\n")
-    },
-    warning = function(w) {
-      cat("Warning:", conditionMessage(w), "\n")
-    }
+    }#,
+    # warning = function(w) {
+    #   cat("Warning:", conditionMessage(w), "\n")
+    # }
   )
 }
 
@@ -238,10 +245,10 @@ calculate_sample_numbers <- function(cmap_coloc, DNA_samples_key, unique_sample_
     },
     error = function(e) {
       cat("Error calculating sample numbers:", conditionMessage(e), "\n")
-    },
-    warning = function(w) {
-      cat("Warning encountered while calculating sample numbers:", conditionMessage(w), "\n")
-    }
+    }#,
+    # warning = function(w) {
+    #   cat("Warning encountered while calculating sample numbers:", conditionMessage(w), "\n")
+    # }
   )
 
   tryCatch(
@@ -257,10 +264,10 @@ calculate_sample_numbers <- function(cmap_coloc, DNA_samples_key, unique_sample_
     },
     error = function(e) {
       cat("Error calculating DNA/RNA samples:", conditionMessage(e), "\n")
-    },
-    warning = function(w) {
-      cat("Warning encountered while calculating DNA/RNA samples:", conditionMessage(w), "\n")
-    }
+    }#,
+    # warning = function(w) {
+    #   cat("Warning encountered while calculating DNA/RNA samples:", conditionMessage(w), "\n")
+    # }
   )
 
   tryCatch(
@@ -277,10 +284,10 @@ calculate_sample_numbers <- function(cmap_coloc, DNA_samples_key, unique_sample_
     },
     error = function(e) {
       cat("Error calculating replicate samples:", conditionMessage(e), "\n")
-    },
-    warning = function(w) {
-      cat("Warning encountered while calculating replicate samples:", conditionMessage(w), "\n")
-    }
+    }#,
+    # warning = function(w) {
+    #   cat("Warning encountered while calculating replicate samples:", conditionMessage(w), "\n")
+    # }
   )
 
   tryCatch(
@@ -296,10 +303,10 @@ calculate_sample_numbers <- function(cmap_coloc, DNA_samples_key, unique_sample_
     },
     error = function(e) {
       cat("Error calculating size fractions:", conditionMessage(e), "\n")
-    },
-    warning = function(w) {
-      cat("Warning encountered while calculating size fractions:", conditionMessage(w), "\n")
-    }
+    }#,
+    # warning = function(w) {
+    #   cat("Warning encountered while calculating size fractions:", conditionMessage(w), "\n")
+    # }
   )
 }
 
@@ -354,30 +361,32 @@ analyze_sample_statistics <- function(cmap_coloc, unique_sample_id_key) {
             # pull_name = n,
             all_columns = TRUE
           )
-        print(samples_per_nucleicAcidType, n = 1000, zero.print = ".")
-      
-          ## * by study id
-          samples_per_nucleicAcidType_studyid <- query_df %>%
-            count_and_arrange(c("studyID", "nucleicAcidType")) %>%
-            add_percentage(n,
-              percentage,
-              grouping_by = NULL,
-              remove_columns = "total"
-            ) %>%
-            add_total_row(
-              column_name = "studyID",
-              summary_column = n,
-              all_columns = FALSE
-            )
 
-          print(samples_per_nucleicAcidType_studyid, n = 50, zero.print = ".")
+        print(samples_per_nucleicAcidType, n = 1000)
+      
+    ## * by study id
+    samples_per_nucleicAcidType_studyid <- query_df %>%
+      count_and_arrange(c("studyID", "nucleicAcidType")) %>%
+      add_percentage(n,
+        percentage,
+        grouping_by = NULL,
+        remove_columns = "total"
+      ) %>%
+      add_total_row(
+        column_name = "studyID",
+        summary_column = n,
+        all_columns = FALSE
+      )
+
+    print(samples_per_nucleicAcidType_studyid, n = 50)
+    
         },
         error = function(e) {
           cat("Error analyzing nucleic acid types by study id:", conditionMessage(e), "\n")
-        },
-        warning = function(w) {
-          cat("Warning encountered while analyzing nucleic acid types by study id:", conditionMessage(w), "\n")
         }
+        # warning = function(w) {
+        #   cat("Warning encountered while analyzing nucleic acid types by study id:", conditionMessage(w), "\n")
+        # }
       )
 
       tryCatch(
@@ -386,20 +395,25 @@ analyze_sample_statistics <- function(cmap_coloc, unique_sample_id_key) {
 
           ### -  photic
           samples_per_photic <- count_and_arrange(query_df, "photic") %>%
-            mutate(
-              total = sum(n),
-              percentage = n / total * 100
-            ) %>%
-            select(photic, n, percentage)
+           add_percentage(n,
+        percentage,
+        grouping_by = NULL,
+        remove_columns = "total"
+      )  #%>% 
+      # add_total_row(
+      #   column_name = "photic",
+      #   summary_column = n,
+      #   all_columns = FALSE
+      # )
 
-          print(samples_per_photic, n = 1000, zero.print = ".")
+          print(samples_per_photic, n = 1000)
         },
         error = function(e) {
           cat("Error analyzing photic samples:", conditionMessage(e), "\n")
-        },
-        warning = function(w) {
-          cat("Warning encountered while analyzing photic samples:", conditionMessage(w), "\n")
-        }
+        }#,
+        # warning = function(w) {
+        #   cat("Warning encountered while analyzing photic samples:", conditionMessage(w), "\n")
+        # }
       )
 
       tryCatch(
@@ -407,14 +421,14 @@ analyze_sample_statistics <- function(cmap_coloc, unique_sample_id_key) {
         samples_per_photic_nucacid <- count_and_arrange(cmap_coloc, c("photic", "nucleicAcidType"))
 
 
-        print(samples_per_photic_nucacid, n = 100, zero.print = ".")
+        print(samples_per_photic_nucacid, n = 100)
         },
         error = function(e) {
           cat("Error analyzing photic samples and nucleic acid types:", conditionMessage(e), "\n")
-        },
-        warning = function(w) {
-          cat("Warning encountered while analyzing photic samples and nucleic acid types:", conditionMessage(w), "\n")
-        }
+        }#,
+        # warning = function(w) {
+        #   cat("Warning encountered while analyzing photic samples and nucleic acid types:", conditionMessage(w), "\n")
+        # }
       )
 
       tryCatch(
@@ -431,14 +445,14 @@ analyze_sample_statistics <- function(cmap_coloc, unique_sample_id_key) {
             remove_columns = "total"
           ))
           
-          print(sample_type, n = 100, zero.print = ".")
+          print(sample_type, n = 100)
         },
         error = function(e) {
           cat("Error analyzing sample types:", conditionMessage(e), "\n")
         },
-        warning = function(w) {
-          cat("Warning encountered while analyzing sample types:", conditionMessage(w), "\n")
-        },
+        # warning = function(w) {
+        #   cat("Warning encountered while analyzing sample types:", conditionMessage(w), "\n")
+        # },
     error = function(e) {
       cat("Error analyzing sample statistics:", conditionMessage(e), "\n")
     }
@@ -487,8 +501,12 @@ main <- function(files_to_read, files_in_path, files_out_path) {
 
 # Run if the script is being run directly
 if (sys.nframe() == 0 && !interactive()) {
+  source_file(files_to_source)
+  
   parser <- setup_parser()
   args <- parse_arg(parser)
+
+  validate_parsed_args(parsed_args = args)
 
   final_results <- main(
     args$files_to_read,
