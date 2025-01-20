@@ -116,6 +116,18 @@ validate_parsed_args <- function(parsed_args) {
     warning("files_in_path: '", parsed_args$files_in_path, "' must be a valid directory path")
   }
 
+  # Check if both plot_ext and plot_device are provided
+  if (!is.null(parsed_args$plot_ext) && !is.null(parsed_args$plot_device)) {
+    plot_ext_check <- gsub("\\.", "", parsed_args$plot_ext)
+    if (plot_ext_check %in% "pdf") {
+      parsed_args$plot_device <- "pdf"
+    }
+    if (plot_ext_check != parsed_args$plot_device) {
+      stop("plot_ext: '", parsed_args$plot_ext, "' must match plot_device: 
+      '", parsed_args$plot_device, "'")
+    }
+  }
+
   # Check if each file in files_to_read exists in files_in_path
   missing_files <- character(0)
   for (file in parsed_args$files_to_read) {
@@ -185,7 +197,7 @@ load_files <- function(file_list, path, verbose = TRUE) {
       }
     )
   }
-  if (verbose) cat("Finished loading", length(data_list), "file.\n")
+  if (verbose) cat("Finished loading", length(data_list), "file.\n\n")
   return(data_list)
 }
 
@@ -734,13 +746,13 @@ cat("Defining function to add percentage column to the dataframe...\n")
 #'
 #' @return Dataframe with percentage column added.
 #'
-add_percentage <- function(df, sum_by_percent, percentage_id, grouping_by = NULL, remove_columns = NULL) {
+add_percentage <- function(df, sum_by_percent, percentage_id, rnd_pct = 1, grouping_by = NULL, remove_columns = NULL) {
   cat("Adding percentage column to the dataframe that is summed by '", deparse(substitute(sum_by_percent)), "' and grouped by '", grouping_by, "'...\n", sep = "")
   df_with_total <- df %>%
     group_by({{ grouping_by }}) %>%
     mutate(
       total = sum({{ sum_by_percent }}),
-      {{ percentage_id }} := {{ sum_by_percent }} / total * 100
+      {{ percentage_id }} := round({{ sum_by_percent }} / total * 100, rnd_pct)
     ) %>%
     ungroup()
   if (!is.null({{ remove_columns }})) {
