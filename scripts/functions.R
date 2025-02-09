@@ -1,33 +1,74 @@
-#' Module Docstring:
+#!/usr/bin/env Rscript
+
+#' @title NifH Amplicon Data Processing and Analysis Pipeline
+#' @description This script processes and analyzes NifH amplicon sequencing data,
+#'              performing various data transformations, merging operations, and
+#'              statistical analyses. It provides a comprehensive set of functions
+#'              for handling complex NifH amplicon datasets, with robust error
+#'              handling and informative logging.
 #'
-#' This script contains a collection of functions designed to perform various data processing tasks on dataframes using the tidyverse package in R. Below are the main functionalities of the script:
+#' @details The pipeline includes the following key components:
+#' * Data Loading and Validation:
+#'   - Loads input files and validates command-line arguments
+#' * Data Merging and Transformation:
+#'   - Merges data with CMAP and annotation tables
+#'   - Transforms data from wide to long format
+#' * Sample Processing:
+#'   - Removes aphotic samples and filters by nucleic acid type
+#'   - Adds size fraction and replicate flags
+#' * Statistical Analysis:
+#'   - Calculates averages and removes duplicates
+#'   - Computes percentages and summarizes taxonomic data
+#' * Data Cleaning and Output:
+#'   - Cleans percentage data based on thresholds
+#'   - Writes processed data to output files
 #'
-#' - Merging Functions:
-#'     - `merge_cmap`: Merge dataframe with Colocalization Map data.
-#'     - `merge_annotations`: Merge dataframe with annotation table.
+#' Key functions include:
+#' * merge_cmap(): Merges data with Colocalization Map
+#' * merge_annotations(): Merges data with annotation table
+#' * transform_data_lng(): Transforms data from wide to long format
+#' * remove_aphotic_samples(): Filters out aphotic samples
+#' * main_average_ra_dedup_by_group(): Calculates averages and removes duplicates
+#' * sum_tax(): Summarizes taxonomic data
+#' * clean_percentages(): Cleans percentage data based on thresholds
 #'
-#' - Data Transformation:
-#'     - `transform_data_lng`: Transform data from wide to long format.
+#' @usage source("path/to/this/script.R")
+#' # Then call individual functions as needed, e.g.:
+#' # merged_data <- merge_cmap(my_data, cmap_coloc)
 #'
-#' - Data Manipulation:
-#'     - `add_total_row`: Add a total row to the dataframe.
-#'     - `add_group_id`: Add group ID to the dataframe.
-#'     - `dedup_by_group`: Remove duplicates based on group ID.
-#'     - `main_average_ra_dedup_by_group`: Calculate average and remove duplicates based on group ID.
-#'     - `remove_samples_nucleic_acid`: Remove samples based on nucleic acid type.
-#'     - `count_and_arrange`: Count occurrences and arrange dataframe.
-#'     - `add_percentage`: Add a percentage column to the dataframe.
-#'     - `sum_tax`: Summarize taxonomic data.
-#'     - `clean_percentages`: Clean percentage data.
-#'     - `remove_aphotic_samples`: Remove aphotic samples from the dataframe.
-#'     - `add_size_frac_key`: Add size fraction column to dataframe.
-#'     - `add_rep_flag`: Add replicate flag column to identify replicate samples.
+#' @author Michael Morando
+#' @date 2025-02-02
 #'
-#' These functions can be used individually or in combination to preprocess and analyze data efficiently.
+#' @note This script requires the following R packages: tidyverse, readr
 #'
-#' Load required libraries
-cat("Loading the tidyverse library...\n")
-library(tidyverse)
+#' @examples
+#' # Load and process data
+#' data_list <- load_files(c("sample_data", "metadata"), "path/to/input/files")
+#' processed_data <- merge_cmap(data_list$sample_data, data_list$metadata)
+#' transformed_data <- transform_data_lng(processed_data, "AUID", "sample", "abundance")
+#'
+#' # Perform analysis
+#' summary_data <- sum_tax(transformed_data, annotation_table, by = "AUID")
+#' cleaned_data <- clean_percentages(summary_data, threshold = 1.0)
+#'
+#' # Write results
+#' write_file_list(list(cleaned_data = cleaned_data), "path/to/output")
+#'
+#' @export
+
+
+# Load required libraries with error handling
+suppressPackageStartupMessages({
+  tryCatch(
+    {
+      library(tidyverse)
+    },
+    error = function(e) {
+      cat("Error loading required packages:", conditionMessage(e), "\n")
+      cat("Error call in:", deparse(conditionCall(e)), "\n")
+    }
+  )
+})
 
 
 #' Source a file with error handling and path validation
@@ -64,7 +105,7 @@ source_file <- function(file_path) {
 
 
 #' Define function to create a new directory
-cat("Defining function to create a new directory...\n")
+
 
 #' Create directory if it doesn't exist
 #'
@@ -88,60 +129,114 @@ create_dir <- function(dir_path) {
 }
 
 
-#' Validate parsed arguments
+#' Validate Command Line Arguments
 #'
-#' Validate the objects returned by the parse_arg() function
+#' @description
+#' Performs comprehensive validation of command line arguments parsed by parse_arg().
+#' Checks for existence, type correctness, and validity of paths and file combinations.
 #'
-#' @param parsed_args A list containing the parsed arguments returned by parse_arg()
+#' @param parsed_args List of parsed arguments from parse_arg()
 #'
-#' @return NULL
+#' @details
+#' Validates:
+#' * files_to_read: existence and character vector type
+#' * files_in_path: existence and directory validity
+#' * files_out_path: directory validity (creates if missing)
+#' * plot_ext and plot_device: matching and compatibility
+#' * Presence of specified files in input directory
 #'
-#' @example
+#' @return Invisible NULL. Throws errors for invalid arguments.
+#'
+#' @examples
+#' \dontrun{
 #' parser <- setup_parser()
 #' args <- parse_arg(parser)
 #' validate_parsed_args(args)
+#' }
+#'
+#' @export
 validate_parsed_args <- function(parsed_args) {
-  # Check if files_to_read is a character vector
-  if (!is.character(parsed_args$files_to_read)) {
-    stop("files_to_read must be a character vector")
-  }
-
-  # Check if files_in_path is a valid directory path
-  if (!dir.exists(parsed_args$files_in_path)) {
-    stop("files_in_path: '", parsed_args$files_in_path, "' must be a valid directory path")
-  }
-
-  # Check if files_out_path is a valid directory path
-  if (!dir.exists(parsed_args$files_out_path)) {
-    warning("files_in_path: '", parsed_args$files_in_path, "' must be a valid directory path")
-  }
-
-  # Check if both plot_ext and plot_device are provided
-  if (!is.null(parsed_args$plot_ext) && !is.null(parsed_args$plot_device)) {
-    plot_ext_check <- gsub("\\.", "", parsed_args$plot_ext)
-    if (plot_ext_check %in% "pdf") {
-      parsed_args$plot_device <- "pdf"
+  tryCatch({
+    # Validate parsed_args is a list
+    if (!is.list(parsed_args)) {
+      stop("parsed_args must be a list object")
     }
-    if (plot_ext_check != parsed_args$plot_device) {
-      stop("plot_ext: '", parsed_args$plot_ext, "' must match plot_device: 
-      '", parsed_args$plot_device, "'")
-    }
-  }
 
-  # Check if each file in files_to_read exists in files_in_path
-  missing_files <- character(0)
-  for (file in parsed_args$files_to_read) {
-    # if (!file.exists(file.path(parsed_args$files_in_path, file))) {
-    if (!any(startsWith(list.files(parsed_args$files_in_path), file))) {
-      missing_files <- c(missing_files, file)
-    }
-  }
-  if (length(missing_files > 0)) {
-    stop("The following files are missing in files_in_path:\n", paste("\t",missing_files, collapse = "\n"))
-  }
+    # Check if files_to_read is a character vector
+    if ("files_to_read" %in% names(parsed_args)) {
+      if (!is.character(parsed_args$files_to_read)) {
+        stop("files_to_read must be a character vector")
+      }
+      if (length(parsed_args$files_to_read) == 0) {
+        stop("files_to_read cannot be empty")
+      }
 
-  # All validations passed
-  cat("All parsed arguments are valid.\n")
+      missing_files <- character(0)
+      files_in_dir <- list.files(parsed_args$files_in_path)
+      
+      for (file in parsed_args$files_to_read) {
+        if (!any(startsWith(files_in_dir, file))) {
+          missing_files <- c(missing_files, file)
+        }
+      }
+      
+      if (length(missing_files) > 0) {
+        stop(sprintf("Missing files in '%s':\n%s", 
+                    parsed_args$files_in_path,
+                    paste("\t", missing_files, collapse = "\n")))
+      }
+    }
+
+    # Check if files_in_path is a valid directory path
+    if ("files_in_path" %in% names(parsed_args)) {
+      if (!dir.exists(parsed_args$files_in_path)) {
+        stop("files_in_path: '", parsed_args$files_in_path, "' must be a valid directory path")
+      }
+    } else {
+      stop("files_in_path is required but not provided")
+    }
+
+    # Check if files_out_path is a valid directory path
+    if ("files_out_path" %in% names(parsed_args)) {
+      if (!dir.exists(parsed_args$files_out_path)) {
+        warning("files_out_path: '", parsed_args$files_in_path, "' must be a valid directory path")
+      }
+    } else {
+      stop("files_out_path is required but not provided")
+    }
+
+    # Check if both plot_ext and plot_device are provided
+    if (all(c("plot_ext", "plot_device") %in% names(parsed_args))) {
+      plot_ext_check <- gsub("\\.", "", parsed_args$plot_ext)
+      if (plot_ext_check %in% "pdf") {
+        parsed_args$plot_device <- "pdf"
+      }
+      if (plot_ext_check != parsed_args$plot_device) {
+        stop("plot_ext: '", parsed_args$plot_ext, "' must match plot_device: 
+        '", parsed_args$plot_device, "'")
+      }
+    }
+
+    # # Check if each file in files_to_read exists in files_in_path
+    # missing_files <- character(0)
+    # for (file in parsed_args$files_to_read) {
+    #   # if (!file.exists(file.path(parsed_args$files_in_path, file))) {
+    #   if (!any(startsWith(list.files(parsed_args$files_in_path), file))) {
+    #     missing_files <- c(missing_files, file)
+    #   }
+    # }
+    # if (length(missing_files > 0)) {
+    #   stop("The following files are missing in files_in_path:\n", paste("\t",missing_files, collapse = "\n"))
+    # }
+
+    # All validations passed
+    cat("All parsed arguments are valid.\n")
+    return(invisible(NULL))
+},
+  error = function(e) {
+    cat("Error call in:", deparse(conditionCall(e)), "\n")
+    stop(cat("Argument validation failed due to:\n", conditionMessage(e), "\n"))
+  })
 }
 
 
@@ -235,7 +330,7 @@ print_object_dimensions <- function(list) {
 
 
 
-cat("Defining function to write files from a list...\n")
+
 #' Write files list
 #'
 #' This function writes objects from a list to files with specified names, file paths and extentions.
@@ -307,7 +402,7 @@ write_file_list <- function(file_list, path = ".", out_ext = ".csv") {
 
 
 #' Define merging functions
-cat("Defining merging functions...\n")
+
 
 #' Merge dataframe with Colocalization Map data from CMAP.
 #'
@@ -348,7 +443,7 @@ merge_annotations <- function(df, annotation_table = annoNifHDB_updt, by_join = 
 }
 
 #' Define data transformation function
-cat("Defining data transformation function...\n")
+
 
 #' Transform data from wide to long format.
 #'
@@ -394,7 +489,7 @@ transform_data_lng <- function(input_df, starts_with_col, names_to_col, values_t
 
 
 #' Define function to remove aphotic samples from a tibble
-cat("Defining function to remove aphotic samples from a tibble...\n")
+
 
 #' Remove photic samples from the dataframe, returning just the photic samples
 #'
@@ -414,7 +509,7 @@ remove_aphotic_samples <- function(df, photic_samples = photic_samples_key) {
 
 
 #' Define function to add a total row
-cat("Defining function to add a total row...\n")
+
 
 #' Add total row to the dataframe.
 #'
@@ -447,7 +542,7 @@ add_total_row <- function(df, summary_column = NULL, column_name, pull_name = NU
 }
 
 #' Define function to add a size fraction row
-cat("Defining function to add a size fraction row...\n")
+
 #' Add size fraction row to dataframe
 #'
 #' This function adds a size fraction column to the dataframe based on the specified join key.
@@ -570,7 +665,7 @@ add_rep_flag <- function(df) {
 
 
 #' Define function to add group ID
-cat("Defining function to add group ID...\n")
+
 
 #' Add group ID to the dataframe.
 #'
@@ -591,7 +686,7 @@ add_group_id <- function(df, group_id_key = unique_sample_id_key, var_select = S
 }
 
 #' Define function to remove duplicates based on group ID
-cat("Defining function to remove duplicates based on group ID...\n")
+
 
 #' Remove duplicates based on group ID.
 #'
@@ -619,7 +714,7 @@ dedup_by_group <- function(df, group_id_key = unique_sample_id_key, ...) {
 }
 
 #' Define function to calculate average and remove duplicates based on group ID in the relative abundance table
-cat("Defining function to calculate average and remove duplicates based on group ID in the relative abundance table...\n")
+
 
 #' Calculate average and remove duplicates based on group ID in the relative abundance table.
 #'
@@ -648,7 +743,7 @@ main_average_ra_dedup_by_group <- function(df_lng, ..., grp_key, mean_by) {
 
 
 #' Define function to remove duplicates based on group ID in count table
-cat("Defining function to remove duplicates based on group ID in count table...\n")
+
 
 #' remove duplicates based on group ID in count table.
 #'
@@ -670,7 +765,7 @@ main_cnts_dedup_by_group <- function(df_lng, ..., grp_key) {
 
 
 #' Define function to remove samples based on nucleic acid type
-cat("Defining function to remove samples based on nucleic acid type...\n")
+
 
 #' Remove samples based on nucleic acid type.
 #'
@@ -704,7 +799,7 @@ remove_samples_nucleic_acid <- function(df, nucleic_acid_type, nucleic_acid_samp
 }
 
 #' Define function to count occurrences and arrange dataframe
-cat("Defining function to count occurrences and arrange dataframe...\n")
+
 
 #' Count occurrences and arrange dataframe.
 #'
@@ -732,7 +827,7 @@ count_and_arrange <- function(
 }
 
 #' Define function to add percentage column to the dataframe
-cat("Defining function to add percentage column to the dataframe...\n")
+
 
 #' Add percentage column to the dataframe.
 #'
@@ -763,7 +858,7 @@ add_percentage <- function(df, sum_by_percent, percentage_id, rnd_pct = 1, group
 }
 
 #' Define function to summarize taxonomic data
-cat("Defining function to summarize taxonomic data...\n")
+
 
 #' Summarize taxonomic data.
 #'
@@ -803,7 +898,7 @@ sum_tax <- function(abundance_table, annotation_table, joining_by_col, total_cou
 }
 
 #' Define function to clean percentage data
-cat("Defining function to clean percentage data...\n")
+
 
 #' Clean percentage data.
 #'
@@ -847,28 +942,22 @@ clean_percentages <- function(df, grouping_by, clean_var, threshold = 1.0, perce
   return(cleaned_df)
 }
 
-#' Provide usage instructions
-cat("\nSCRIPT LOADED SUCCESSFULLY!\n\n")
-cat("\nUSAGE:\n\n")
-cat("merge_cmap(df, cmap = cmap_coloc, by_join = 'SAMPLEID'): Merge dataframe with Colocalization Map data.\n\n")
-cat("merge_annotations(df, annotation_table = annoNifHDB_updt, by_join = 'AUID'): Merge dataframe with annotation table.\n\n")
-cat("transform_data_lng(input_df, starts_with_col, names_to_col, values_to_col): Transform data from wide to long format.\n\n")
-cat("add_total_row(df, summary_column = NULL, column_name, pull_name = NULL, all_columns): Add total row to the dataframe.\n\n")
-cat("add_group_id(df, var_select = SAMPLEID, by_var = 'SAMPLEID'): Add group ID to the dataframe.\n\n")
-cat("dedup_by_group(df, ...): Remove duplicates based on group ID.\n\n")
-cat("main_average_ra_dedup_by_group(df_lng, ..., mean_by): Calculate average and remove duplicates based on group ID in the relative abundance table.\n\n")
-cat("main_cnt_dedup_by_group(df_lng, ...): Calculate average and remove duplicates based on group ID in the count table.\n\n")
-cat("remove_samples_nucleic_acid(df, nucleic_acid_type, nucleic_acid_samples_key = DNA_samples_key): Remove samples based on nucleic acid type.\n\n")
-cat("count_and_arrange(data, group_vars, arrange_var = n, count_col_name = 'n'): Count occurrences and arrange dataframe.\n\n")
-cat("add_percentage(df, sum_by_percent, percentage_id, grouping_by = NULL, remove_columns = NULL): Add percentage column to the dataframe.\n\n")
-cat("sum_tax(abundance_table, annotation_table, joining_by_col, total_counts_id, grouping_for_percentage = NULL, percentage_id, grouping_by_1 = NULL, grouping_by_2 = NULL, sum_by, ...): Summarize taxonomic data.\n\n")
-cat("clean_percentages(df, grouping_by, clean_var, threshold = 1.0, percentage_id, column_var_mutate, column_var): Clean percentage data.\n\n")
-cat("remove_aphotic_samples(df, photic_samples = photic_samples_key): Remove aphotic samples from the dataframe.\n\n")
-cat("add_size_frac_key(df, join_key, remove_col): Add size fraction column to dataframe.\n\n")
-cat("add_rep_flag(df): Add replicate flag column to identify replicate samples.\n\n")
-
-
-
-### _ Finished loading in the data ### _ Finished loading in the data
-### _ Finished loading in the data ### _ Finished loading in the data
-### _ Finished loading in the data ### _ Finished loading in the data
+# #' Provide usage instructions
+# cat("\nSCRIPT LOADED SUCCESSFULLY!\n\n")
+# cat("\nUSAGE:\n\n")
+# cat("merge_cmap(df, cmap = cmap_coloc, by_join = 'SAMPLEID'): Merge dataframe with Colocalization Map data.\n\n")
+# cat("merge_annotations(df, annotation_table = annoNifHDB_updt, by_join = 'AUID'): Merge dataframe with annotation table.\n\n")
+# cat("transform_data_lng(input_df, starts_with_col, names_to_col, values_to_col): Transform data from wide to long format.\n\n")
+# cat("add_total_row(df, summary_column = NULL, column_name, pull_name = NULL, all_columns): Add total row to the dataframe.\n\n")
+# cat("add_group_id(df, var_select = SAMPLEID, by_var = 'SAMPLEID'): Add group ID to the dataframe.\n\n")
+# cat("dedup_by_group(df, ...): Remove duplicates based on group ID.\n\n")
+# cat("main_average_ra_dedup_by_group(df_lng, ..., mean_by): Calculate average and remove duplicates based on group ID in the relative abundance table.\n\n")
+# cat("main_cnt_dedup_by_group(df_lng, ...): Calculate average and remove duplicates based on group ID in the count table.\n\n")
+# cat("remove_samples_nucleic_acid(df, nucleic_acid_type, nucleic_acid_samples_key = DNA_samples_key): Remove samples based on nucleic acid type.\n\n")
+# cat("count_and_arrange(data, group_vars, arrange_var = n, count_col_name = 'n'): Count occurrences and arrange dataframe.\n\n")
+# cat("add_percentage(df, sum_by_percent, percentage_id, grouping_by = NULL, remove_columns = NULL): Add percentage column to the dataframe.\n\n")
+# cat("sum_tax(abundance_table, annotation_table, joining_by_col, total_counts_id, grouping_for_percentage = NULL, percentage_id, grouping_by_1 = NULL, grouping_by_2 = NULL, sum_by, ...): Summarize taxonomic data.\n\n")
+# cat("clean_percentages(df, grouping_by, clean_var, threshold = 1.0, percentage_id, column_var_mutate, column_var): Clean percentage data.\n\n")
+# cat("remove_aphotic_samples(df, photic_samples = photic_samples_key): Remove aphotic samples from the dataframe.\n\n")
+# cat("add_size_frac_key(df, join_key, remove_col): Add size fraction column to dataframe.\n\n")
+# cat("add_rep_flag(df): Add replicate flag column to identify replicate samples.\n\n")
