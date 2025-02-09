@@ -28,6 +28,7 @@ logs/
 # Conda environments
 .conda/
 envs/
+nifH/
 
 # Snakefile specifics
 .snakemake
