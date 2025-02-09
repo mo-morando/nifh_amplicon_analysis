@@ -1,17 +1,42 @@
 #!/usr/bin/env Rscript
 
-#' World Map Plot Generator for nifH Database
+#' @title World Map Plot Generator for nifH Database
+#' @description This script processes nifH amplicon data and generates comprehensive world map visualizations for each study in the nifH database. It provides a flexible and robust approach to data visualization with error handling and informative logging.
 #'
-#' This script processes input files and generates world plots for each study in the nifH database.
-#' It performs the following steps:
-#' 1. Loads required libraries
-#' 2. Sources necessary external files
-#' 3. Sets up command-line argument parsing
-#' 4. Defines custom themes and plotting functions
-#' 5. Loads and processes input data
-#' 6. Generates and saves world map plots
+#' @details The script performs the following main steps:
+#' * Loads required libraries (tidyverse, rlang, patchwork, argparser)
+#' * Sources necessary external utility functions
+#' * Sets up and parses command-line arguments for input/output paths and plot settings
+#' * Defines custom themes and plotting functions for world maps
+#' * Loads and processes input data, filtering for photic zone samples
+#' * Generates color-blind safe palettes for plot aesthetics
+#' * Creates world map plots for all studies and faceted by ocean
+#' * Saves generated plots in specified formats
 #'
-#' @author Your Name
+#' Key functions include:
+#' * create_custom_worldmap_plot(): Creates a customized world map plot
+#' * extract_study_ids_and_filter_photic(): Processes input data for plotting
+#' * create_and_print_world_maps(): Generates main and faceted world map plots
+#' * main(): Orchestrates the entire data processing and visualization workflow
+#'
+#' @usage Rscript wrldMaps_nifhDB.R [--files FILES] [--input_path PATH] [--output_path PATH] [--plot_ext EXT] [--plot_device DEVICE]
+#'
+#' @param --files Comma-separated list of input files (default: cmap_coloc)
+#' @param --input_path Directory path for input files (default: ../analysis/out_files)
+#' @param --output_path Directory path for output plots (default: ../analysis/plots)
+#' @param --plot_ext File extension for saved plots (default: .jpeg)
+#' @param --plot_device Device to use for plot generation (default: jpeg)
+#'
+#' @author Michael (Mo) Morando
+#' @date 2025-02-02
+#'
+#' @note This script requires the following R packages: tidyverse, rlang, patchwork, argparser
+#'
+#' @examples
+#' Rscript wrldMaps_nifhDB.R --files cmap_coloc --input_path ../data/processed --output_path ../results/plots --plot_ext .png --plot_device png
+#'
+#' @export
+
 
 
 # Load required libraries
@@ -55,7 +80,7 @@ source_file <- function(file_path) {
       cat("Finished sourcing files. \n")
     },
     error = function(e) {
-      stop(paste("Error in source_file:", conditionMessage(e)))
+      stop("Error in source_file:", conditionMessage(e))
     } # ,
     # warning = function(w) {
     #   warning(paste("Warning in source_file:", conditionMessage(w)))
@@ -66,8 +91,8 @@ source_file <- function(file_path) {
 
 # Source needed files
 files_to_source <- c(
-  "/Users/mo/Projects/nifH_amp_project/myWork/scripts/functions.R",
-  "/Users/mo/Projects/nifH_amp_project/myWork/scripts/basic_plotting.R"
+  "functions.R",
+  "basic_plotting.R"
 )
 
 
@@ -138,20 +163,21 @@ parse_arg <- function(parser) {
       # Parse the arguments
       argv <- parse_args(parser)
 
-      # Convert the comma-separated string to a vector
-      files_to_read <- strsplit(argv$files, ",")[[1]]
-      files_in_path <- argv$input_path
-      files_out_path <- argv$output_path
-      plot_ext <- argv$plot_ext
-      plot_device <- argv$plot_device
-
       return(list(
-        files_to_read = files_to_read,
-        files_in_path = files_in_path,
-        files_out_path = files_out_path,
-        plot_ext = plot_ext,
-        plot_device = plot_device
+      # Convert the comma-separated string to a vector
+      files_to_read = strsplit(argv$files, ",")[[1]],
+      files_in_path = argv$input_path,
+      files_out_path = argv$output_path,
+      plot_ext = argv$plot_ext,
+      plot_device = argv$plot_device
       ))
+      # return(list(
+      #   files_to_read = files_to_read,
+      #   files_in_path = files_in_path,
+      #   files_out_path = files_out_path,
+      #   plot_ext = plot_ext,
+      #   plot_device = plot_device
+      # ))
     },
     # warning = function(w) {
     #   cat("Warning occurred:\n")
@@ -160,7 +186,7 @@ parse_arg <- function(parser) {
     # },
     error = function(e) {
       cat("Error call in:", deparse(conditionCall(e)), "\n")
-      stop(paste("Error parsing arguments due to:\n", conditionMessage(e)))
+      stop("Error parsing arguments due to:\n", conditionMessage(e))
     }
   )
 }
@@ -221,10 +247,10 @@ create_custom_worldmap_plot <- function(
         },
         error = function(e) {
           cat("Error call in:", deparse(conditionCall(e)), "\n")
-          stop(paste(
+          stop(
             "World map from map_data could not load due to:\n",
             conditionMessage(e)
-          ))
+          )
         }
       )
 
@@ -272,7 +298,7 @@ create_custom_worldmap_plot <- function(
     # },
     error = function(e) {
       cat("Error call in:\n", deparse(conditionCall(e)), "\n")
-      stop(cat("No plots created due to:\n", conditionMessage(e), "\n"))
+      stop("No plots created due to:\n", conditionMessage(e), "\n")
     }
   )
 }
@@ -290,7 +316,7 @@ filter_df <- function(x, plt_flt) {
     },
     error = function(e) {
       cat("Error call in:", deparse(conditionCall(e)), "\n")
-      stop(cat("Filtered df was not created due to:\n", conditionMessage(e), "\n"))
+      stop("Filtered df was not created due to:\n", conditionMessage(e), "\n")
     }
   )
 }
@@ -327,10 +353,10 @@ generate_cb_palette <- function(n) {
     # },
     error = function(e) {
       cat("Error call in: '", deparse(conditionCall(e)), "'\n")
-      stop(cat(
+      stop(
         "Error caused no color palette to be generated:\n",
         conditionMessage(e), "\n"
-      ))
+      )
     }
   )
 }
@@ -366,7 +392,7 @@ extract_study_ids_and_filter_photic <- function(data, photic_filter) {
     },
     error = function(e) {
       cat("Error call in:", deparse(conditionCall(e)), "\n")
-      stop(cat("No filtered df produced:\n", conditionMessage(e), "\n"))
+      stop("No filtered df produced:\n", conditionMessage(e), "\n")
     }
   )
 }
@@ -438,7 +464,7 @@ create_and_print_world_maps <- function(data, x_var, y_var, color_var, legend_nr
     },
     error = function(e) {
       cat("Error call in:", deparse(conditionCall(e)), "\n")
-      stop(cat("Plots were not created due to:\n", conditionMessage(e), "\n"))
+      stop("Plots were not created due to:\n", conditionMessage(e), "\n")
     }
   )
 }
@@ -516,7 +542,7 @@ main <- function(
     },
     error = function(e) {
       cat("Error in call:", deparse(conditionCall(e)), "\n")
-      stop(cat("Main function did not execute properly resulting in to plots being generated or saved due to:\n", conditionMessage(e), "\n"))
+      stop("Main function did not execute properly resulting in no plots being generated or saved due to:\n", conditionMessage(e), "\n")
     }
   )
 }

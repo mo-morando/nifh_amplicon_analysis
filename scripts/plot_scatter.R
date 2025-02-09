@@ -44,8 +44,8 @@ source_file <- function(file_path) {
 
 # Source needed files
 files_to_source <- c(
-    "/Users/mo/Projects/nifH_amp_project/myWork/scripts/functions.R",
-    "/Users/mo/Projects/nifH_amp_project/myWork/scripts/basic_plotting.R"
+    "functions.R",
+    "basic_plotting.R"
 )
 
 #' Set up the argument parser

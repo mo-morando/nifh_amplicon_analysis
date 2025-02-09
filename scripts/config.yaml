@@ -1,16 +1,36 @@
-# config.yaml
+descrption: |
+  Configuration file for nifh_amplicons_analysis workflow
+
+  This YAML file contains configuration settings for the Snakemake workflow
+  that processes and analyzes NifH amplicon data. It defines input and output
+  paths, file names, and parameters used throughout the pipeline.
+
+  Main sections:
+  1. Environment settings
+  2. Input/Output directories
+  3. File lists for various processing stages
+  4. Plotting parameters
+  5. Input/Output file lists for specific analysis steps
+
+  Usage:
+      This file should be named 'config.yaml' and placed in the same directory
+      as the Snakefile. It will be automatically loaded by Snakemake.
+
+metadata:
+  author: "Michael (Mo) Morando"
+  last_updated: "2025-02-02"
 
 # Conda enviroment
 conda_env: "../environments/environment.yaml"
 
-# Input workspace
-workspace: "../data/workspace/archive/NifH_ASV_DB_March28_after_drop_19_empty_samples/workspace.RData"
+# Input files
 workspace: "../data/workspace/Sep18/workspace.RData"
 input_dir_tables: "../data/csvs_for_tables"
 
 # Output directories
 output_dir: "../analysis/out_files"
 plot_dir: "../analysis/plots"
+table_dir: "../analysis/tables"
 
 # Files to process
 files_to_process:

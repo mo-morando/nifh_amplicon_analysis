@@ -1,15 +1,60 @@
 #!/usr/bin/env Rscript
 
-# Check if the argparser library is available and install it if necessary
-if (!requireNamespace("argparser", quietly = TRUE)) {
-  install.packages("argparser")
-}
+#' @title NifH Amplicon Data Preprocessing Pipeline
+#' @description This script preprocesses NifH amplicon data by loading input files, performing data transformations, and generating processed outputs for downstream analysis. It provides a comprehensive and modular approach to handle complex NifH amplicon sequencing data, with robust error handling and informative logging.
+#'
+#' @details The pipeline performs the following steps:
+#' * Sources required utility functions and plotting scripts
+#' * Parses command-line arguments for input files, input path, and output path
+#' * Loads and processes annoNifHDB update data
+#' * Processes metaTab data and merges with CMAP data
+#' * Cleans and transforms CMAP dataset
+#' * Processes sample types, including DNA/RNA splitting and deduplication
+#' * Constructs new tibbles for counts and relative abundance data
+#' * Writes processed data to output files
+#'
+#' Key functions include:
+#' * source_file(): Sources external R scripts with error handling
+#' * setup_parser(): Configures command-line argument parsing
+#' * parse_arg(): Parses command-line arguments
+#' * process_annoNifHDB_updt(): Processes annoNifHDB update data
+#' * process_metaTab(): Processes metaTab data and merges with CMAP data
+#' * cmap_clean_main(): Cleans and transforms CMAP dataset
+#' * process_sample_types(): Processes sample types and creates keys
+#' * construct_new_tibbles(): Constructs new tibbles for further analysis
+#' * main(): Orchestrates the entire data preprocessing workflow
+#'
+#' @usage Rscript preprocess_files.R [--files FILES] [--input_path PATH] [--output_path PATH]
+#'
+#' @param --files Comma-separated list of files to read in
+#' @param --input_path Input directory path
+#' @param --output_path Output directory path
+#'
+#' @author Michael Morando
+#' @date 2023
+#'
+#' @note This script requires the following R packages: tidyverse, argparser
+#'
+#' @examples
+#' Rscript preprocess_files.R --files annoNifHDB_updt,metaTab,cmap_coloc,nifhDB_cnts,nifhDB_RA --input_path ../analysis/out_files --output_path ../analysis/processed_files
+#'
+#' @export
+
 
 # Load required libraries
-suppressPackageStartupMessages({
-library(tidyverse)
-library(argparser)
-})
+tryCatch(
+  {
+    suppressPackageStartupMessages({
+      library(tidyverse)
+      library(argparser)
+    })
+  },
+  error = function(e) {
+    cat("Error call in:", deparse(conditionCall(e)), "\n")
+    stop(cat("Required packages could not be loaded due to:\n", conditionMessage(e), "\n"))
+  }
+)
+
 
 #' Source a file with error handling and path validation
 #'
@@ -18,44 +63,41 @@ library(argparser)
 #' @examples
 #' source_file("/path/to/your/file.R")
 source_file <- function(file_path) {
-  for (file in file_path) {
-    # Check if file exists
-    if (!file.exists(file)) {
-      stop("File does not exist: ", file, "\n")
-    }
+  tryCatch(
+    {
+      for (file in file_path) {
+        # Check if file exists
+        if (!file.exists(file)) {
+          stop("File does not exist: ", file, "\n")
+        }
 
-    # Try to source the file
-    tryCatch(
-      {
-        source(file)
-        cat("Successfully sourced : ", file, "\n")
-      },
-      error = function(e) {
-        stop("Error sourcing : ", file_path, ":", conditionMessage(e), "\n")
-      },
-      warning = function(w) {
-        cat("Warning while sourcing : ", file_path, ":", conditionMessage(w), "\n")
+        # Try to source the file
+        tryCatch(
+          {
+            source(file)
+            cat("Successfully sourced : ", file, "\n")
+          },
+          error = function(e) {
+            stop("Error sourcing : ", file_path, ":", conditionMessage(e), "\n")
+          }
+        )
       }
-    )
-  }
 
-  cat("Finished sourcing files. \n")
+      cat("Finished sourcing files. \n")
+    },
+    error = function(e) {
+      stop(paste("Error in source_file:", conditionMessage(e)))
+    }
+  )
 }
 
 
 # Source needed files
 files_to_source <- c(
-  "/Users/mo/Projects/nifH_amp_project/myWork/scripts/functions.R",
-  "/Users/mo/Projects/nifH_amp_project/myWork/scripts/basic_plotting.R"
+  "functions.R",
+  "basic_plotting.R"
 )
 
-
-# # _# Processing the files of the workspace
-# cat("\nProcessing the files of the workspace\n")
-# #  Print out what script is running
-# script_name <- basename(commandArgs(trailingOnly = FALSE)[4])
-# cat("Running script:", script_name, "\n")
-# cat("Load in the data\n")
 
 #' Set up the argument parser
 #'
@@ -89,18 +131,18 @@ setup_parser <- function() {
 }
 
 #' Parse command-line arguments
-#' 
+#'
 #' Parses the command-line arguments using the provided parser.
-#' 
+#'
 #' @param parser An argument parser object created by setup_parser()
-#' 
+#'
 #' @return A list containing:
 #'    \item{files_to_read}{A character vector of file names to read}
 #'    \item{files_in_pathd}{The input directory path}
 #'    \item{files_to_read}{The output directory path}
 #' @importFrom argparser parse_args
-#' @export 
-#' 
+#' @export
+#'
 #' @examples
 #' parser <- setup_parser()
 #' args <- parse_arg(parser)
@@ -108,65 +150,16 @@ parse_arg <- function(parser) {
   # Parse the arguments
   argv <- parse_args(parser)
 
-  # Convert the comma-separated string to a vector
-  files_to_read <- strsplit(argv$files, ",")[[1]]
-  files_in_path <- argv$input_path
-  files_out_path <- argv$output_path
-
   return(list(
-    files_to_read = files_to_read,
-    files_in_path = files_in_path,
-    files_out_path = files_out_path
+    # Convert the comma-separated string to a vector
+    files_to_read = strsplit(argv$files, ",")[[1]],
+    files_in_path = argv$input_path,
+    files_out_path = argv$output_path
   ))
 }
 
-
-### _ Loading in the data
-
-# # define paths to read and write files
-# files_in_path <- "analysis/out_files"
-
-# files_out_path <- "analysis/out_files"
-
-# # Define the files needed for this script
-# files_to_read <- c(
-#   "annoNifHDB_updt",
-#   "metaTab",
-#   "cmap_coloc",
-#   "nifhDB_cnts",
-#   "nifhDB_RA"
-# )
-
-# for (file in files_to_read) {
-#   cat("Loading file:", file.path(files_in_path, paste0(file, ".csv")), "\n")
-#   assign(file, read_csv(file.path(files_in_path, paste0(file, ".csv"))))
-# }
-
-# #' Load and Assign CSV Files
-# #'
-# #' This function reads a list of CSV files from a specified directory and assigns each file's data
-# #' to a variable in the global environment using the file name as the variable name.
-# #'
-# #' Load CSV files
-# #'
-# #' @param file_list Character vector of file names to load
-# #' @param path Directory path for input files
-# #' @return List of loaded data frames
-# #' @importFrom readr read_csv
-# load_files <- function(file_list, path) {
-#   data_list <- list()
-#   for (file in file_list) {
-#     file_path <- file.path(path, paste0(file, ".csv"))
-#     if (file.exists(file_path)) {
-#       cat("Loading file:", file_path, "\n")
-#       data_list[[file]] <- read_csv(file_path, show_col_types = FALSE)
-#     } else {
-#       warning(paste("File not found:", file_path))
-#     }
-#   }
-#   return(data_list)
-# }
-
+# TODO: Add tryCatch error handling to all functions
+# Including nested tryCatch for various manipulations within each function
 #' Process annoNifHDB Update
 #'
 #' This function processes the annoNifHDB update data, performing various
@@ -241,8 +234,6 @@ process_annoNifHDB_updt <- function(data) {
 }
 
 
-# _##########################################################
-#-# Processing metaTab
 #' Process metaTab Data
 #'
 #' This function processes the metaTab data, including fixing up size fractions
@@ -260,15 +251,17 @@ process_metaTab <- function(metaTab, cmap_coloc) {
         if_else(Size_fraction %in%
           c("whole", "Sterivex", "0.22") | is.na(Size_fraction),
         "0.2",
-        Size_fraction),
+        Size_fraction
+        ),
       coastal_class = if_else(
         Coastal_200km == TRUE,
         true = "coastal",
-        false = "open ocean"),
+        false = "open ocean"
+      ),
       StudyID = case_when(
         StudyID %in% "Turk_2021" ~ "TurkKubo_2021",
         StudyID %in% "TianjUni_2016" ~ "Wu_2021",
-        StudyID %in% "TianjUni_2017"  ~ "Wu_2019",
+        StudyID %in% "TianjUni_2017" ~ "Wu_2019",
         .default = StudyID
       )
     )
@@ -283,11 +276,8 @@ process_metaTab <- function(metaTab, cmap_coloc) {
 
   return(merged_data)
 }
-# _##########################################################
 
 
-# _##########################################################
-#-# Processing cmap_coloc
 #' Clean up CMAP dataset
 #'
 #' This function cleans up the cmap_coloc dataset by performing various data processing steps.
@@ -308,7 +298,7 @@ cmap_clean_main <- function(cmap_coloc) {
           ~ "Gradoville_2020_G1",
           studyID %in% "Turk_2021" ~ "TurkKubo_2021",
           studyID %in% "TianjUni_2016" ~ "Wu_2021",
-          studyID %in% "TianjUni_2017"  ~ "Wu_2019",
+          studyID %in% "TianjUni_2017" ~ "Wu_2019",
           .default = studyID
         )
       )
@@ -390,9 +380,7 @@ cmap_clean_main <- function(cmap_coloc) {
   #     studyID = StudyID
   #   )
 
-  #! FIXME: Must move file and change path to within this project directory
-  #-# add Ocean regions for each study ID
-  studyid_regions <- read_csv("~/mmorando@ucsc.edu - Google Drive/My Drive/data/amplicon_review/all_studies/tables/Table1/studyid_regions.csv", show_col_types = FALSE)
+  studyid_regions <- read_csv("../data/misc/studyid_regions.csv", show_col_types = FALSE)
 
   # Define function to add study region to a tibble
   add_study_region <- function(tibble, key = studyid_regions) {
@@ -403,9 +391,9 @@ cmap_clean_main <- function(cmap_coloc) {
           "Southern", study_ocean
         )
       )
-  
 
-  return(tb_sr)
+
+    return(tb_sr)
   }
 
 
@@ -475,8 +463,8 @@ cmap_clean_main <- function(cmap_coloc) {
 
 #' Process Sample Types
 #'
-#' This function processes the sample types in the CMAP data by splitting them 
-#' into DNA and RNA, identifying sample types, averaging by sample type and 
+#' This function processes the sample types in the CMAP data by splitting them
+#' into DNA and RNA, identifying sample types, averaging by sample type and
 #' nucleic acid type, and deduplicating by group.
 #'
 #' @param cmap_coloc A data frame containing CMAP data with sample collection data.
@@ -510,7 +498,7 @@ process_sample_types <- function(cmap_coloc) {
         (num_distinct_size_fractions > 1) ~ "Two_Size_Fractions",
       )
     ) %>%
-    ungroup()  %>% 
+    ungroup() %>%
     suppressMessages()
 
   # Add size fraction flag to the main data frame
@@ -649,7 +637,7 @@ construct_new_tibbles <- function(nifhDB_cnts, nifhDB_RA, unique_sample_id_key) 
         grp_key = grp_key,
         mean_by = !!sym(value_col)
       )
-      
+
       #-## now pivot wide #-## now pivot wide
       df_T_mean_deduped <- df_T_lng_mean_deduped %>%
         select(-any_of(c("RA", "group_id"))) %>%
@@ -710,20 +698,9 @@ main <- function(files_to_read, files_in_path, files_out_path) {
   cmap_coloc <- result$cmap_coloc
   photic_samples_key <- result$photic_samples_key
 
-  # Call the process_sample_types function
   result_list <- process_sample_types(cmap_coloc)
 
-  # # Access elements from the returned list by their names
-  # size_fraction_key <- result_list$size_fraction_key
-  # cmap_coloc <- result_list$cmap_coloc
-  # DNA_samples_key <- result_list$DNA_samples_key
-  # sample_types_all <- result_list$sample_types_all
-  # unique_sample_column_ids <- result_list$unique_sample_column_ids
-  # unique_sample_id_key <- result_list$unique_sample_id_key
-
   new_tibbles <- construct_new_tibbles(data_list$nifhDB_cnts, data_list$nifhDB_RA, result_list$unique_sample_id_key)
-
-  # cat(new_tibbles)
 
   # Prepare the final results
   final_results <- list(
@@ -745,13 +722,21 @@ main <- function(files_to_read, files_in_path, files_out_path) {
     RA_df_mean_RA_AUID_deduped = new_tibbles$df_mean_deduped
   )
 
-  return(final_results)
+  if (!is.null(final_results)) {
+    create_dir(files_out_path)
+    write_file_list(
+      file_list = final_results,
+      path = files_out_path
+    )
+  }
+
+  cat("\nPreprocessing done.\n\n")
+  # return(final_results)
 }
 
 
 # Run if the script is being run directly
 if (sys.nframe() == 0 && !interactive()) {
-
   source_file(files_to_source)
 
 
@@ -761,29 +746,9 @@ if (sys.nframe() == 0 && !interactive()) {
 
   validate_parsed_args(parsed_args = args)
 
-  final_results <- main(
+  main(
     args$files_to_read,
     args$files_in_path,
     args$files_out_path
   )
-
-  if (!is.null(final_results)) {
-    create_dir(args$files_out_path)
-    write_file_list(
-      file_list = final_results,
-      path = args$files_out_path
-    )
-  }
-
 }
-
-
-### _ Finished loading in the data ### _ Finished loading in the data
-### _ Finished loading in the data ### _ Finished loading in the data
-### _ Finished loading in the data ### _ Finished loading in the data
-cat("\nDone running preprocess_files.R!!!\n")
-cat("\nWoooooooohooooooo!!!\n")
-
-### _ Finished loading in the data ### _ Finished loading in the data
-### _ Finished loading in the data ### _ Finished loading in the data
-### _ Finished loading in the data ### _ Finished loading in the data

@@ -1,3 +1,26 @@
+#!/usr/bin/env python
+
+"""
+Snakefile for Analyzing nifH data for the nifh_amplicons_analysis workflow
+
+This Snakefile defines a workflow for processing and analyzing biological data,
+particularly focused on sample statistics, taxonomic breakdowns, and visualization.
+
+Main steps in the workflow:
+1. Load files from a workspace
+2. Preprocess the loaded files
+3. Calculate basic sample statistics
+4. Perform sample taxonomic breakdown
+5. Generate various plots and tables
+6. Create world plots
+
+The workflow also includes cleaning rules for removing intermediate and output files.
+
+Usage:
+    snakemake -j <num_cores> --use-conda
+
+Note: This Snakefile requires a config.yaml file with appropriate settings.
+"""
 
 configfile: "config.yaml"
 
@@ -23,7 +46,7 @@ rule all:
 
 # Loading workspace files
 rule load_files:
-    # priority: 1
+    """Load workspace files into the pipeline."""
     input:
         workspace=config["workspace"],
     params:
@@ -40,7 +63,7 @@ rule load_files:
 
 # Loading workspace files
 rule preprocess_files:
-    # priority: 2
+    """Preprocess the loaded files."""
     input:
         expand(f"{config['output_dir']}/{{file}}.csv", file=config["files_to_process"]),
     params:
@@ -60,7 +83,7 @@ rule preprocess_files:
 
 
 rule basic_sample_stats:
-    # priority: 3
+    """Calculate basic sample statistics."""
     conda:
         config["conda_env"]
     input:
@@ -80,7 +103,7 @@ rule basic_sample_stats:
 
 
 rule samp_tax_brkdwn:
-    # priority: 4
+    """Perform sample taxonomic breakdown."""
     conda:
         config["conda_env"]
     input:
@@ -100,7 +123,7 @@ rule samp_tax_brkdwn:
 
 
 rule make_plots:
-    # priority: 5
+    """Generate various plots from the processed data."""
     conda:
         config["conda_env"]
     input:
@@ -125,7 +148,7 @@ rule make_plots:
 
 
 rule make_plots_tax:
-    # priority: 6
+    """Generate taxonomic plots."""
     conda:
         config["conda_env"]
     input:
@@ -150,7 +173,7 @@ rule make_plots_tax:
 
 
 rule make_tables:
-    # priority: 7
+    """Generate output tables 4 and 5."""
     conda:
         config["conda_env"]
     input:
@@ -158,15 +181,13 @@ rule make_tables:
             f"{config['input_dir_tables']}/{{file}}.csv",
             file=config["files_in_tables"],
         ),
-        # lambda wildcards: ",".join(expand(f"{config['input_dir_tables']}/{{file}}.csv", file=config['files_in_tables']))
-        # input_files=",".join(config['files_in_tables'])
     params:
         input_files=",".join(config["files_in_tables"]),
         input_dir=config["input_dir_tables"],
-        output_dir=config["output_dir"],
+        output_dir=config["table_dir"],
     output:
         expand(
-            f"{config['output_dir']}/{{files}}.csv", files=config["files_out_tables"]
+            f"{config['table_dir']}/{{files}}.csv", files=config["files_out_tables"]
         ),
     log:
         f"{config['output_dir']}/logs/make_tables.log",
@@ -177,7 +198,7 @@ rule make_tables:
 
 
 rule make_wrld_plts:
-    # priority: 8
+    """Create world plots."""
     conda:
         config["conda_env"]
     input:
@@ -376,20 +397,21 @@ rule clean_make_wrld_plts:
         fi
         """
 
-# Remove output files only but leave directory structure, log files, and conda environment
 rule clean:
+    """Remove output files only but leave directory structure, log files, and conda environment"""
     shell:
         """
         echo "Cleaning output files only"
         snakemake -c 1 --use-conda --delete-all-output
         """
 
-# Remove all directories, outputs, logs, and conda environment
 rule superclean:
+    """Remove all directories, outputs, logs, and conda environment"""
     params:
         log=f"{config['output_dir']}/logs",
         files_dir=config["output_dir"],
         plot_dir=config["plot_dir"],
+        tables_dir=config["table_dir"]
     shell:
         """
         echo "Cleaning all output files and directories"

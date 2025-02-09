@@ -1,25 +1,45 @@
-#' Module Docstring:
+#!/usr/bin/env Rscript
+
+#' @title Data Visualization and Processing Functions for nifH Amplicon Analysis
+#' @description This module provides a comprehensive set of functions for data visualization and processing, specifically tailored for nifH amplicon analysis. It includes custom themes, color palettes, and various plotting functions to create publication-quality figures.
 #'
-#' This script contains a collection of functions designed to perform various data processing tasks using ggplot2 and tidyverse packages in R. Below are the main functionalities of the script:
+#' @details The module includes the following key components:
+#' * Custom Theme Function:
+#'   - theme_custom(): Defines a consistent, customized theme for ggplot2 plots
+#' * Color Functions:
+#'   - get_viridis_colors(): Generates custom color palettes based on the viridis scheme
+#'   - nifh_cluster_colours: Defines a preset color palette for nifH clusters
+#'   - generate_nifh_palette(): Creates a colorblind-safe palette for nifH clusters
+#' * Plotting Functions:
+#'   - create_custom_plot_point(): Creates customized dot plots
+#'   - bar_plot(): Generates versatile bar plots with various customization options
+#'   - histogram_plot() and histogram_plot_x_or_y(): Create customizable histogram plots
+#'   - scatter_line_plot(): Produces scatter plots with optional trend lines
+#' * Utility Function:
+#'   - save_custom_plot(): Saves ggplot objects as image files with customizable parameters
 #'
-#' - Custom Theme Function:
-#'     - `theme_custom`: Define a custom theme for ggplot2 plots.
+#' @usage
+#' source("basic_plotting.R")
+#' # Then call individual functions as needed, e.g.:
+#' # my_plot <- bar_plot(data, x = column1, y = column2, fill = group)
 #'
-#' - Color Functions:
-#'     - `get_viridis_colors`: Generate a custom color palette based on the viridis color scheme.
-#'     - `nifh_cluster_colours`: Define custom colors for nifh clusters.
+#' @author Michael (Mo) Morando
+#' @date 2025-02-02
 #'
-#' - Plotting Functions:
-#'     - `create_custom_plot_point`: Create a custom dot plot.
-#'     - `bar_plot`: Create a simple custom bar plot.
-#'     - `histogram_plot`: Create a simple custom histogram plot.
-#'     - `histogram_plot_x_or_y`: Create a custom histogram plot with options to specify x or y axis.
+#' @note This module requires the following R packages: tidyverse, viridisLite, RColorBrewer
 #'
-#' These functions can be used individually to customize plot aesthetics and create visually appealing visualizations.
+#' @examples
+#' # Generate a custom color palette
+#' custom_colors <- get_viridis_colors(my_data, plot_by = group, pallette_type = "D")
 #'
-#' @import tidyverse
-#' @importFrom viridisLite viridis
+#' # Create a bar plot with custom theme
+#' plot <- bar_plot(my_data, x = category, y = value, fill = group, fill_pallete = custom_colors)
 #'
+#' # Save the plot
+#' save_custom_plot(plot, output_dir = "path/to/output", filename = "my_plot", file_ext = ".png")
+#'
+#' @export
+
 
 #' Define custom colors for nifh clusters
 #'

@@ -1,24 +1,54 @@
 #!/usr/bin/env Rscript
 
-#' @title Plots Output Script
-#' @description This script processes workspace files and generates various plots for nifH amplicon data analysis.
-#' @details The script performs the following steps:
-#' 1. Loads necessary libraries and sources required files
-#' 2. Sets up command-line argument parsing
-#' 3. Loads and processes input data
-#' 4. Generates and saves various plots including:
-#'    - Sample type plots
-#'    - Ocean and hemisphere plots
-#'    - Depth distribution plots
-#'    - Oceanographic data plots (SST, PO4, Fe, etc.)
+#' @title NifH Amplicon Data Pipeline Basic Plots
+#' @description This script processes NifH amplicon data and generates a comprehensive set of visualizations to analyze sample distributions, oceanographic parameters, and other relevant metrics. It provides a modular and flexible approach to data visualization with robust error handling.
+#'
+#' @details The pipeline executes the following main steps:
+#' * Loads and validates input files from specified paths
+#' * Generates sample distribution plots (e.g., by type, nucleic acid, study ID, ocean, hemisphere)
+#' * Creates oceanographic data plots (e.g., SST, PO4, Fe, PP, CHL)
+#' * Produces a combined plot for key metrics (latitude, ocean, SST, PO4)
+#' * Saves all generated plots in specified formats
+#'
+#' Key functions include:
+#' * generate_sample_distribution_plots(): Creates various sample distribution visualizations
+#' * generate_oceanographic_plots(): Produces plots for oceanographic parameters
+#' * create_combined_plot(): Assembles a composite plot from individual visualizations
+#' * main(): Orchestrates the entire visualization workflow
+#'
+#' @usage Rscript plots_out.R [--files FILES] [--input_path PATH] [--output_path PATH] [--tables_out_path PATH] [--plot_ext EXT] [--plot_device DEVICE]
+#'
+#' @param --files Comma-separated list of input files
+#' @param --input_path Directory path for input files
+#' @param --output_path Directory path for output plots
+#' @param --tables_out_path Directory path for output tables
+#' @param --plot_ext File extension for saved plots
+#' @param --plot_device Device to use for plot generation
+#'
 #' @author Michael Morando
-#' @date 2023-09-10
+#' @date 2025-02-02
+#'
+#' @note This script requires the following R packages: tidyverse, patchwork, argparser
+#'
+#' @examples
+#' Rscript plots_out.R --files cmap_coloc,samples_per_nucleicAcidType,samples_per_nucleicAcidType_studyid,samples_per_photic,samples_per_photic_nucacid,sample_type,unique_sample_id_key --input_path ../data/processed --output_path ../results/plots --tables_out_path ../results/tables --plot_ext .png --plot_device png
+#'
+#' @export
 
-# Load required libraries
+
+# Load required libraries with error handling
 suppressPackageStartupMessages({
-  library(tidyverse)
-  library(patchwork)
-  library(argparser)
+  tryCatch(
+    {
+      library(tidyverse)
+      library(patchwork)
+      library(argparser)
+    },
+    error = function(e) {
+      cat("Error loading required packages:", conditionMessage(e), "\n")
+      cat("Error call in:", deparse(conditionCall(e)), "\n")
+    }
+  )
 })
 
 
@@ -29,37 +59,41 @@ suppressPackageStartupMessages({
 #' @examples
 #' source_file("/path/to/your/file.R")
 source_file <- function(file_path) {
-  for (file in file_path) {
-    # Check if file exists
-    if (!file.exists(file)) {
-      stop("File does not exist: ", file, "\n")
-    }
+  tryCatch(
+    {
+      for (file in file_path) {
+        # Check if file exists
+        if (!file.exists(file)) {
+          stop("File does not exist: ", file, "\n")
+        }
 
-    # Try to source the file
-    tryCatch(
-      {
-        source(file)
-        cat("Successfully sourced : ", file, "\n")
-      },
-      error = function(e) {
-        stop("Error sourcing : ", file_path, ":", conditionMessage(e), "\n")
-      },
-      warning = function(w) {
-        cat("Warning while sourcing : ", file_path, ":", conditionMessage(w), "\n")
+        # Try to source the file
+        tryCatch(
+          {
+            source(file)
+            cat("Successfully sourced : ", file, "\n")
+          },
+          error = function(e) {
+            stop("Error sourcing : ", file_path, ":", conditionMessage(e), "\n")
+          },
+          warning = function(w) {
+            cat("Warning while sourcing : ", file_path, ":", conditionMessage(w), "\n")
+          }
+        )
       }
-    )
-  }
 
-  cat("Finished sourcing files. \n")
+      cat("Finished sourcing files. \n")
+    },
+    error = function(e) {
+      stop(paste("Error in source_file:", conditionMessage(e)))
+    }
+  )
 }
-
-
-
 
 # Source needed files
 files_to_source <- c(
-  "/Users/mo/Projects/nifH_amp_project/myWork/scripts/functions.R",
-  "/Users/mo/Projects/nifH_amp_project/myWork/scripts/basic_plotting.R"
+  "functions.R",
+  "basic_plotting.R"
 )
 
 #' Set up the argument parser
@@ -407,7 +441,6 @@ generate_sample_distribution_plots <- function(
               limits =
                 rev(c("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")),
               labels =
-              # c("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")
                 rev(c("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")),
             )
 
