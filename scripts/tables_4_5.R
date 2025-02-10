@@ -1,26 +1,53 @@
 #!/usr/bin/env Rscript
 
-#' Summarizing and Formatting Tables
+#' @title NifH Amplicon Data Processing and Summarization Pipeline
+#' @description This script processes and summarizes data from the DADA2 nifH pipeline and workflow stages, generating comprehensive tables for analysis. It handles input data, performs calculations, and produces formatted output tables.
 #'
-#' This script processes and summarizes data from the DADA2 nifH pipeline and
-#' workflow stages.
-#' It performs the following steps:
-#' 1. Loads required libraries
-#' 2. Sources necessary files
-#' 3. Sets up argument parsing
-#' 4. Reads and processes input CSV files
-#' 5. Calculates percentage of retained read pairs
-#' 6. Summarizes and formats tables
-#' 7. Renames columns for better readability
-#' 8. Writes output CSV files
+#' @details The pipeline executes the following main steps:
+#' * Loads required libraries (tidyverse, argparser)
+#' * Sources necessary utility functions
+#' * Sets up and parses command-line arguments for input/output paths and file names
+#' * Reads and processes input CSV files
+#' * Calculates percentage of retained read pairs
+#' * Summarizes and formats tables for each workflow stage
+#' * Renames columns for better readability and interpretation
+#' * Writes output CSV files with processed results
+#'
+#' Key functions include:
+#' * summarise_workflow_stages_table(): Summarizes workflow stages and produces summary tables
+#' * format_table(): Formats tables for scientific notation
+#' * process_data(): Main data processing function that orchestrates table creation
+#' * main(): Orchestrates the entire data processing and summarization workflow
+#'
+#' @usage Rscript tables_4_5.R [--files FILES] [--input_path PATH] [--output_path PATH]
+#'
+#' @param --files Comma-separated list of input files (default: Table_SreadsAtEachStage_samples,workflowTable)
+#' @param --input_path Directory path for input files (default: ../data/csvs_for_tables)
+#' @param --output_path Directory path for output files (default: ../analysis/tables)
 #'
 #' @author Michael (Mo) Morando
-#' @date 2024-12-04
+#' @date 2025-02-02
+#'
+#' @note This script requires the following R packages: tidyverse, argparser
+#'
+#' @examples
+#' Rscript tables_4_5.R --files Table_SreadsAtEachStage_samples,workflowTable --input_path ../data/raw_tables --output_path ../results/summary_tables
+#'
+#' @export
+
 
 # Load required libraries
-suppressPackageStartupMessages({
-  library(tidyverse)
-  library(argparser)
+tryCatch({
+  suppressPackageStartupMessages({
+    library(tidyverse)
+    library(argparser)
+  })
+  cat("Successfully loaded required packages.\n")
+},
+error = function(e) {
+  cat("Error loading required packages:", conditionMessage(e), "\n")
+  cat("Error call in:", deparse(conditionCall(e)), "\n")
+  quit(status = 1)
 })
 
 
@@ -56,13 +83,11 @@ source_file <- function(file_path) {
 }
 
 
-
-
-# # Source needed files
-# files_to_source <- c(
-#   "/Users/mo/Projects/nifH_amp_project/myWork/scripts/functions.R",
-#   "/Users/mo/Projects/nifH_amp_project/myWork/scripts/basic_plotting.R"
-# )
+# Source needed files
+files_to_source <- c(
+  "functions.R",
+  "basic_plotting.R"
+)
 
 
 #' Set up the argument parser
@@ -142,45 +167,52 @@ summarise_workflow_stages_table <- function(
     rnd_to,
     initial_col,
     final_col) {
-  message("Summarising workflow stage: ", deparse(substitute(df)))
+  tryCatch({
+    message("Summarizing workflow stage: ", deparse(substitute(df)))
 
-  summarised_table <- df %>%
-    group_by({{ grp_by }}) %>%
-    reframe(across(where(is.numeric), ~ mean(.))) %>%
-    ungroup() %>%
-    bind_rows(
-      tibble(
-        {{ grp_by }} := "mean",
-        df %>%
-          summarise(across(where(is.numeric), ~ mean(.))) #* This gives the mean over all the reads, not by study ID
-      )
-    ) %>%
-    bind_rows(
-      tibble(
-        {{ grp_by }} := "median",
-        df %>%
-          summarise(across(where(is.numeric), ~ median(.))) #* This gives the median over all the reads, not by study ID
-      )
-    ) %>%
-    bind_rows(
-      tibble(
-        {{ grp_by }} := "sum",
-        df %>%
-          summarise(across(where(is.numeric), ~ sum(.))) #* this gives the total over all the reads
-      )
-    ) %>%
-    mutate(
-      PctReadPairsRetained =
-        ifelse(test = studyID == "sum",
-          yes = round((1 - ({{ initial_col }} - {{ final_col }}) / {{ initial_col }}), 1) * 100,
-          no = PctReadPairsRetained
+    summarised_table <- df %>%
+      group_by({{ grp_by }}) %>%
+      reframe(across(where(is.numeric), ~ mean(.))) %>%
+      ungroup() %>%
+      bind_rows(
+        tibble(
+          {{ grp_by }} := "mean",
+          df %>%
+            summarise(across(where(is.numeric), ~ mean(.))) #* This gives the mean over all the reads, not by study ID
         )
-    ) %>%
-    mutate(across(where(is.numeric), ~ round(., rnd_to)))
+      ) %>%
+      bind_rows(
+        tibble(
+          {{ grp_by }} := "median",
+          df %>%
+            summarise(across(where(is.numeric), ~ median(.))) #* This gives the median over all the reads, not by study ID
+        )
+      ) %>%
+      bind_rows(
+        tibble(
+          {{ grp_by }} := "sum",
+          df %>%
+            summarise(across(where(is.numeric), ~ sum(.))) #* this gives the total over all the reads
+        )
+      ) %>%
+      mutate(
+        PctReadPairsRetained =
+          ifelse(test = studyID == "sum",
+            yes = round((1 - ({{ initial_col }} - {{ final_col }}) / {{ initial_col }}), 1) * 100,
+            no = PctReadPairsRetained
+          )
+      ) %>%
+      mutate(across(where(is.numeric), ~ round(., rnd_to)))
 
-  cat("Summarized workflow stages for '", deparse(substitute(df)), "' by group: '", deparse(substitute(grp_by)), "'\n", sep = "")
+    cat("Summarized workflow stages for '", deparse(substitute(df)), "' by group: '", deparse(substitute(grp_by)), "'\n", sep = "")
 
-  return(summarised_table)
+    return(summarised_table)
+  },
+    error = function(e) {
+      cat("Error in summarise_workflow_stages_table:", conditionMessage(e), "\n")
+      cat("Error call in:", deparse(conditionCall(e)), "\n")
+      return(NULL)
+    })
 }
 
 
@@ -190,105 +222,119 @@ summarise_workflow_stages_table <- function(
 #'
 #' @return A formatted table with scientific notation
 format_table <- function(table) {
-  formatted_table <- table %>%
-    mutate(across(!contains("studyID") & !contains("PctReadPairsRetained"), ~ format(., scientific = TRUE, digits = 2)))
+  tryCatch({
+    formatted_table <- table %>%
+      mutate(across(!contains("studyID") & !contains("PctReadPairsRetained"), ~ format(., scientific = TRUE, digits = 2)))
 
-  cat("Formatted table with scientific notation.\n")
-  return(formatted_table)
+    cat("Formatted table with scientific notation.\n")
+    return(formatted_table)
+  },
+  error = function(e) {
+    cat("Error in format_table:", conditionMessage(e), "\n")
+    cat("Error call in:", deparse(conditionCall(e)), "\n")
+    return(NULL)
+  })
 }
 
 
 process_data <- function(data_list) {
-  cat("Processing tables...\n")
-  Table_SreadsAtEachStage_samples <- data_list$Table_SreadsAtEachStage_samples %>%
-    rename(
-      studyID = Study,
-      SAMPLEID = Sample,
-      InNonChimericASVs_final = InNonChimericASVs
-    )
-
-  workflowTable <- data_list$workflowTable %>% rename(
-    studyID = Study,
-    ReadsFilterAuids.Length_final = ReadsFilterAuids.Length
-  )
-
-  ### add percentage column
-  Table_SreadsAtEachStage_samples <- Table_SreadsAtEachStage_samples %>%
-    mutate(
-      PctReadPairsRetained = round(((1 - (Initial - InNonChimericASVs_final) / Initial) * 100), 1)
-      # test = round(((1 - (Initial - contains("final")) / Initial) * 100), 1)
-    )
-
-  workflowTable <- workflowTable %>%
-    mutate(
-      PctReadPairsRetained = ifelse(
-        ReadsFilterAuids.Length_final == 0,
-        0,
-        round(((1 - (ReadsPipeline -
-          ReadsFilterAuids.Length_final) / ReadsPipeline) * 100), 1)
+  tryCatch({
+    cat("Processing tables...\n")
+    Table_SreadsAtEachStage_samples <- data_list$Table_SreadsAtEachStage_samples %>%
+      rename(
+        studyID = Study,
+        SAMPLEID = Sample,
+        InNonChimericASVs_final = InNonChimericASVs
       )
+
+    workflowTable <- data_list$workflowTable %>% rename(
+      studyID = Study,
+      ReadsFilterAuids.Length_final = ReadsFilterAuids.Length
     )
 
+    ### add percentage column
+    Table_SreadsAtEachStage_samples <- Table_SreadsAtEachStage_samples %>%
+      mutate(
+        PctReadPairsRetained = round(((1 - (Initial - InNonChimericASVs_final) / Initial) * 100), 1)
+        # test = round(((1 - (Initial - contains("final")) / Initial) * 100), 1)
+      )
 
-  #* # summarise DADA2 nifH pipeline
-  Table_SreadsAtEachStage_samples_summary <- summarise_workflow_stages_table(
-    df = Table_SreadsAtEachStage_samples,
-    grp_by = studyID,
-    rnd_to = 1,
-    initial_col = Initial,
-    final_col = InNonChimericASVs_final
-  )
+    workflowTable <- workflowTable %>%
+      mutate(
+        PctReadPairsRetained = ifelse(
+          ReadsFilterAuids.Length_final == 0,
+          0,
+          round(((1 - (ReadsPipeline -
+            ReadsFilterAuids.Length_final) / ReadsPipeline) * 100), 1)
+        )
+      )
 
-  #* ## summarise workflow
-  workflowTable_summary <- summarise_workflow_stages_table(
-    df = workflowTable,
-    grp_by = studyID,
-    rnd_to = 1,
-    initial_col = ReadsPipeline,
-    final_col = ReadsFilterAuids.Length_final
-  )
 
-  ##* format table
-  Table_SreadsAtEachStage_samples_summary_format <- Table_SreadsAtEachStage_samples_summary %>%
-    format_table()
+    #* # summarise DADA2 nifH pipeline
+    Table_SreadsAtEachStage_samples_summary <- summarise_workflow_stages_table(
+      df = Table_SreadsAtEachStage_samples,
+      grp_by = studyID,
+      rnd_to = 1,
+      initial_col = Initial,
+      final_col = InNonChimericASVs_final
+    )
 
-  workflowTable_summary_format <- workflowTable_summary %>%
-    format_table()
+    #* ## summarise workflow
+    workflowTable_summary <- summarise_workflow_stages_table(
+      df = workflowTable,
+      grp_by = studyID,
+      rnd_to = 1,
+      initial_col = ReadsPipeline,
+      final_col = ReadsFilterAuids.Length_final
+    )
 
-  #-##  fix column names
+    ##* format table
+    Table_SreadsAtEachStage_samples_summary_format <- Table_SreadsAtEachStage_samples_summary %>%
+      format_table()
 
-  (Table_SreadsAtEachStage_samples_summary_format_rename <- Table_SreadsAtEachStage_samples_summary_format %>%
-    rename(
-      "Study ID" = studyID,
-      # Initial = Initial,
-      Trimmed4 = Trimmed,
-      Filtered4 = Filtered,
-      Merged7 = Merged,
-      "non-Bimera9" = InNonChimericASVs_final,
-      "Retained (%)" = PctReadPairsRetained
+    workflowTable_summary_format <- workflowTable_summary %>%
+      format_table()
+
+    #-##  fix column names
+
+    (Table_SreadsAtEachStage_samples_summary_format_rename <- Table_SreadsAtEachStage_samples_summary_format %>%
+      rename(
+        "Study ID" = studyID,
+        # Initial = Initial,
+        Trimmed4 = Trimmed,
+        Filtered4 = Filtered,
+        Merged7 = Merged,
+        "non-Bimera9" = InNonChimericASVs_final,
+        "Retained (%)" = PctReadPairsRetained
+      ))
+
+
+    (workflowTable_summary_format_rename <- workflowTable_summary_format %>%
+      # rename("DADA2 nifH pipeline" = ReadsPipeline
+      rename(
+        "Study ID" = studyID,
+        "DADA2 nifH pipeline" = ReadsPipeline,
+        GatherAsvs = ReadsGatherAsvs,
+        "Small samples" = ReadsFilterAuids.SmallSamp,
+        Rare = ReadsFilterAuids.Rare,
+        NonNifH = ReadsFilterAuids.NonNifH,
+        Length = ReadsFilterAuids.Length_final,
+        "Retained (%)" = PctReadPairsRetained
+      ))
+    # mutate(across(where(is.numeric), ~sum(.)))
+
+    cat("Processed data and prepared summaries.\n")
+
+    return(list(
+      "Table 4" = Table_SreadsAtEachStage_samples_summary_format_rename,
+      "Table 5" = workflowTable_summary_format_rename
     ))
-
-
-  (workflowTable_summary_format_rename <- workflowTable_summary_format %>%
-    # rename("DADA2 nifH pipeline" = ReadsPipeline
-    rename(
-      "Study ID" = studyID,
-      "DADA2 nifH pipeline" = ReadsPipeline,
-      GatherAsvs = ReadsGatherAsvs,
-      "Small samples" = ReadsFilterAuids.SmallSamp,
-      Rare = ReadsFilterAuids.Rare,
-      NonNifH = ReadsFilterAuids.NonNifH,
-      Length = ReadsFilterAuids.Length_final,
-      "Retained (%)" = PctReadPairsRetained
-    ))
-  # mutate(across(where(is.numeric), ~sum(.)))
-
-  cat("Processed data and prepared summaries.\n")
-
-  return(list(
-    "Table 4" = Table_SreadsAtEachStage_samples_summary_format_rename,
-    "Table 5" = workflowTable_summary_format_rename
-  ))
+  },
+  error = function(e) {
+    cat("Error in process_data:", conditionMessage(e), "\n")
+    cat("Error call in:", deparse(conditionCall(e)), "\n")
+    return(NULL)
+  })
 }
 
 
@@ -296,27 +342,28 @@ main <- function(
     files_to_read,
     files_in_path,
     files_out_path) {
-  # Load data from CSV files
-  data_list <- load_files(files_to_read, files_in_path)
+  tryCatch({
+    # Load data from CSV files
+    data_list <- load_files(files_to_read, files_in_path)
 
-  # Process data to summarize and format tables
-  final_results <- process_data(data_list)
+    # Process data to summarize and format tables
+    final_results <- process_data(data_list)
 
-  if (!is.null(final_results)) {
-    # Create output directory if it doesn't exist
-    create_dir(files_out_path)
-    write_file_list(final_results, files_out_path)
-  }
-  # return(final_results)
+    if (!is.null(final_results)) {
+      # Create output directory if it doesn't exist
+      create_dir(files_out_path)
+      write_file_list(final_results, files_out_path)
+    }
+    # return(final_results)
+  },
+  error = function(e) {
+    cat("Error in main function:", conditionMessage(e), "\n")
+    cat("Error call in:", deparse(conditionCall(e)), "\n")
+  })
 }
 
 
 if (sys.nframe() == 0 && !interactive()) {
-  # Source needed files
-  files_to_source <- c(
-    "/Users/mo/Projects/nifH_amp_project/myWork/scripts/functions.R",
-    "/Users/mo/Projects/nifH_amp_project/myWork/scripts/basic_plotting.R"
-  )
   source_file(files_to_source)
 
   # Set up and parse arguments
