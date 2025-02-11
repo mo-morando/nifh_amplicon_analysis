@@ -1,5 +1,0 @@
-{
-    "filtered_blast_output_ucyna": "filt_colsfilt_blst.csv",
-    "min_qcov_ucyna": 70,
-    "min_pident_ucyna": 97
-}

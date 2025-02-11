@@ -1,8 +1,0 @@
-{
-    "input_fasta_db_genome879": "Genome879DB/genome879_March2019.fasta",
-    "database_type_genome879": "prot",
-    "blast_database_dir_genome879": "genome879_db/",
-    "blast_database_genome879": "genome879_db",
-    "input_fasta_dir_genome879": "../../databases/BlastxGenome879/",
-    "database_suffix_genome879": "genome879"
-}

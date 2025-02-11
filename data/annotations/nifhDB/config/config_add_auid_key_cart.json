@@ -1,6 +1,0 @@
-{
-    "keyed_csv_cart": "nifh_clusters.csv",
-    "left_on_key_cart": "AUID_updt",
-    "right_on_key_cart": "AUID_OLD",
-    "how_key_cart": "left"
-}

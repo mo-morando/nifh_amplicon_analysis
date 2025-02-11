@@ -1,6 +1,0 @@
-{
-    "keyed_csv_genome879": "auids_headers_filt_colsfilt_blst.csv",
-    "left_on_key_genome879": "genome879_nifh_qseqid",
-    "right_on_key_genome879": "AUID_OLD",
-    "how_key_genome879": "left"
-}

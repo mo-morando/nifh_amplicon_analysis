@@ -1,9 +1,0 @@
-{
-    "input_fasta_blast_ucyna": "fasta/auid.filtered.nifHDB.fasta",
-    "blast_type_ucyna": "blastn",
-    "num_threads_ucyna": 4,
-    "output_csv_ucyna": "output_blast.csv",
-    "final_blst_csv_ucyna": "final_blst.csv",
-    "blast_output_dir_ucyna": "UCYNA_oligos/",
-    "database_suffix_ucyna": "ucyna"
-}

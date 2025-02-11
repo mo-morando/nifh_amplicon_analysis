@@ -1,8 +1,0 @@
-{
-    "left_csv_descrp_ncd_cyano": "Marine_NCD_cyano_refsequences_sans_oligos.csv",
-    "merged_csv_descrp_ncd_cyano": "cart_arb_genome879_ncd_cyano_ucyna_descrp_ncd_merge.csv",
-    "left_on_descrp_ncd_cyano": "seqID",
-    "right_on_descrp_ncd_cyano": "ncd_cyano_sseqid",
-    "how_descrp_ncd_cyano": "right",
-    "merged_dir_descrp_ncd_cyano": "merged_database/"
-}

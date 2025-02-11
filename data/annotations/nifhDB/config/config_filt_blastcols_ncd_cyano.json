@@ -1,4 +1,0 @@
-{
-    "headers_to_keep_ncd_cyano": "qseqid sseqid length qcovs pident evalue",
-    "cols_filt_blast_output_ncd_cyano": "colsfilt_blst.csv"
-}

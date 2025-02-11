@@ -1,5 +1,0 @@
-{
-    "filtered_blast_output_arb": "filt_colsfilt_blst.csv",
-    "min_qcov_arb": 70,
-    "min_pident_arb": 90
-}

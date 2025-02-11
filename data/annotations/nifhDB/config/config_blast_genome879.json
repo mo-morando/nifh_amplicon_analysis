@@ -1,9 +1,0 @@
-{
-    "input_fasta_blast_genome879": "fasta/auid.filtered.nifHDB.fasta",
-    "blast_type_genome879": "blastx",
-    "num_threads_genome879": 8,
-    "output_csv_genome879": "output_blast.csv",
-    "final_blst_csv_genome879": "final_blst.csv",
-    "blast_output_dir_genome879": "genome879/",
-    "database_suffix": "genome879"
-}

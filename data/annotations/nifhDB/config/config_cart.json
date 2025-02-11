@@ -1,6 +1,0 @@
-{
-    "input_fasta_cart": "fasta/auid.filtered.nifHDB.fasta",
-    "final_blst_csv_cart": "final_blst.csv",
-    "blast_output_dir_cart": "cart/",
-    "database_suffix_cart": "cart"
-}

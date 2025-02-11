@@ -1,8 +1,0 @@
-{
-    "left_csv_descrp_genome879": "Genome879DB/genome879_acc_taxstring.csv",
-    "merged_csv_descrp_genome879": "cart_arb_genome879_ncd_cyano_ucyna_descrp_ncd_879_merge.csv",
-    "left_on_descrp_genome879": "arb_name",
-    "right_on_descrp_genome879": "genome879_nifh_sseqid",
-    "how_descrp_genome879": "right",
-    "merged_dir_descrp_genome879": "merged_database/"
-}

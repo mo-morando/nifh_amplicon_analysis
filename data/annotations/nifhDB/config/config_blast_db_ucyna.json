@@ -1,7 +1,0 @@
-{
-    "input_fasta_db_ucyna": "UCYNA_oligoreps.fasta",
-    "database_type_ucyna": "nucl",
-    "blast_database_dir_ucyna": "ucyna_oligoreps_db/",
-    "blast_database_ucyna": "ucyna_oligoreps_db",
-    "input_fasta_dir_ucyna": "../../databases/UCYNA_oligoreps/"
-}

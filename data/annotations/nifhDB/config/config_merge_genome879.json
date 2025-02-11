@@ -1,8 +1,0 @@
-{
-    "left_csv_genome879": "genome879/auids_headers_filt_colsfilt_blst.csv",
-    "merged_csv_genome879": "cart_arb_genome879_merge.csv",
-    "left_on_genome879": "AUID_updt",
-    "right_on_genome879": "AUID_updt",
-    "how_genome879": "outer",
-    "merged_dir_genome879": "merged_database/"
-}

@@ -1,9 +1,0 @@
-{
-    "input_fasta_blast_ncd_cyano": "fasta/auid.filtered.nifHDB.fasta",
-    "blast_type_ncd_cyano": "blastn",
-    "num_threads_ncd_cyano": 4,
-    "output_csv_ncd_cyano": "output_blast.csv",
-    "final_blst_csv_ncd_cyano": "final_blst.csv",
-    "blast_output_dir_ncd_cyano": "ncd_cyano/",
-    "database_suffix_ncd_cyano": "ncd_cyano"
-}

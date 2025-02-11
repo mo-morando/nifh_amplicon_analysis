@@ -1,7 +1,0 @@
-## To generate the top 20 rows of Table 4.
-tab4 <- read.csv('Table_SreadsAtEachStage_samples.csv')
-aggregate( . ~ Study, tab4[,-2], function(v) mean(v[v>0]))
-
-## To generate the top 20 rows of Table 5.
-tab5 <- read.csv('table_5_for_manuscript.csv')
-aggregate( . ~ Study, tab5, function(v) mean(v[v>0]))
