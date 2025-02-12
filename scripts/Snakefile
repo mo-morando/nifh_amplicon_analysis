@@ -40,7 +40,7 @@ rule all:
             file=config["files_out_wrld_plt"],
         ),
         expand(
-            f"{config['output_dir']}/{{files}}.csv", files=config["files_out_tables"]
+            f"{config['table_dir']}/{{files}}.csv", files=config["files_out_tables"]
         ),
 
 
