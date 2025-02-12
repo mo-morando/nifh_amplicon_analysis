@@ -37,7 +37,7 @@
 #' # merged_data <- merge_cmap(my_data, cmap_coloc)
 #'
 #' @author Michael Morando
-#' @date 2025-02-02
+#'  2025-02-02
 #'
 #' @note This script requires the following R packages: tidyverse, readr
 #'

@@ -23,7 +23,7 @@
 #' @param --output_path Directory path for output files (default: ../analysis/out_files)
 #'
 #' @author Michael Morando
-#' @date 2025-02-02
+#'  2025-02-02
 #'
 #' @note This script requires the following R packages: tidyverse, patchwork, argparser
 #'

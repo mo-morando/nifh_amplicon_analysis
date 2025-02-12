@@ -28,7 +28,7 @@
 #' @param --plot_device Device to use for plot generation (default: jpeg)
 #'
 #' @author Michael (Mo) Morando
-#' @date 2025-02-02
+#'  2025-02-02
 #'
 #' @note This script requires the following R packages: tidyverse, rlang, patchwork, argparser
 #'

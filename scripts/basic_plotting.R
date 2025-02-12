@@ -24,7 +24,7 @@
 #' # my_plot <- bar_plot(data, x = column1, y = column2, fill = group)
 #'
 #' @author Michael (Mo) Morando
-#' @date 2025-02-02
+#'  2025-02-02
 #'
 #' @note This module requires the following R packages: tidyverse, viridisLite, RColorBrewer
 #'

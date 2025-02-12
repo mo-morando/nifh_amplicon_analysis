@@ -1,0 +1,482 @@
+suppressPackageStartupMessages({
+    tryCatch({
+        library(tidyverse)
+    }, error = function(e) {
+        cat("Error loading required packages:", conditionMessage(e), "\n")
+        cat("Error call in:", deparse(conditionCall(e)), "\n")
+    })
+})
+source_file <- function(file_path) {
+    for (file in file_path) {
+        if (!file.exists(file)) {
+            stop("File does not exist: ", file, "\n")
+        }
+        tryCatch({
+            source(file)
+            cat("Successfully sourced : ", file, "\n")
+        }, error = function(e) {
+            stop("Error sourcing : ", file_path, ":", conditionMessage(e), "\n")
+        }, warning = function(w) {
+            cat("Warning while sourcing : ", file_path, ":", conditionMessage(w), "\n")
+        })
+    }
+    cat("Finished sourcing files. \n")
+}
+create_dir <- function(dir_path) {
+    if (!dir.exists(dir_path)) {
+        dir.create(dir_path)
+        cat(paste("Directory: '", dir_path, "' created\n", sep = ""))
+    }
+    else {
+        cat(paste("Directory: '", dir_path, "' already exists\n", sep = ""))
+    }
+}
+validate_parsed_args <- function(parsed_args) {
+    tryCatch({
+        if (!is.list(parsed_args)) {
+            stop("parsed_args must be a list object")
+        }
+        if ("files_to_read" %in% names(parsed_args)) {
+            if (!is.character(parsed_args$files_to_read)) {
+                stop("files_to_read must be a character vector")
+            }
+            if (length(parsed_args$files_to_read) == 0) {
+                stop("files_to_read cannot be empty")
+            }
+            missing_files <- character(0)
+            files_in_dir <- list.files(parsed_args$files_in_path)
+            for (file in parsed_args$files_to_read) {
+                if (!any(startsWith(files_in_dir, file))) {
+                  missing_files <- c(missing_files, file)
+                }
+            }
+            if (length(missing_files) > 0) {
+                stop(sprintf("Missing files in '%s':\n%s", parsed_args$files_in_path, paste("\t", missing_files, collapse = "\n")))
+            }
+        }
+        if ("files_in_path" %in% names(parsed_args)) {
+            if (!dir.exists(parsed_args$files_in_path)) {
+                stop("files_in_path: '", parsed_args$files_in_path, "' must be a valid directory path")
+            }
+        }
+        else {
+            stop("files_in_path is required but not provided")
+        }
+        if ("files_out_path" %in% names(parsed_args)) {
+            if (!dir.exists(parsed_args$files_out_path)) {
+                warning("files_out_path: '", parsed_args$files_in_path, "' must be a valid directory path")
+            }
+        }
+        else {
+            stop("files_out_path is required but not provided")
+        }
+        if (all(c("plot_ext", "plot_device") %in% names(parsed_args))) {
+            plot_ext_check <- gsub("\\.", "", parsed_args$plot_ext)
+            if (plot_ext_check %in% "pdf") {
+                parsed_args$plot_device <- "pdf"
+            }
+            if (plot_ext_check != parsed_args$plot_device) {
+                stop("plot_ext: '", parsed_args$plot_ext, "' must match plot_device: \n        '", parsed_args$plot_device, "'")
+            }
+        }
+        cat("All parsed arguments are valid.\n")
+        return(invisible(NULL))
+    }, error = function(e) {
+        cat("Error call in:", deparse(conditionCall(e)), "\n")
+        stop(cat("Argument validation failed due to:\n", conditionMessage(e), "\n"))
+    })
+}
+load_files <- function(file_list, path, verbose = TRUE) {
+    data_list <- list()
+    for (file in file_list) {
+        file_path <- file.path(path, paste0(file, ".csv"))
+        tryCatch({
+            if (file.exists(file_path)) {
+                if (verbose) 
+                  cat("Loading file:", file_path, "\n")
+                lines <- suppressWarnings(readLines(file_path, n = 2))
+                if (length(lines) == 1) {
+                  data_list[[file]] <- read_csv(file_path, show_col_types = FALSE, col_names = FALSE)
+                  if (verbose) 
+                    cat("  File loaded as a data frame but without column\n          headers.\n")
+                }
+                else {
+                  data_list[[file]] <- read_csv(file_path, show_col_types = FALSE)
+                  if (verbose) {
+                    cat("  File loaded as a data frame with", nrow(data_list[[file]]), "rows and", ncol(data_list[[file]]), "columns.\n")
+                  }
+                }
+            }
+            else {
+                warning(paste("File not found:", file_path))
+            }
+        }, error = function(e) {
+            cat("Error loading file", file_path, ":", conditionMessage(e), "\n")
+        })
+    }
+    if (verbose) 
+        cat("Finished loading", length(data_list), "file.\n\n")
+    return(data_list)
+}
+print_object_dimensions <- function(list) {
+    for (obj in list) {
+        if (!is.function(get(obj))) {
+            cat("Object:", obj, "\n")
+            if (!is.null(dim(get(obj)))) {
+                cat("Dimensions:", paste(dim(get(obj)), collapse = "x"), "\n\n")
+            }
+            cat("Dimensions: None\n\n")
+        }
+    }
+}
+write_file_list <- function(file_list, path = ".", out_ext = ".csv") {
+    cat("Writing files from list to path:", path, "\n")
+    if (!is.list(file_list) && !is.null(names(file_list))) {
+        stop("file_list must be a list, and have associated names.")
+    }
+    file_list_names <- names(file_list)
+    for (i in seq_along(file_list)) {
+        file_path <- file.path(path, paste0(file_list_names[i], out_ext))
+        file_data <- file_list[[i]]
+        if (inherits(file_data, c("tbl_df", "data.frame"))) {
+            write_csv(file_data, file_path)
+        }
+        else if (is.list(file_data)) {
+            write_csv(tibble(temp_col_id = unlist(file_data)), file = file_path)
+        }
+        else if (is.character(file_data)) {
+            if (!is.null(names(file_data)) && all(names(file_data) != "")) {
+                write_csv(tibble(key = names(file_data), value = file_data), file = file_path)
+            }
+            else {
+                writeLines(file_data, con = file_path, sep = ",")
+            }
+        }
+        else {
+            cat("Skipping file:", file_list_names[i], "- unsupported type.\n")
+            next
+        }
+        cat("Wrote file:", file_list_names[i], "\n")
+    }
+}
+merge_cmap <- function(df, cmap = cmap_coloc, by_join = "SAMPLEID") {
+    cat("Merging dataframe with Colocalization Map data...\n")
+    if ("group_id" %in% names(cmap)) {
+        cmap <- cmap %>% select(-group_id)
+    }
+    merged_df <- df %>% left_join(cmap, by = by_join)
+    return(merged_df)
+}
+merge_annotations <- function(df, annotation_table = annoNifHDB_updt, by_join = "AUID") {
+    cat("Merging dataframe with annotation table...\n")
+    merged_df <- df %>% left_join(annotation_table, by = by_join)
+    return(merged_df)
+}
+transform_data_lng <- function(input_df, starts_with_col, names_to_col, values_to_col) {
+    cat("Transforming data from wide to long format...\n")
+    result <- input_df %>% {
+        if ("group_id" %in% names(input_df)) 
+            select(., -group_id)
+        else .
+    } %>% pivot_longer(cols = starts_with(starts_with_col), names_to = if ("group_id" %in% names(input_df)) 
+        starts_with_col
+    else names_to_col, values_to = values_to_col)
+    return(result)
+}
+remove_aphotic_samples <- function(df, photic_samples = photic_samples_key) {
+    subbed_df <- df %>% filter(SAMPLEID %in% photic_samples)
+    return(subbed_df)
+}
+add_total_row <- function(df, summary_column = NULL, column_name, pull_name = NULL, all_columns) {
+    cat("Adding total row to the dataframe...\n")
+    if (all_columns == FALSE) {
+        df_with_total_count <- df %>% bind_rows(tibble(`:=`(!!column_name, "Total"), `:=`({
+            {
+                summary_column
+            }
+        }, sum(df %>% pull({
+            {
+                summary_column
+            }
+        })))))
+    }
+    else {
+        df_with_total_count <- df %>% bind_rows(tibble(`:=`(!!column_name, "Total"), df %>% summarise(across(where(is.numeric), ~sum(.)))))
+    }
+    return(df_with_total_count)
+}
+add_size_frac_key <- function(df, join_key = size_fraction_key, remove_col = num_distinct_size_fractions) {
+    cat("Add '", deparse(substitute(join_key)), "' column to dataframe: ", deparse(substitute(df)), " ...\n", sep = "")
+    df_size_frac <- df %>% left_join(join_key) %>% suppressMessages() %>% select(-{
+        {
+            remove_col
+        }
+    })
+    return(df_size_frac)
+}
+merge_cmap <- function(df, cmap = cmap_coloc, by_join = "SAMPLEID") {
+    cat("Merging dataframe with Colocalization Map data...\n")
+    if ("group_id" %in% names(cmap)) {
+        cmap <- cmap %>% select(-group_id)
+    }
+    merged_df <- df %>% left_join(cmap, by = by_join)
+    return(merged_df)
+}
+merge_annotations <- function(df, annotation_table = annoNifHDB_updt, by_join = "AUID") {
+    cat("Merging dataframe with annotation table...\n")
+    merged_df <- df %>% left_join(annotation_table, by = by_join)
+    return(merged_df)
+}
+transform_data_lng <- function(input_df, starts_with_col, names_to_col, values_to_col) {
+    cat("Transforming data from wide to long format...\n")
+    result <- input_df %>% {
+        if ("group_id" %in% names(input_df)) 
+            select(., -group_id)
+        else .
+    } %>% pivot_longer(cols = starts_with(starts_with_col), names_to = if ("group_id" %in% names(input_df)) 
+        starts_with_col
+    else names_to_col, values_to = values_to_col)
+    return(result)
+}
+add_rep_flag <- function(df) {
+    cat("Add replicate flag column to dataframe: ", deparse(substitute(df)), " ...\n", sep = "")
+    df_w_rep <- df %>% group_by(sample_point) %>% mutate(replicate_flag = case_when((num_dist_samp_pnts == 1) ~ "Single_Sample", (n_distinct(nucleicAcidType) == 1 & size_frac_flag == "Two_Size_Fractions") ~ "Single_Sample", (n_distinct(nucleicAcidType) == 1 & size_frac_flag == "Two_Size_Fractions" & num_dist_samp_pnts > 3) ~ "Replicate_Sample", (n_distinct(nucleicAcidType) == 1 & size_frac_flag == "One_Size_Fractions") ~ "Replicate_Sample", )) %>% ungroup()
+    return(df_w_rep)
+}
+add_group_id <- function(df, group_id_key = unique_sample_id_key, var_select = SAMPLEID, by_var = "SAMPLEID") {
+    cat("Adding group ID to the dataframe...\n")
+    df_with_group_id <- df %>% left_join(group_id_key %>% select({
+        {
+            var_select
+        }
+    }, group_id), by = by_var)
+    return(df_with_group_id)
+}
+dedup_by_group <- function(df, group_id_key = unique_sample_id_key, ...) {
+    cat("Removing duplicates based on group ID...\n")
+    contains_group_id <- "group_id" %in% names(df)
+    if (contains_group_id) {
+        df_deup <- df %>% distinct(..., .keep_all = TRUE)
+    }
+    else {
+        df_deup <- df %>% add_group_id(group_id_key) %>% distinct(..., .keep_all = TRUE)
+    }
+    rows_removed <- nrow(df) - nrow(df_deup)
+    cat("Number of rows removed:", rows_removed, "\n")
+    return(df_deup)
+}
+main_average_ra_dedup_by_group <- function(df_lng, ..., grp_key, mean_by) {
+    cat("Calculating average and removing duplicates based on group ID in the relative abundance table...\n")
+    cat("This is going to take awhile...\n")
+    df_lng_mean_ra_depup_by_group <- df_lng %>% add_group_id(group_id_key = {
+        {
+            grp_key
+        }
+    }) %>% group_by(...) %>% mutate(average_value_AUID = mean({
+        {
+            mean_by
+        }
+    }, na.rm = TRUE)) %>% ungroup() %>% dedup_by_group(group_id_key = unique_sample_id_key, ...) %>% ungroup()
+    return(df_lng_mean_ra_depup_by_group)
+}
+main_cnts_dedup_by_group <- function(df_lng, ..., grp_key) {
+    cat("Removing duplicates based on group ID in count table...\n")
+    df_lng_mean_ra_depup_by_group <- df_lng %>% add_group_id(group_id_key = {
+        {
+            grp_key
+        }
+    }) %>% dedup_by_group(group_id_key = unique_sample_id_key, ...) %>% ungroup() %>% return(df_lng_mean_ra_depup_by_group)
+}
+remove_samples_nucleic_acid <- function(df, nucleic_acid_type, nucleic_acid_samples_key = DNA_samples_key) {
+    nucleic_acid_flag <- c("DNA", "RNA") %in% nucleic_acid_type
+    if (nucleic_acid_flag[1]) {
+        na_removed <- "RNA"
+        nucleic_acid <- df %>% filter(SAMPLEID %in% {
+            {
+                nucleic_acid_samples_key
+            }
+        })
+    }
+    else if (nucleic_acid_flag[2]) {
+        na_removed <- "DNA"
+        nucleic_acid <- df %>% filter(!SAMPLEID %in% {
+            {
+                nucleic_acid_samples_key
+            }
+        })
+    }
+    else {
+        cat("You supplied '", nucleic_acid_type, ",' which is neither DNA nor RNA. Please make sure it is in ALL CAPS.\n\n")
+        nucleic_acid <- NULL
+    }
+    if (!is.null(nucleic_acid)) {
+        removed_samples <- nrow(df) - nrow(nucleic_acid)
+        cat("Samples of type nucleic acid type '", nucleic_acid_type, "' were retained.\nNumber of ", na_removed, " samples removed: ", removed_samples, "\n\n", sep = "")
+    }
+    return(nucleic_acid)
+}
+count_and_arrange <- function(data, group_vars, arrange_var = n, count_col_name = "n") {
+    cat_text <- paste(group_vars, collapse = ", ")
+    cat("Counting occurrences and arranging dataframe by: '", cat_text, "'...\n", sep = "")
+    df_count_and_arrange <- data %>% count(across(all_of(group_vars)), name = count_col_name) %>% arrange(desc({
+        {
+            arrange_var
+        }
+    }))
+    return(df_count_and_arrange)
+}
+add_percentage <- function(df, sum_by_percent, percentage_id, rnd_pct = 1, grouping_by = NULL, remove_columns = NULL) {
+    cat("Adding percentage column to the dataframe that is summed by '", deparse(substitute(sum_by_percent)), "' and grouped by '", grouping_by, "'...\n", sep = "")
+    df_with_total <- df %>% group_by({
+        {
+            grouping_by
+        }
+    }) %>% mutate(total = sum({
+        {
+            sum_by_percent
+        }
+    }), `:=`({
+        {
+            percentage_id
+        }
+    }, round({
+        {
+            sum_by_percent
+        }
+    }/total * 100, rnd_pct))) %>% ungroup()
+    if (!is.null({
+        {
+            remove_columns
+        }
+    })) {
+        df_with_total <- df_with_total %>% select(-{
+            {
+                remove_columns
+            }
+        })
+    }
+    return(df_with_total)
+}
+sum_tax <- function(abundance_table, annotation_table, joining_by_col, total_counts_id, grouping_for_percentage = NULL, percentage_id, grouping_by_1 = NULL, grouping_by_2 = NULL, sum_by, ...) {
+    cat("Summarizing taxonomic data...\n")
+    result <- abundance_table %>% left_join(annotation_table, joining_by_col) %>% group_by({
+        {
+            grouping_by_1
+        }
+    }, {
+        {
+            grouping_by_2
+        }
+    }) %>% mutate(`:=`({
+        {
+            total_counts_id
+        }
+    }, sum({
+        {
+            sum_by
+        }
+    }, na.rm = TRUE))) %>% ungroup() %>% distinct({
+        {
+            total_counts_id
+        }
+    }, {
+        {
+            grouping_by_1
+        }
+    }, {
+        {
+            grouping_by_2
+        }
+    }, .keep_all = TRUE) %>% arrange(desc({
+        {
+            total_counts_id
+        }
+    })) %>% group_by({
+        {
+            grouping_for_percentage
+        }
+    }) %>% mutate(total = sum({
+        {
+            total_counts_id
+        }
+    }), `:=`({
+        {
+            percentage_id
+        }
+    }, {
+        {
+            total_counts_id
+        }
+    }/total * 100)) %>% ungroup() %>% select(..., {
+        {
+            total_counts_id
+        }
+    }, total, {
+        {
+            percentage_id
+        }
+    }, everything())
+    return(result)
+}
+clean_percentages <- function(df, grouping_by, clean_var, threshold = 1, percentage_id, column_var_mutate, column_var) {
+    cat("Cleaning percentage data...\n")
+    cat("Using clean_var:", deparse(substitute(clean_var)), "\n")
+    cat("Threshold required: ", threshold, "%\n", sep = "")
+    cleaned_df <- df %>% mutate(`:=`({
+        {
+            column_var_mutate
+        }
+    }, ifelse({
+        {
+            clean_var
+        }
+    } < threshold, "other", {
+        {
+            column_var
+        }
+    }))) %>% group_by({
+        {
+            column_var_mutate
+        }
+    }, {
+        {
+            grouping_by
+        }
+    }) %>% summarise(`:=`({
+        {
+            percentage_id
+        }
+    }, sum({
+        {
+            clean_var
+        }
+    }))) %>% mutate(`:=`({
+        {
+            percentage_id
+        }
+    }, round({
+        {
+            percentage_id
+        }
+    }, 1))) %>% ungroup() %>% arrange(desc({
+        {
+            percentage_id
+        }
+    }))
+    if (nrow(cleaned_df) < nrow(df)) {
+        removed_rows <- df %>% filter({
+            {
+                clean_var
+            }
+        } < threshold) %>% pull({
+            {
+                column_var
+            }
+        })
+        unique_removed_rows <- unique(removed_rows)
+        cat("Unique column headers that did not reach the threshold and were converted to 'other':\n")
+        cat(paste(unique_removed_rows, collapse = ", "), "\n")
+        cat("Number of rows removed:", length(removed_rows), "\n\n")
+    }
+    return(cleaned_df)
+}

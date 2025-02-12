@@ -26,7 +26,7 @@
 #' @param --plot_device Device to use for plot generation
 #'
 #' @author Michael Morando
-#' @date 2025-02-02
+#'  2025-02-02
 #'
 #' @note This script requires the following R packages: tidyverse, patchwork, argparser
 #'

@@ -26,7 +26,7 @@
 #' @param --output_path Directory path for output files (default: ../analysis/tables)
 #'
 #' @author Michael (Mo) Morando
-#' @date 2025-02-02
+#'  2025-02-02
 #'
 #' @note This script requires the following R packages: tidyverse, argparser
 #'

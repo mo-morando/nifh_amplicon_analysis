@@ -27,7 +27,7 @@
 #' @param --output_path Output directory path
 #'
 #' @author Michael Morando
-#' @date 2023
+#'  2023
 #'
 #' @note This script requires the following R packages: tidyverse, argparser
 #'
