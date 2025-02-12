@@ -16,6 +16,7 @@ ____
   - [Running the analysis](#running-the-analysis)
   - [Output](#output)
   - [Troubleshooting and error handling](#troubleshooting-and-error-handling)
+  - [License](#license)
 
 Outputs are figures, tables, and data (csv) and log (txt) files that represent both work found in [(Morando, Magasin) et al. 2025](https://essd.copernicus.org/articles/17/393/2025/essd-17-393-2025.html) as well as other information providing a broader view of the [*nifH* database](https://figshare.com/articles/dataset/Global_biogeography_of_N_sub_2_sub_-fixing_microbes_i_i_i_nifH_i_amplicon_database_and_analytics_workflow/23795943/1?file=46033371).
 
@@ -107,6 +108,8 @@ snakemake -c1 --use-conda
 
 ## Output
 
+____
+
 The workflow generates:
 - Figures and tables from [(Morando, Magasin) et al. 2025](https://essd.copernicus.org/articles/17/393/2025/essd-17-393-2025.html)
 - Additional figures and tables
@@ -131,3 +134,9 @@ analysis/out_files/tables # Important tables specific to Morando, Magasin et al.
 ____
 
 The workflow is designed to be self-contained with comprehensive error handling. For custom analyses or data changes, refer to the documentation and error messages in the log files for debugging assistance.
+
+## License
+
+____
+
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](http://creativecommons.org/licenses/by/4.0/)
